@@ -9,3 +9,5 @@ http://www.thinkster.io/angularjs/GtaQ0oMGIl
 https://www.ng-book.com/
 
 http://codecondo.com/3-free-books-for-learning-angularjs/
+
+look at Sass
