@@ -48,3 +48,4 @@ objc[10661]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.a
 2014-06-25 11:26:45.052 HelloCordova[10661:70b] [CDVTimer][TotalPluginStartup] 0.508964ms
 2014-06-25 11:26:45.263 HelloCordova[10661:70b] Resetting plugins due to page load.
 2014-06-25 11:26:45.508 HelloCordova[10661:70b] Finished load of: file:///Users/adammenz/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/D7E20C5A-48B3-4A0E-A4A7-EA4809087A68/HelloCordova.app/www/index.html#/Jobs
+Terminating in response to SpringBoard's termination.

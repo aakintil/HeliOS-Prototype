@@ -68,20 +68,14 @@ function NavCtrl($scope) {
     $ionicNavBarDelegate.back();
   };
 
-  $scope.getClass = function(path) {
+  $scope.getClass = function(path) { 
 
     if (window.location.href.indexOf(path) != -1) {
       return "active"
     } else {
       return ""
     }
-    // if (location.path().substr(0, path.length) == path) {
-    //   return "active"
-    // } else {
-    //   return ""
-    // }
-}
-
+  }
 }
 
 
