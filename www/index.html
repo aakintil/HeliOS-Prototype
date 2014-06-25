@@ -1,54 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-  </head>
-
-  <body ng-app="starter">
-
-    <ion-nav-bar ng-controller="NavCtrl" class="bar-positive" align-title="center">
-      <div class="button-bar">
-      <!-- place in a.button -->
-        <back>Back</back>
-        <a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page">Jobs</a>
-        <a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page">Notes</a>
-        <a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page">Alerts</a>
-        <a class="button">Add Note</a>
-      </div>
-    </ion-nav-bar>
-       
-    <ion-nav-view animation="no-animation"></ion-nav-view>
-
-    <script id="jobs_page.html" type="text/ng-template">
-    
-      <!-- The title of the ion-view will be shown on the navbar -->
-	  	<ion-view title="Jobs" hide-back-button="true">
-			<ion-content class="padding">
-			<div class="section">
-			<!-- try list dividers for the h1.titles tmrw. have to be within div.list though <div class="item item-divider"> Candy Bars </div>-->
-			<!--
-<h1 class="title">
-MY JOBS
-			</h1>
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+<link href="css/ionic.app.css" rel="stylesheet">
 -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+	</head>
+
+	<body ng-app="starter">
+
+		<ion-nav-bar ng-controller="NavCtrl" class="bar-positive" align-title="center">
+			<div class="button-bar">
+				<!-- place in a.button -->
+				<back>Back</back>
+				<a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page">Jobs</a>
+				<a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page">Notes</a>
+				<a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page">Alerts</a>
+				<a class="button">Add Note</a>
+			</div>
+		</ion-nav-bar>
+
+		<ion-nav-view animation="no-animation"></ion-nav-view>
+
+		<script id="jobs_page.html" type="text/ng-template">
+<ion-view title="Jobs" >
+	<ion-content class="padding">
+		<div class="section"> 
 			<div class="item item-divider">
 				MY JOBS
 			</div>
@@ -56,105 +48,104 @@ MY JOBS
 				<li class="item">
 					<p class="job-name">Replace Faulty Bolts</p>
 					<p class="job-member">You</p>
-			</li>
+				</li>
 				<li class="item">
 					<p class="job-name">Replace Faulty Bolts</p>
 					<p class="job-member">You</p>
-			</li>
+				</li>
 				<li class="item">
 					<p class="job-name">Replace Faulty Bolts</p>
 					<p class="job-member">You</p>
-			</li>
+				</li>
 			</ul>
-
-			</div>
+		</div>
 		<div class="section">
 			<div class="list">
 				<div class="item item-divider">
 					ALL JOBS IN PROGRESS
-			</div>
+				</div>
 				<div class="item item-button-right">
 					<p class="job-name"> 
 						Backlog stations
-			</p>
+					</p>
 					<p class="job-member">
 						You, Adam M.
-			</p>
+					</p>
 					<button class="button button-positive">
 						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
+					</button>
+				</div>
 
 				<div class="item item-button-right">
 					<p class="job-name"> 
 						Replace arcjet tubes
-			</p>
+					</p>
 					<p class="job-member">
 						You, Adam M.
-			</p>
+					</p>
 					<button class="button button-positive">
 						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
+					</button>
+				</div>
 
 				<div class="item item-button-right">
 					<p class="job-name"> 
 						Secure ArcJet for Test Run
-			</p>
+					</p>
 					<p class="job-member">
 						You, Adam M.
-			</p>
+					</p>
 					<button class="button button-positive">
 						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
+					</button>
+				</div>
 			</div>
 
-			</div>
+		</div>
 		<div class="section">
 			<div class="item item-divider">
 				JOB TEMPLATES
 			</div>
 			<div class="item item-button-right">
-					<p class="job-name"> 
-						Backlog stations
-			</p>
-					<p class="job-member">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
+				<p class="job-name"> 
+					Backlog stations
+				</p>
+				<p class="job-member">
+					You, Adam M.
+				</p>
+				<button class="button button-positive">
+					<i class="icon ion-plus-round"></i>
+				</button>
 			</div>
 
-				<div class="item item-button-right">
-					<p class="job-name"> 
-						Replace arcjet tubes
-			</p>
-					<p class="job-member">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
+			<div class="item item-button-right">
+				<p class="job-name"> 
+					Replace arcjet tubes
+				</p>
+				<p class="job-member">
+					You, Adam M.
+				</p>
+				<button class="button button-positive">
+					<i class="icon ion-plus-round"></i>
+				</button>
 			</div>
 
-				<div class="item item-button-right">
-					<p class="job-name"> 
-						Secure ArcJet for Test Run
-			</p>
-					<p class="job-member">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
+			<div class="item item-button-right">
+				<p class="job-name"> 
+					Secure ArcJet for Test Run
+				</p>
+				<p class="job-member">
+					You, Adam M.
+				</p>
+				<button class="button button-positive">
+					<i class="icon ion-plus-round"></i>
+				</button>
 			</div>
 
-			</div>
+		</div>
 
-			</ion-content>
-			</ion-view>
+	</ion-content>
+</ion-view>
 		</script>    
 
 
@@ -181,30 +172,30 @@ MY JOBS
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-email"></i>
 						Check mail
-					</a>
+			</a>
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-chatbubble-working"></i>
 						Call Ma
 						<i class="icon ion-ios7-telephone-outline"></i>
-					</a>
+			</a>
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-mic-a"></i>
 						Record album
 						<span class="item-note">
 							Grammy
-						</span>
-					</a>
+			</span>
+			</a>
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-person-stalker"></i>
 						Friends
-					</a>
+			</a>
 
-				</div>
+			</div>
 			</ion-content>
-		</ion-view>    
+			</ion-view>    
 		</script> 
 
 	</body>
