@@ -8304,3 +8304,8 @@ a.button {
   width: 7.5%; }
 #nav-bar #search:focus {
   width: 50%; }
+#nav-bar .icon {
+  max-height: 25px;
+  padding-top: 5px; }
+#nav-bar .icon-text {
+  margin-top: -13px; }
