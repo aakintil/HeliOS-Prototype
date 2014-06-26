@@ -31,24 +31,52 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-                <a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
-                <a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
-                <a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
-                <a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
-            </div>
-        </ion-nav-bar>
+				<a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
+				<a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
+				<a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
+				<!--				<a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>-->
+				<a class="button" ng-click="showAddJobModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+			</div>
+		</ion-nav-bar>
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
 		<!-- Transparent Screen that will allow us to dismiss the dialog -->
-		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>
+		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
+		<div id="hover" ng-controller="AddJobController" ng-click="hideNewJobModal()"></div>
 
-		<div id="addNoteModal" ng-controller="AddNoteController" class="card">
+		<!--
+		<div id="addNoteModal" ng-controller="AddNoteController" class="card popup-modal">
+		<form ng-submit="createTask(task)">
+		<div class="list">
+		<h1>NOTE MODAL</h1>
+		<label class="item item-input">
+		<input type="text" placeholder="Whats up" ng-model="task.title">
+		</label>
+		</div>
+		</form>
+		</div>
+		-->
+
+		<div id="addJobModal" ng-controller="AddJobController" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
+					<p class="input-header"> Add New Job </p>
 					<label class="item item-input">
-						<input type="text" placeholder="Whats up" ng-model="task.title">
+						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>
+					
+					<label class="item item-input">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
+					</label>
+					
+					<label class="item item-input">
+						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
+					</label>
+					
+					<button class="button button-full button-dark" >Create Job</button>
+					
+<!-- end of list-->
 				</div>
 			</form>
 		</div>
@@ -167,51 +195,51 @@
 
 
 		<!-- NOTES PAGE -->
-<script id="notes_page.html" type="text/ng-template">
+		<script id="notes_page.html" type="text/ng-template">
           <ion-view>
             <ion-content>
                 <div class="section">
 					<div class="item item-divider">
 						<div class="section-header">Recently Used</div>
-					</div>
+			</div>
 					<ul class="list">
 						<li class="item">
 							<div class="list-item-title">Adjust torque to 50 Nm</div>
 							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
-						</li>
+			</li>
 						<li class="item">
 							<div class="list-item-title">From Olga: Please check the Arcjet for faulty bolts</div>
 							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
-						</li>
+			</li>
 						<li class="item">
 							<div class="list-item-title">Bolt measurement - 50mm</div>
-						</li>
+			</li>
                         <li class="item">
 							<div class="list-item-title">Check ArcJet before EOD</div>
-						</li>
+			</li>
                         <li class="item">
 							<div class="list-item-adder">Add new note +</div>
-						</li>
-					</ul>
-            	</div>
+			</li>
+			</ul>
+			</div>
                 <div class="section">
 					<div class="item item-divider">
 						<div class="section-header">Other Notes</div>
-					</div>
+			</div>
 					<ul class="list">
 						<li class="item">
 							<div class="list-item-title">Switch out o-rings on ArcJet</div>
-						</li>
+			</li>
 						<li class="item">
 							<div class="list-item-title">Faulty bolts in areas 12, 15, 17</div>
 							<div class="list-item-subtitle">Job: Replace bolts on ArcJet</div>
-						</li>
-					</ul>
-            	</div>
-            </ion-content>
-          </ion-view>
-        </script> 
-        
+			</li>
+			</ul>
+			</div>
+			</ion-content>
+			</ion-view>
+		</script> 
+
 
 
 		<!-- ALERTS PAGE -->
@@ -243,7 +271,7 @@
 			</p>
 					<div class="indicator job"> </div>
 			</div>
-			
+
 			<div class="item item-button-right">
 			<p class="list-item-title"> 
 				Adam M. added  <a href="">a note</a> to the job Change Window Sensor.
@@ -252,7 +280,7 @@
 				YESTERDAY
 			</p>
 			<div class="indicator note"> </div>
-		</div>
+			</div>
 		<div class="item item-button-right">
 			<p class="list-item-title"> 
 				You added <a href="">a note</a> to the job Change Window Sensor.
@@ -261,7 +289,7 @@
 				YESTERDAY
 			</p>
 			<div class="indicator note"> </div>
-		</div>
+			</div>
 		<div class="item item-button-right">
 			<p class="list-item-title"> 
 				You created the job <a href="">Change Window Sensor.</a>
@@ -270,7 +298,7 @@
 				2 DAYS AGO
 			</p>
 			<div class="indicator job"> </div>
-		</div>
+			</div>
 
 			</div>
 
@@ -279,15 +307,15 @@
 		</script> 
 
 
-        
-        <!-- Add Note Modal -->
-        <script id="new_note_modal.html" type="text/ng-template">
+
+		<!-- Add Note Modal -->
+		<script id="new_note_modal.html" type="text/ng-template">
         	<div class="modal">
 				<!-- Modal Header Bar -->
 				<ion-header-bar class="bar-secondary">
 					<h1 class="title">New Task</h1>
 					<button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>                
-				</ion-header-bar>
+			</ion-header-bar>
 
 				<!-- Modal content area -->
 				<ion-content>
@@ -295,12 +323,12 @@
 						<div class="list">
 							<label class="item item-input">
 								<input type="text" placeholder="Whats up" ng-model="task.title">
-							</label>
-						</div>
-					</form>
-				</ion-content> 
-        	</div>
-        </script>
+			</label>
+			</div>
+			</form>
+			</ion-content> 
+			</div>
+		</script>
 
 
 

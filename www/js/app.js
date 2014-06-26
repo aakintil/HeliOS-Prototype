@@ -9,58 +9,58 @@ var fadeSpeed = .5;
 angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
+		if(window.cordova && window.cordova.plugins.Keyboard) {
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if(window.StatusBar) {
+			StatusBar.styleDefault();
+		}
+	});
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-  .state('jobs_page', {
-    url: '/Jobs',
-    templateUrl: 'jobs_page.html',
-    controller : "JobsCtrl"
-  })
-  .state('notes_page', {
-    url: '/Notes',
-    templateUrl: 'notes_page.html',
-    controller : "NotesCtrl"
-  })
-  .state('alerts_page', {
-    url: '/Alerts',
-    templateUrl: 'alerts_page.html',
-    controller : "AlertsCtrl"
-  })
-  $urlRouterProvider.otherwise("/Jobs");
+	$stateProvider
+	.state('jobs_page', {
+		url: '/Jobs',
+		templateUrl: 'jobs_page.html',
+		controller : "JobsCtrl"
+	})
+	.state('notes_page', {
+		url: '/Notes',
+		templateUrl: 'notes_page.html',
+		controller : "NotesCtrl"
+	})
+	.state('alerts_page', {
+		url: '/Alerts',
+		templateUrl: 'alerts_page.html',
+		controller : "AlertsCtrl"
+	})
+	$urlRouterProvider.otherwise("/Jobs");
 })
 
 .controller('JobsCtrl', function($scope) {
-  
+
 })
 .controller('NotesCtrl', function($scope) {
-  
+
 })
 .controller('AlertsCtrl', function($scope) {
-  
+
 })
 
 .directive('back', function () {
-    return {
-        restrict: 'E',
-        link: function(scope, element) {
-          element.on('click', function() {
-            window.history.back();
-          });
-        },
-        controller: 'NavCtrl'
-    };
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			element.on('click', function() {
+				window.history.back();
+			});
+		},
+		controller: 'NavCtrl'
+	};
 })
 //
 //.directive('AddNoteModal', function () {
@@ -76,34 +76,51 @@ angular.module('starter', ['ionic'])
 //});
 
 function AddNoteController($scope) {
-  
-    $scope.hideNewNoteModal = function() {
-      $("#hover").fadeOut(fadeSpeed);
-      $("#addNoteModal").fadeOut(fadeSpeed);
-    }
+
+	$scope.hideNewNoteModal = function() {
+		$("#hover").fadeOut(fadeSpeed);
+		$("#addNoteModal").fadeOut(fadeSpeed);
+	}
 }
 
+
+// Add Job Controller
+function AddJobController($scope) {
+
+	$scope.hideNewJobModal = function() {
+		$("#hover").fadeOut(fadeSpeed);
+		$("#addJobModal").fadeOut(fadeSpeed);
+	}
+}
+
+
 function NavCtrl($scope) {
-  
-  $scope.goBack = function() {
-    $ionicNavBarDelegate.back();
-  };
 
-  $scope.getClass = function(path) { 
+	$scope.goBack = function() {
+		$ionicNavBarDelegate.back();
+	};
 
-    if (window.location.href.indexOf(path) != -1) {
-      return "active"
-    } else {
-      return ""
-    }
-  }
+	$scope.getClass = function(path) { 
 
-  $scope.showAddNoteModal = function() {
-    console.log("Sup playa?");
-    $("#hover").fadeIn(fadeSpeed);
-    $("#addNoteModal").fadeIn(fadeSpeed);
-  }
+		if (window.location.href.indexOf(path) != -1) {
+			return "active"
+		} else {
+			return ""
+		}
+	}
 
-//    $("#addNoteModal").fadeOut();
-//    $("#hover").fadeOut();
+	$scope.showAddNoteModal = function() {
+		console.log("Sup playa?");
+		$("#hover").fadeIn(fadeSpeed);
+		$("#addNoteModal").fadeIn(fadeSpeed);
+	}
+
+	$scope.showAddJobModal = function() {
+		console.log("Sup playa?");
+		$("#hover").fadeIn(fadeSpeed);
+		$("#addJobModal").fadeIn(fadeSpeed);
+	}
+
+	//    $("#addNoteModal").fadeOut();
+	//    $("#hover").fadeOut();
 }
