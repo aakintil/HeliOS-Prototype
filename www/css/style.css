@@ -8263,11 +8263,6 @@ a.button {
   -webkit-transition: none !important;
   transition: none !important; }
 
-<<<<<<< HEAD
-h1 {
-  color: red; }
-
-=======
 .section-header {
   font-weight: bold;
   font-size: 11.5 px;
@@ -8278,10 +8273,6 @@ h1 {
   font-weight: bold; }
 
 .list-item-subtitle {
-<<<<<<< HEAD
-  font-size: 29/2px; }
->>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
-=======
   font-size: 14.5 px; }
 
 #nav-bar.bar {
@@ -8307,4 +8298,3 @@ h1 {
   width: 7.5%; }
 #nav-bar #search:focus {
   width: 50%; }
->>>>>>> e7922d4e9e143f1536287a2c8cd24980a6100374
