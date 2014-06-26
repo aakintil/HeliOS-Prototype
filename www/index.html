@@ -153,21 +153,58 @@
 
 
 		<!-- NOTES PAGE -->
-		<script id="notes_page.html" type="text/ng-template">
-      <!-- The title of the ion-view will be shown on the navbar -->
-      <ion-view title="Notes">
-        <ion-content class="padding">
-          <h1>Notes</h1>
-			</ion-content>
-			</ion-view>
-		</script> 
+<script id="notes_page.html" type="text/ng-template">
+          <ion-view>
+            <ion-content>
+                <div class="section">
+					<div class="item item-divider">
+						<div class="section-header">Recently Used</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							<div class="list-item-title">Adjust torque to 50 Nm</div>
+							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">From Olga: Please check the Arcjet for faulty bolts</div>
+							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Bolt measurement - 50mm</div>
+						</li>
+                        <li class="item">
+							<div class="list-item-title">Check ArcJet before EOD</div>
+						</li>
+                        <li class="item">
+							<div class="list-item-adder">Add new note +</div>
+						</li>
+					</ul>
+            	</div>
+                <div class="section">
+					<div class="item item-divider">
+						<div class="section-header">Other Notes</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							<div class="list-item-title">Switch out o-rings on ArcJet</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Faulty bolts in areas 12, 15, 17</div>
+							<div class="list-item-subtitle">Job: Replace bolts on ArcJet</div>
+						</li>
+					</ul>
+            	</div>
+            </ion-content>
+          </ion-view>
+        </script> 
+        
 
 
 		<!-- ALERTS PAGE -->
 		<script id="alerts_page.html" type="text/ng-template">
       <!-- The title of the ion-view will be shown on the navbar -->
 	  	<ion-view title="Alerts">
-			<ion-content class="padding">
+			<ion-content>
 					<div id="alerts" class="section">
 					<div class="item item-divider">
 					<div class="section-header">ALERTS</div>
