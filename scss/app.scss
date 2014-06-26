@@ -1,11 +1,38 @@
 // your variable changes can go here
 
+// Colors
+$gray-section-header: #6d6e70;
+
+//Base
+$font-family-sans-serif: Gotham Narrow;
+
+// Items
+$item-border-width: 1px;
+
+$item-divider-bg: $gray-section-header;
+$item-divider-color: white;
+
+$item-light-bg: #ededed;
+$item-light-border: rgb(185, 185, 185);
+
 @import "ionic/ionic";
 
-
-h1 {
-    color: red;
-}
 // your slick styles can go here...
-// when Sass processes, both Ionic's Sass and your Sass will combine
-// into one file and saved in your app's directory as css/app.css
+
+
+// Custom
+
+.section-header {
+    font-weight: bold;
+    font-size: 23/2px;
+    text-transform: uppercase;
+}
+
+.list-item-title {
+    font-size: 36/2px;
+    font-weight: bold;
+}
+
+.list-item-subtitle {
+    font-size: 29/2px;
+}

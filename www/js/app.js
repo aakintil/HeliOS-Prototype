@@ -64,7 +64,6 @@ angular.module('starter', ['ionic'])
 function NavCtrl($scope) {
   
   $scope.goBack = function() {
-    console.log("HIH");
     $ionicNavBarDelegate.back();
   };
 

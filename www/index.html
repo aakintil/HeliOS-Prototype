@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -59,14 +60,81 @@
 				</li>
 			</ul>
 		</div>
+=======
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+<link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
+
+        <!-- your app's js -->
+        <script src="js/app.js"></script>
+    </head>
+
+    <body ng-app="starter">
+
+        <ion-nav-bar ng-controller="NavCtrl" class="bar-positive" align-title="center">
+            <div class="button-bar">
+                <!-- place in a.button -->
+                <back>Back</back>
+                <a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page">Jobs</a>
+                <a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page">Notes</a>
+                <a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page">Alerts</a>
+                <a class="button">Add Note</a>
+            </div>
+        </ion-nav-bar>
+
+        <ion-nav-view animation="no-animation"></ion-nav-view>
+
+        <script id="jobs_page.html" type="text/ng-template">
+	  	<ion-view title="Jobs" hide-back-button="true">
+			<ion-content>
+				<div class="section">
+					<div class="item item-divider">
+						<div class="section-header">My Jobs</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							<div class="list-item-title">Replace Faulty Bolts</div>
+							<div class="list-item-subtitle">You</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Replace Faulty Bolts</div>
+							<div class="list-item-subtitle">You</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Replace Faulty Bolts</div>
+							<div class="list-item-subtitle">You</div>
+						</li>
+					</ul>
+            	</div>
+				
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 		<div class="section">
 			<div class="list">
 				<div class="item item-divider">
 					ALL JOBS IN PROGRESS
+<<<<<<< HEAD
 				</div>
+=======
+            </div>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 				<div class="item item-button-right">
-					<p class="job-name"> 
+					<p class="list-item-title"> 
 						Backlog stations
+<<<<<<< HEAD
 					</p>
 					<p class="job-member">
 						You, Adam M.
@@ -75,10 +143,21 @@
 						<i class="icon ion-plus-round"></i>
 					</button>
 				</div>
+=======
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 				<div class="item item-button-right">
-					<p class="job-name"> 
+					<p class="list-item-title"> 
 						Replace arcjet tubes
+<<<<<<< HEAD
 					</p>
 					<p class="job-member">
 						You, Adam M.
@@ -87,10 +166,21 @@
 						<i class="icon ion-plus-round"></i>
 					</button>
 				</div>
+=======
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 				<div class="item item-button-right">
-					<p class="job-name"> 
+					<p class="list-item-title"> 
 						Secure ArcJet for Test Run
+<<<<<<< HEAD
 					</p>
 					<p class="job-member">
 						You, Adam M.
@@ -102,11 +192,25 @@
 			</div>
 
 		</div>
+=======
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+            </div>
+
+            </div>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 		<div class="section">
 			<div class="item item-divider">
 				JOB TEMPLATES
-			</div>
+            </div>
 			<div class="item item-button-right">
+<<<<<<< HEAD
 				<p class="job-name"> 
 					Backlog stations
 				</p>
@@ -147,21 +251,63 @@
 	</ion-content>
 </ion-view>
 		</script>    
+=======
+					<p class="list-item-title"> 
+						Backlog stations
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+
+				<div class="item item-button-right">
+					<p class="list-item-title"> 
+						Replace arcjet tubes
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+
+				<div class="item item-button-right">
+					<p class="list-item-title"> 
+						Secure ArcJet for Test Run
+            </p>
+					<p class="list-item-subtitle">
+						You, Adam M.
+            </p>
+					<button class="button button-positive">
+						<i class="icon ion-plus-round"></i>
+            </button>
+            </div>
+
+            </div>
+
+            </ion-content>
+            </ion-view>
+        </script>    
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 
-		<!-- NOTES PAGE -->
-		<script id="notes_page.html" type="text/ng-template">
+        <!-- NOTES PAGE -->
+        <script id="notes_page.html" type="text/ng-template">
       <!-- The title of the ion-view will be shown on the navbar -->
       <ion-view title="Notes">
         <ion-content class="padding">
           <h1>Notes</h1>
-			</ion-content>
-			</ion-view>
-		</script> 
+            </ion-content>
+            </ion-view>
+        </script> 
 
 
-		<!-- ALERTS PAGE -->
-		<script id="alerts_page.html" type="text/ng-template">
+        <!-- ALERTS PAGE -->
+        <script id="alerts_page.html" type="text/ng-template">
       <!-- The title of the ion-view will be shown on the navbar -->
 	  			<ion-view title="Alerts">
 			<ion-content class="padding">
@@ -172,31 +318,53 @@
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-email"></i>
 						Check mail
+<<<<<<< HEAD
 			</a>
+=======
+            </a>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-chatbubble-working"></i>
 						Call Ma
 						<i class="icon ion-ios7-telephone-outline"></i>
+<<<<<<< HEAD
 			</a>
+=======
+            </a>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-mic-a"></i>
 						Record album
 						<span class="item-note">
 							Grammy
+<<<<<<< HEAD
 			</span>
 			</a>
+=======
+            </span>
+            </a>
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
 
 					<a class="item item-icon-right" href="#">
 						<i class="icon ion-person-stalker"></i>
 						Friends
+<<<<<<< HEAD
 			</a>
 
 			</div>
 			</ion-content>
 			</ion-view>    
 		</script> 
+=======
+            </a>
 
-	</body>
+            </div>
+            </ion-content>
+            </ion-view>    
+        </script> 
+>>>>>>> 133aaaa227150b2a96c2780e49d4e72a42f96967
+
+    </body>
 </html>
