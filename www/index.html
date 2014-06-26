@@ -85,10 +85,12 @@
 
     <body ng-app="starter">
 
-        <ion-nav-bar ng-controller="NavCtrl" class="bar-positive" align-title="center">
-            <div class="button-bar">
+        <ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
+                           <back>Back</back>
+            <input id="search" type="text"/>
+            <div class="button-bar nav-bar-buttons">
                 <!-- place in a.button -->
-                <back>Back</back>
+
                 <a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page">Jobs</a>
                 <a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page">Notes</a>
                 <a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page">Alerts</a>
