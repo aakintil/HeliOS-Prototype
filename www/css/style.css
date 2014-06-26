@@ -8275,12 +8275,6 @@ a.button {
 .list-item-subtitle {
   font-size: 14.5 px; }
 
-.list-item-adder {
-  font-size: 13.5 px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase; }
-
 #nav-bar.bar {
   height: 60.5 px;
   padding: 0px; }
@@ -8299,7 +8293,6 @@ a.button {
 #nav-bar #search {
   -webkit-transition: width .25s;
   transition: width .25s;
-  border: 2px solid #6d6e70;
   margin: 5px;
   width: 7.5%; }
 #nav-bar #search:focus {
@@ -8309,3 +8302,37 @@ a.button {
   padding-top: 5px; }
 #nav-bar .icon-text {
   margin-top: -13px; }
+
+#alerts .list-item-title {
+  font-weight: normal; }
+#alerts .list-item-subtitle {
+  font-size: 11px; }
+#alerts a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold; }
+#alerts .indicator {
+  height: 92px;
+  position: absolute;
+  width: 10px;
+  left: 0;
+  top: 0; }
+#alerts .note {
+  background-color: #f0aa09; }
+#alerts .job {
+  background-color: #2d9db4; }
+
+#addNoteModal {
+  position: relative;
+  top: 50px;
+  z-index: 1000;
+  background-color: red;
+  height: 300px; }
+
+#hover {
+  position: fixed;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  z-index: 999; }

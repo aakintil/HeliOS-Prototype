@@ -21,6 +21,8 @@ $item-divider-color: white;
 $item-light-bg: #ededed;
 $item-light-border: rgb(185, 185, 185);
 
+
+
 @import "ionic/ionic";
 
 // your slick styles can go here...
@@ -29,30 +31,23 @@ $item-light-border: rgb(185, 185, 185);
 // Custom
 
 .section-header {
-    font-weight: bold;
-    font-size: (23/2)px;
-    text-transform: uppercase;
+	font-weight: bold;
+	font-size: (23/2)px;
+	text-transform: uppercase;
 }
 
 .list-item-title {
-    font-size: (36/2)px;
-    font-weight: bold;
+	font-size: (36/2)px;
+	font-weight: bold;
 }
 
 .list-item-subtitle {
-    font-size: (29/2)px;
-}
-
-.list-item-adder {
-    font-size: (27/2)px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
+	font-size: (29/2)px;
 }
 
 #nav-bar.bar {
-    height: (121/2)px;
-    padding: 0px;
+	height: (121/2)px;
+	padding: 0px;
 }
 
 #nav-bar {
@@ -77,7 +72,6 @@ $item-light-border: rgb(185, 185, 185);
     #search {
         -webkit-transition: width .25s;
         transition: width .25s;
-        border: 2px solid $gray-dark;
         margin: 5px;
         width: 7.5%;
     }
@@ -94,5 +88,62 @@ $item-light-border: rgb(185, 185, 185);
     .icon-text {
         margin-top: -13px;
     }
-    
+
+}
+
+
+
+//	Alerts Page
+
+#alerts {
+
+	.list-item-title {
+		font-weight: normal; 
+	}
+
+	.list-item-subtitle {
+		font-size: 11px;
+	}
+
+	a {
+		text-decoration: none; 
+		color: #000;
+		font-weight: bold; 
+	}
+
+	.indicator {
+		height: 92px; 
+		position: absolute; 
+		width: 10px; 
+		left: 0; 
+		top: 0; 
+	}
+
+	.note {
+		background-color: #f0aa09;
+	}
+
+	.job {
+		background-color: #2d9db4;
+	}
+
+}
+
+// Add Note Modal
+
+#addNoteModal {
+	position: relative;
+	top: 50px;
+	z-index: 1000;
+	background-color: red;
+	height: 300px;
+}
+
+#hover {
+	position: fixed;
+	background: #000;
+	width: 100%;
+	height: 100%;
+	opacity: 0.6;
+	z-index: 999;
 }
