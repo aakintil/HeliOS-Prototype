@@ -21,6 +21,8 @@ $item-divider-color: white;
 $item-light-bg: #ededed;
 $item-light-border: rgb(185, 185, 185);
 
+
+
 @import "ionic/ionic";
 
 // your slick styles can go here...
@@ -29,54 +31,92 @@ $item-light-border: rgb(185, 185, 185);
 // Custom
 
 .section-header {
-    font-weight: bold;
-    font-size: (23/2)px;
-    text-transform: uppercase;
+	font-weight: bold;
+	font-size: (23/2)px;
+	text-transform: uppercase;
 }
 
 .list-item-title {
-    font-size: (36/2)px;
-    font-weight: bold;
+	font-size: (36/2)px;
+	font-weight: bold;
 }
 
 .list-item-subtitle {
-    font-size: (29/2)px;
+	font-size: (29/2)px;
 }
 
 #nav-bar.bar {
-    height: (121/2)px;
-    padding: 0px;
+	height: (121/2)px;
+	padding: 0px;
 }
 
 #nav-bar {
-    
-    .button {
-        border: 0px;
-        color: $gray-text;
-        font-size: (23/2)px;
-        font-weight: bold;
-    }
-    
-    .button.active {
-        box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
-        color: $white-text;
-    }
-    
-    .button.activated {
-        box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
-        color: $white-text;
-    }
-    
-    #search {
-        -webkit-transition: width .25s;
-        transition: width .25s;
-        border: 2px solid $gray-dark;
-        margin: 5px;
-        width: 7.5%;
-    }
-    
-    #search:focus {
-        width: 50%;
-    }
-    
+
+	.button {
+		border: 0px;
+		color: $gray-text;
+		font-size: (23/2)px;
+		font-weight: bold;
+	}
+
+	.button.active {
+		box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+		color: $white-text;
+	}
+
+	.button.activated {
+		box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+		color: $white-text;
+	}
+
+	#search {
+		-webkit-transition: width .25s;
+		transition: width .25s;
+		border: 2px solid $gray-dark;
+		margin: 5px;
+		width: 7.5%;
+	}
+
+	#search:focus {
+		width: 50%;
+	}
+
+}
+
+
+
+//	Alerts Page
+
+#alerts {
+
+	.list-item-title {
+		font-weight: normal; 
+	}
+
+	.list-item-subtitle {
+		font-size: 11px;
+	}
+
+	a {
+		text-decoration: none; 
+		color: #000;
+		font-weight: bold; 
+	}
+
+	.indicator {
+		height: 92px; 
+		position: absolute; 
+		width: 10px; 
+		left: 0; 
+		top: 0; 
+	}
+
+	.note {
+		background-color: #f0aa09;
+	}
+
+	.job {
+		background-color: #2d9db4;
+	}
+
 }
