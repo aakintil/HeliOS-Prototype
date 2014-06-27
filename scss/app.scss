@@ -133,7 +133,10 @@ $item-light-border: rgb(185, 185, 185);
 
 
 // Modals
-
+#hover, 
+.popup-modal {
+	display: none;
+}
 .popup-modal {
 	position: relative;
 	top: 50px;
@@ -151,7 +154,7 @@ $item-light-border: rgb(185, 185, 185);
 		font-weight: bold;
 		text-transform: uppercase; 
 	}
-	
+
 	textarea {
 		height: 100px; 
 		background-color: $item-light-bg; 
@@ -161,12 +164,12 @@ $item-light-border: rgb(185, 185, 185);
 	input {
 		color: black;
 	}
-	
+
 
 	input[placeholder], 
 	textarea[placeholder] {
 		@include placeholder-color( "red" ); 
-//		color: rgb(134, 133, 134);
+		//		color: rgb(134, 133, 134);
 		font-size: 18px; 
 		font-weight: bold;
 	}

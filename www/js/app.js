@@ -62,36 +62,44 @@ angular.module('starter', ['ionic'])
 		controller: 'NavCtrl'
 	};
 })
-//
-//.directive('AddNoteModal', function () {
-//    return {
-//        restrict: 'A',
-//        link: function(scope, element) {
-//          element.on('click', function() {
-//            console.log("Sup Plays");
-//          });
-//        },
-//        controller: 'NavCtrl'
-//    };
-//});
 
-function AddNoteController($scope) {
 
-	$scope.hideNewNoteModal = function() {
+// Controller for Modal Logic
+// we should think about making one controller for the modals.
+function ModalController( $scope ) {
+	// current modal variable
+	var $modal = ""; 
+
+	$scope.showModal = function( name ) {
+		$modal = name; 
+		$("#selectionModal").fadeOut( fadeSpeed ); 
+		( name === "note" ) ? $("#addNoteModal").fadeIn(fadeSpeed) : $("#addJobModal").fadeIn(fadeSpeed);
+	}
+
+	$scope.hideModal = function( $modal ) {
+		// object containing jquery calls for note and job modals
+		var modals = {
+			note : {
+				func: $("#addNoteModal").fadeOut(fadeSpeed)
+			}, 
+			job : {
+				func: $("#addJobModal").fadeOut(fadeSpeed)
+			}
+		}
+		// hide the translucent bg
 		$("#hover").fadeOut(fadeSpeed);
-		$("#addNoteModal").fadeOut(fadeSpeed);
+
+		if ( $modal === undefined ) {
+			$("#selectionModal").fadeOut( fadeSpeed ); 	
+		}
+		else {
+			// call the appropriate function to fade the modal
+			modals[ $modal ].func; 
+		}
+
 	}
 }
 
-
-// Add Job Controller
-function AddJobController($scope) {
-
-	$scope.hideNewJobModal = function() {
-		$("#hover").fadeOut(fadeSpeed);
-		$("#addJobModal").fadeOut(fadeSpeed);
-	}
-}
 
 
 function NavCtrl($scope) {
@@ -110,17 +118,21 @@ function NavCtrl($scope) {
 	}
 
 	$scope.showAddNoteModal = function() {
-		console.log("Sup playa?");
+		console.log("calling show note modal"); 
 		$("#hover").fadeIn(fadeSpeed);
 		$("#addNoteModal").fadeIn(fadeSpeed);
 	}
 
 	$scope.showAddJobModal = function() {
-		console.log("Sup playa?");
+		console.log("calling show job modal"); 
 		$("#hover").fadeIn(fadeSpeed);
 		$("#addJobModal").fadeIn(fadeSpeed);
 	}
 
-	//    $("#addNoteModal").fadeOut();
-	//    $("#hover").fadeOut();
+	$scope.showSelectionModal = function() {
+		console.log("calling show selection modal"); 
+		$("#hover").fadeIn(fadeSpeed);
+		$("#selectionModal").fadeIn( fadeSpeed ); 
+	}
+
 }

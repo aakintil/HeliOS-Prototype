@@ -8321,6 +8321,10 @@ a.button {
 #alerts .job {
   background-color: #2d9db4; }
 
+#hover,
+.popup-modal {
+  display: none; }
+
 .popup-modal {
   position: relative;
   top: 50px;

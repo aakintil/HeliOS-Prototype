@@ -18,7 +18,7 @@
 
 		<!-- cordova script (this will be a 404 during development) -->
 		<script src="cordova.js"></script>
-
+			
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
 	</head>
@@ -35,7 +35,7 @@
 				<a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
 				<a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
 				<!--				<a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>-->
-				<a class="button" ng-click="showAddJobModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
 			</div>
 		</ion-nav-bar>
 
@@ -43,43 +43,67 @@
 
 		<!-- Transparent Screen that will allow us to dismiss the dialog -->
 		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-		<div id="hover" ng-controller="AddJobController" ng-click="hideNewJobModal()"></div>
+		<div id="hover" ng-controller="ModalController" ng-click="hideModal()"></div>
 
-		<!--
-		<div id="addNoteModal" ng-controller="AddNoteController" class="card popup-modal">
-		<form ng-submit="createTask(task)">
-		<div class="list">
-		<h1>NOTE MODAL</h1>
-		<label class="item item-input">
-		<input type="text" placeholder="Whats up" ng-model="task.title">
-		</label>
+		<div id="selectionModal" ng-controller="ModalController" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<p class="input-header"> Select </p>
+					<button class="button button-full button-dark" ng-click="showModal( 'note' )">Add A Note</button>
+					<button class="button button-full button-dark" ng-click="showModal( 'job' )">Add A Job</button>
+					<!-- end of list-->
+				</div>
+			</form>
 		</div>
-		</form>
-		</div>
-		-->
+		
+		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
+		<div id="addNoteModal" ng-controller="ModalController" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<p class="input-header"> Add New Note </p>
+					<label class="item item-input">
+						<input type="text" placeholder="Title" ng-model="task.title">
+					</label>
 
-		<div id="addJobModal" ng-controller="AddJobController" class="card popup-modal">
+					<label class="item item-input">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
+					</label>
+
+					<label class="item item-input">
+						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
+					</label>
+
+					<button class="button button-full button-dark" >Create Note</button>
+
+					<!-- end of list-->
+				</div>
+			</form>
+		</div>
+
+		<div id="addJobModal" ng-controller="ModalController" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
 					<label class="item item-input">
 						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>
-					
+
 					<label class="item item-input">
 						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
 					</label>
-					
+
 					<label class="item item-input">
 						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
 					</label>
-					
+
 					<button class="button button-full button-dark" >Create Job</button>
-					
-<!-- end of list-->
+
+					<!-- end of list-->
 				</div>
 			</form>
 		</div>
+
+
 
 		<script id="jobs_page.html" type="text/ng-template">
 	  	<ion-view title="Jobs" hide-back-button="true">
@@ -329,9 +353,6 @@
 			</ion-content> 
 			</div>
 		</script>
-
-
-
 
 	</body>
 </html>
