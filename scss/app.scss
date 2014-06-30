@@ -33,6 +33,16 @@ $item-light-border: rgb(185, 185, 185);
 
 // Custom
 
+//was gonna use this for transitions but might have to change 
+* {
+	-webkit-transition: all .25s linear; 
+	-moz-transition:  all .25s linear; 
+	-ms-transition: all .25s linear; 
+	-o-transition: all .25s linear; 
+	transition:  all .25s linear;
+}
+
+
 .section-header {
 	font-weight: bold;
 	font-size: (23/2)+px;
@@ -144,8 +154,19 @@ $item-light-border: rgb(185, 185, 185);
 	background-color: white;
 	height: 425px;
 
+	.button {
+		font-weight: bold !important; 
+		border: none; 
+	}
+
 	.item-input {
 		margin: 20px 12px;
+		background-color: #EAEAEA;
+
+		textarea, 
+		input {
+			background-color: inherit; 
+		}
 	}
 
 	.input-header {
@@ -175,6 +196,13 @@ $item-light-border: rgb(185, 185, 185);
 	}
 
 
+}
+
+#selectionModal {
+	margin: 0 auto; 
+	height: 176px; 
+	width: 30%; 
+	padding: 0 10px; 
 }
 
 #hover {

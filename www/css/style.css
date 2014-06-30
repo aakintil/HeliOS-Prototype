@@ -8263,6 +8263,13 @@ a.button {
   -webkit-transition: none !important;
   transition: none !important; }
 
+* {
+  -webkit-transition: all .25s linear;
+  -moz-transition: all .25s linear;
+  -ms-transition: all .25s linear;
+  -o-transition: all .25s linear;
+  transition: all .25s linear; }
+
 .section-header {
   font-weight: bold;
   font-size: 11.5px;
@@ -8331,8 +8338,15 @@ a.button {
   z-index: 10;
   background-color: white;
   height: 425px; }
+  .popup-modal .button {
+    font-weight: bold !important;
+    border: none; }
   .popup-modal .item-input {
-    margin: 20px 12px; }
+    margin: 20px 12px;
+    background-color: #EAEAEA; }
+    .popup-modal .item-input textarea,
+    .popup-modal .item-input input {
+      background-color: inherit; }
   .popup-modal .input-header {
     font-size: 18px;
     margin: 20px 12px;
@@ -8364,6 +8378,12 @@ a.button {
     .popup-modal textarea[placeholder] :-ms-input-placeholder {
       /* Internet Explorer 10+ */
       color: "red"; }
+
+#selectionModal {
+  margin: 0 auto;
+  height: 176px;
+  width: 30%;
+  padding: 0 10px; }
 
 #hover {
   position: fixed;
