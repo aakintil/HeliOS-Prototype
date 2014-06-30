@@ -31,10 +31,9 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<a class="button" ng-click="hideModal()" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
-				<a class="button" ng-click="hideModal()" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
-				<a class="button" ng-click="hideModal()" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
-				<!--				<a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>-->
+				<a class="button" ng-click="hideModal(); switchBackStack('jobs')" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
+				<a class="button" ng-click="hideModal(); switchBackStack('notes')" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
+				<a class="button" ng-click="hideModal(); switchBackStack('alerts')" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
 				<a class="button" ng-click="showSelectionModal()" ><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
 			</div>
 		</ion-nav-bar>
