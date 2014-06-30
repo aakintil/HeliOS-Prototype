@@ -25,6 +25,7 @@
 
 	<body ng-app="starter">
 
+
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
 			<back>Back</back>
 			<input id="search" type="text"/>
@@ -33,15 +34,147 @@
 
 				<a class="button active" ng-click="hideModal(); switchBackStack('jobs')" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></a>
 				<a class="button" ng-click="hideModal(); switchBackStack('notes')" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
-				<a class="button" ng-click="hideModal(); switchBackStack('alerts')" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></a>
+				<a class="button" ng-click="hideModal(); switchBackStack('alerts')" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></a>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+			</div>
+		</ion-nav-bar>
+
+		<ion-nav-view animation="no-animation"></ion-nav-view>
+
+		<ion-view title="Jobs" hide-back-button="true">
+			<ion-content>
+				<div class="section">
+					<div class="item item-divider">
+						<div class="section-header">My Jobs</div>
+					</div>
+					<ul class="list">
+						<a href="job.html">
+							<li class="item">
+								<div class="list-item-title">Replace Faulty Bolts</div>
+								<div class="list-item-subtitle">You</div>
+							</li>
+						</a>
+						<li class="item">
+							<div class="list-item-title">Replace Faulty Bolts</div>
+							<div class="list-item-subtitle">You</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Replace Faulty Bolts</div>
+							<div class="list-item-subtitle">You</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<div class="list">
+						<div class="item item-divider">
+							ALL JOBS IN PROGRESS
+						</div>
+						<div class="item item-button-right">
+							<p class="list-item-title"> 
+								Backlog stations
+							</p>
+							<p class="list-item-subtitle">
+								You, Adam M.
+							</p>
+							<button class="button button-positive">
+								<i class="icon ion-plus-round"></i>
+							</button>
+						</div>
+
+						<div class="item item-button-right">
+							<p class="list-item-title"> 
+								Replace arcjet tubes
+							</p>
+							<p class="list-item-subtitle">
+								You, Adam M.
+							</p>
+							<button class="button button-positive">
+								<i class="icon ion-plus-round"></i>
+							</button>
+						</div>
+
+						<div class="item item-button-right">
+							<p class="list-item-title"> 
+								Secure ArcJet for Test Run
+							</p>
+							<p class="list-item-subtitle">
+								You, Adam M.
+							</p>
+							<button class="button button-positive">
+								<i class="icon ion-plus-round"></i>
+							</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="section">
+					<div class="item item-divider">
+						JOB TEMPLATES
+					</div>
+					<div class="item item-button-right">
+						<p class="list-item-title"> 
+							Backlog stations
+						</p>
+						<p class="list-item-subtitle">
+							You, Adam M.
+						</p>
+						<button class="button button-positive">
+							<i class="icon ion-plus-round"></i>
+						</button>
+					</div>
+
+					<div class="item item-button-right">
+						<p class="list-item-title"> 
+							Replace arcjet tubes
+						</p>
+						<p class="list-item-subtitle">
+							You, Adam M.
+						</p>
+						<button class="button button-positive">
+							<i class="icon ion-plus-round"></i>
+						</button>
+					</div>
+
+					<div class="item item-button-right">
+						<p class="list-item-title"> 
+							Secure ArcJet for Test Run
+						</p>
+						<p class="list-item-subtitle">
+							You, Adam M.
+						</p>
+						<button class="button button-positive">
+							<i class="icon ion-plus-round"></i>
+						</button>
+					</div>
+
+				</div>
+
+			</ion-content>
+		</ion-view>
+
+
+
+
+
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
+
+			<back>Back</back>
+			<input id="search" type="text"/>
+
+			<div class="button-bar nav-bar-buttons">
+<!--				place a.button-->
+
+				<a class="button active" ng-click="hideModal(); switchBackStack('jobs')" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></a>
+				<a class="button" ng-click="hideModal(); switchBackStack('notes')" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
+				<a class="button" ng-click="hideModal(); switchBackStack('alerts')" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></a>
 				<a class="button" ng-click="showSelectionModal()" ><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
 			</div>
 		</ion-nav-bar>
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
-		<!-- Transparent Screen that will allow us to dismiss the dialog -->
-		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
+<!--		Transparent Screen that will allow us to dismiss the dialog-->
 		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
 		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
@@ -49,12 +182,12 @@
 				<div class="list">
 					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> Note </button>
 					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> Job </button>
-					<!-- end of list-->
+					end of list
 				</div>
 			</form>
 		</div>
 
-		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
+		dunno if we have to change the controllers for add note and job: DISCUSS LATER
 		<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
 			<form ng-submit="submit(note)">
 				<div class="list">
@@ -71,8 +204,6 @@
 
 
 					<button type="submit" id="submit" value="Submit" class="button button-full button-dark" >Create Note</button>
-
-					<!-- end of list-->
 				</div>
 			</form>
 		</div>
@@ -96,258 +227,26 @@
 					</label>
 
 					<button class="button button-full button-dark" >Create Job</button>
-
-					<!-- end of list-->
 				</div>
 			</form>
 		</div>
 
 
-
-		<script id="jobs_page.html" type="text/ng-template" ng-controller="JobsCtrl">
-	  	<ion-view title="Jobs" hide-back-button="true">
-			<ion-content>
-				<div class="section">
-					<div class="item item-divider">
-						<div class="section-header">My Jobs</div>
-			</div>
-					<ul class="list">
-						<a href="job.html">
-							<li class="item">
-								<div class="list-item-title">Replace Faulty Bolts</div>
-								<div class="list-item-subtitle">You</div>
-			</li>
-			</a>
-						<li class="item">
-							<div class="list-item-title">Replace Faulty Bolts</div>
-							<div class="list-item-subtitle">You</div>
-			</li>
-						<li class="item">
-							<div class="list-item-title">Replace Faulty Bolts</div>
-							<div class="list-item-subtitle">You</div>
-			</li>
-			</ul>
-			</div>
-
-		<div class="section">
-			<div class="list">
-				<div class="item item-divider">
-					ALL JOBS IN PROGRESS
-			</div>
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Backlog stations
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Replace arcjet tubes
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Secure ArcJet for Test Run
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-			</div>
-
-			</div>
-		<div class="section">
-			<div class="item item-divider">
-				JOB TEMPLATES
-			</div>
-			<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Backlog stations
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Replace arcjet tubes
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Secure ArcJet for Test Run
-			</p>
-					<p class="list-item-subtitle">
-						You, Adam M.
-			</p>
-					<button class="button button-positive">
-						<i class="icon ion-plus-round"></i>
-			</button>
-			</div>
-
-			</div>
-
-			</ion-content>
-			</ion-view>
-		</script>    
-
-
-		<!-- NOTES PAGE -->
-		<script id="notes_page.html" type="text/ng-template">
-          <ion-view>
-            <ion-content>
-                <div class="section">
-					<div class="item item-divider">
-						<div class="section-header">Recently Used</div>
-			</div>
-					<ul class="list">
-						<li class="item">
-							<div class="list-item-title">Adjust torque to 50 Nm</div>
-							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
-			</li>
-						<li class="item">
-							<div class="list-item-title">From Olga: Please check the Arcjet for faulty bolts</div>
-							<div class="list-item-subtitle">Job: Replace bolts on Arcjet</div>
-			</li>
-						<li class="item">
-							<div class="list-item-title">Bolt measurement - 50mm</div>
-			</li>
-                        <li class="item">
-							<div class="list-item-title">Check ArcJet before EOD</div>
-			</li>
-                        <li class="item">
-							<div class="list-item-adder">Add new note +</div>
-			</li>
-			</ul>
-			</div>
-                <div class="section">
-					<div class="item item-divider">
-						<div class="section-header">Other Notes</div>
-			</div>
-					<ul class="list">
-						<li class="item">
-							<div class="list-item-title">Switch out o-rings on ArcJet</div>
-			</li>
-						<li class="item">
-							<div class="list-item-title">Faulty bolts in areas 12, 15, 17</div>
-							<div class="list-item-subtitle">Job: Replace bolts on ArcJet</div>
-			</li>
-			</ul>
-			</div>
-			</ion-content>
-			</ion-view>
-		</script> 
-
-
-
-		<!-- ALERTS PAGE -->
-		<script id="alerts_page.html" type="text/ng-template">
-      <!-- The title of the ion-view will be shown on the navbar -->
-	  	<ion-view title="Alerts">
-			<ion-content>
-					<div id="alerts" class="section">
-					<div class="item item-divider">
-					<div class="section-header">ALERTS</div>
-			</div>
-			<div class="list">
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Olga K. added <a href="">a note</a> to the job <a href="">Replace Bolts on ArcJet</a>
-			</p>
-					<p class="time list-item-subtitle">
-						2 MINUTES AGO
-			</p>
-					<div class="indicator note"> </div>
-			</div>
-
-				<div class="item item-button-right">
-					<p class="list-item-title"> 
-						Olga K. added you to the job <a href="">Replace Bolts on ArcJet</a>
-			</p>
-					<p class="time list-item-subtitle">
-						3 HOURS AGO
-			</p>
-					<div class="indicator job"> </div>
-			</div>
-
-			<div class="item item-button-right">
-			<p class="list-item-title"> 
-				Adam M. added  <a href="">a note</a> to the job Change Window Sensor.
-			</p>
-			<p class="time list-item-subtitle">
-				YESTERDAY
-			</p>
-			<div class="indicator note"> </div>
-			</div>
-		<div class="item item-button-right">
-			<p class="list-item-title"> 
-				You added <a href="">a note</a> to the job Change Window Sensor.
-			</p>
-			<p class="time list-item-subtitle">
-				YESTERDAY
-			</p>
-			<div class="indicator note"> </div>
-			</div>
-		<div class="item item-button-right">
-			<p class="list-item-title"> 
-				You created the job <a href="">Change Window Sensor.</a>
-			</p>
-			<p class="time list-item-subtitle">
-				2 DAYS AGO
-			</p>
-			<div class="indicator job"> </div>
-			</div>
-
-			</div>
-
-			</ion-content>
-			</ion-view>   
-		</script> 
-
-
-
-		<!-- Add Note Modal -->
+		Add Note Modal
 		<script id="new_note_modal.html" type="text/ng-template">
-        	<div class="modal">
-				<!-- Modal Header Bar -->
-				<ion-header-bar class="bar-secondary">
-					<h1 class="title">New Task</h1>
-					<button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>                
+<div class="modal">
+Modal Header Bar
+<ion-header-bar class="bar-secondary">
+<h1 class="title">New Task</h1>
+<button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>                
 			</ion-header-bar>
 
-				<!-- Modal content area -->
-				<ion-content>
-					<form ng-submit="createTask(task)">
-						<div class="list">
-							<label class="item item-input">
-								<input type="text" placeholder="Whats up" ng-model="task.title">
+Modal content area
+<ion-content>
+<form ng-submit="createTask(task)">
+<div class="list">
+<label class="item item-input">
+<input type="text" placeholder="Whats up" ng-model="task.title">
 			</label>
 			</div>
 			</form>

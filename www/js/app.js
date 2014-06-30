@@ -25,23 +25,23 @@ angular.module('starter', ['ionic'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-	$stateProvider
-	.state('jobs_page', {
-		url: '/Jobs',
-		templateUrl: 'jobs_page.html',
-		controller : "JobsCtrl"
-	})
-	.state('notes_page', {
-		url: '/Notes',
-		templateUrl: 'notes_page.html',
-		controller : "NotesCtrl"
-	})
-	.state('alerts_page', {
-		url: '/Alerts',
-		templateUrl: 'alerts_page.html',
-		controller : "AlertsCtrl"
-	})
-	$urlRouterProvider.otherwise("/Jobs");
+//	$stateProvider
+//	.state('jobs_page', {
+//		url: '/Jobs',
+//		templateUrl: 'jobs_page.html',
+//		controller : "JobsCtrl"
+//	})
+//	.state('notes_page', {
+//		url: '/Notes',
+//		templateUrl: 'notes_page.html',
+//		controller : "NotesCtrl"
+//	})
+//	.state('alerts_page', {
+//		url: '/Alerts',
+//		templateUrl: 'alerts_page.html',
+//		controller : "AlertsCtrl"
+//	})
+//	$urlRouterProvider.otherwise("/Jobs");
 })
 
 .controller('JobsCtrl', function($scope) {

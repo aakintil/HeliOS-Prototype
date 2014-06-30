@@ -8338,8 +8338,7 @@ a.button {
   margin-top: -13px; }
 
 .section .list .item {
-  min-height: 62.5px;
-  overflow: auto; }
+  min-height: 62.5px; }
 .section .item-divider {
   height: 28px; }
   .section .item-divider .section-header {
