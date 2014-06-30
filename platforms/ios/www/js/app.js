@@ -1,5 +1,8 @@
 // Ionic Starter App
 
+//Globals
+var fadeSpeed = .5;
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -35,7 +38,6 @@ angular.module('starter', ['ionic'])
     templateUrl: 'alerts_page.html',
     controller : "AlertsCtrl"
   })
-  
   $urlRouterProvider.otherwise("/Jobs");
 })
 
@@ -59,7 +61,27 @@ angular.module('starter', ['ionic'])
         },
         controller: 'NavCtrl'
     };
-});
+})
+//
+//.directive('AddNoteModal', function () {
+//    return {
+//        restrict: 'A',
+//        link: function(scope, element) {
+//          element.on('click', function() {
+//            console.log("Sup Plays");
+//          });
+//        },
+//        controller: 'NavCtrl'
+//    };
+//});
+
+function AddNoteController($scope) {
+  
+    $scope.hideNewNoteModal = function() {
+      $("#hover").fadeOut(fadeSpeed);
+      $("#addNoteModal").fadeOut(fadeSpeed);
+    }
+}
 
 function NavCtrl($scope) {
   
@@ -75,6 +97,13 @@ function NavCtrl($scope) {
       return ""
     }
   }
+
+  $scope.showAddNoteModal = function() {
+    console.log("Sup playa?");
+    $("#hover").fadeIn(fadeSpeed);
+    $("#addNoteModal").fadeIn(fadeSpeed);
+  }
+
+//    $("#addNoteModal").fadeOut();
+//    $("#hover").fadeOut();
 }
-
-

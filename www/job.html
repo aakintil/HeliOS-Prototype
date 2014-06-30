@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+<link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+			
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+	</head>
+
+	<body ng-app="starter">
+
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
+			<back>Back</back>
+			<input id="search" type="text"/>
+			<div class="button-bar nav-bar-buttons">
+				<!-- place in a.button -->
+
+				<a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
+				<a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
+				<a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
+				<!--				<a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>-->
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+			</div>
+		</ion-nav-bar>
+
+		<ion-nav-view animation="no-animation"></ion-nav-view>
+
+		<!-- Transparent Screen that will allow us to dismiss the dialog -->
+		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
+		<div id="hover" ng-controller="ModalController" ng-click="hideModal()"></div>
+
+		<div id="selectionModal" ng-controller="ModalController" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<p class="input-header"> Select </p>
+					<button class="button button-full button-dark" ng-click="showModal( 'note' )">Add A Note</button>
+					<button class="button button-full button-dark" ng-click="showModal( 'job' )">Add A Job</button>
+					<!-- end of list-->
+				</div>
+			</form>
+		</div>
+		
+		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
+		<div id="addNoteModal" ng-controller="ModalController" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<p class="input-header"> Add New Note </p>
+					<label class="item item-input">
+						<input type="text" placeholder="Title" ng-model="task.title">
+					</label>
+
+					<label class="item item-input">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
+					</label>
+
+					<label class="item item-input">
+						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
+					</label>
+
+					<button class="button button-full button-dark" >Create Note</button>
+
+					<!-- end of list-->
+				</div>
+			</form>
+		</div>
+
+		<div id="addJobModal" ng-controller="ModalController" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<p class="input-header"> Add New Job </p>
+					<label class="item item-input">
+						<input type="text" placeholder="Title" ng-model="task.title">
+					</label>
+
+					<label class="item item-input">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
+					</label>
+
+					<label class="item item-input">
+						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
+					</label>
+
+					<button class="button button-full button-dark" >Create Job</button>
+
+					<!-- end of list-->
+				</div>
+			</form>
+		</div>
+
+
+
+		<script id="jobs_page.html" type="text/ng-template">
+	  	<ion-view title="Jobs" hide-back-button="true">
+			<ion-content>
+				<div class="section">
+					<div class="item item-divider">
+						<div class="section-header">Job: Replace Bolts on ArcJet</div>
+					</div>
+					<ul class="list">
+						<li class="item job-header">
+							<div class="list-item-title">Replace Bolts on ArcJet</div>
+							<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">3/3/14</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> Olga K.</span></div>
+							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">Olga K, Astra Not(You)</span></div>
+						</li>
+					</ul>
+				</div>
+				
+				<button class="button offset list-item-adder">Add Participant +</button>
+				
+				<div class="section offset">
+					<div class="item item-divider">
+						<div class="section-header">Notes</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							Please check the ArcJet for faulty bolts in Areas 1, 5, 8
+						</li>
+						<li class="item">
+							Please check the ArcJet for faulty bolts in Areas 1, 5, 8
+						</li>
+					</ul>
+				</div>
+				
+				<div class="section offset">
+					<div class="item item-divider">
+						<div class="section-header">Tools</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							<div class="list-item-title">Clamp C8</div>
+							<div class="list-item-subtitle">Current Location: Mercury-1</div>
+						</li>
+						<li class="item">
+							<div class="list-item-title">Clamp C12</div>
+							<div class="list-item-subtitle">Current Location: Mercury-2</div>
+						</li>
+					</ul>
+				</div>
+				
+			</ion-content>
+			</ion-view>
+		</script>    
+
+	</body>
+</html>
