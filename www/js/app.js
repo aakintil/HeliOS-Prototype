@@ -3,6 +3,9 @@
 //Globals
 var fadeSpeed = .5;
 
+//backStack, keeps track of the backstack for each seperate tab
+var currentBackStack = 'jobs';
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -56,11 +59,41 @@ angular.module('starter', ['ionic'])
 		restrict: 'E',
 		link: function(scope, element) {
 			element.on('click', function() {
-				window.history.back();
+				//window.history.back();
+               
+                // go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
+                var curStack = JSON.parse(localStorage.getItem(currentBackStack));
+				if (curStack == null) {
+					curStack = new Array();
+				}
+                if (curStack.length > 0) {
+                    var backpage = curStack[curStack.length-1];
+					console.log(backpage);
+                    curStack.pop();
+					localStorage.setItem(currentBackStack, JSON.stringify(curStack));
+                    window.location = backpage;
+                }
 			});
 		},
 		controller: 'NavCtrl'
 	};
+})
+
+.directive('a', function () {
+   return {
+      restrict: 'E',
+      link: function(scope, element) {
+			element.on('click', function() {
+				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
+				if (curStack == null) {
+					curStack = new Array();
+				}
+				curStack.push(document.URL);
+			    localStorage.setItem(currentBackStack, JSON.stringify(curStack));
+			});
+		},
+		controller: 'JobsCtrl'
+   }
 })
 
 
@@ -131,7 +164,6 @@ function NavCtrl($scope) {
 
 
 	$scope.showSelectionModal = function() {
-		console.log("calling show selection modal"); 
 		$("#addJobModal").fadeOut(fadeSpeed);
 		$("#addNoteModal").fadeOut(fadeSpeed);
 
@@ -139,8 +171,9 @@ function NavCtrl($scope) {
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
 	
-	$scope.switchBackStack = function () {
-		console.log("switch back stack");	
+	$scope.switchBackStack = function (tab) {
+		console.log("switch back stack to " + tab);
+        currentBackStack = tab;
 	}
 
 }
