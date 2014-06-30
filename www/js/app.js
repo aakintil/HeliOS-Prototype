@@ -45,10 +45,10 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('JobsCtrl', function($scope) {
-// add functions to take data from job modal
+	// add functions to take data from job modal
 })
 .controller('NotesCtrl', function($scope) {
-// add functions to take data from notes modal
+	// add functions to take data from notes modal
 })
 .controller('AlertsCtrl', function($scope) {
 
@@ -99,7 +99,7 @@ angular.module('starter', ['ionic'])
 
 // Controller for Modal Logic
 // we should think about making one controller for the modals.
-function ModalController( $scope ) {
+function ModalCtrl( $scope ) {
 	// current modal variable
 	var $modal = ""; 
 
@@ -131,6 +131,18 @@ function ModalController( $scope ) {
 		}
 
 	}
+
+	$scope.form = {}; 
+	$scope.submit = function( formType ) {
+//		$scope.form = { 
+//			type : formType, 
+//			title : , 
+//			participants : , 
+//			note : ,
+//		}
+		console.log( "submit successfully called with type of ", formType ); 	
+	}
+
 }
 
 
@@ -175,5 +187,10 @@ function NavCtrl($scope) {
 		console.log("switch back stack to " + tab);
         currentBackStack = tab;
 	}
+
+}
+
+
+function FormCtrl( $scope ) {
 
 }

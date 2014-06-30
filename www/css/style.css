@@ -8426,6 +8426,8 @@ a.button {
   height: 176px;
   width: 30%;
   padding: 0 10px; }
+  #selectionModal .button {
+    text-transform: uppercase; }
 
 #hover {
   position: fixed;

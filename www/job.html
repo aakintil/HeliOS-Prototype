@@ -42,9 +42,9 @@
 
 		<!-- Transparent Screen that will allow us to dismiss the dialog -->
 		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-		<div id="hover" ng-controller="ModalController" ng-click="hideModal()"></div>
+		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
-		<div id="selectionModal" ng-controller="ModalController" class="card popup-modal">
+		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Select </p>
@@ -56,7 +56,7 @@
 		</div>
 		
 		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-		<div id="addNoteModal" ng-controller="ModalController" class="card popup-modal">
+		<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Note </p>
@@ -79,7 +79,7 @@
 			</form>
 		</div>
 
-		<div id="addJobModal" ng-controller="ModalController" class="card popup-modal">
+		<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
