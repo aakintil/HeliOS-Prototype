@@ -138,5 +138,9 @@ function NavCtrl($scope) {
 		$("#hover").fadeIn(fadeSpeed );
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
+	
+	$scope.switchBackStack = function () {
+		console.log("switch back stack");	
+	}
 
 }
