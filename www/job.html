@@ -40,71 +40,7 @@
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
-		<!-- Transparent Screen that will allow us to dismiss the dialog -->
-		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
-
-		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
-			<form ng-submit="createTask(task)">
-				<div class="list">
-					<p class="input-header"> Select </p>
-					<button class="button button-full button-dark" ng-click="showModal( 'note' )">Add A Note</button>
-					<button class="button button-full button-dark" ng-click="showModal( 'job' )">Add A Job</button>
-					<!-- end of list-->
-				</div>
-			</form>
-		</div>
 		
-		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-		<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
-			<form ng-submit="createTask(task)">
-				<div class="list">
-					<p class="input-header"> Add New Note </p>
-					<label class="item item-input">
-						<input type="text" placeholder="Title" ng-model="task.title">
-					</label>
-
-					<label class="item item-input">
-						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
-					</label>
-
-					<label class="item item-input">
-						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
-					</label>
-
-					<button class="button button-full button-dark" >Create Note</button>
-
-					<!-- end of list-->
-				</div>
-			</form>
-		</div>
-
-		<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
-			<form ng-submit="createTask(task)">
-				<div class="list">
-					<p class="input-header"> Add New Job </p>
-					<label class="item item-input">
-						<input type="text" placeholder="Title" ng-model="task.title">
-					</label>
-
-					<label class="item item-input">
-						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
-					</label>
-
-					<label class="item item-input">
-						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
-					</label>
-
-					<button class="button button-full button-dark" >Create Job</button>
-
-					<!-- end of list-->
-				</div>
-			</form>
-		</div>
-
-
-
-		<script id="jobs_page.html" type="text/ng-template">
 	  	<ion-view title="Jobs" hide-back-button="true">
 			<ion-content>
 				<div class="section">
@@ -154,7 +90,6 @@
 				
 			</ion-content>
 			</ion-view>
-		</script>    
 
 	</body>
 </html>
