@@ -145,8 +145,6 @@ function ModalCtrl( $scope ) {
 
 }
 
-
-
 function NavCtrl($scope) {
 
 	$scope.goBack = function() {
@@ -187,10 +185,5 @@ function NavCtrl($scope) {
 		console.log("switch back stack to " + tab);
         currentBackStack = tab;
 	}
-
-}
-
-
-function FormCtrl( $scope ) {
 
 }
