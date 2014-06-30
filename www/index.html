@@ -60,6 +60,8 @@
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Note </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+					
 					<label class="item item-input">
 						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>
@@ -83,6 +85,8 @@
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+					
 					<label class="item item-input">
 						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>

@@ -8338,6 +8338,12 @@ a.button {
   z-index: 10;
   background-color: white;
   height: 425px; }
+  .popup-modal .closeModals {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    right: 10px;
+    top: 20px; }
   .popup-modal .button {
     font-weight: bold !important;
     border: none; }
