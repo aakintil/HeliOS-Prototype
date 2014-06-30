@@ -42,10 +42,10 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('JobsCtrl', function($scope) {
-
+// add functions to take data from job modal
 })
 .controller('NotesCtrl', function($scope) {
-
+// add functions to take data from notes modal
 })
 .controller('AlertsCtrl', function($scope) {
 
@@ -109,7 +109,7 @@ function NavCtrl($scope) {
 	};
 
 	$scope.getClass = function(path) { 
-
+		//		we have to do something to account for highlighting the add notes tab
 		if (window.location.href.indexOf(path) != -1) {
 			return "active"
 		} else {
@@ -129,9 +129,13 @@ function NavCtrl($scope) {
 		$("#addJobModal").fadeIn(fadeSpeed);
 	}
 
+
 	$scope.showSelectionModal = function() {
 		console.log("calling show selection modal"); 
-		$("#hover").fadeIn(fadeSpeed);
+		$("#addJobModal").fadeOut(fadeSpeed);
+		$("#addNoteModal").fadeOut(fadeSpeed);
+
+		$("#hover").fadeIn(fadeSpeed );
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
 

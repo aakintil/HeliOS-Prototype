@@ -31,11 +31,11 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<a class="button" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
-				<a class="button" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
-				<a class="button" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
+				<a class="button" ng-click="hideModal()" ng-class="getClass('/Jobs')" ui-sref="jobs_page"><img class="icon" src="img/icons/jobs-dark.svg"><div class="icon-text">Jobs</div></a>
+				<a class="button" ng-click="hideModal()" ng-class="getClass('/Notes')" ui-sref="notes_page"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
+				<a class="button" ng-click="hideModal()" ng-class="getClass('/Alerts')" ui-sref="alerts_page"><img class="icon" src="img/icons/alert-light.svg"><div class="icon-text">Alerts</div></a>
 				<!--				<a class="button" ng-click="showAddNoteModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>-->
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+				<a class="button" ng-click="showSelectionModal()" ><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
 			</div>
 		</ion-nav-bar>
 
@@ -48,9 +48,8 @@
 		<div id="selectionModal" ng-controller="ModalController" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
-					<p class="input-header"> Select </p>
-					<button class="button button-full button-dark" ng-click="showModal( 'note' )">Add A Note</button>
-					<button class="button button-full button-dark" ng-click="showModal( 'job' )">Add A Job</button>
+					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> NOTE </button>
+					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> JOB </button>
 					<!-- end of list-->
 				</div>
 			</form>
@@ -61,6 +60,8 @@
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Note </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+					
 					<label class="item item-input">
 						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>
@@ -84,6 +85,8 @@
 			<form ng-submit="createTask(task)">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+					
 					<label class="item item-input">
 						<input type="text" placeholder="Title" ng-model="task.title">
 					</label>
