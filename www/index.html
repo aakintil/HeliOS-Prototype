@@ -43,21 +43,21 @@
 
 		<!-- Transparent Screen that will allow us to dismiss the dialog -->
 		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-		<div id="hover" ng-controller="ModalController" ng-click="hideModal()"></div>
+		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
-		<div id="selectionModal" ng-controller="ModalController" class="card popup-modal">
+		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
 			<form ng-submit="createTask(task)">
 				<div class="list">
-					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> NOTE </button>
-					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> JOB </button>
+					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> Note </button>
+					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> Job </button>
 					<!-- end of list-->
 				</div>
 			</form>
 		</div>
 		
 		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-		<div id="addNoteModal" ng-controller="ModalController" class="card popup-modal">
-			<form ng-submit="createTask(task)">
+		<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
+			<form ng-submit="submit('note')">
 				<div class="list">
 					<p class="input-header"> Add New Note </p>
 					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
@@ -74,7 +74,7 @@
 						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
 					</label>
 
-					<button class="button button-full button-dark" >Create Note</button>
+					<button type="submit" id="submit" value="Submit" class="button button-full button-dark" >Create Note</button>
 
 					<!-- end of list-->
 				</div>
@@ -82,7 +82,7 @@
 		</div>
 
 		<div id="addJobModal" ng-controller="ModalController" class="card popup-modal">
-			<form ng-submit="createTask(task)">
+			<form ng-submit="submit('job')">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
 					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
