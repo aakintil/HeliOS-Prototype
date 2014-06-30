@@ -99,8 +99,14 @@ function ModalCtrl( $scope ) {
 
 	}
 
-	$scope.form = []; 
-	$scope.submit( formType ) {
+	$scope.form = {}; 
+	$scope.submit = function( formType ) {
+//		$scope.form = { 
+//			type : formType, 
+//			title : , 
+//			participants : , 
+//			note : ,
+//		}
 		console.log( "submit successfully called with type of ", formType ); 	
 	}
 
