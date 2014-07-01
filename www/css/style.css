@@ -8440,9 +8440,27 @@ a.button {
   height: 44px;
   width: 100%;
   position: relative;
-  background-color: red;
   z-index: 10;
   top: -80px; }
+  #notification div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 22px; }
+
+.success {
+  background-color: #8fcb21; }
+
+.error {
+  background-color: #ef4e3a; }
+
+.warning {
+  background-color: #eaad16; }
 
 .disappear {
   opacity: 0;

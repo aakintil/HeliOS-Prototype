@@ -7,6 +7,10 @@ $gray-light: #ededed;
 $gray-lighter: #989898;
 $white-text: white;
 
+$success: rgba( 143, 203, 33, 1 ); 
+$warning: rgba( 234, 173, 22, 1 ); 
+$error: rgba( 239, 78, 58, 1 ); 
+
 // Overridden Variables
 $positive: #cfd1d2;
 $positive-active: #6d6e70;
@@ -27,6 +31,10 @@ $item-light-bg: $gray-light;
 $item-light-border: rgb(185, 185, 185);
 
 
+// Fonts (havne't implemented yet, just created)
+$item-title: (36/2)+px;
+$section-header: (23/2)+px;
+$item-subtitle: (23/2)+px;
 
 @import "ionic/ionic";
 
@@ -289,10 +297,31 @@ $item-light-border: rgb(185, 185, 185);
 	height: $bar-height; 
 	width: 100%; 
 	position: relative; 
-	background-color: red; 
 	z-index: 10;
 	top: -80px;
 	
+	div {
+		position: absolute;
+		left: 0; 
+		right: 0; 
+		font-weight: bold; 
+		color: white; 
+		font-size: $item-title; 
+		text-transform: uppercase; 
+		line-height: 22px; 
+	}
+}
+
+.success {
+	background-color: $success;  
+}
+
+.error {
+	background-color: $error;  
+}
+
+.warning {
+	background-color: $warning;  
 }
 
 .disappear {

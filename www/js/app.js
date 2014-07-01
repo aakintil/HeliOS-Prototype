@@ -145,6 +145,7 @@ function ModalCtrl( $scope ) {
 	$scope.submit = function( formType ) {		
 		if ( formType === undefined ) {
 			console.log( "please fill out form "); // turn into an alert / notification
+			$scope.showFeedback( formType ); 	
 		}
 		else {
 			formType.job !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
@@ -156,15 +157,28 @@ function ModalCtrl( $scope ) {
 
 	$scope.showFeedback = function( formType ) {
 		var title = ""; 
-		formType.job !== undefined ? title = "Note" : title = "Job"; 
-		
-		console.log( $("#notification"), "   should exist "); 
-		// add the formtype title to the notification page
-		$("#notification").addClass( "appear" ); 
+		if (formType === undefined) {
+			$("#notification").addClass( "appear error" )
+			.html("<div> An Error Occurred </div>"); 
 
-		setTimeout(function() {
-			$("#notification").removeClass( "appear" ).addClass( "disappear" ); 
-		}, 1500);
+			setTimeout(function() {
+				$("#notification").removeClass( "appear error" )
+				.addClass( "disappear" ); 
+				
+			}, 2400);
+		}
+		else {
+			formType.job !== undefined ? title = "Note" : title = "Job"; 
+
+			// add the formtype title to the notification page
+			$("#notification").addClass( "appear success" )
+			.html("<div> Your " + title + " Was Successfully Created </div>"); ; 
+
+			setTimeout(function() {
+				$("#notification").removeClass( "appear success" )
+				.addClass( "disappear" ); 
+			}, 2400);	
+		}
 	}
 
 }
