@@ -25,23 +25,23 @@ angular.module('starter', ['ionic'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-//	$stateProvider
-//	.state('jobs_page', {
-//		url: '/Jobs',
-//		templateUrl: 'jobs_page.html',
-//		controller : "JobsCtrl"
-//	})
-//	.state('notes_page', {
-//		url: '/Notes',
-//		templateUrl: 'notes_page.html',
-//		controller : "NotesCtrl"
-//	})
-//	.state('alerts_page', {
-//		url: '/Alerts',
-//		templateUrl: 'alerts_page.html',
-//		controller : "AlertsCtrl"
-//	})
-//	$urlRouterProvider.otherwise("/Jobs");
+	//	$stateProvider
+	//	.state('jobs_page', {
+	//		url: '/Jobs',
+	//		templateUrl: 'jobs_page.html',
+	//		controller : "JobsCtrl"
+	//	})
+	//	.state('notes_page', {
+	//		url: '/Notes',
+	//		templateUrl: 'notes_page.html',
+	//		controller : "NotesCtrl"
+	//	})
+	//	.state('alerts_page', {
+	//		url: '/Alerts',
+	//		templateUrl: 'alerts_page.html',
+	//		controller : "AlertsCtrl"
+	//	})
+	//	$urlRouterProvider.otherwise("/Jobs");
 })
 
 .controller('JobsCtrl', function($scope) {
@@ -60,19 +60,19 @@ angular.module('starter', ['ionic'])
 		link: function(scope, element) {
 			element.on('click', function() {
 				//window.history.back();
-               
-                // go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
-                var curStack = JSON.parse(localStorage.getItem(currentBackStack));
+
+				// go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
+				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
 				if (curStack == null) {
 					curStack = new Array();
 				}
-                if (curStack.length > 0) {
-                    var backpage = curStack[curStack.length-1];
+				if (curStack.length > 0) {
+					var backpage = curStack[curStack.length-1];
 					console.log(backpage);
-                    curStack.pop();
+					curStack.pop();
 					localStorage.setItem(currentBackStack, JSON.stringify(curStack));
-                    window.location = backpage;
-                }
+					window.location = backpage;
+				}
 			});
 		},
 		controller: 'NavCtrl'
@@ -80,20 +80,20 @@ angular.module('starter', ['ionic'])
 })
 
 .directive('a', function () {
-   return {
-      restrict: 'E',
-      link: function(scope, element) {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
 			element.on('click', function() {
 				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
 				if (curStack == null) {
 					curStack = new Array();
 				}
 				curStack.push(document.URL);
-			    localStorage.setItem(currentBackStack, JSON.stringify(curStack));
+				localStorage.setItem(currentBackStack, JSON.stringify(curStack));
 			});
 		},
 		controller: 'JobsCtrl'
-   }
+	}
 })
 
 
@@ -133,14 +133,38 @@ function ModalCtrl( $scope ) {
 	}
 
 	$scope.form = {}; 
-	$scope.submit = function( formType ) {
-//		$scope.form = { 
-//			type : formType, 
-//			title : , 
-//			participants : , 
-//			note : ,
-//		}
-		console.log( "submit successfully called with type of ", formType ); 	
+	var sendToNotes = function( note ) {
+		console.log(" insert into notes db ", note ); 
+	}
+
+	var sendToJobs = function( job ) {
+		console.log(" insert into jobs db ", job ); 
+	}
+
+
+	$scope.submit = function( formType ) {		
+		if ( formType === undefined ) {
+			console.log( "please fill out form "); // turn into an alert / notification
+		}
+		else {
+			formType.job !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
+			console.log( "submit successfully called" ); 
+			$scope.hideModal(); 
+			$scope.showFeedback( formType ); 	
+		}
+	}
+
+	$scope.showFeedback = function( formType ) {
+		var title = ""; 
+		formType.job !== undefined ? title = "Note" : title = "Job"; 
+		
+		console.log( $("#notification"), "   should exist "); 
+		// add the formtype title to the notification page
+		$("#notification").addClass( "appear" ); 
+
+		setTimeout(function() {
+			$("#notification").removeClass( "appear" ).addClass( "disappear" ); 
+		}, 1500);
 	}
 
 }
@@ -174,16 +198,18 @@ function NavCtrl($scope) {
 
 
 	$scope.showSelectionModal = function() {
+		console.log("iniit")
+
 		$("#addJobModal").fadeOut(fadeSpeed);
 		$("#addNoteModal").fadeOut(fadeSpeed);
 
 		$("#hover").fadeIn(fadeSpeed );
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
-	
+
 	$scope.switchBackStack = function (tab) {
 		console.log("switch back stack to " + tab);
-        currentBackStack = tab;
+		currentBackStack = tab;
 	}
 
 }

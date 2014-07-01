@@ -7,7 +7,7 @@
 
 		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-
+<!--		<link href="css/animate.css" rel="stylesheet">-->
 		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
@@ -38,6 +38,10 @@
 				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
 			</div>
 		</ion-nav-bar>
+
+		<div id="notification">
+			TESTING NOTIFICATIONS
+		</div>
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
@@ -163,7 +167,7 @@
 			<input id="search" type="text"/>
 
 			<div class="button-bar nav-bar-buttons">
-<!--				place a.button-->
+				<!--				place a.button-->
 
 				<a class="button active" ng-click="hideModal(); switchBackStack('jobs')" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></a>
 				<a class="button" ng-click="hideModal(); switchBackStack('notes')" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></a>
@@ -174,7 +178,7 @@
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
-<!--		Transparent Screen that will allow us to dismiss the dialog-->
+		<!--		Transparent Screen that will allow us to dismiss the dialog-->
 		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
 		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
@@ -182,7 +186,7 @@
 				<div class="list">
 					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> Note </button>
 					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> Job </button>
-					end of list
+					<!-- end of list -->
 				</div>
 			</form>
 		</div>
@@ -198,8 +202,16 @@
 						<textarea placeholder="Write Your Note" ng-model="note.note"> </textarea>
 					</label>
 
-					<label class="item item-input">
-						<input type="text" placeholder="Add To Job (Optional)" ng-model="note.job">
+					<label class="item item-input item-select">
+						<!--						<input type="text" placeholder="Add To Job (Optional)" ng-model="note.job">-->
+						<div class="input-label">
+							Add To Job (Optional)
+						</div>
+						<select ng-model="note.job">
+							<option selected>Blue</option>
+							<option>Green</option>
+							<option>Red</option>
+						</select>
 					</label>
 
 
@@ -209,24 +221,24 @@
 		</div>
 
 		<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
-			<form ng-submit="submit('job')">
+			<form ng-submit="submit(job)">
 				<div class="list">
 					<p class="input-header"> Add New Job </p>
 					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
 
 					<label class="item item-input">
-						<input type="text" placeholder="Title" ng-model="task.title">
+						<input type="text" placeholder="Title" ng-model="job.title">
 					</label>
 
 					<label class="item item-input">
-						<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="job.participants">
 					</label>
 
 					<label class="item item-input">
-						<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
+						<textarea placeholder="Create Note (Optional)" ng-model="job.note"> </textarea>
 					</label>
 
-					<button class="button button-full button-dark" >Create Job</button>
+					<button type="submit" id="submit" value="Submit" class="button button-full button-dark" >Create Job</button>
 				</div>
 			</form>
 		</div>

@@ -76,7 +76,7 @@ $item-light-border: rgb(185, 185, 185);
 	margin-left: 4.5%;
 	margin-top: 28px;
 	width: 95.4%;
-	
+
 	.item-divider {
 		background-color: $gray-lighter;
 	}
@@ -93,11 +93,11 @@ $item-light-border: rgb(185, 185, 185);
 
 .job-header {
 	border: 0px;
-	
+
 	.list-item-title {
 		padding-bottom: 10px;	
 	}
-	
+
 	.list-item-details {
 		padding-bottom: 3px;	
 	}
@@ -150,10 +150,10 @@ $item-light-border: rgb(185, 185, 185);
 			min-height: (125/2)+px;
 		}
 	}
-	
+
 	.item-divider {
 		height: (56/2)+px;
-		
+
 		.section-header {
 			line-height: (15)+px;
 		}
@@ -284,3 +284,33 @@ $item-light-border: rgb(185, 185, 185);
 
 
 
+// NOTIFACTION BAR
+#notification {
+	height: $bar-height; 
+	width: 100%; 
+	position: relative; 
+	background-color: red; 
+	z-index: 10;
+	top: -80px;
+	
+}
+
+.disappear {
+	opacity: 0; 
+	top: -80px; 
+	-webkit-transition: all 0.75s linear; 
+	-moz-transition:  all 0.75s linear; 
+	-ms-transition: all 0.75s linear; 
+	-o-transition: all 0.75s linear; 
+	transition:  all 0.75s linear;
+}
+
+.appear {
+	opacity: 1; 
+	top: 0 !important; 
+	-webkit-transition: all 0.75s linear; 
+	-moz-transition:  all 0.75s linear; 
+	-ms-transition: all 0.75s linear; 
+	-o-transition: all 0.75s linear; 
+	transition:  all 0.75s linear;
+}
