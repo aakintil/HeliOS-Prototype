@@ -59,14 +59,14 @@ var app = angular.module('starter', ['ionic'])
 		link: function(scope, element) {
 			element.on('click', function() {
 				//window.history.back();
-               
-                // go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
-                var currentBackStack = localStorage.getItem('currentBackStackName');
-                if (currentBackStack == null) {
-                    currentBackStack = 'jobs'
-                    localStorage.setItem('currentBackStackName', currentBackStack);
-                }
-                var curStack = JSON.parse(localStorage.getItem(currentBackStack));
+
+				// go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
+				var currentBackStack = localStorage.getItem('currentBackStackName');
+				if (currentBackStack == null) {
+					currentBackStack = 'jobs'
+					localStorage.setItem('currentBackStackName', currentBackStack);
+				}
+				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
 				if (curStack == null) {
 					curStack = new Array();
 				}
@@ -130,51 +130,46 @@ function ModalCtrl( $scope ) {
 
 	$scope.submit = function( formType ) {		
 		if ( formType === undefined ) {
-			console.log( "please fill out form "); // turn into an alert / notification
-			$scope.showFeedback( formType ); 	
+			$scope.hideModal();
+			console.log( "please fill out form "); // turn into an alert / notification	
 		}
 		else {
 			formType.job !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
 			console.log( "submit successfully called" ); 
-			$scope.hideModal(); 
-			$scope.showFeedback( formType ); 	
+			$scope.hideModal(); 	
 		}
+		$scope.showFeedback( formType ); 
 	}
 
 	$scope.showFeedback = function( formType ) {
 		var title = ""; 
-		if (formType === undefined) {
-			$("#notification").addClass( "appear error" )
-			.html("<div> An Error Occurred </div>"); 
+		var notice = ""; 
 
-			setTimeout(function() {
-				$("#notification").removeClass( "appear error" )
-				.addClass( "disappear" ); 
-				
-			}, 2400);
+		if (formType === undefined) {
+			notice = "appear error"; 
+			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
 		}
 		else {
 			// title can be the formType.title
 			formType.job !== undefined ? title = "Note" : title = "Job"; 
 
 			// add the formtype title to the notification page
-			$("#notification").addClass( "appear success" )
-			.html("<div> Your " + title + " Was Successfully Created ! </div>"); ; 
-
-			setTimeout(function() {
-				$("#notification").removeClass( "appear success" )
-				.addClass( "disappear" ); 
-			}, 2400);	
+			notice = "appear success"; 
+			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
 		}
+
+		setTimeout(function() {
+			$("#notification").removeClass( notice ).addClass( "disappear" ); 
+		}, 2400);	
 	}
 
 }
 
 function NavCtrl($scope) {
 
-//	$scope.goBack = function() {
-//		$ionicNavBarDelegate.back();
-//	};
+	//	$scope.goBack = function() {
+	//		$ionicNavBarDelegate.back();
+	//	};
 
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
