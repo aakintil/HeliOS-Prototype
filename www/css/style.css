@@ -8480,3 +8480,9 @@ a.button {
 
 .collapsable {
   top: 0 !important; }
+
+.expandable .tool-submenu {
+  display: none;
+  padding: 10px 20px;
+  background-color: grey;
+  text-transform: uppercase; }

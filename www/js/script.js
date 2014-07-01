@@ -83,14 +83,22 @@ $(document).ready(function () {
 	$("a:not(.nav-bar-buttons > a)").click(function () {
 		saveCurrentPagetoCurrentStack();
 	});
-	
-	
-	
-//	Collapsable Code
+
+
+
+	//	Collapsable Code
+
 	$(".collapsable").click( function() {
 		var list =  $(this).parent().siblings(".list"); 
-		list.toggle(); 
-	})
+		list.slideToggle(); 
+	}); 
+
+	//	Expandable Code 
+	$(".expandable").click( function() {
+		$(this).find(".tool-submenu").slideToggle(); 
+	}); 
+
+
 
 
 });
