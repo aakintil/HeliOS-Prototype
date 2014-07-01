@@ -24,23 +24,23 @@ var app = angular.module('starter', ['ionic'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-//	$stateProvider
-//	.state('jobs_page', {
-//		url: '/Jobs',
-//		templateUrl: 'jobs_page.html',
-//		controller : "JobsCtrl"
-//	})
-//	.state('notes_page', {
-//		url: '/Notes',
-//		templateUrl: 'notes_page.html',
-//		controller : "NotesCtrl"
-//	})
-//	.state('alerts_page', {
-//		url: '/Alerts',
-//		templateUrl: 'alerts_page.html',
-//		controller : "AlertsCtrl"
-//	})
-//	$urlRouterProvider.otherwise("/Jobs");
+	//	$stateProvider
+	//	.state('jobs_page', {
+	//		url: '/Jobs',
+	//		templateUrl: 'jobs_page.html',
+	//		controller : "JobsCtrl"
+	//	})
+	//	.state('notes_page', {
+	//		url: '/Notes',
+	//		templateUrl: 'notes_page.html',
+	//		controller : "NotesCtrl"
+	//	})
+	//	.state('alerts_page', {
+	//		url: '/Alerts',
+	//		templateUrl: 'alerts_page.html',
+	//		controller : "AlertsCtrl"
+	//	})
+	//	$urlRouterProvider.otherwise("/Jobs");
 })
 
 .controller('JobsCtrl', function($scope) {
@@ -70,13 +70,13 @@ var app = angular.module('starter', ['ionic'])
 				if (curStack == null) {
 					curStack = new Array();
 				}
-                if (curStack.length > 0) {
-                    var backpage = curStack[curStack.length-1];
+				if (curStack.length > 0) {
+					var backpage = curStack[curStack.length-1];
 					console.log(backpage);
-                    curStack.pop();
+					curStack.pop();
 					localStorage.setItem(currentBackStack, JSON.stringify(curStack));
-                    window.location = backpage;
-                }
+					window.location = backpage;
+				}
 			});
 		},
 		controller: 'NavCtrl'
@@ -119,14 +119,53 @@ function ModalCtrl( $scope ) {
 	}
 
 	$scope.form = {}; 
-	$scope.submit = function( formType ) {
-//		$scope.form = { 
-//			type : formType, 
-//			title : , 
-//			participants : , 
-//			note : ,
-//		}
-		console.log( "submit successfully called with type of ", formType ); 	
+	var sendToNotes = function( note ) {
+		console.log(" insert into notes db ", note ); 
+	}
+
+	var sendToJobs = function( job ) {
+		console.log(" insert into jobs db ", job ); 
+	}
+
+
+	$scope.submit = function( formType ) {		
+		if ( formType === undefined ) {
+			console.log( "please fill out form "); // turn into an alert / notification
+			$scope.showFeedback( formType ); 	
+		}
+		else {
+			formType.job !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
+			console.log( "submit successfully called" ); 
+			$scope.hideModal(); 
+			$scope.showFeedback( formType ); 	
+		}
+	}
+
+	$scope.showFeedback = function( formType ) {
+		var title = ""; 
+		if (formType === undefined) {
+			$("#notification").addClass( "appear error" )
+			.html("<div> An Error Occurred </div>"); 
+
+			setTimeout(function() {
+				$("#notification").removeClass( "appear error" )
+				.addClass( "disappear" ); 
+				
+			}, 2400);
+		}
+		else {
+			// title can be the formType.title
+			formType.job !== undefined ? title = "Note" : title = "Job"; 
+
+			// add the formtype title to the notification page
+			$("#notification").addClass( "appear success" )
+			.html("<div> Your " + title + " Was Successfully Created ! </div>"); ; 
+
+			setTimeout(function() {
+				$("#notification").removeClass( "appear success" )
+				.addClass( "disappear" ); 
+			}, 2400);	
+		}
 	}
 
 }
@@ -160,16 +199,13 @@ function NavCtrl($scope) {
 
 
 	$scope.showSelectionModal = function() {
+		console.log("iniit")
+
 		$("#addJobModal").fadeOut(fadeSpeed);
 		$("#addNoteModal").fadeOut(fadeSpeed);
 
 		$("#hover").fadeIn(fadeSpeed );
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
-	
-//	$scope.switchBackStack = function (tab) {
-//		console.log("switch back stack to " + tab);
-//        localStorage.setItem('currentBackStack', tab);
-//	}
 
 }

@@ -1,4 +1,4 @@
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8435,3 +8435,46 @@ a.button {
   height: 100%;
   opacity: 0.6;
   z-index: 9; }
+
+#notification {
+  height: 44px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  top: -80px; }
+  #notification div {
+    position: relative;
+    margin: 0 auto;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 44px;
+    width: 50%;
+    text-align: center; }
+
+.success {
+  background-color: #8fcb21; }
+
+.error {
+  background-color: #ef4e3a; }
+
+.warning {
+  background-color: #eaad16; }
+
+.disappear {
+  opacity: 0;
+  top: -80px;
+  -webkit-transition: all 0.75s linear;
+  -moz-transition: all 0.75s linear;
+  -ms-transition: all 0.75s linear;
+  -o-transition: all 0.75s linear;
+  transition: all 0.75s linear; }
+
+.appear {
+  opacity: 1;
+  top: 0 !important;
+  -webkit-transition: all 0.75s linear;
+  -moz-transition: all 0.75s linear;
+  -ms-transition: all 0.75s linear;
+  -o-transition: all 0.75s linear;
+  transition: all 0.75s linear; }
