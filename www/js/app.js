@@ -4,12 +4,11 @@
 var fadeSpeed = .5;
 
 //backStack, keeps track of the backstack for each seperate tab
-var currentBackStack = 'jobs';
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+var app = angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -62,6 +61,11 @@ angular.module('starter', ['ionic'])
 				//window.history.back();
                
                 // go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
+                var currentBackStack = localStorage.getItem('currentBackStackName');
+                if (currentBackStack == null) {
+                    currentBackStack = 'jobs'
+                    localStorage.setItem('currentBackStackName', currentBackStack);
+                }
                 var curStack = JSON.parse(localStorage.getItem(currentBackStack));
 				if (curStack == null) {
 					curStack = new Array();
@@ -78,24 +82,6 @@ angular.module('starter', ['ionic'])
 		controller: 'NavCtrl'
 	};
 })
-
-.directive('a', function () {
-   return {
-      restrict: 'E',
-      link: function(scope, element) {
-			element.on('click', function() {
-				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
-				if (curStack == null) {
-					curStack = new Array();
-				}
-				curStack.push(document.URL);
-			    localStorage.setItem(currentBackStack, JSON.stringify(curStack));
-			});
-		},
-		controller: 'JobsCtrl'
-   }
-})
-
 
 // Controller for Modal Logic
 // we should think about making one controller for the modals.
@@ -147,9 +133,9 @@ function ModalCtrl( $scope ) {
 
 function NavCtrl($scope) {
 
-	$scope.goBack = function() {
-		$ionicNavBarDelegate.back();
-	};
+//	$scope.goBack = function() {
+//		$ionicNavBarDelegate.back();
+//	};
 
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
@@ -181,9 +167,9 @@ function NavCtrl($scope) {
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
 	
-	$scope.switchBackStack = function (tab) {
-		console.log("switch back stack to " + tab);
-        currentBackStack = tab;
-	}
+//	$scope.switchBackStack = function (tab) {
+//		console.log("switch back stack to " + tab);
+//        localStorage.setItem('currentBackStack', tab);
+//	}
 
 }
