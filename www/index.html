@@ -46,13 +46,20 @@
 
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
-		<ion-view title="Jobs" hide-back-button="true">
+		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobsCtrl">
 			<ion-content>
-				<div class="section">
+				<div class="section" >
 					<div class="item item-divider">
 						<div class="section-header">My Jobs</div>
 					</div>
 					<ul class="list">
+						<li class="item" ng-repeat="job in myJobs">
+							<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
+								<div class="list-item-title">{{job.title}}</div>
+								<div class="list-item-subtitle">{{job.members}}</div>
+							</a>
+						</li>
+<!--
 						<a href="job.html">
 							<li class="item">
 								<div class="list-item-title">Replace Faulty Bolts</div>
@@ -67,6 +74,7 @@
 							<div class="list-item-title">Replace Faulty Bolts</div>
 							<div class="list-item-subtitle">You</div>
 						</li>
+-->
 					</ul>
 				</div>
 

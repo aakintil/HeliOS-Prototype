@@ -42,17 +42,17 @@
 		<ion-nav-view animation="no-animation"></ion-nav-view>
 
 		
-	  	<ion-view title="Jobs" hide-back-button="true">
+	  	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl">
 			<ion-content>
 				<div class="section">
 					<div class="item item-divider">
-						<div class="section-header">Job: Replace Bolts on ArcJet</div>
+						<div class="section-header">Job: {{job.title}}</div>
 					</div>
 					<ul class="list">
 						<li class="item job-header">
-							<div class="list-item-title">Replace Bolts on ArcJet</div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">3/3/14</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> Olga K.</span></div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">Olga K, Astra Not(You)</span></div>
+							<div class="list-item-title">{{job.title}}</div>
+							<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
+							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
 						</li>
 					</ul>
 				</div>
@@ -64,11 +64,8 @@
 						<div class="section-header">Notes</div>
 					</div>
 					<ul class="list">
-						<li class="item">
-							Please check the ArcJet for faulty bolts in Areas 1, 5, 8
-						</li>
-						<li class="item">
-							Please check the ArcJet for faulty bolts in Areas 1, 5, 8
+						<li class="item" ng-repeat="note in job.notes">
+							{{note}}
 						</li>
 					</ul>
 				</div>
@@ -78,13 +75,9 @@
 						<div class="section-header">Tools</div>
 					</div>
 					<ul class="list">
-						<li class="item">
-							<div class="list-item-title">Clamp C8</div>
-							<div class="list-item-subtitle">Current Location: Mercury-1</div>
-						</li>
-						<li class="item">
-							<div class="list-item-title">Clamp C12</div>
-							<div class="list-item-subtitle">Current Location: Mercury-2</div>
+						<li class="item" ng-repeat="tool in job.tools">
+							<div class="list-item-title">{{tool.name}}</div>
+							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
 						</li>
 					</ul>
 				</div>

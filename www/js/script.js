@@ -71,7 +71,7 @@ $(document).ready(function () {
    $(".alerts").click(function (e) {
       saveCurrentPagetoCurrentStack();
       
-      switchToStack('notes');
+      switchToStack('alerts');
       var popStack = popFromStack();
       if (popStack != undefined) {
          document.location.href = popStack;

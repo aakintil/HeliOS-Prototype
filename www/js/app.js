@@ -23,34 +23,47 @@ var app = angular.module('starter', ['ionic'])
 	});
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-	//	$stateProvider
-	//	.state('jobs_page', {
-	//		url: '/Jobs',
-	//		templateUrl: 'jobs_page.html',
-	//		controller : "JobsCtrl"
-	//	})
-	//	.state('notes_page', {
-	//		url: '/Notes',
-	//		templateUrl: 'notes_page.html',
-	//		controller : "NotesCtrl"
-	//	})
-	//	.state('alerts_page', {
-	//		url: '/Alerts',
-	//		templateUrl: 'alerts_page.html',
-	//		controller : "AlertsCtrl"
-	//	})
-	//	$urlRouterProvider.otherwise("/Jobs");
-})
+//.config(function($stateProvider, $urlRouterProvider) {
+//		$stateProvider
+//		.state('jobs_page', {
+//			url: '/Jobs',
+//			templateUrl: 'jobs_page.html',
+//			controller : "JobsCtrl"
+//		})
+//		.state('notes_page', {
+//			url: '/Notes',
+//			templateUrl: 'notes_page.html',
+//			controller : "NotesCtrl"
+//		})
+//		.state('alerts_page', {
+//			url: '/Alerts',
+//			templateUrl: 'alerts_page.html',
+//			controller : "AlertsCtrl"
+//		})
+//		$urlRouterProvider.otherwise("/Jobs");
+//})
 
-.controller('JobsCtrl', function($scope) {
-	// add functions to take data from job modal
-})
+//.controller('JobsCtrl', function($scope) {
+//	$scope.myJobs = [
+//		{
+//			title: "Replace Faulty Bolts",
+//			members: "You"
+//		},
+//		{
+//			title: "Install Arcjet Manifolds",
+//			members: "You, Derin"
+//		},
+//		{
+//			title: "Clean you Workplace",
+//			members: "You"
+//		},
+//	];
+//})
 .controller('NotesCtrl', function($scope) {
 	// add functions to take data from notes modal
 })
 .controller('AlertsCtrl', function($scope) {
-
+	
 })
 
 .directive('back', function () {
@@ -82,6 +95,64 @@ var app = angular.module('starter', ['ionic'])
 		controller: 'NavCtrl'
 	};
 })
+
+app.factory('jobService', function($rootScope) {
+	var jobService = [
+		{
+			id: "1",
+			title: "Replace Faulty Bolts",
+			members: "Olga K. Astra Not(You)",
+			created: "3/3/14",
+			creator: "Olga K.",
+			notes: [
+				"this is a test",
+				"you are a test"
+			],
+			tools: [
+				{
+					name: "Clamp C8",
+					current_location: "Mercury-1"
+				},
+				{
+					name: "Clamp C12",
+					current_location: "Mercury-2"
+				}
+			]
+		},
+		{
+			title: "Install Arcjet Manifolds",
+			members: "You, Derin"
+		},
+		{
+			title: "Clean you Workplace",
+			members: "You"
+		},
+	];
+	return jobService;
+});
+
+function JobsCtrl($scope, jobService, $rootScope) {
+	$scope.myJobs = jobService;
+		
+	$scope.broadcastJob = function(id) {
+		$scope.$broadcast('JOB', id);
+		console.log("hoho");
+	};
+}
+		
+function JobCtrl($scope, jobService, $location) {
+	//console.log($location.search('id'));
+	var absUrl = $location.$$absUrl;
+	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
+
+	var job;
+	for (key in jobService) {
+		if (jobService[key].id == jobId) {
+			job = jobService[key];
+		}
+	}
+	$scope.job = job;
+}
 
 // Controller for Modal Logic
 // we should think about making one controller for the modals.
