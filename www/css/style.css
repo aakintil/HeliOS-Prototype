@@ -8443,15 +8443,14 @@ a.button {
   z-index: 10;
   top: -80px; }
   #notification div {
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: relative;
     margin: 0 auto;
-    font-weight: bold;
     color: white;
     font-size: 18px;
     text-transform: uppercase;
-    line-height: 22px; }
+    line-height: 44px;
+    width: 50%;
+    text-align: center; }
 
 .success {
   background-color: #8fcb21; }

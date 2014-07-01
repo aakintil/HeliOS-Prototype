@@ -168,11 +168,12 @@ function ModalCtrl( $scope ) {
 			}, 2400);
 		}
 		else {
+			// title can be the formType.title
 			formType.job !== undefined ? title = "Note" : title = "Job"; 
 
 			// add the formtype title to the notification page
 			$("#notification").addClass( "appear success" )
-			.html("<div> Your " + title + " Was Successfully Created </div>"); ; 
+			.html("<div> Your " + title + " Was Successfully Created ! </div>"); ; 
 
 			setTimeout(function() {
 				$("#notification").removeClass( "appear success" )
