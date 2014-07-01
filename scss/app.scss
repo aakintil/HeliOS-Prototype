@@ -81,9 +81,10 @@ $item-subtitle: (23/2)+px;
 }
 
 .offset {
-	margin-left: 4.5%;
+	//	margin-left: 4.5%;
+	margin: 0 20px; 
 	margin-top: 28px;
-	width: 95.4%;
+	//	width: 95.4%;
 
 	.item-divider {
 		background-color: $gray-lighter;
@@ -299,7 +300,7 @@ $item-subtitle: (23/2)+px;
 	position: relative; 
 	z-index: 10;
 	top: -80px;
-	
+
 	div {
 		position: relative;
 		margin: 0 auto; 
@@ -343,3 +344,11 @@ $item-subtitle: (23/2)+px;
 	-o-transition: all 0.75s linear; 
 	transition:  all 0.75s linear;
 }
+
+
+
+// Collapsable Elements (on jobs page)
+.collapsable {
+	top: 0 !important; 
+}
+

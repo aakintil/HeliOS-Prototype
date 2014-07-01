@@ -8293,9 +8293,8 @@ a.button {
   text-align: center; }
 
 .offset {
-  margin-left: 4.5%;
-  margin-top: 28px;
-  width: 95.4%; }
+  margin: 0 20px;
+  margin-top: 28px; }
   .offset .item-divider {
     background-color: #989898; }
 
@@ -8478,3 +8477,6 @@ a.button {
   -ms-transition: all 0.75s linear;
   -o-transition: all 0.75s linear;
   transition: all 0.75s linear; }
+
+.collapsable {
+  top: 0 !important; }
