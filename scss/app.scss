@@ -3,6 +3,7 @@
 // Colors
 $gray-dark: #6d6e70;
 $gray-text: #404041;
+$gray-list-item: #f5f5f5;
 $gray-light: #ededed;
 $gray-lighter: #989898;
 $white-text: white;
@@ -27,9 +28,17 @@ $item-border-width: 1px;
 $item-divider-bg: $gray-dark;
 $item-divider-color: white;
 
-$item-light-bg: $gray-light;
+$item-light-bg: $gray-list-item;
 $item-light-border: rgb(185, 185, 185);
 
+//Forms
+input {
+	background-color: $gray-list-item;
+}
+
+::-webkit-input-placeholder {
+   color: $gray-lighter;
+}
 
 // Fonts (havne't implemented yet, just created)
 $item-title: (36/2)+px;

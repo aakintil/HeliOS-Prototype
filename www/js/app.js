@@ -96,8 +96,28 @@ var app = angular.module('starter', ['ionic'])
 	};
 })
 
+/*
+This directive allows us to pass a function in on an enter key to do what we want.
+From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
+ */
+.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+ 
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 app.factory('jobService', function($rootScope) {
-	var jobService = [
+	
+	var JobService = {};
+	var list = [
 		{
 			id: "1",
 			title: "Replace Faulty Bolts",
@@ -128,16 +148,28 @@ app.factory('jobService', function($rootScope) {
 			members: "You"
 		},
 	];
-	return jobService;
+		
+	JobService.getItem = function(index) { return list[index]; }
+	JobService.addItem = function(item) { list.push(item); }
+	JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
+	JobService.getJobWithId = function(jobId) {
+		for (key in list) {
+			if (list[key].id == jobId) {
+				return list[key];
+			}
+		}
+	}
+	JobService.addNoteToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.notes.push(note);
+	}
+	JobService.jobs = list;
+
+	return JobService;
 });
 
 function JobsCtrl($scope, jobService, $rootScope) {
-	$scope.myJobs = jobService;
-		
-	$scope.broadcastJob = function(id) {
-		$scope.$broadcast('JOB', id);
-		console.log("hoho");
-	};
+	$scope.myJobs = jobService.jobs;
 }
 		
 function JobCtrl($scope, jobService, $location) {
@@ -145,13 +177,12 @@ function JobCtrl($scope, jobService, $location) {
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
 
-	var job;
-	for (key in jobService) {
-		if (jobService[key].id == jobId) {
-			job = jobService[key];
-		}
-	}
-	$scope.job = job;
+	$scope.job = jobService.getJobWithId(jobId);
+					
+	$scope.addNote = function(note) {
+		jobService.addNoteToJob(jobId, note);
+	};
+   
 }
 
 // Controller for Modal Logic

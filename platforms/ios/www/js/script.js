@@ -98,29 +98,5 @@ $(document).ready(function () {
 		$(this).find(".tool-submenu").slideToggle(); 
 	}); 
 
-	
-	// Code for handling adding element inline
-	$('input').keyup(function(e){
-		if(e.keyCode == 13)
-		{
-			$(this).trigger("enterKey");
-		}
-	});
-	
-	$('#addNoteInput').hide();
-	
-	$('#addNoteText').click(function() {
-		$('#addNoteText').hide();
-		$('#addNoteInput').show();
-		$('#addNoteInput').focus();
-	});
-	
-	$('#addNoteInput').bind("enterKey", function() {
-		$('#addNoteInput').hide();
-		$('#addNoteInput').val("");
-		$('#addNoteText').show();
-		
-	});
-	
-	
+
 });
