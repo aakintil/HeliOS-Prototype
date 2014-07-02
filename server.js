@@ -18,10 +18,15 @@ var mongoose = require('mongoose'); 					// mongoose for mongodb
 mongoose.connect( 'mongodb://localhost/HeliOS' ); 
 
 app.configure(function() {
-	app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
+	app.use(express.static(__dirname + '/www')); 		// set the static files location /public/img will be /img for users
 	app.use(express.logger('dev')); 						// log every request to the console
 	app.use(express.bodyParser()); 							// pull information from html in POST
 });
+
+
+
+
+
 
 // =============== RESTful API ================
 
@@ -88,7 +93,12 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 
 
+app.get( '*', function( req, res ) {
+	res.sendfile( 'www/index.html')
+})
+
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(3000, "localhost");
+//console.log( "commonnn   ", app.get('port') );
+console.log("App listening on port 3000");
