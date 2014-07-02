@@ -54,8 +54,8 @@ app.post( '/api/notes', function( req, res ) {
 	// ===== SET THIS UP ===== 
 
 	Note.create({ 
-		text : req.body.text; 
-		done : false; 
+		text : req.body.text,
+		done : false
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
 
