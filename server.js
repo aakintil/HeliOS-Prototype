@@ -7,7 +7,7 @@
 
 // server.js
 
-// =============== Set Up ==================
+//////////////// Set Up ////////////////
 var express  = require('express');
 var app      = express(); 								// create our app w/ express
 var mongoose = require('mongoose'); 					// mongoose for mongodb
@@ -15,10 +15,11 @@ var mongoose = require('mongoose'); 					// mongoose for mongodb
 // configuration =================
 
 //mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'); 	// connect to mongoDB database on modulus.io
-mongoose.connect( 'mongodb://localhost/HeliOS' ); 
+mongoose.connect( 'mongodb://localhost/helios-test' ); 
+
 
 app.configure(function() {
-	app.use(express.static(__dirname + '/www')); 		// set the static files location /public/img will be /img for users
+	app.use(express.static(__dirname + '/www')); 		// set the static files location for index.html
 	app.use(express.logger('dev')); 						// log every request to the console
 	app.use(express.bodyParser()); 							// pull information from html in POST
 });
@@ -28,8 +29,8 @@ app.configure(function() {
 
 
 
-// =============== RESTful API ================
-
+//////////////// RESTful API ////////////////
+// have to create get, post, and delete models for Jobs, Alerts, Tools, and Member/Participants
 // Notes Model 
 var Note = mongoose.model( 'Note', {
 	text : String 
@@ -56,7 +57,7 @@ app.get( '/api/notes', function ( req, res ) {
 app.post( '/api/notes', function( req, res ) {
 
 	// create a todo, information comes from AJAX request from Angular 
-	// ===== SET THIS UP ===== 
+	////////////////// SET THIS UP ////////////////// 
 
 	Note.create({ 
 		text : req.body.text,
@@ -79,10 +80,10 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 		_id : req.params.note_id
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
-		
+
 		Note.find( function( err, notes ) {
 			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
-			
+
 			res.json( notes ) // return all notes in the JSON format after we create another
 		})
 

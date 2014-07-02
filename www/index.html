@@ -52,6 +52,25 @@
 						<div class="section-header">My Jobs</div>
 					</div>
 					<ul class="list">
+
+
+						<!-- HEADER AND TODO COUNT -->
+						<!-- TEST CODE -->
+						<div class="jumbotron text-center" ng-controller="NoteCtrl">
+							<h1>I'm a Todo-aholic <span class="label label-info">{{ notes.length }}</span></h1>
+							<form>
+								<div class="form-group">
+
+									<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+									<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+								</div>
+
+								<!-- createToDo() WILL CREATE NEW TODOS -->
+								<button type="submit" class="button button-positive" ng-click="createNote()">Add</button>
+							</form>
+						</div>
+						<!-- TEST CODE -->
+
 						<li class="item" ng-repeat="job in myJobs">
 							<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
 								<div class="list-item-title">{{job.title}}</div>
@@ -120,6 +139,7 @@
 					</div>
 
 				</div>
+
 				<div class="section">
 					<div class="item item-divider">
 						JOB TEMPLATES

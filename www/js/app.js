@@ -168,10 +168,13 @@ JobService.jobs = list;
 return JobService;
 });
 
+
 function JobsCtrl($scope, jobService, $rootScope) {
 	$scope.myJobs = jobService.jobs;
 }
 
+
+//////////////// Job Controller ////////////////
 function JobCtrl($scope, jobService, $location) {
 	//console.log($location.search('id'));
 	var absUrl = $location.$$absUrl;
@@ -185,7 +188,7 @@ function JobCtrl($scope, jobService, $location) {
 
 }
 
-// Controller for Modal Logic
+//////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
 function ModalCtrl( $scope ) {
 	// current modal variable
@@ -267,6 +270,8 @@ function ModalCtrl( $scope ) {
 
 }
 
+
+//////////////// Navigation Controller ////////////////
 function NavCtrl($scope) {
 
 	//	$scope.goBack = function() {
@@ -305,4 +310,40 @@ function NavCtrl($scope) {
 		$("#selectionModal").fadeIn( fadeSpeed ); 
 	}
 
+}
+
+
+//////////////// Note Controller For Node.js & MondoDB Test ////////////////
+function NoteCtrl( $scope, $http ) { //$http variale 
+	console.log( " note controller has been accessed " );
+	console.log( " " )
+	console.log( " " )
+	
+	// get all the notes and show them once a user lands on this page
+	$http.get( '/api/notes' )
+	.success( function( data ) {
+		$scope.notes = data; 
+		console.log( "all the notes in the database | ", data ); 
+		console.log( " " )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting notes: ", data ); 
+		console.log( " " )
+	}); 
+	
+	// create a note and send it to the database 
+	// after submission, send the text to the node API
+	$scope.createNote = function() {
+		
+		$http.post( '/api/notes', $scope.formData )
+		.success( function( data ) {
+			$scope.formData = {}; // clear the form so users can enter 
+			$scope.notes = data; 
+			console.log( "successfully sent the form data to the notes node api | ", data ); 
+		})
+		.error( function( data ) {
+			console.log( "Error! Something went wrong ... ", data)
+			console.log( " " )
+		})
+	}
 }
