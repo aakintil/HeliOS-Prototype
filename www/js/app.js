@@ -115,7 +115,6 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 });
 
 app.factory('toolService', function($rootScope) {
-	
 	var ToolService = {};
 	var list = [
 		{
@@ -226,6 +225,8 @@ app.factory('jobService', function($rootScope) {
 });
 
 function ToolsCtrl($scope, toolService, $rootScope) {
+	
+	$scope.query = $scope.$parent.query;
 	$scope.tools = toolService.tools;
 }
 
@@ -332,12 +333,17 @@ function ModalCtrl( $scope ) {
 
 }
 
-function NavCtrl($scope) {
+function NavCtrl($scope, $rootScope) {
 
 	//	$scope.goBack = function() {
 	//		$ionicNavBarDelegate.back();
 	//	};
 
+	$scope.setSearchQuery = function(query){
+		console.log(query);
+		$scope.query = query;
+	}
+	
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
 		if (window.location.href.indexOf(path) != -1) {
@@ -346,7 +352,7 @@ function NavCtrl($scope) {
 			return ""
 		}
 	}
-
+	
 	$scope.showAddNoteModal = function() {
 		console.log("calling show note modal"); 
 		$("#hover").fadeIn(fadeSpeed);
