@@ -7,12 +7,14 @@
 
 		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/jquery-ui.css" rel="stylesheet">
 
 		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
 		<!-- ionic/angularjs js -->
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -22,6 +24,7 @@
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
 		<script src="js/script.js"></script>
+		
 	</head>
 
 	<body ng-app="starter">
@@ -69,8 +72,8 @@
 							{{note}}
 						</li>
 						<li class="item list-item-adder" id="addNoteFromJob">
-							<div id="addNoteText">Add Note +</div>
-							<input id="addNoteInput" type="text" placeholder="Write Note" ng-model="text" ng-enter="addNote(text)">
+							<div class="addListItemText">Add Note +</div>
+							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note" ng-enter="addNote(note)">
 						</li>
 					</ul>
 				</div>
@@ -86,6 +89,10 @@
 						<li class="item" ng-repeat="tool in job.tools">
 							<div class="list-item-title">{{tool.name}}</div>
 							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
+						</li>
+						<li class="item list-item-adder" id="addToolFromJob">
+							<a href="addTool.html"><div class="addListItemText">Add Tool +</div></a>
+<!--							<input id="tags" class="addListItemInput" type="text" placeholder="Write Note" ng-model="tool" ng-enter="addTool(tool)">-->
 						</li>
 					</ul>
 				</div>

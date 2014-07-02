@@ -98,5 +98,55 @@ $(document).ready(function () {
 		$(this).find(".tool-submenu").slideToggle(); 
 	}); 
 
-
+	
+	// Code for handling adding element inline
+	$('input').keyup(function(e){
+		if(e.keyCode == 13)
+		{
+			$(this).trigger("enterKey");
+		}
+	});
+	
+	$('.addListItemInput').hide();
+	
+	$('.addListItemText').click(function() {
+		$(this).nextAll('.addListItemInput');
+		$(this).hide();
+		$(this).nextAll('.addListItemInput').show();
+		$(this).nextAll('.addListItemInput').focus();
+	});
+	
+	$('.addListItemInput').bind("enterKey", function() {
+		$(this).hide();
+		$(this).val("");
+		$(this).prevAll('.addListItemText').show();
+	});
+	
+	var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+	$("#tags").autocomplete({source: availableTags});
+	
+	
 });
