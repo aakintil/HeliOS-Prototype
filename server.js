@@ -34,9 +34,9 @@ app.configure(function() {
 
 
 // Schemas will work for the associations with other collections
-var AvatarSchema = new Mongoose.Schema({
-    type: String,
-    url: String
+var AvatarSchema = new mongoose.Schema({
+	type: String,
+	url: String
 });
 // READ TMRW
 // http://mongoosejs.com/docs/populate.html
@@ -54,10 +54,16 @@ var Job = mongoose.model( 'Job', {
 	created: { type: Date, default: Date.now }, 
 	creator: String, 
 	tools: [ String ]
-//			name : String, 
-//			current_location : String
-			
+	//			name : String, 
+	//			current_location : String
+
 })
+
+Job.get_by_id = {
+	load: function ( id ) {
+		this.findOne({ _id : id });
+	}
+};
 
 
 //////////////// ROUTES ////////////////
@@ -118,6 +124,17 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 
 //// JOBS //////
+app.get('/api/jobs/:id', function( req, res ) {
+//	res.send('jobs should have an id ' + req.params.id);
+	var query = { '_id' : req.params.id };
+
+	Job.findOne( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+
+});
+
 // Get ALL Jobs
 app.get( '/api/jobs', function ( req, res ) {
 

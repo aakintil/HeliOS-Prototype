@@ -53,7 +53,7 @@
 					</div>
 					<ul class="list">
 						<li class="item" ng-repeat="job in jobs">
-							<a href="" ng-click="broadcastJob( job._id )">
+							<a href="job.html?id={{job._id}}" ng-click="broadcastJob( job._id )">
 								<div class="list-item-title">{{job.title}}</div>
 								<div class="list-item-subtitle">{{job.members}}</div>
 							</a>

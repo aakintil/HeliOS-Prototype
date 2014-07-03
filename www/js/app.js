@@ -254,18 +254,78 @@ JobService.getJobWithId = function(jobId) {
 	}
 	JobService.jobs = list;
 
-
 	return JobService;
+}
+
 });
 
 
 
+//////////////// All Job Factory ////////////////
+app.factory("Jobs", function(){
+	this.insert = function( data ) {
+		var k = ""; 
+		for ( var k in data ) {
+			this.push( data[ k ] ); 
+		}
+	}
+
+	this.get = function( id ) {
+		var k = ""; 
+		for ( var k in this ) {
+			if ( this[ k ]._id === id ) 
+				return this[ k ]; 
+		}
+		return "doesn't exist"
+	}
+});
+
+
+
+app.service('jobService', ['$http', function ($http) {
+
+	var urlBase = '/api/jobs';
+
+	this.getJobs = function () {
+		return $http.get( urlBase );
+	};
+
+	this.getJobWithId = function ( id ) {
+		return $http.get( urlBase + '/' + id );
+	};
+	//
+	//	this.insertCustomer = function (cust) {
+	//		return $http.post(urlBase, cust);
+	//	};
+	//
+	//	this.updateCustomer = function (cust) {
+	//		return $http.put(urlBase + '/' + cust.ID, cust)
+	//	};
+	//
+	//	this.deleteCustomer = function (id) {
+	//		return $http.delete(urlBase + '/' + id);
+	//	};
+	//
+	//	this.getOrders = function (id) {
+	//		return $http.get(urlBase + '/' + id + '/orders');
+	//	};
+}]);
+
+
 //////////////// Job Controller ////////////////
-function JobCtrl($scope, jobService, $location) {
-	$scope.myJobs = jobService.jobs;
-	//console.log($location.search('id'));
+function JobCtrl( $scope, jobService, $location, Jobs ) {
+
 	var absUrl = $location.$$absUrl;
-	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
+	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
+	jobService.getJobWithId( jobId )
+	.success( function( data ) {
+		$scope.job = data;
+		console.log ( " this page's job ", data )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting all jobs: ", data._id ); 
+	})
+	//	$scope.myJob = get_object_id( jobId, ; 
 
 	$scope.job = jobService.getJobWithId(jobId);
 
@@ -440,23 +500,18 @@ function NotesCtrl( $scope, $http ) { //$http variale
 }
 
 
-
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function JobsCtrl( $scope, jobService, $rootScope, $http ) {
-	//	$scope.myJobs = jobService.jobs;
-	console.log( " jobs controller has been accessed " );
-	console.log( " " )
-	console.log( " " ); 
+function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
+	//	console.log ( " scope.Jobs ", Jobs )
 
 	// onload, show all jobs
-	$http.get( '/api/jobs' )
+	jobService.getJobs()
 	.success( function( data ) {
-		$scope.jobs = data; 
-		console.log("all jobs in db ", data[0]._id )
+		$scope.jobs = data;
+		console.log ( " new Jobs ", data )
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs: ", data ); 
-		console.log( " " )
 	})
 
 
@@ -474,9 +529,21 @@ function JobsCtrl( $scope, jobService, $rootScope, $http ) {
 	}
 
 	$scope.broadcastJob = function( id ) {
-		console.log( id)
+		//		console.log( " the job ", get_object_id( id, Jobs ) ); 
+		//		console.log( "seeing if the http variable is available ", Job )
 	}
 }
+
+
+function get_object_id( id, model ) {
+	var key = ""; 
+	for ( key in model ) {
+		if ( model[ key ]._id === id ) {
+			return model[ key ]; 
+		}
+	}
+}
+
 
 //		title: req.body.title,
 //		members: req.body.members,
