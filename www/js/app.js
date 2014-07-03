@@ -115,7 +115,6 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 });
 
 app.factory('jobService', function($rootScope) {
-
 	var JobService = {};
 	var list = [
 		{
@@ -149,6 +148,39 @@ app.factory('jobService', function($rootScope) {
 		},
 	];
 
+
+		//
+		//		var job = 
+		//		{
+		//		title: "Replace Faulty Bolts",
+		//		members: "Olga K. Astra",
+		//		created: Date.now(),
+		//		creator: "Olga K.",
+		//		tools: [{
+		//		name: "Clamp C8",
+		//		current_location: "Mercury-1"
+		//		},
+		//		{
+		//		name: "Clamp C12",
+		//		current_location: "Mercury-2"
+		//		}]
+		//	},
+		//			{
+		//				title: "Install Arcjet Manifolds",
+		//				members: “Admin"
+		//			},
+		//
+		//			{
+		//				title: "Clean you Workplace",
+		//				members: “Admin"
+		//			},
+		//
+		//			]
+
+
+
+
+
 		JobService.getItem = function(index) { return list[index]; }
 			JobService.addItem = function(item) { list.push(item); }
 JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
@@ -168,10 +200,6 @@ JobService.jobs = list;
 return JobService;
 });
 
-
-function JobsCtrl($scope, jobService, $rootScope) {
-	$scope.myJobs = jobService.jobs;
-}
 
 
 //////////////// Job Controller ////////////////
@@ -313,16 +341,16 @@ function NavCtrl($scope) {
 }
 
 
-//////////////// Note Controller For Node.js & MondoDB Test ////////////////
-function NoteCtrl( $scope, $http ) { //$http variale 
+//////////////// Notes Controller For Node.js & MondoDB Test ////////////////
+function NotesCtrl( $scope, $http ) { //$http variale 
 	console.log( " note controller has been accessed " );
 	console.log( " " )
 	console.log( " " )
-	
+
 	// get all the notes and show them once a user lands on this page
 	$http.get( '/api/notes' )
 	.success( function( data ) {
-		$scope.notes = data; 
+		$scope.text = data; 
 		console.log( "all the notes in the database | ", data ); 
 		console.log( " " )
 	})
@@ -330,12 +358,47 @@ function NoteCtrl( $scope, $http ) { //$http variale
 		console.log( "Error with getting notes: ", data ); 
 		console.log( " " )
 	}); 
-	
+
 	// create a note and send it to the database 
 	// after submission, send the text to the node API
 	$scope.createNote = function() {
-		
+		console.log("called createNote")
 		$http.post( '/api/notes', $scope.formData )
+		.success( function( data ) {
+			$scope.formData = {}; // clear the form so users can enter 
+			$scope.text = data; 
+			console.log( "successfully sent the form data to the notes node api | ", data ); 
+		})
+		.error( function( data ) {
+			console.log( "Error! Something went wrong ... ", data)
+			console.log( " " )
+		})
+	}
+}
+
+
+
+//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+function JobsCtrl( $scope, jobService, $rootScope, $http ) {
+	//	$scope.myJobs = jobService.jobs;
+	console.log( " jobs controller has been accessed " );
+	console.log( " " )
+	console.log( " " ); 
+
+	// onload, show all jobs
+	$http.get( '/api/jobs' )
+	.success( function( data ) {
+		$scope.jobs = data; 
+		console.log("all jobs in db ", data[0]._id )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting all jobs: ", data ); 
+		console.log( " " )
+	})
+
+
+	$scope.createJob = function() {
+		$http.post( '/api/jobs', $scope.formData )
 		.success( function( data ) {
 			$scope.formData = {}; // clear the form so users can enter 
 			$scope.notes = data; 
@@ -346,4 +409,14 @@ function NoteCtrl( $scope, $http ) { //$http variale
 			console.log( " " )
 		})
 	}
+	
+	$scope.broadcastJob = function( id ) {
+		console.log( id)
+	}
 }
+
+//		title: req.body.title,
+//		members: req.body.members,
+//		created: Date.now,
+//		creator: "Admin", // have to change this to member_id or something like that
+//		notes: req.body.note,
