@@ -55,14 +55,17 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
-	note : [ { type: Schema.Types.ObjectId, ref: 'Note' } ]
+	notes : [ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	status : String
 })
 
 
 // Tool Model 
 var Tool = mongoose.model( 'Tool', {
 	current_location : String, 
-	home_location : String
+	home_location : String, 
+	replacement_for : String, 
+	status : String
 })
 
 
@@ -73,6 +76,9 @@ var Tool = mongoose.model( 'Tool', {
 
 
 ////// NOTES //////
+
+
+
 // Get ALL Notes
 app.get( '/api/notes', function ( req, res ) {
 
@@ -86,11 +92,22 @@ app.get( '/api/notes', function ( req, res ) {
 	})
 }); 
 
+
+app.get('/api/notes/:id', function( req, res ) {
+	//	res.send('jobs should have an id ' + req.params.id);
+	var query = { '_id' : req.params.id };
+
+	Note.findOne( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+
+});
+
+
+
 // Create a Note
 app.post( '/api/notes', function( req, res ) {
-
-	// create a todo, information comes from AJAX request from Angular 
-	////////////////// SET THIS UP ////////////////// 
 
 	Note.create({ 
 		text : req.body.text,
@@ -151,10 +168,20 @@ app.get( '/api/jobs', function ( req, res ) {
 	})
 }); 
 
+// Add a note to a job // UPDATE
+app.post( '/update/:id', function( req, res ) {
+//	var query = { '_id' : req.params.id };
+//	Job.findById( query, function ( err, job ){
+//		job.notes    = req.body.content;
+//		todo.updated_at = Date.now();
+//		job.save( function ( err, job, count ){
+//			res.redirect( '/' );
+//		});
+//	});
+})
+
 // Create a Note
 app.post( '/api/jobs', function( req, res ) {
-
-	// create a todo, information comes from AJAX request from Angular 
 	////////////////// SET THIS UP ////////////////// 
 
 	Job.create({ 

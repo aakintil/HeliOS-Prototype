@@ -286,30 +286,63 @@ app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
 
-	this.getJobs = function () {
+	this.getJobs = function() {
 		return $http.get( urlBase );
 	};
 
-	this.getJobWithId = function ( id ) {
+	this.getJobWithId = function( id ) {
 		return $http.get( urlBase + '/' + id );
 	};
-	//
-	//	this.insertCustomer = function (cust) {
-	//		return $http.post(urlBase, cust);
-	//	};
-	//
-	//	this.updateCustomer = function (cust) {
-	//		return $http.put(urlBase + '/' + cust.ID, cust)
-	//	};
-	//
+
+	this.addTool = function() {
+		return $http.put( urlBase + '/' + id );
+	}
+
+	this.addNote = function() {
+		return $http.put( urlBase + '/' + id );
+	}
+
 	//	this.deleteCustomer = function (id) {
 	//		return $http.delete(urlBase + '/' + id);
 	//	};
-	//
-	//	this.getOrders = function (id) {
-	//		return $http.get(urlBase + '/' + id + '/orders');
-	//	};
+
+	// for adding notes on job page
+	//		create note
+	//			insert note into job
+	//				update job
 }]);
+
+
+
+
+app.service('noteService', ['$http', function ($http) {
+
+	var urlBase = '/api/notes';
+
+	this.getNotes = function() {
+		return $http.get( urlBase );
+	};
+
+	this.getNoteWithId = function( id ) {
+		return $http.get( urlBase + '/' + id );
+	};
+
+	this.addTool = function() {
+		return $http.put( urlBase + '/' + id );
+	}
+
+	//	this.deleteCustomer = function (id) {
+	//		return $http.delete(urlBase + '/' + id);
+	//	};
+
+}]);
+
+
+
+
+
+
+
 
 
 //////////////// Job Controller ////////////////
