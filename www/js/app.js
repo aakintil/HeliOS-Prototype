@@ -63,7 +63,7 @@ var app = angular.module('starter', ['ionic'])
 	// add functions to take data from notes modal
 })
 .controller('AlertsCtrl', function($scope) {
-	
+
 })
 
 .directive('back', function () {
@@ -101,20 +101,21 @@ This directive allows us to pass a function in on an enter key to do what we wan
 From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
  */
 .directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
- 
-                event.preventDefault();
-            }
-        });
-    };
+	return function (scope, element, attrs) {
+		element.bind("keydown keypress", function (event) {
+			if(event.which === 13) {
+				scope.$apply(function (){
+					scope.$eval(attrs.ngEnter);
+				});
+
+				event.preventDefault();
+			}
+		});
+	};
 });
 
 app.factory('toolService', function($rootScope) {
+
 	var ToolService = {};
 	var list = [
 		{
@@ -148,7 +149,7 @@ app.factory('toolService', function($rootScope) {
 			current_location: "Saturn-4"
 		}
 	];
-		
+
 	ToolService.getItem = function(index) { return list[index]; }
 	ToolService.addItem = function(item) { list.push(item); }
 	ToolService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
@@ -165,7 +166,6 @@ app.factory('toolService', function($rootScope) {
 });
 
 app.factory('jobService', function($rootScope) {
-	
 	var JobService = {};
 	var list = [
 		{
@@ -200,17 +200,50 @@ app.factory('jobService', function($rootScope) {
 			members: "You"
 		},
 	];
-		
-	JobService.getItem = function(index) { return list[index]; }
-	JobService.addItem = function(item) { list.push(item); }
-	JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
-	JobService.getJobWithId = function(jobId) {
-		for (key in list) {
-			if (list[key].id == jobId) {
-				return list[key];
-			}
+
+
+		//
+		//		var job = 
+		//		{
+		//		title: "Replace Faulty Bolts",
+		//		members: "Olga K. Astra",
+		//		created: Date.now(),
+		//		creator: "Olga K.",
+		//		tools: [{
+		//		name: "Clamp C8",
+		//		current_location: "Mercury-1"
+		//		},
+		//		{
+		//		name: "Clamp C12",
+		//		current_location: "Mercury-2"
+		//		}]
+		//	},
+		//			{
+		//				title: "Install Arcjet Manifolds",
+		//				members: “Admin"
+		//			},
+		//
+		//			{
+		//				title: "Clean you Workplace",
+		//				members: “Admin"
+		//			},
+		//
+		//			]
+
+
+
+
+
+		JobService.getItem = function(index) { return list[index]; }
+			JobService.addItem = function(item) { list.push(item); }
+JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
+JobService.getJobWithId = function(jobId) {
+	for (key in list) {
+		if (list[key].id == jobId) {
+			return list[key];
 		}
 	}
+
 	JobService.addNoteToJob = function(jobId, note) {
 		var jobToUpdate = JobService.getJobWithId(jobId);
 		jobToUpdate.notes.push(note);
@@ -221,6 +254,7 @@ app.factory('jobService', function($rootScope) {
 	}
 	JobService.jobs = list;
 
+
 	return JobService;
 });
 
@@ -230,28 +264,27 @@ function ToolsCtrl($scope, toolService, $rootScope) {
 	$scope.tools = toolService.tools;
 }
 
-function JobsCtrl($scope, jobService, $rootScope) {
-	$scope.myJobs = jobService.jobs;
-}
-		
-function JobCtrl($scope, jobService, $location) {
 
+//////////////// Job Controller ////////////////
+function JobCtrl($scope, jobService, $location) {
+	$scope.myJobs = jobService.jobs;
 	//console.log($location.search('id'));
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
 
 	$scope.job = jobService.getJobWithId(jobId);
-					
+
 	$scope.addNote = function(note) {
 		jobService.addNoteToJob(jobId, note);
 	};
-   
+
 	$scope.addTool = function(tool) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
+
 }
 
-// Controller for Modal Logic
+//////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
 function ModalCtrl( $scope ) {
 	// current modal variable
@@ -377,3 +410,84 @@ function NavCtrl($scope, $rootScope) {
 	}
 
 }
+
+
+//////////////// Notes Controller For Node.js & MondoDB Test ////////////////
+function NotesCtrl( $scope, $http ) { //$http variale 
+	console.log( " note controller has been accessed " );
+	console.log( " " )
+	console.log( " " )
+
+	// get all the notes and show them once a user lands on this page
+	$http.get( '/api/notes' )
+	.success( function( data ) {
+		$scope.text = data; 
+		console.log( "all the notes in the database | ", data ); 
+		console.log( " " )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting notes: ", data ); 
+		console.log( " " )
+	}); 
+
+	// create a note and send it to the database 
+	// after submission, send the text to the node API
+	$scope.createNote = function() {
+		console.log("called createNote")
+		$http.post( '/api/notes', $scope.formData )
+		.success( function( data ) {
+			$scope.formData = {}; // clear the form so users can enter 
+			$scope.text = data; 
+			console.log( "successfully sent the form data to the notes node api | ", data ); 
+		})
+		.error( function( data ) {
+			console.log( "Error! Something went wrong ... ", data)
+			console.log( " " )
+		})
+	}
+}
+
+
+
+//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+function JobsCtrl( $scope, jobService, $rootScope, $http ) {
+	//	$scope.myJobs = jobService.jobs;
+	console.log( " jobs controller has been accessed " );
+	console.log( " " )
+	console.log( " " ); 
+
+	// onload, show all jobs
+	$http.get( '/api/jobs' )
+	.success( function( data ) {
+		$scope.jobs = data; 
+		console.log("all jobs in db ", data[0]._id )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting all jobs: ", data ); 
+		console.log( " " )
+	})
+
+
+	$scope.createJob = function() {
+		$http.post( '/api/jobs', $scope.formData )
+		.success( function( data ) {
+			$scope.formData = {}; // clear the form so users can enter 
+			$scope.notes = data; 
+			console.log( "successfully sent the form data to the notes node api | ", data ); 
+		})
+		.error( function( data ) {
+			console.log( "Error! Something went wrong ... ", data)
+			console.log( " " )
+		})
+	}
+
+	$scope.broadcastJob = function( id ) {
+		console.log( id)
+	}
+}
+
+//		title: req.body.title,
+//		members: req.body.members,
+//		created: Date.now,
+//		creator: "Admin", // have to change this to member_id or something like that
+//		notes: req.body.note,
