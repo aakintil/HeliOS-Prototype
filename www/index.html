@@ -24,143 +24,122 @@
 		<script src="js/script.js"></script>
 	</head>
 
-	<body ng-app="starter">
+	<body ng-app="starter" class="home">
 
 
-		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
-			<back>Back</back>
-			<input id="search" type="text"/>
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></div>
-				<div class="button notes" ng-click="hideModal()" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"></div>
+				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
 			</div>
+			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
-		<div id="notification">
-	
-		</div>
-
-		<ion-nav-view animation="no-animation"></ion-nav-view>
-
-		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobsCtrl">
+		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobsCtrl" class="nav-frame">
 			<ion-content>
 				<div class="section" >
-					<div class="item item-divider">
-						<div class="section-header">My Jobs</div>
+					<div class="item item-divider home">
+						<div class="section-header center-text">Home</div>
 					</div>
 					<ul class="list">
-						<li class="item" ng-repeat="job in myJobs">
+						<li class="item">
 							<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
-								<div class="list-item-title">{{job.title}}</div>
-								<div class="list-item-subtitle">{{job.members}}</div>
+								<div class="large-regular-text"><img class="medium-icon" src="img/icons/notebook.svg">My personal notes</div>
 							</a>
 						</li>
-<!--
-						<a href="job.html">
-							<li class="item">
-								<div class="list-item-title">Replace Faulty Bolts</div>
-								<div class="list-item-subtitle">You</div>
-							</li>
-						</a>
-						<li class="item">
-							<div class="list-item-title">Replace Faulty Bolts</div>
-							<div class="list-item-subtitle">You</div>
-						</li>
-						<li class="item">
-							<div class="list-item-title">Replace Faulty Bolts</div>
-							<div class="list-item-subtitle">You</div>
-						</li>
--->
 					</ul>
 				</div>
 
 				<div class="section">
-					<div class="list">
-						<div class="item item-divider">
-							ALL JOBS IN PROGRESS
-						</div>
-						<div class="item item-button-right">
-							<p class="list-item-title"> 
-								Backlog stations
-							</p>
-							<p class="list-item-subtitle">
-								You, Adam M.
-							</p>
-							<button class="button button-positive">
-								<i class="icon ion-plus-round"></i>
-							</button>
-						</div>
-
-						<div class="item item-button-right">
-							<p class="list-item-title"> 
-								Replace arcjet tubes
-							</p>
-							<p class="list-item-subtitle">
-								You, Adam M.
-							</p>
-							<button class="button button-positive">
-								<i class="icon ion-plus-round"></i>
-							</button>
-						</div>
-
-						<div class="item item-button-right">
-							<p class="list-item-title"> 
-								Secure ArcJet for Test Run
-							</p>
-							<p class="list-item-subtitle">
-								You, Adam M.
-							</p>
-							<button class="button button-positive">
-								<i class="icon ion-plus-round"></i>
-							</button>
-						</div>
+					<div class="item item-divider">
+						<div class="section-header">My Jobs</div>
 					</div>
-
+					<div class="list">
+						<ul class="list">
+							<li class="item item-button-right" ng-repeat="job in myJobs">
+								<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
+									<div class="big-title">{{job.title}}</div>
+									<div class="small-regular-text">{{job.members}}</div>
+								</a>
+								<button class="button button-clear checklist-item">
+									<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
 				</div>
+
 				<div class="section">
 					<div class="item item-divider">
-						JOB TEMPLATES
+						<div class="section-header">Other Jobs</div>
 					</div>
 					<div class="item item-button-right">
-						<p class="list-item-title"> 
-							Backlog stations
-						</p>
-						<p class="list-item-subtitle">
-							You, Adam M.
-						</p>
-						<button class="button button-positive">
-							<i class="icon ion-plus-round"></i>
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Backlog Stations</div>
+							<div class="small-regular-text">Derin M.</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
 						</button>
 					</div>
 
 					<div class="item item-button-right">
-						<p class="list-item-title"> 
-							Replace arcjet tubes
-						</p>
-						<p class="list-item-subtitle">
-							You, Adam M.
-						</p>
-						<button class="button button-positive">
-							<i class="icon ion-plus-round"></i>
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Replace ArcJet Tubes</div>
+							<div class="small-regular-text">Lisa D, Christine E, Elisa M</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
 						</button>
 					</div>
 
 					<div class="item item-button-right">
-						<p class="list-item-title"> 
-							Secure ArcJet for Test Run
-						</p>
-						<p class="list-item-subtitle">
-							You, Adam M.
-						</p>
-						<button class="button button-positive">
-							<i class="icon ion-plus-round"></i>
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Rearrange Work Station</div>
+							<div class="small-regular-text">Melissa M</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="section">
+					<div class="item item-divider">
+						<div class="section-header">Templates</div>
+					</div>
+					<div class="item item-button-right">
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Backlog Stations</div>
+							<div class="small-regular-text">Last completed 5/5/14 by Adam M.</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
 						</button>
 					</div>
 
+					<div class="item item-button-right">
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Replace ArcJet Tubes</div>
+							<div class="small-regular-text">Last completed 5/5/14 by Adam M.</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
+						</button>
+					</div>
+
+					<div class="item item-button-right">
+						<a href="job.html?id=1" ng-click="broadcastJob(1)">
+							<div class="big-title">Rearrange Work Station</div>
+							<div class="small-regular-text">Last completed 5/5/14 by Adam M.</div>
+						</a>
+						<button class="button button-clear checklist-item">
+							<i class="icon ion-ios7-plus-outline medium-icon"></i>
+						</button>
+					</div>
 				</div>
 
 			</ion-content>

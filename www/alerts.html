@@ -25,27 +25,40 @@
 	</head>
 
 	<body ng-app="starter">
-
-		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
-			<back>Back</back>
-			<input id="search" type="text"/>
+		
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></div>
-				<div class="button notes" ng-click="hideModal()" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></div>
-				<div class="button alerts active" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-dark.svg"></div>
+				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-light.svg"></div>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
 			</div>
+			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
-		<ion-nav-view animation="no-animation"></ion-nav-view>
 
-		<ion-view title="Alerts">
+
+<!-- <div class="section" >
+					<div class="item item-divider home">
+						<div class="section-header center-text">Home</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+							<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
+								<div class="large-regular-text"><img class="medium-icon" src="img/icons/notebook.svg">My personal notes</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+ -->
+
+
+		<ion-view title="Alerts" class="nav-frame">
 			<ion-content>
 				<div id="alerts" class="section">
-					<div class="item item-divider">
-						<div class="section-header">ALERTS</div>
+					<div class="item item-divider alert">
+						<div class="section-header center-text">Alerts</div>
 					</div>
 					<div class="list">
 						<div class="item item-button-right">

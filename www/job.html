@@ -29,50 +29,53 @@
 
 	<body ng-app="starter">
 
-		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive" align-title="center">
-			<back>Back</back>
-			<input id="search" type="text"/>
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"><div class="icon-text">Jobs</div></div>
-				<div class="button notes" ng-click="hideModal()" href="notes.html"><img class="icon" src="img/icons/notes-dark.svg"><div class="icon-text">Notes</div></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"><div class="icon-text">Alerts</div></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"><div class="icon-text">Add Notes</div></a>
+				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"></div>
+				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
 			</div>
+			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
-		<ion-nav-view animation="no-animation"></ion-nav-view>		
-	  	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl">
-			<ion-content>
+	  	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
+			<ion-content class="job">
 				<div class="section">
-					<div class="item item-divider">
-						<div class="section-header">Job: {{job.title}}</div>
+					<div class="item item-divider home">
+						<div class="section-header center-text">{{job.title}}</div>
 					</div>
-					<ul class="list">
+					<div class="big-title offset">{{job.title}}</div>
+					<!-- <ul class="list">
 						<li class="item job-header">
 							<div class="list-item-title">{{job.title}}</div>
 							<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
 							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
 						</li>
-					</ul>
+					</ul> -->
 				</div>
 
-				<button class="button offset list-item-adder">Add Participant +</button>
+				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
 				<div class="section offset">
 					<div class="item item-button-right item-divider">
-						<div class="section-header">Notes</div>
+						<div class="section-header small-title"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
 						<button class="collapsable button button-clear button-positive">
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
 					<ul class="list">
-						<li class="item" ng-repeat="note in job.notes track by $index">
+						<li class="item regular-text item-button-right" ng-repeat="note in job.notes track by $index">
 							{{note}}
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
 						</li>
-						<li class="item list-item-adder" id="addNoteFromJob">
-							<div class="addListItemText">Add Note +</div>
+						<li class="item" id="addNoteFromJob">
+							<div class="addListItemText action-text">
+								+ Add Note
+							</div>
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note" ng-enter="addNote(note)">
 						</li>
 					</ul>
@@ -80,19 +83,62 @@
 
 				<div class="section offset">
 					<div class="item item-button-right item-divider">
-						<div class="section-header">Tools</div>
+						<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
 						<button class="collapsable button button-clear button-positive">
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
 					<ul class="list">
-						<li class="item" ng-repeat="tool in job.tools">
-							<div class="list-item-title">{{tool.name}}</div>
-							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
+						<li class="item item-button-right" ng-repeat="tool in job.tools">
+							<div class="big-title">{{tool.name}}</div>
+							<div class="detail-text ">Current Location: {{tool.current_location}}</div>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
 						</li>
-						<li class="item list-item-adder" id="addToolFromJob">
-							<a href="addTool.html"><div class="addListItemText">Add Tool +</div></a>
-<!--							<input id="tags" class="addListItemInput" type="text" placeholder="Write Note" ng-model="tool" ng-enter="addTool(tool)">-->
+						<li class="item" id="addToolFromJob">
+							<a href="addTool.html">
+								<div class="addListItemText action-text">+ Add Tool</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="section offset">
+					<div class="item item-button-right item-divider">
+						<div class="section-header small-title">
+
+							<div class="detail-header">
+								<img class="small-icon" src="img/icons/jobs-dark.svg">Job Details
+							</div>
+
+							<div class="detail">
+								<span class="small-light-caps">Created:</span> 
+								<span class="action-text">{{job.created}}</span> 
+								<span class="small-light-caps">by</span> 
+								<span class="action-text">{{job.creator}}</span>
+							</div>
+
+							<div class="detail">
+								<span class="small-light-caps">Participants:</span> 
+								<span class="action-text">{{job.members}}</span> 
+
+							</div>
+
+						</div>
+						<button class="collapsable button button-clear button-positive">
+							<i class="icon ion-ios7-arrow-down"></i>
+						</button>
+					</div>
+					<ul class="list">
+						<li class="item action-text">
+							Add or Remove a Participant
+						</li>
+						<li class="item action-text">
+							Update Job Template
+						</li>
+						<li class="item action-text">
+							Save as New Job Template
 						</li>
 					</ul>
 				</div>
