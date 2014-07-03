@@ -98,6 +98,36 @@ $(document).ready(function () {
 		$(this).find(".tool-submenu").slideToggle(); 
 	}); 
 
+	// Check List Code
+	$(".checklist-item").click( function() {
+
+		console.log("hi");
+		var icon = $(this).children().first();
+		console.log(icon);
+		if (icon.hasClass('ion-ios7-checkmark-outline')) {
+			icon.removeClass('ion-ios7-checkmark-outline')
+			icon.addClass('ion-ios7-checkmark');
+		} else if(icon.hasClass('ion-ios7-checkmark')) {
+			icon.removeClass('ion-ios7-checkmark')
+			icon.addClass('ion-ios7-checkmark-outline')
+		}
+
+	});
+
+	$(".checklist-item").click( function() {
+
+		console.log("hi");
+		var icon = $(this).children().first();
+		console.log(icon);
+		if (icon.hasClass('ion-ios7-plus-outline')) {
+			icon.removeClass('ion-ios7-plus-outline')
+			icon.addClass('ion-ios7-plus');
+		} else if(icon.hasClass('ion-ios7-plus')) {
+			icon.removeClass('ion-ios7-plus')
+			icon.addClass('ion-ios7-plus-outline')
+		}
+
+	});
 	
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
@@ -106,7 +136,7 @@ $(document).ready(function () {
 			$(this).trigger("enterKey");
 		}
 	});
-	
+
 	$('.addListItemInput').hide();
 	
 	$('.addListItemText').click(function() {
