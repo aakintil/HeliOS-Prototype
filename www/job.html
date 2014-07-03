@@ -13,7 +13,6 @@
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 
-
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="js/jquery-ui.js"></script>
 		<!-- ionic/angularjs js -->
@@ -41,29 +40,20 @@
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
-<<<<<<< HEAD
-		<ion-nav-view animation="no-animation"></ion-nav-view>		
-		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl">
-			<ion-content>
-				<div class="section">
-					<div class="item item-divider">
-						<div class="section-header">Job: {{ job.title }}</div>
-=======
-	  	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
+		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content class="job">
 				<div class="section">
 					<div class="item item-divider home">
 						<div class="section-header center-text">{{job.title}}</div>
->>>>>>> b776dd50d749d3447131708846df5981e47a5fe3
 					</div>
 					<div class="big-title offset">{{job.title}}</div>
 					<!-- <ul class="list">
-						<li class="item job-header">
-							<div class="list-item-title">{{ job.title }}</div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Created By:</span> <span class="list-item-subtitle">{{ job.create }}</span><span class="list-item-subtitle"> {{ job.creator }}</span></div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{ job.members }}</span></div>
-						</li>
-					</ul> -->
+<li class="item job-header">
+<div class="list-item-title">{{job.title}}</div>
+<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
+<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
+</li>
+</ul> -->
 				</div>
 
 				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
@@ -76,17 +66,11 @@
 						</button>
 					</div>
 					<ul class="list">
-<<<<<<< HEAD
-						<li class='item' ng-if="job.notes.length === 0">No Notes </li>
-						<li class="item" ng-if="job.notes.length !== 0" ng-repeat="note in job.notes track by $index">
-							{{ note }}
-=======
 						<li class="item regular-text item-button-right" ng-repeat="note in job.notes track by $index">
 							{{note}}
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
->>>>>>> b776dd50d749d3447131708846df5981e47a5fe3
 						</li>
 						<li class="item" id="addNoteFromJob">
 							<div class="addListItemText action-text">
@@ -147,16 +131,6 @@
 						</button>
 					</div>
 					<ul class="list">
-<<<<<<< HEAD
-					<li class='item' ng-if="job.tools.length === 0"> No Tools </li>
-						<li class="item" ng-if="job.tools.length !== 0" ng-repeat="tool in job.tools">
-							<div class="list-item-title"> {{ tool.name }} </div>
-							<div class="list-item-subtitle"> Current Location: {{ tool.current_location }} </div>
-						</li>
-						<li class="item list-item-adder" id="addToolFromJob">
-							<a href="addTool.html"><div class="addListItemText">Add Tool +</div></a>
-							<!--							<input id="tags" class="addListItemInput" type="text" placeholder="Write Note" ng-model="tool" ng-enter="addTool(tool)">-->
-=======
 						<li class="item action-text">
 							Add or Remove a Participant
 						</li>
@@ -165,7 +139,6 @@
 						</li>
 						<li class="item action-text">
 							Save as New Job Template
->>>>>>> b776dd50d749d3447131708846df5981e47a5fe3
 						</li>
 					</ul>
 				</div>

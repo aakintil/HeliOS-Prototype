@@ -44,16 +44,9 @@
 						<div class="section-header center-text">Home</div>
 					</div>
 					<ul class="list">
-<<<<<<< HEAD
-						<li class="item" ng-repeat="job in jobs">
-							<a href="job.html?id={{job._id}}" ng-click="broadcastJob( job._id )">
-								<div class="list-item-title">{{job.title}}</div>
-								<div class="list-item-subtitle">{{job.members}}</div>
-=======
 						<li class="item">
 							<a href="job.html?id={{job._id}}" ng-click="broadcastJob( job._id )">
 								<div class="large-regular-text"><img class="medium-icon" src="img/icons/notebook.svg">My personal notes</div>
->>>>>>> b776dd50d749d3447131708846df5981e47a5fe3
 							</a>
 						</li>
 					</ul>
@@ -157,14 +150,14 @@
 	</body>
 
 
-		<!--		Add Note Modal-->
-		<script id="new_note_modal.html" type="text/ng-template">
+	<!--		Add Note Modal-->
+	<script id="new_note_modal.html" type="text/ng-template">
 <div class="modal">
 Modal Header Bar
 <ion-header-bar class="bar-secondary">
 <h1 class="title">New Task</h1>
 <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>                
-			</ion-header-bar>
+		</ion-header-bar>
 
 Modal content area
 <ion-content>
@@ -172,12 +165,12 @@ Modal content area
 <div class="list">
 <label class="item item-input">
 <input type="text" placeholder="Whats up" ng-model="task.title">
-			</label>
-			</div>
-			</form>
-			</ion-content> 
-			</div>
-		</script>
+		</label>
+		</div>
+		</form>
+		</ion-content> 
+		</div>
+	</script>
 
 	</body>
 </html>
