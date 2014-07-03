@@ -114,6 +114,57 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 	};
 });
 
+app.factory('toolService', function($rootScope) {
+
+	var ToolService = {};
+	var list = [
+		{
+			id: '1',
+			name: "Clamp C8",
+			current_location: "Mercury-1"
+		},
+		{
+			id: '2',
+			name: "Screwdriver 42",
+			current_location: "Mercury-2"
+		},
+		{
+			id: '3',
+			name: "1/4 Inch Wrench",
+			current_location: "Saturn-2"
+		},
+		{
+			id: '4',
+			name: "Socket Set",
+			current_location: "Venus-2"
+		},
+		{
+			id: '5',
+			name: "Torque Wrench B93",
+			current_location: "Pluto"
+		},
+		{
+			id: '6',
+			name: "Torque Wrench A77",
+			current_location: "Saturn-4"
+		}
+	];
+
+	ToolService.getItem = function(index) { return list[index]; }
+	ToolService.addItem = function(item) { list.push(item); }
+	ToolService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
+	ToolService.getJobWithId = function(toolId) {
+		for (key in list) {
+			if (list[key].id == toolId) {
+				return list[key];
+			}
+		}
+	}
+	ToolService.tools = list;
+
+	return ToolService;
+});
+
 app.factory('jobService', function($rootScope) {
 	var JobService = {};
 	var list = [
@@ -129,11 +180,13 @@ app.factory('jobService', function($rootScope) {
 			],
 			tools: [
 				{
+					id: '1',
 					name: "Clamp C8",
 					current_location: "Mercury-1"
 				},
 				{
-					name: "Clamp C12",
+					id: '2',
+					name: "Screwdriver 42",
 					current_location: "Mercury-2"
 				}
 			]
@@ -190,20 +243,26 @@ JobService.getJobWithId = function(jobId) {
 			return list[key];
 		}
 	}
-}
-JobService.addNoteToJob = function(jobId, note) {
-	var jobToUpdate = JobService.getJobWithId(jobId);
-	jobToUpdate.notes.push(note);
-}
-JobService.jobs = list;
 
-return JobService;
+	JobService.addNoteToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.notes.push(note);
+	}
+	JobService.addToolToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.tools.push(note);
+	}
+	JobService.jobs = list;
+
+
+	return JobService;
 });
 
 
 
 //////////////// Job Controller ////////////////
 function JobCtrl($scope, jobService, $location) {
+	$scope.myJobs = jobService.jobs;
 	//console.log($location.search('id'));
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
@@ -212,6 +271,10 @@ function JobCtrl($scope, jobService, $location) {
 
 	$scope.addNote = function(note) {
 		jobService.addNoteToJob(jobId, note);
+	};
+
+	$scope.addTool = function(tool) {
+		jobService.addToolToJob(jobId, {name: tool});
 	};
 
 }
@@ -409,7 +472,7 @@ function JobsCtrl( $scope, jobService, $rootScope, $http ) {
 			console.log( " " )
 		})
 	}
-	
+
 	$scope.broadcastJob = function( id ) {
 		console.log( id)
 	}

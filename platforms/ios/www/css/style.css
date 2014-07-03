@@ -1,4 +1,10 @@
-/*
+input {
+  background-color: whitesmoke; }
+
+::-webkit-input-placeholder {
+  color: #989898; }
+
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -4427,7 +4433,7 @@ a.subdued {
  */
 .item {
   border-color: #b9b9b9;
-  background-color: #ededed;
+  background-color: whitesmoke;
   color: #444444;
   position: relative;
   z-index: 2;
@@ -4478,7 +4484,7 @@ a.subdued {
     margin-right: 5px; }
   .item.item-light {
     border-color: #b9b9b9;
-    background-color: #ededed;
+    background-color: whitesmoke;
     color: #444444; }
   .item.item-stable {
     border-color: #b2b2b2;
@@ -4683,7 +4689,7 @@ a.item-content {
 
 .item-complex.item-light > .item-content {
   border-color: #b9b9b9;
-  background-color: #ededed;
+  background-color: whitesmoke;
   color: #444444; }
   .item-complex.item-light > .item-content.active, .item-complex.item-light > .item-content:active {
     border-color: #cccccc;
@@ -8394,7 +8400,7 @@ a.button {
     text-transform: uppercase; }
   .popup-modal textarea {
     height: 100px;
-    background-color: #ededed;
+    background-color: whitesmoke;
     resize: none; }
   .popup-modal input {
     color: black; }

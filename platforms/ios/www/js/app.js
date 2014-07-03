@@ -96,6 +96,83 @@ var app = angular.module('starter', ['ionic'])
 	};
 })
 
+/*
+This directive allows us to pass a function in on an enter key to do what we want.
+From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
+ */
+.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+ 
+                event.preventDefault();
+            }
+        });
+    };
+});
+
+app.factory('toolService', function($rootScope) {
+	
+	var ToolService = {};
+	var list = [
+		{
+			id: '1',
+			name: "Clamp C8",
+			current_location: "Mercury-1"
+		},
+		{
+			id: '2',
+			name: "Screwdriver 42",
+			current_location: "Mercury-2"
+		},
+		{
+			id: '3',
+			name: "1/4 Inch Wrench",
+			current_location: "Saturn-2"
+		},
+		{
+			id: '4',
+			name: "Socket Set",
+			current_location: "Venus-2"
+		},
+		{
+			id: '5',
+			name: "Torque Wrench B93",
+			current_location: "Pluto"
+		},
+		{
+			id: '6',
+			name: "Torque Wrench A77",
+			current_location: "Saturn-4"
+		}
+	];
+		
+	JobService.getItem = function(index) { return list[index]; }
+	JobService.addItem = function(item) { list.push(item); }
+	JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
+	JobService.getJobWithId = function(jobId) {
+		for (key in list) {
+			if (list[key].id == jobId) {
+				return list[key];
+			}
+		}
+	}
+	JobService.addNoteToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.notes.push(note);
+	}
+	JobService.addToolToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.tools.push(note);
+	}
+	JobService.jobs = list;
+
+	return JobService;
+});
+
 app.factory('jobService', function($rootScope) {
 	
 	var JobService = {};
@@ -112,11 +189,13 @@ app.factory('jobService', function($rootScope) {
 			],
 			tools: [
 				{
+					id: '1',
 					name: "Clamp C8",
 					current_location: "Mercury-1"
 				},
 				{
-					name: "Clamp C12",
+					id: '2',
+					name: "Screwdriver 42",
 					current_location: "Mercury-2"
 				}
 			]
@@ -145,15 +224,21 @@ app.factory('jobService', function($rootScope) {
 		var jobToUpdate = JobService.getJobWithId(jobId);
 		jobToUpdate.notes.push(note);
 	}
+	JobService.addToolToJob = function(jobId, note) {
+		var jobToUpdate = JobService.getJobWithId(jobId);
+		jobToUpdate.tools.push(note);
+	}
+	JobService.jobs = list;
 
 	return JobService;
 });
 
 function JobsCtrl($scope, jobService, $rootScope) {
-	$scope.myJobs = jobService.list;
+	$scope.myJobs = jobService.jobs;
 }
 		
 function JobCtrl($scope, jobService, $location) {
+
 	//console.log($location.search('id'));
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr(absUrl.indexOf('=')+1);
@@ -162,6 +247,10 @@ function JobCtrl($scope, jobService, $location) {
 					
 	$scope.addNote = function(note) {
 		jobService.addNoteToJob(jobId, note);
+	};
+   
+	$scope.addTool = function(tool) {
+		jobService.addToolToJob(jobId, {name: tool});
 	};
 }
 

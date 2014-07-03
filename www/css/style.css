@@ -8334,6 +8334,9 @@ a.button {
   transition: width .25s;
   margin: 5px;
   width: 7.5%; }
+#nav-bar #search-search {
+  margin: 5px;
+  width: 75%; }
 #nav-bar #search:focus {
   width: 50%; }
 #nav-bar .icon {

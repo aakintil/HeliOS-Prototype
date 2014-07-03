@@ -107,20 +107,19 @@ $(document).ready(function () {
 		}
 	});
 	
-	$('#addNoteInput').hide();
+	$('.addListItemInput').hide();
 	
-	$('#addNoteText').click(function() {
-		$('#addNoteText').hide();
-		$('#addNoteInput').show();
-		$('#addNoteInput').focus();
+	$('.addListItemText').click(function() {
+		$(this).nextAll('.addListItemInput');
+		$(this).hide();
+		$(this).nextAll('.addListItemInput').show();
+		$(this).nextAll('.addListItemInput').focus();
 	});
 	
-	$('#addNoteInput').bind("enterKey", function() {
-		$('#addNoteInput').hide();
-		$('#addNoteInput').val("");
-		$('#addNoteText').show();
-		
+	$('.addListItemInput').bind("enterKey", function() {
+		$(this).hide();
+		$(this).val("");
+		$(this).prevAll('.addListItemText').show();
 	});
-	
 	
 });
