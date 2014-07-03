@@ -11,6 +11,8 @@
 var express  = require('express');
 var app      = express(); 								// create our app w/ express
 var mongoose = require('mongoose'); 					// mongoose for mongodb
+var Schema = mongoose.Schema; 
+
 
 // configuration =================
 
@@ -34,36 +36,37 @@ app.configure(function() {
 
 
 // Schemas will work for the associations with other collections
-var AvatarSchema = new mongoose.Schema({
-	type: String,
-	url: String
-});
 // READ TMRW
 // http://mongoosejs.com/docs/populate.html
 
 
 // Notes Model 
 var Note = mongoose.model( 'Note', {
-	text : String 
+	message : String, 
+	status : String, 
+	creator : String, 
+	job : { type: Schema.Types.ObjectId, ref: 'Job' }
 })
 
 // Job Model 
 var Job = mongoose.model( 'Job', {
 	title : String, 
-	members: String, 
-	created: { type: Date, default: Date.now }, 
-	creator: String, 
-	tools: [ String ]
-	//			name : String, 
-	//			current_location : String
-
+	members : String, 
+	created : { type: Date, default: Date.now }, 
+	creator : String, 
+	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
+	note : [ { type: Schema.Types.ObjectId, ref: 'Note' } ]
 })
 
-Job.get_by_id = {
-	load: function ( id ) {
-		this.findOne({ _id : id });
-	}
-};
+
+// Tool Model 
+var Tool = mongoose.model( 'Tool', {
+	current_location : String, 
+	home_location : String
+})
+
+
+
 
 
 //////////////// ROUTES ////////////////
@@ -125,7 +128,7 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 //// JOBS //////
 app.get('/api/jobs/:id', function( req, res ) {
-//	res.send('jobs should have an id ' + req.params.id);
+	//	res.send('jobs should have an id ' + req.params.id);
 	var query = { '_id' : req.params.id };
 
 	Job.findOne( query, function( err, item ) {
@@ -159,7 +162,6 @@ app.post( '/api/jobs', function( req, res ) {
 		members: req.body.members,
 		created: Date.now,
 		creator: "Admin", // have to change this to member_id or something like that
-		notes: req.body.note,
 		done : false
 	}, function( err, job ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js") }; 
