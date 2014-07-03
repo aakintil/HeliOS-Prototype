@@ -45,7 +45,7 @@
 					</div>
 					<ul class="list">
 						<li class="item">
-							<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
+							<a href="job.html?id={{job._id}}" ng-click="broadcastJob( job._id )">
 								<div class="large-regular-text"><img class="medium-icon" src="img/icons/notebook.svg">My personal notes</div>
 							</a>
 						</li>
@@ -58,8 +58,8 @@
 					</div>
 					<div class="list">
 						<ul class="list">
-							<li class="item item-button-right" ng-repeat="job in myJobs">
-								<a href="job.html?id={{job.id}}" ng-click="broadcastJob({{job.id}})">
+							<li class="item item-button-right" ng-repeat="job in jobs">
+								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
 									<div class="big-title">{{job.title}}</div>
 									<div class="small-regular-text">{{job.members}}</div>
 								</a>
