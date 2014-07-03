@@ -202,45 +202,14 @@ app.factory('jobService', function($rootScope) {
 	];
 
 
-		//
-		//		var job = 
-		//		{
-		//		title: "Replace Faulty Bolts",
-		//		members: "Olga K. Astra",
-		//		created: Date.now(),
-		//		creator: "Olga K.",
-		//		tools: [{
-		//		name: "Clamp C8",
-		//		current_location: "Mercury-1"
-		//		},
-		//		{
-		//		name: "Clamp C12",
-		//		current_location: "Mercury-2"
-		//		}]
-		//	},
-		//			{
-		//				title: "Install Arcjet Manifolds",
-		//				members: “Admin"
-		//			},
-		//
-		//			{
-		//				title: "Clean you Workplace",
-		//				members: “Admin"
-		//			},
-		//
-		//			]
-
-
-
-
-
-		JobService.getItem = function(index) { return list[index]; }
-			JobService.addItem = function(item) { list.push(item); }
-JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
-JobService.getJobWithId = function(jobId) {
-	for (key in list) {
-		if (list[key].id == jobId) {
-			return list[key];
+	JobService.getItem = function(index) { return list[index]; }
+	JobService.addItem = function(item) { list.push(item); }
+	JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
+	JobService.getJobWithId = function(jobId) {
+		for (key in list) {
+			if (list[key].id == jobId) {
+				return list[key];
+			}
 		}
 	}
 
@@ -253,7 +222,6 @@ JobService.getJobWithId = function(jobId) {
 		jobToUpdate.tools.push(note);
 	}
 	JobService.jobs = list;
-
 
 	return JobService;
 });
