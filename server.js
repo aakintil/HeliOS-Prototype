@@ -115,7 +115,8 @@ app.post( '/api/notes', function( req, res ) {
 		done : false
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
-
+		console.log( "no error with creation "); 
+		console.log( "should not throw error with creation "); 
 		Note.find( function( err, notes ) {
 			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note AFTER CREATING one |  line 60 : server.js") };
 			res.json( notes ) // return all notes in the JSON format after we create another
@@ -182,14 +183,14 @@ app.get( '/api/jobs', function ( req, res ) {
 
 // Add a note to a job // UPDATE
 app.post( '/update/:id', function( req, res ) {
-//	var query = { '_id' : req.params.id };
-//	Job.findById( query, function ( err, job ){
-//		job.notes    = req.body.content;
-//		todo.updated_at = Date.now();
-//		job.save( function ( err, job, count ){
-//			res.redirect( '/' );
-//		});
-//	});
+	//	var query = { '_id' : req.params.id };
+	//	Job.findById( query, function ( err, job ){
+	//		job.notes    = req.body.content;
+	//		todo.updated_at = Date.now();
+	//		job.save( function ( err, job, count ){
+	//			res.redirect( '/' );
+	//		});
+	//	});
 })
 
 

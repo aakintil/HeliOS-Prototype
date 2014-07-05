@@ -66,8 +66,8 @@
 						</button>
 					</div>
 					<ul class="list">
-						<li class="item regular-text item-button-right" ng-repeat="note in job.notes track by $index">
-							{{note}}
+						<li class="item regular-text item-button-right" ng-repeat="note in notes track by $index">
+							{{note.message}}
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
@@ -76,7 +76,7 @@
 							<div class="addListItemText action-text">
 								+ Add Note
 							</div>
-							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote(note)">
+							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
 					</ul>
 				</div>

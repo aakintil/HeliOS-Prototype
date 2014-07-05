@@ -319,9 +319,9 @@ app.service('noteService', ['$http', function ($http) {
 	this.getNotes = function() {
 		return $http.get( urlBase );
 	};
-	
-	this.createNote = function() {
-		return $http.post( urlBase );
+
+	this.createNote = function( note ) {
+		return $http.post( urlBase, note );
 	}
 
 	this.getNoteWithId = function( id ) {
@@ -351,6 +351,19 @@ function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
 
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
+
+	// get all the notes 
+	// have to change this to another function later... get all notes with job id xx
+	noteService.getNotes()
+	.success( function( data ) {
+		$scope.notes = data;
+		console.log ( " All notes ", data )
+	})
+	.error( function( data ) {
+		console.log( "Error with getting all jobs: ", data ); 
+	})
+
+	// Show the job with the given id
 	jobService.getJobWithId( jobId )
 	.success( function( data ) {
 		$scope.job = data;
@@ -368,6 +381,16 @@ function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
 		noteService.createNote( note )
 		.success( function( data ) {
 			console.log( "note successfully created | ", data )
+
+			noteService.getNotes()
+			.success( function( data ) {
+				$scope.notes = data;
+				console.log ( " All notes ", data )
+			})
+			.error( function( data ) {
+				console.log( "Error with getting all jobs: ", data ); 
+			})
+
 		})
 	};
 
