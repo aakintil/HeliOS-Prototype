@@ -45,7 +45,8 @@ var Note = mongoose.model( 'Note', {
 	message : String, 
 	status : String, 
 	creator : String, 
-	job : { type: Schema.Types.ObjectId, ref: 'Job' }
+	job_id : String 
+	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
 })
 
 // Job Model 
@@ -93,14 +94,22 @@ app.get( '/api/notes', function ( req, res ) {
 }); 
 
 
-app.get('/api/notes/:id', function( req, res ) {
-	//	res.send('jobs should have an id ' + req.params.id);
-	var query = { '_id' : req.params.id };
 
-	Note.findOne( query, function( err, item ) {
-		console.log( "i am in the find one query function ", item );
-		res.json( item );
-	});
+
+app.get('/api/notes/:id', function( req, res, id ) {
+	console.log( " the job ", jobs );
+	//	var d = {
+	//		t : "title"
+	//	}
+	//	res.json( d )
+//	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
+//	console.log('jobs should have an id ' + req.params.id);
+//	var query = { '_id' : req.params.id };
+
+		Note.findOne( query, function( err, item ) {
+			console.log( "i am in the find one query function ", item );
+			res.json( item );
+		});
 
 });
 
@@ -108,10 +117,12 @@ app.get('/api/notes/:id', function( req, res ) {
 
 // Create a Note
 app.post( '/api/notes', function( req, res ) {
-
+console.log(" FUCKING USELSESS ", req.body.id ); 
+//	console.log( "AHHDFJAL;DFKJAF========= ")
 	Note.create({ 
-		message : req.body.message,
+		message : req.body.note.message,
 		creator : "Admin",
+		job_id : req.body.id,
 		done : false
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
