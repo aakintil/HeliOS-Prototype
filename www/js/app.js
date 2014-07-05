@@ -285,6 +285,7 @@ app.factory("Jobs", function(){
 app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
+	var noteUrlBase = '/api/notes'
 
 	this.getJobs = function() {
 		return $http.get( urlBase );
@@ -295,10 +296,6 @@ app.service('jobService', ['$http', function ($http) {
 	};
 
 	this.addTool = function() {
-		return $http.put( urlBase + '/' + id );
-	}
-
-	this.addNote = function() {
 		return $http.put( urlBase + '/' + id );
 	}
 
@@ -322,6 +319,10 @@ app.service('noteService', ['$http', function ($http) {
 	this.getNotes = function() {
 		return $http.get( urlBase );
 	};
+	
+	this.createNote = function() {
+		return $http.post( urlBase );
+	}
 
 	this.getNoteWithId = function( id ) {
 		return $http.get( urlBase + '/' + id );
@@ -346,7 +347,7 @@ app.service('noteService', ['$http', function ($http) {
 
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, $location, Jobs ) {
+function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
 
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
@@ -363,7 +364,11 @@ function JobCtrl( $scope, jobService, $location, Jobs ) {
 	$scope.job = jobService.getJobWithId(jobId);
 
 	$scope.addNote = function(note) {
-		jobService.addNoteToJob(jobId, note);
+		console.log( note.message , " | is the new note "); 
+		noteService.createNote( note )
+		.success( function( data ) {
+			console.log( "note successfully created | ", data )
+		})
 	};
 
 	$scope.addTool = function(tool) {
@@ -568,18 +573,3 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 }
 
 
-function get_object_id( id, model ) {
-	var key = ""; 
-	for ( key in model ) {
-		if ( model[ key ]._id === id ) {
-			return model[ key ]; 
-		}
-	}
-}
-
-
-//		title: req.body.title,
-//		members: req.body.members,
-//		created: Date.now,
-//		creator: "Admin", // have to change this to member_id or something like that
-//		notes: req.body.note,

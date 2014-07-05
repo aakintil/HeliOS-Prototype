@@ -110,7 +110,8 @@ app.get('/api/notes/:id', function( req, res ) {
 app.post( '/api/notes', function( req, res ) {
 
 	Note.create({ 
-		text : req.body.text,
+		message : req.body.message,
+		creator : "Admin",
 		done : false
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
@@ -143,7 +144,14 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 //////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
 
 
-//// JOBS //////
+
+
+
+
+
+
+
+// Get Job With Id 
 app.get('/api/jobs/:id', function( req, res ) {
 	//	res.send('jobs should have an id ' + req.params.id);
 	var query = { '_id' : req.params.id };
@@ -154,6 +162,8 @@ app.get('/api/jobs/:id', function( req, res ) {
 	});
 
 });
+
+
 
 // Get ALL Jobs
 app.get( '/api/jobs', function ( req, res ) {
@@ -168,6 +178,8 @@ app.get( '/api/jobs', function ( req, res ) {
 	})
 }); 
 
+
+
 // Add a note to a job // UPDATE
 app.post( '/update/:id', function( req, res ) {
 //	var query = { '_id' : req.params.id };
@@ -180,7 +192,10 @@ app.post( '/update/:id', function( req, res ) {
 //	});
 })
 
-// Create a Note
+
+
+
+// Create a Job
 app.post( '/api/jobs', function( req, res ) {
 	////////////////// SET THIS UP ////////////////// 
 
@@ -201,7 +216,7 @@ app.post( '/api/jobs', function( req, res ) {
 }); 
 
 
-// Delete a Note 
+// Delete a Job 
 // think about making this "HIDE" ... which if we do, an api call won't be necessary 
 app.delete( '/api/notes/:job_id', function( req, res ) {
 
@@ -218,6 +233,8 @@ app.delete( '/api/notes/:job_id', function( req, res ) {
 
 	})
 })
+
+
 
 //////////////////////////////// END OF JOB ROUTES ////////////////////////////////
 
