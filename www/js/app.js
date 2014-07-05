@@ -304,8 +304,12 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.put( urlBase + '/' + id );
 	}
 
-	this.addNote = function( note, id ) {
-		return $http.put( noteUrlBase + '/' + id, note )
+	//	this.addNote = function( note, id ) {
+	//		return $http.put( noteUrlBase + '/' + id, note )
+	//	}
+
+	this.updateJobWithNote = function( id ) {
+		return $http.post( urlBase + '/' + id )
 	}
 
 	//		this.getNotesWithId = function( note, id ) {
@@ -366,63 +370,40 @@ function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
 
+	// Show the job with the given id
+	jobService.getJobWithId( jobId )
+	.success( function( data ) {
+		$scope.job = data; 
+	})
+	.error( function( data ) {
+		console.log( "Error with getting all jobs 44: ", data._id ); 
+	})
+
+
 	noteService.getNotes()
 	.success( function( data ) {
-		$scope.notes = { }; 
+		$scope.notes = {}
 		console.log(" in here "); 
-		//				var i = "";
-		//				for ( var i in data ) {
-		//					//				$scope.notes = data;
-		//					console.log ( " All notes ", data[i].job_id )
-		//					if ( data[i].job_id === jobId ) { $scope.notes.push( data[ i ] ) }; 
-		//				}
+		var i = "";
+		for ( var i in data ) {
+			console.log ( " All notes ", data[i].job_id )
+			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
+		}
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs: ", data ); 
 	})
 
-	//	console.log( " yoooo ", jobId )
-
-	// get all the notes 
-	// have to change this to another function later... get all notes with job id xx
-	//	noteService.getNotes()
-	//	.success( function( data ) {
-	//		$scope.notes = data;
-	//		console.log ( " All notes ", data )
-	//	})
-	//	.error( function( data ) {
-	//		console.log( "Error with getting all jobs: ", data ); 
-	//	})
 
 
-	// Show the job with the given id
-	jobService.getJobWithId( jobId )
-	.success( function( data ) {
-		$scope.job = data; 
-		$scope.notes = data.notes; 
-		console.log ( " this page's job ", $scope.notes )
-	})
-	.error( function( data ) {
-		console.log( "Error with getting all jobs 44: ", data._id ); 
-	})
-	//	$scope.myJob = get_object_id( jobId,
-	//	$scope.myJob = get_object_id( jobId,
-
-	//	console.log( $scope.job.notes, " jdfl;akfda")
-	//	$scope.notes = $scope.job.notes; 
-	//	console.log( $scope.job , " jooobs" ); 
 	$scope.addNote = function(note) {
-		//		console.log( note.message , " | is the new note "); 
-		//		console.log( jobId , "   ininiteoa ")
-
-		//		console.log( " in the add note function ", note ); 
 		var form = {}; 
 		form.note = note; 
 		form.id = jobId; 
 		noteService.createNote( form )
 		.success( function( data ) {
-			console.log( "note successfully created | ", data )
-
+			console.log( "all notes from this job successfully created | ", data )
+			$scope.notes = data; 
 		})
 	};
 
