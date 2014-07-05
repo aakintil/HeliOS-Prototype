@@ -114,172 +114,6 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 	};
 });
 
-app.factory('toolService', function($rootScope) {
-
-	var ToolService = {};
-	var list = [
-		{
-			id: '1',
-			name: "Clamp C8",
-			current_location: "Mercury-1"
-		},
-		{
-			id: '2',
-			name: "Screwdriver 42",
-			current_location: "Mercury-2"
-		},
-		{
-			id: '3',
-			name: "1/4 Inch Wrench",
-			current_location: "Saturn-2"
-		},
-		{
-			id: '4',
-			name: "Socket Set",
-			current_location: "Venus-2"
-		},
-		{
-			id: '5',
-			name: "Torque Wrench B93",
-			current_location: "Pluto"
-		},
-		{
-			id: '6',
-			name: "Torque Wrench A77",
-			current_location: "Saturn-4"
-		}
-	];
-
-	ToolService.getItem = function(index) { return list[index]; }
-	ToolService.addItem = function(item) { list.push(item); }
-	ToolService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
-	ToolService.getJobWithId = function(toolId) {
-		for (key in list) {
-			if (list[key].id == toolId) {
-				return list[key];
-			}
-		}
-	}
-	ToolService.tools = list;
-
-	return ToolService;
-});
-
-app.factory('jobService', function($rootScope) {
-	var JobService = {};
-	var list = [
-		{
-			id: "1",
-			title: "Replace Faulty Bolts",
-			members: "Olga K. Astra Not(You)",
-			created: "3/3/14",
-			creator: "Olga K.",
-			notes: [
-				"this is a test",
-				"you are a test"
-			],
-			tools: [
-				{
-					id: '1',
-					name: "Clamp C8",
-					current_location: "Mercury-1"
-				},
-				{
-					id: '2',
-					name: "Screwdriver 42",
-					current_location: "Mercury-2"
-				}
-			]
-		},
-		{
-			title: "Install Arcjet Manifolds",
-			members: "You, Derin"
-		},
-		{
-			title: "Clean you Workplace",
-			members: "You"
-		},
-	];
-
-
-		//
-		//		var job = 
-		//		{
-		//		title: "Replace Faulty Bolts",
-		//		members: "Olga K. Astra",
-		//		created: Date.now(),
-		//		creator: "Olga K.",
-		//		tools: [{
-		//		name: "Clamp C8",
-		//		current_location: "Mercury-1"
-		//		},
-		//		{
-		//		name: "Clamp C12",
-		//		current_location: "Mercury-2"
-		//		}]
-		//	},
-		//			{
-		//				title: "Install Arcjet Manifolds",
-		//				members: “Admin"
-		//			},
-		//
-		//			{
-		//				title: "Clean you Workplace",
-		//				members: “Admin"
-		//			},
-		//
-		//			]
-
-
-
-
-
-		JobService.getItem = function(index) { return list[index]; }
-			JobService.addItem = function(item) { list.push(item); }
-JobService.removeItem = function(item) { list.splice(list.indexOf(item), 1); }
-JobService.getJobWithId = function(jobId) {
-	for (key in list) {
-		if (list[key].id == jobId) {
-			return list[key];
-		}
-	}
-
-	JobService.addNoteToJob = function(jobId, note) {
-		var jobToUpdate = JobService.getJobWithId(jobId);
-		jobToUpdate.notes.push(note);
-	}
-	JobService.addToolToJob = function(jobId, note) {
-		var jobToUpdate = JobService.getJobWithId(jobId);
-		jobToUpdate.tools.push(note);
-	}
-	JobService.jobs = list;
-
-	return JobService;
-}
-
-});
-
-
-
-//////////////// All Job Factory ////////////////
-app.factory("Jobs", function(){
-	this.insert = function( data ) {
-		var k = ""; 
-		for ( var k in data ) {
-			this.push( data[ k ] ); 
-		}
-	}
-
-	this.get = function( id ) {
-		var k = ""; 
-		for ( var k in this ) {
-			if ( this[ k ]._id === id ) 
-				return this[ k ]; 
-		}
-		return "doesn't exist"
-	}
-});
-
 
 
 app.service('jobService', ['$http', function ($http) {
@@ -329,7 +163,6 @@ app.service('jobService', ['$http', function ($http) {
 
 
 
-
 app.service('noteService', ['$http', function ($http) {
 
 	var urlBase = '/api/notes';
@@ -362,10 +195,8 @@ app.service('noteService', ['$http', function ($http) {
 
 
 
-
-
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
+function JobCtrl( $scope, jobService, noteService, $location ) {
 
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
@@ -412,6 +243,9 @@ function JobCtrl( $scope, jobService, noteService, $location, Jobs ) {
 	};
 
 }
+
+
+
 
 //////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
