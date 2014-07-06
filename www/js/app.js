@@ -115,13 +115,15 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 });
 
 
-
+var x = 5; 
 app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
 	var noteUrlBase = '/api/notes'
+	this.x = 5; 
 
 	this.getJobs = function() {
+		this.x = $http.get( urlBase );
 		return $http.get( urlBase );
 	};
 
@@ -249,9 +251,18 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 
 //////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
-function ModalCtrl( $scope ) {
+function ModalCtrl( $scope, jobService ) {
 	// current modal variable
 	var $modal = ""; 
+	//	console.log( " jobs scope ", $scope.jobs)
+	jobService.getJobs()
+	.success( function( data ) {
+		$scope.jobs = data; 
+//		console.log( "successfully got all jobs ", $scope.jobs); 
+	})
+	.error( function( data ) {
+		console.log( "could not successfully get all jobs"); 
+	})
 
 	$scope.showModal = function( name ) {
 		$modal = name; 
@@ -292,13 +303,14 @@ function ModalCtrl( $scope ) {
 	}
 
 
-	$scope.submit = function( formType ) {		
+	$scope.submit = function( formType ) {
+
 		if ( formType === undefined ) {
 			$scope.hideModal();
 			console.log( "please fill out form "); // turn into an alert / notification	
 		}
-		else {
-			formType.job !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
+		else { // only notes contain messages, and messages are required fields
+			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
 			console.log( "submit successfully called" ); 
 			$scope.hideModal(); 	
 		}
@@ -411,12 +423,12 @@ function NotesCtrl( $scope, $http ) { //$http variale
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
 function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
-
+	$scope.jobs = ""; 
 	// onload, show all jobs
 	jobService.getJobs()
 	.success( function( data ) {
 		$scope.jobs = data;
-		console.log ( " new Jobs ", data )
+		//		console.log ( " new Jobs ", data )
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs: ", data ); 
