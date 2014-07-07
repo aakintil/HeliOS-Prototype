@@ -128,7 +128,7 @@ $(document).ready(function () {
 		}
 
 	});
-	
+
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
 		if(e.keyCode == 13)
@@ -138,18 +138,30 @@ $(document).ready(function () {
 	});
 
 	$('.addListItemInput').hide();
-	
+
 	$('.addListItemText').click(function() {
 		$(this).nextAll('.addListItemInput');
 		$(this).hide();
 		$(this).nextAll('.addListItemInput').show();
 		$(this).nextAll('.addListItemInput').focus();
 	});
-	
+
 	$('.addListItemInput').bind("enterKey", function() {
 		$(this).hide();
 		$(this).val("");
 		$(this).prevAll('.addListItemText').show();
 	});
-	
+
+
+
+
+	// Code for handling search bar results
+	$( "#search" ).focus( function() {
+		$( "#search-results" ).animate({ height: "200px", opacity: 1 }, 300 )
+	}); 
+
+	$( "#search" ).blur( function() {
+		$( "#search-results" ).animate({ height: "0", opacity: 0 } )
+	}); 
+
 });
