@@ -60,7 +60,7 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
-	notes : [ type: String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : { type: String }, //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 
@@ -91,6 +91,18 @@ app.get( '/api/tools', function ( req, res ) {
 		if ( err ) { res.send( err ); console.log("Error finding / getting appropriate tool  |  line 42 : server.js") }; 
 		res.json( tools ) // return all notes in the JSON format
 	})
+}); 
+
+// Get Tool With Name 
+app.get( '/api/tools/:name', function ( req, res ) {
+	console.log( "======== CALLED THE RIGHT METHOD =======")
+	console.log( "hopefully the name ", req.params ); 
+//	var query = { 'name' : req.params.name };
+//
+//	Tool.findOne( query, function( err, item ) {
+//		console.log( "i am in the find one query function ", item );
+//		res.json( item );
+//	});
 }); 
 
 

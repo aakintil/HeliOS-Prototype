@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<!--		<link href="css/animate.css" rel="stylesheet">-->
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above <link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+		<script src="js/script.js"></script>
+	</head>
+
+	<body ng-app="starter" class="home">
+
+
+		<!------------------- NAVIGATION ------------------->
+		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
+			<div class="button-bar nav-bar-buttons">
+				<!-- place in a.button -->
+
+				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-colored.svg"></div>
+				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
+			</div>
+			<input id="search" type="text" placeholder="Search"  autocomplete="off" ng-model="searchText"> 
+			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
+		</ion-nav-bar>
+
+
+		<!------------------- NOTIFICATIONS BAR ------------------->
+		<div id="notification"> </div>
+
+
+		<!------------------- JOBS VIEW ------------------->
+		<ion-view title="Search" hide-back-button="true" ng-controller="SearchCtrl" class="nav-frame">
+			<ion-content>
+				<div class="section" >
+					<div class="item item-divider home">
+						<div class="section-header center-text">Search</div>
+					</div>
+					<ul class="list">
+						<li class="item">
+<!--
+							<a href="job.html?id={{job._id}}" ng-click="broadcastJob( job._id )">
+								<div class="large-regular-text"><img class="medium-icon" src="img/icons/notebook.svg">My personal notes</div>
+							</a>
+-->
+						</li>
+					</ul>
+				</div>
+
+			</ion-content>
+		</ion-view>
+
+
+	</body>
+
+</html>

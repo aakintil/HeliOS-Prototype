@@ -149,15 +149,23 @@ $(document).ready(function () {
 	});
 
 	// Code for handling search bar results
-//	$( "#search" ).focus( function() {
-//		$( "#search-results" ).animate({ height: "200px", opacity: 1 }, 300 )
-//	}); 
-//
-//	$( "#search" ).blur( function() {
-//		$( "#search-results" ).animate({ height: "0", opacity: 0 } )
-//	}); 
+	$('#search').bind("enterKey", function() {
+		var query = $( this ).val(); 
+		console.log( query, " should not be null");  
+		$(this).val("");
+		window.location = "search.html"; 
+		
+	});
 
-	
+	//	$( "#search" ).focus( function() {
+	//		$( "#search-results" ).animate({ height: "200px", opacity: 1 }, 300 )
+	//	}); 
+	//
+	//	$( "#search" ).blur( function() {
+	//		$( "#search-results" ).animate({ height: "0", opacity: 0 } )
+	//	}); 
+
+
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
 		$(this).addClass('active');
@@ -173,5 +181,5 @@ $(document).ready(function () {
 			$('#add-note-form').hide();
 		}
 	});
-	
+
 });

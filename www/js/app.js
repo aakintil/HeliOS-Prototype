@@ -215,27 +215,19 @@ app.service('updateJobsService', function () {
 app.service('toolService', ['$http', function ($http) {
 
 	var urlBase = '/api/tools';
+	var store = ""; 
 
 	this.getTools = function() {
 		return $http.get( urlBase );
 	};
 
-	//	this.createNote = function( note, id ) {
-	//		return $http.post( urlBase, note, id );
-	//	}
-	//
-	//	this.getNoteWithId = function( id ) {
-	//		return $http.get( urlBase + '/' + id );
-	//	};
-	//
-	//	this.addTool = function() {
-	//		return $http.put( urlBase + '/' + id );
-	//	}
-	//
-	//	this.deleteCustomer = function (id) {
-	//		return $http.delete(urlBase + '/' + id);
-	//	};
+	this.saveQuery = function( input ) {
+		store = input; 
+	}
 
+	this.getQuery = function() {
+		return store; 
+	}
 }]);
 
 
@@ -415,17 +407,10 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 //////////////// Navigation Controller ////////////////
 function NavCtrl($scope, toolService) {
-
-	toolService.getTools()
-	.success( function( data ) {
-		$scope.tools = data; 
-		console.log( "got all the tools, check it ", $scope.tools )
-	})
-	.error( function( data ) {
-		console.log( "shit there was an error loading tools "); 
-	})
-
-
+	var searchText = ""; 
+	console.log( searchText, " should change "); 
+	toolService.saveQuery( searchText ); 
+	
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
 		if (window.location.href.indexOf(path) != -1) {
@@ -524,6 +509,34 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	//		})
 	//	}
 
+}
+
+
+
+//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+function SearchCtrl( $scope, $rootScope, $http, toolService ) {
+	console.log ( " the search query  ", toolService.getQuery()  )
+
+	toolService.getTools()
+	.success( function( data ) {
+		$scope.tools = data; 
+		console.log( "got all the tools, check it ", $scope.tools )
+	})
+	.error( function( data ) {
+		console.log( "shit there was an error loading tools "); 
+	})
+	
+	console.log ( " the search query  ", toolService )
+	
+//		var toolQuery = toolService.getQuery(); 
+//	
+//	toolService.getTool( toolQuery )
+//	.success( function( data ) {
+//		$scope.tool = data;
+//	})
+//	.error( function( data ) {
+//		console.log( " a problem occured with finding an individual tool " ); 
+//	})
 }
 
 
