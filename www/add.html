@@ -29,91 +29,132 @@
 
 	<body ng-app="starter">
 
-		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
-			<div class="button-bar nav-bar-buttons">
-				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-green.svg"></a>
-			</div>
-			<input id="search" type="text" placeholder="Search">
-		</ion-nav-bar>
-
-		<ion-view title="Add" hide-back-button="true" class="nav-frame">
-			<ion-content id="add">
-				<div class="section">
-					<div class="item item-divider add">
-						<div class="left-title-button"><back></back></div>
-						<div class="center-text">Add New</div>
-						<div class="right-title-button"></div>
-					</div>
+		<!-- The add job page overlay -->
+		<div id="add-modal" class="modal" ng-model="JobsCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
+				<div class="button-bar nav-bar-buttons">
+					<div class="button">Done</div>
 				</div>
+			</ion-nav-bar>
 
-				<div class="section add-type">
-					<div class="button-bar">
-					  <div class="button note active action-text">Note</div>
-					  <div class="button job action-text">Job</div>
-					</div>
-				</div>
-
-				<div class="section add-section" id="add-note-form">
-					<ul class="list">
-						<div class="white-container">
-						<li>
-							<label class="item item-input first">
-								<textarea placeholder="Enter Your Note"></textarea>
-							</label>
-						</li>
-						<li>
-							<label class="item item-input">
-								<i class="icon ion-camera placeholder-icon"></i>
-								<input type="text" placeholder="Add Note (Optional)">
-							</label>
-						</li>
-						<li>
-							<label class="item item-input">
-								<i class="icon ion-search placeholder-icon"></i>
-								<input type="text" placeholder="Add to Job (Optional)">
-							</label>
-						</li>
-						<li class="notab">
-							<div class="add-sub">
-								<div class="button add create-button action-text-white">Create Note</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-
-				<div class="white-container">
-					<div class="section add-section" id="add-job-form">
+			<ion-view class="nav-frame">
+				<ion-content>
+					<div class="section">
+						<div class="item item-divider add">
+							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
+						</div>
 						<ul class="list">
-							<li>
-								<label class="item item-input first">
-									<i class="icon ion-ios7-briefcase-outline"></i>
-									<input type="text" placeholder="Job Title">
-								</label>
+							<li class="item item-button-right" ng-repeat="job in jobs">
+								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
+									<div class="big-title">{{job.title}}</div>
+									<div class="small-regular-text">{{job.members}}</div>
+								</a>
+								<button class="button button-clear checklist-item">
+									<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+								</button>
 							</li>
-							<li>
-								<label class="item item-input">
-									<i class="icon ion-ios7-people-outline placeholder-icon"></i>
-									<input type="text" placeholder="Add Participants">
-								</label>
-							</li>
-							<li>
-								<label class="item item-input">
-									<textarea placeholder="Add Note (Optional)"></textarea>
-								</label>
-							</li>
-							<div class="add-sub">
-								<div class="button add create-button action-text-white">Create Job</div>
-							</div>
 						</ul>
 					</div>
-				</div>
 
-			</ion-content>
-		</ion-view>
+				</ion-content>
+			</ion-view>
+		</div>
+
+
+		<div id="add-page">
+			<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
+				<div class="button-bar nav-bar-buttons">
+					<!-- place in a.button -->
+
+					<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></div>
+					<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></div>
+					<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-green.svg"></a>
+				</div>
+				<input id="search" type="text" placeholder="Search">
+			</ion-nav-bar>
+
+			<ion-view title="Add" hide-back-button="true" class="nav-frame">
+				<ion-content id="add">
+					<div class="section">
+						<div class="item item-divider add">
+							<div class="left-title-button"><back></back></div>
+							<div class="center-text">Add New</div>
+							<div class="right-title-button"></div>
+						</div>
+					</div>
+
+					<div class="section add-type">
+						<div class="button-bar">
+						  <div class="button note active action-text">Note</div>
+						  <div class="button job action-text">Job</div>
+						</div>
+					</div>
+
+					<div class="section add-section" id="add-note-form" ng-controller="ModalCtrl">
+						<form ng-submit="submit(note)">
+							<ul class="list">
+								<div class="white-container">
+								<li>
+									<label class="item item-input first">
+										<textarea placeholder="Enter Your Note" ng-model="note.message"> </textarea>
+									</label>
+								</li>
+								<li>
+									<label class="item item-input">
+										<i class="icon ion-camera placeholder-icon"></i>
+										<input type="text" placeholder="Add Photo (Optional)">
+									</label>
+								</li>
+								<li>
+									<label class="item item-input">
+										<i class="icon ion-search placeholder-icon"></i>
+										<input id="input-job" type="text" ng-model="note.job">
+										<!-- <select ng-model="note.job" ng-options="job.title for job in jobs"></select> -->
+									</label>
+								</li>
+								<li class="notab">
+									<div class="add-sub">
+										<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Note</button>
+									</div>
+								</li>
+							</ul>
+						</form>
+					</div>
+
+					<div class="white-container" ng-controller="ModalCtrl">
+						<form ng-submit="submit(job)">
+							<div class="section add-section" id="add-job-form">
+								<ul class="list">
+									<li>
+										<label class="item item-input first">
+											<i class="icon ion-ios7-briefcase-outline"></i>
+											<input type="text" placeholder="Job Title" ng-model="job.title">
+										</label>
+									</li>
+									<li>
+										<label class="item item-input">
+											<i class="icon ion-ios7-people-outline placeholder-icon"></i>
+											<input type="text" placeholder="Add Participants (Optional)" ng-model="job.participants">
+										</label>
+									</li>
+									<li>
+										<label class="item item-input">
+											<textarea placeholder="Add Note (Optional)" ng-model="job.note"> </textarea>
+										</label>
+									</li>
+									<div class="add-sub">
+										<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Job</button>
+									</div>
+								</ul>
+							</div>
+						</form>
+					</div>
+
+				</ion-content>
+			</ion-view>
+		</div>
 
 	</body>
 </html>

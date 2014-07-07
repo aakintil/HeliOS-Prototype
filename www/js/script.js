@@ -163,5 +163,10 @@ $(document).ready(function () {
 			$('#add-note-form').hide();
 		}
 	});
+
+	$('#input-job').click(function() {
+		$('#add-page').hide();
+		$('#add-modal').show();
+	})
 	
 });
