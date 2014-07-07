@@ -42,7 +42,7 @@ app.configure(function() {
 
 // Notes Model 
 var Note = mongoose.model( 'Note', {
-	message : [ String ], 
+	message : { type: String }, 
 	status : String, 
 	creator : String, 
 	job_id : String 
@@ -52,11 +52,11 @@ var Note = mongoose.model( 'Note', {
 // Job Model 
 var Job = mongoose.model( 'Job', {
 	title : String, 
-	members : [ String ], 
+	members : { type: String }, 
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
-	notes : [ String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : { type: String }, //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 
