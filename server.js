@@ -60,7 +60,7 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
-	notes : { type: String }, //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : [ type: String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 

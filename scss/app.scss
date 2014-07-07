@@ -11,7 +11,7 @@ $gray-lighter: #989898;
 $white-text: white;
 $blue-home: #2a9acd;
 $red-alert: #f05a24;
-$green-notes: #22b473;
+$green-add: #22b473;
 
 $success: rgba( 143, 203, 33, 1 ); 
 $warning: rgba( 234, 173, 22, 1 ); 
@@ -83,8 +83,15 @@ $item-subtitle: (23/2)+px;
 	color: black;
 }
 
+.small-title-white {
+	font-size: (23/2)+px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: white;
+}
+
 .large-regular-text {
-	font-size: (36/2)+px;
+ 	font-size: (36/2)+px;
 	font-weight: normal;
 	color: black;
 }
@@ -111,6 +118,12 @@ $item-subtitle: (23/2)+px;
 	font-size: (29/2)+px;
 	font-weight: bold;
 	color: black;
+}
+
+.action-text-white {
+	font-size: (29/2)+px;
+	font-weight: bold;
+	color: white;
 }
 
 .small-light-caps {
@@ -166,8 +179,30 @@ a:active {
 	background-color: $red-alert;
 }
 
+.add {
+	background-color: $green-add;
+}
+
+.add-sub {
+	background-color: #C9E7D4;
+}
+
 .center-text {
-	text-align: center;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	width: 50%;
+	display: inline-block;
+}
+
+.left-title-button {
+	display: inline-block;
+	width: 10%;
+}
+
+.right-title-button {
+	display: inline-block;
+	float: right;
+	width: 10%;
 }
 
 .offset {
@@ -519,3 +554,54 @@ textarea[placeholder] {
 	}
 }
 
+// Code for Add page
+
+#add .first {
+	border: 0px;
+}
+
+.add-section {
+	background-color: white;
+	margin-left: 20px;
+}
+
+.add-type {
+
+	.button-bar {
+		height: (57/2)+px;
+	}
+
+	.button {
+		background-color: $gray-light;
+		border: 0px;
+		text-align: left;
+		padding-top: 4px;
+		line-height: (57/2)+px;
+	}
+
+	.active {
+		background-color: white;
+	}
+
+}
+
+.white-container {
+	background-color: white;
+}
+
+#add-job-form {
+	display: none;
+}
+
+.add-sub {
+	width: 100%;
+	height: 47px;
+}
+
+.create-button{
+	clear: both;
+	float: right;
+	width: auto;
+	height: (71/2)+px !important;
+	padding: 0 20px 0 20px;
+}
