@@ -24,7 +24,7 @@
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
 		<script src="js/script.js"></script>
-		
+
 	</head>
 
 	<body ng-app="starter">
@@ -40,7 +40,7 @@
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
-	  	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
+		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content class="job">
 				<div class="section">
 					<div class="item item-divider home">
@@ -50,12 +50,12 @@
 					</div>
 					<div class="big-title offset">{{job.title}}</div>
 					<!-- <ul class="list">
-						<li class="item job-header">
-							<div class="list-item-title">{{job.title}}</div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
-							<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
-						</li>
-					</ul> -->
+<li class="item job-header">
+<div class="list-item-title">{{job.title}}</div>
+<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
+<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
+</li>
+</ul> -->
 				</div>
 
 				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
@@ -68,8 +68,8 @@
 						</button>
 					</div>
 					<ul class="list">
-						<li class="item regular-text item-button-right" ng-repeat="note in job.notes track by $index">
-							{{note}}
+						<li class="item regular-text item-button-right" ng-repeat="note in notes track by $index">
+							{{ note.message }}
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
@@ -78,7 +78,7 @@
 							<div class="addListItemText action-text">
 								+ Add Note
 							</div>
-							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note" ng-enter="addNote(note)">
+							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
 					</ul>
 				</div>

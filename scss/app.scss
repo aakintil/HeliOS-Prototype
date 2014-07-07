@@ -443,7 +443,7 @@ input[placeholder],
 
 // NOTIFACTION BAR
 #notification {
-	height: $bar-height; 
+	height: $nav-bar-height; 
 	width: 100%; 
 	position: relative; 
 	z-index: 10;
@@ -455,7 +455,7 @@ input[placeholder],
 		color: white; 
 		font-size: $item-title; 
 		text-transform: uppercase; 
-		line-height: 44px; 
+		line-height: $nav-bar-height; 
 		width: 50%; 
 		text-align: center; 
 	}

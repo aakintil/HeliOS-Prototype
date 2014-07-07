@@ -26,6 +26,7 @@
 	<body ng-app="starter" class="home">
 
 
+		<!------------------- NAVIGATION ------------------->
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
@@ -37,6 +38,74 @@
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
 
+		<!------------------- NOTIFICATIONS BAR ------------------->
+		<div id="notification"> STUFF </div>
+
+		<!------------------- MODALS ------------------->
+		<!--		Transparent Screen that will allow us to dismiss the dialog-->
+		<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
+
+		<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
+			<form ng-submit="createTask(task)">
+				<div class="list">
+					<button class="button button-full button-dark" ng-click="showModal( 'note' )"> Note </button>
+					<button class="button button-full button-dark" ng-click="showModal( 'job' )"> Job </button>
+					<!-- end of list -->
+				</div>
+			</form>
+		</div>
+
+		<!--		dunno if we have to change the controllers for add note and job: DISCUSS LATER-->
+		<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
+			<form ng-submit="submit(note)">
+				<div class="list">
+					<p class="input-header"> Add New Note </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+
+					<label class="item item-input">
+						<textarea placeholder="Write Your Note" ng-model="note.message"> </textarea>
+					</label>
+
+					<label class="item item-input item-select">
+						<div class="input-label">
+							Add To Job (Optional)
+						</div>			
+
+						<select ng-model="note.job"  ng-options="job.title for job in jobs"></select>
+					</label>
+
+
+					<button type="submit" id="submit" value="Submit" class="button button-full button-dark" >Create Note</button>
+				</div>
+			</form>
+		</div>
+
+		<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
+			<form ng-submit="submit(job)">
+				<div class="list">
+					<p class="input-header"> Add New Job </p>
+					<a href="" class="closeModals" ng-click="hideModal()"> <i class="icon ion-close-round"></i> </a>
+
+					<label class="item item-input">
+						<input type="text" placeholder="Title" ng-model="job.title">
+					</label>
+
+					<label class="item item-input">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="job.participants">
+					</label>
+
+					<label class="item item-input">
+						<textarea placeholder="Create Note (Optional)" ng-model="job.note"> </textarea>
+					</label>
+
+					<button type="submit" id="submit" value="Submit" class="button button-full button-dark" >Create Job</button>
+				</div>
+			</form>
+		</div>
+
+
+
+		<!------------------- JOBS VIEW ------------------->
 		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobsCtrl" class="nav-frame">
 			<ion-content>
 				<div class="section" >
@@ -145,19 +214,17 @@
 		</ion-view>
 
 
-
-
 	</body>
 
 
-		<!--		Add Note Modal-->
-		<script id="new_note_modal.html" type="text/ng-template">
+	<!--		Add Note Modal-->
+	<script id="new_note_modal.html" type="text/ng-template">
 <div class="modal">
 Modal Header Bar
 <ion-header-bar class="bar-secondary">
 <h1 class="title">New Task</h1>
 <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>                
-			</ion-header-bar>
+		</ion-header-bar>
 
 Modal content area
 <ion-content>
@@ -165,12 +232,12 @@ Modal content area
 <div class="list">
 <label class="item item-input">
 <input type="text" placeholder="Whats up" ng-model="task.title">
-			</label>
-			</div>
-			</form>
-			</ion-content> 
-			</div>
-		</script>
+		</label>
+		</div>
+		</form>
+		</ion-content> 
+		</div>
+	</script>
 
 	</body>
 </html>
