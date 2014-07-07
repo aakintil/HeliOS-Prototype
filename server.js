@@ -114,13 +114,17 @@ app.get('/api/notes/:id', function( req, res, id ) {
 
 // Create a Note
 app.post( '/api/notes', function( req, res ) {
-	console.log(" ===== IN THE NOTES POST CALL ===== ", req.body.id ); 
+	console.log(" ===== IN THE NOTES POST CALL ===== ", req.body ); 
 	console.log(" =================" );
-	//	console.log( "AHHDFJAL;DFKJAF========= ")
+
+	var msg = req.body.note === undefined ? req.body.message : req.body.note.message;
+	var j_id = req.body.id || req.body.job_id; 
+
+
 	Note.create({ 
-		message : req.body.note.message,
+		message : msg,
 		creator : "Admin",
-		job_id : req.body.id,
+		job_id : j_id,
 		done : false
 	}, function( err, note ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 

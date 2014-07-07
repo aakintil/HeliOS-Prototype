@@ -251,14 +251,14 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 
 //////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
-function ModalCtrl( $scope, jobService ) {
+function ModalCtrl( $scope, jobService, noteService ) {
 	// current modal variable
 	var $modal = ""; 
 	//	console.log( " jobs scope ", $scope.jobs)
 	jobService.getJobs()
 	.success( function( data ) {
 		$scope.jobs = data; 
-//		console.log( "successfully got all jobs ", $scope.jobs); 
+		//		console.log( "successfully got all jobs ", $scope.jobs); 
 	})
 	.error( function( data ) {
 		console.log( "could not successfully get all jobs"); 
@@ -295,7 +295,20 @@ function ModalCtrl( $scope, jobService ) {
 
 	$scope.form = {}; 
 	var sendToNotes = function( note ) {
-		console.log(" insert into notes db ", note ); 
+
+		var data = {}; 
+		data.message = note.message; 
+		data.job_id = note.job === undefined ? "" : note.job._id; 
+		console.log(data)
+		noteService.createNote( data )
+		.success( function( data ) {
+			console.log(" note created ", data );
+		})
+		.error( function( data ) {
+			console.log(" could not create note ", data ); 
+		})
+
+
 	}
 
 	var sendToJobs = function( job ) {
