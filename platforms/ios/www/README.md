@@ -30,3 +30,12 @@ http://plnkr.co/edit/tpl:IUU30p?p=preview
 
 ## Issues
 Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
+
+
+
+## Running the App
+mongod 
+mongo use helios-test
+nodemon server.js ( or node server.js | nodemon automatically restarts server when it saves )
+sasshelios ( meh just as a reminder )
+

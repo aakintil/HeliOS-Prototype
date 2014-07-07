@@ -30,9 +30,9 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-dark.svg"></div>
+				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></div>
 				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-light.svg"></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
+				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a>
 			</div>
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
@@ -87,8 +87,8 @@
 				<form ng-submit="createTask(task)">
 					<div class="list">
 						<p class="input-header"> Select </p>
-						<button class="button button-full button-dark" ng-click="showModal( 'note' )">Add A Note</button>
-						<button class="button button-full button-dark" ng-click="showModal( 'job' )">Add A Job</button>
+						<button class="button button-full button-dark" ng-click="showModal('note')">Add A Note</button>
+						<button class="button button-full button-dark" ng-click="showModal('job')">Add A Job</button>
 						<!-- end of list-->
 					</div>
 				</form>

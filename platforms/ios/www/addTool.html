@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+<link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+		<script src="js/script.js"></script>
+	</head>
+
+	<body ng-app="starter" ng-controller="ToolsCtrl">
+
+		<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+			<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
+			<div class="button-bar nav-bar-buttons">
+				<div class="button">Done</div>
+			</div>
+		</ion-nav-bar>
+
+
+
+		<ion-view class="nav-frame">
+			<ion-content>
+				<div class="section">
+					<div class="item item-divider home">
+						<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
+					</div>
+					<ul class="list">
+						<li class="item item-button-right" ng-repeat="tool in tools | filter: {name: query}">
+							<div class="list-item-title">{{tool.name}}</div>
+							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
+							<button class="button button-positive">
+								<i class="icon ion-plus-round"></i>
+							</button>
+						</li>
+					</ul>
+				</div>
+
+			</ion-content>
+		</ion-view>
+
+	</body>
+</html>

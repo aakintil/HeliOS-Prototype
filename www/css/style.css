@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Gotham Narrow;
+  src: url(fonts/GothamNarrow-Book.otf); }
+
 input {
   background-color: whitesmoke; }
 
@@ -8645,7 +8649,7 @@ textarea[placeholder] {
   float: right;
   width: auto;
   height: 35.5px !important;
-  width: 120px;
+  width: 140px;
   padding: 0 20px 0 20px; }
 
 #add-modal {
@@ -8655,3 +8659,9 @@ textarea[placeholder] {
   width: 100%;
   height: 100%;
   display: none; }
+
+.job-selection {
+  border: 1px solid red; }
+
+.input-job-hidden {
+  /*display: none;*/ }
