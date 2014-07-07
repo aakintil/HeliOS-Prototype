@@ -79,7 +79,7 @@ $item-subtitle: (23/2)+px;
 }
 
 .large-regular-text {
-	font-size: (36/2)+px;
+ 	font-size: (36/2)+px;
 	font-weight: normal;
 	color: black;
 }
@@ -162,7 +162,21 @@ a:active {
 }
 
 .center-text {
-	text-align: center;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	width: 50%;
+	display: inline-block;
+}
+
+.left-title-button {
+	display: inline-block;
+	width: 10%;
+}
+
+.right-title-button {
+	display: inline-block;
+	float: right;
+	width: 10%;
 }
 
 .offset {

@@ -8352,7 +8352,19 @@ a:active {
   background-color: #f05a24; }
 
 .center-text {
-  text-align: center; }
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  width: 50%;
+  display: inline-block; }
+
+.left-title-button {
+  display: inline-block;
+  width: 10%; }
+
+.right-title-button {
+  display: inline-block;
+  float: right;
+  width: 10%; }
 
 .offset {
   margin-left: 4.5%;
