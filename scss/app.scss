@@ -282,8 +282,11 @@ input[placeholder],
 	}
 	
 	#search-search {
-		margin: 5px;
-		width: 75%;
+		margin: auto;
+		margin-left: 10px;
+		width: 85%;
+		border: 2px solid $gray-lighter;
+		height: (66/2)+px;
 	}
 
 	#search:focus {
@@ -537,9 +540,18 @@ input[placeholder],
 	border: 0px;
 }
 
-.add-section {
-	background-color: white;
+.add-section li {
 	margin-left: 20px;
+}
+
+.add-section li.notab{
+	margin-left: 0px;
+}
+
+.add-section .item {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
 }
 
 .add-type {
@@ -580,5 +592,6 @@ input[placeholder],
 	float: right;
 	width: auto;
 	height: (71/2)+px !important;
+	width: 120px;
 	padding: 0 20px 0 20px;
 }

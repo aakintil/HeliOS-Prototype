@@ -447,6 +447,12 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 		console.log( "Error with getting all jobs: ", data ); 
 	})
 
+	$scope.query = "";
+
+	$scope.setSearchQuery = function(inputQuery) {
+		console.log('hi');
+		$scope.query = inputQuery;
+	}
 
 	$scope.createJob = function() {
 		$http.post( '/api/jobs', $scope.formData )
@@ -467,4 +473,29 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 	}
 }
 
+function ToolsCtrl( $scope, $rootScope, $http ) {
+	//	console.log ( " scope.Jobs ", Jobs )
+
+	$scope.query = "";
+
+	$scope.setSearchQuery = function(inputQuery) {
+		console.log('hi');
+		$scope.query = inputQuery;
+	}
+
+	$scope.tools = [
+		{
+			name: 'Tool 1',
+			current_location: 'Current Location_1'
+		},
+		{
+			name: 'Tool 2',
+			current_location: 'Current Location_2'
+		},
+		{
+			name: 'Tool 3',
+			current_location: 'Current Location_3'
+		},
+	];
+}
 
