@@ -416,15 +416,13 @@ function ModalCtrl( $scope, jobService, noteService ) {
 //////////////// Navigation Controller ////////////////
 function NavCtrl($scope, toolService) {
 
-	//	$scope.goBack = function() {
-	//		$ionicNavBarDelegate.back();
-	//	};
 	toolService.getTools()
 	.success( function( data ) {
-		$scope.tools = data
+		$scope.tools = data; 
+		console.log( "got all the tools, check it ", $scope.tools )
 	})
 	.error( function( data ) {
-		console.log( "shit there was an error loading tools ")
+		console.log( "shit there was an error loading tools "); 
 	})
 
 
@@ -448,7 +446,6 @@ function NavCtrl($scope, toolService) {
 		$("#hover").fadeIn(fadeSpeed);
 		$("#addJobModal").fadeIn(fadeSpeed);
 	}
-
 
 	$scope.showSelectionModal = function() {
 		console.log("iniit")

@@ -35,12 +35,17 @@
 				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
 				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
 			</div>
-			<input id="search" type="text" placeholder="Search"  autocomplete="off"> 
+			<input id="search" type="text" placeholder="Search"  autocomplete="off" ng-model="searchText"> 
 			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->
+
+			<!------------------- SEARCH RESULTS ------------------->
+			<div id="search-results"> 
+				<ul ng-repeat="tool in tools | filter:searchText ">
+					<li>{{tool.name}}</li>
+				</ul>
+			</div>		
 		</ion-nav-bar>
 
-		<!------------------- SEARCH RESULTS ------------------->
-		<div id="search-results"> </div>		
 
 		<!------------------- NOTIFICATIONS BAR ------------------->
 		<div id="notification"> </div>
