@@ -96,13 +96,16 @@ app.get( '/api/tools', function ( req, res ) {
 // Get Tool With Name 
 app.get( '/api/tools/:name', function ( req, res ) {
 	console.log( "======== CALLED THE RIGHT METHOD =======")
-	console.log( "hopefully the name ", req.params ); 
-//	var query = { 'name' : req.params.name };
-//
-//	Tool.findOne( query, function( err, item ) {
-//		console.log( "i am in the find one query function ", item );
-//		res.json( item );
-//	});
+
+	console.log( "hopefully the name ", req.params.name ); 
+	var n = "^" + req.params.name; 
+	var name = new RegExp( n ); 
+	var query = { 'name' : name };
+
+	Tool.find( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
 }); 
 
 

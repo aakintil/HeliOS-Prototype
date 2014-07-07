@@ -153,17 +153,8 @@ $(document).ready(function () {
 		var query = $( this ).val(); 
 		console.log( query, " should not be null");  
 		$(this).val("");
-		window.location = "search.html"; 
-		
+		window.location = "search.html?"+query; 		
 	});
-
-	//	$( "#search" ).focus( function() {
-	//		$( "#search-results" ).animate({ height: "200px", opacity: 1 }, 300 )
-	//	}); 
-	//
-	//	$( "#search" ).blur( function() {
-	//		$( "#search-results" ).animate({ height: "0", opacity: 0 } )
-	//	}); 
 
 
 	// Code for adding note/jobs from the page

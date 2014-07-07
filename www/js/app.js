@@ -225,9 +225,10 @@ app.service('toolService', ['$http', function ($http) {
 		store = input; 
 	}
 
-	this.getQuery = function() {
-		return store; 
+	this.getToolWithName = function( name ) {
+		return $http.get( urlBase + '/'  + name);
 	}
+	
 }]);
 
 
@@ -410,7 +411,7 @@ function NavCtrl($scope, toolService) {
 	var searchText = ""; 
 	console.log( searchText, " should change "); 
 	toolService.saveQuery( searchText ); 
-	
+
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
 		if (window.location.href.indexOf(path) != -1) {
@@ -514,29 +515,30 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function SearchCtrl( $scope, $rootScope, $http, toolService ) {
-	console.log ( " the search query  ", toolService.getQuery()  )
-
+function SearchCtrl( $scope, $rootScope, $http, toolService, $location ) {
+	var absUrl = $location.$$absUrl;
+	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
+ 
+	
 	toolService.getTools()
 	.success( function( data ) {
 		$scope.tools = data; 
-		console.log( "got all the tools, check it ", $scope.tools )
+		console.log( "got all the tools, check it ", $scope.tools ); 
 	})
 	.error( function( data ) {
 		console.log( "shit there was an error loading tools "); 
 	})
-	
-	console.log ( " the search query  ", toolService )
-	
-//		var toolQuery = toolService.getQuery(); 
-//	
-//	toolService.getTool( toolQuery )
-//	.success( function( data ) {
-//		$scope.tool = data;
-//	})
-//	.error( function( data ) {
-//		console.log( " a problem occured with finding an individual tool " ); 
-//	})
+
+	toolService.getToolWithName( query )
+	.success( function( data ) {
+		$scope.results = data; 
+		console.log( $scope.result ); 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate tool name "); 
+	})
+
+
 }
 
 
