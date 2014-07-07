@@ -14,7 +14,9 @@ var mongoose = require('mongoose'); 					// mongoose for mongodb
 var Schema = mongoose.Schema; 
 
 
-// configuration =================
+/////////////////////////////////////////////////////
+////////////////// CONFIGURATION ////////////////////
+/////////////////////////////////////////////////////
 
 //mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'); 	// connect to mongoDB database on modulus.io
 mongoose.connect( 'mongodb://localhost/helios-test' ); 
@@ -31,7 +33,9 @@ app.configure(function() {
 
 
 
-//////////////// RESTful API ////////////////
+////////////////////////////////////////////////
+///////////////// RESTFUL API //////////////////
+////////////////////////////////////////////////
 // have to create get, post, and delete models for Jobs, Alerts, Tools, and Member/Participants
 
 
@@ -73,12 +77,25 @@ var Tool = mongoose.model( 'Tool', {
 
 
 
-//////////////// ROUTES ////////////////
+//////////////////////////////////////////////
+////////////////// ROUTES ////////////////////
+//////////////////////////////////////////////
+
+
+////// TOOLS //////
+
+// Get ALL Tools
+app.get( '/api/tools', function ( req, res ) {
+	Tool.find( function( err, tools ) {
+		// if there is an error, send the error notification 
+		if ( err ) { res.send( err ); console.log("Error finding / getting appropriate tool  |  line 42 : server.js") }; 
+		res.json( tools ) // return all notes in the JSON format
+	})
+}); 
+
 
 
 ////// NOTES //////
-
-
 
 // Get ALL Notes
 app.get( '/api/notes', function ( req, res ) {

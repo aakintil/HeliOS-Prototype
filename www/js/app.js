@@ -62,12 +62,11 @@ var app = angular.module('starter', ['ionic'])
 //		},
 //	];
 //})
-.controller('NotesCtrl', function($scope) {
-	// add functions to take data from notes modal
-})
-.controller('AlertsCtrl', function($scope) {
 
-})
+
+////////////////////////////////////////////////
+///////////////// DIRECTIVES ///////////////////
+////////////////////////////////////////////////
 
 .directive('back', function () {
 	return {
@@ -117,7 +116,11 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 	};
 });
 
+////////////////////////////////////////////////
+////////////////// SERVICES ////////////////////
+////////////////////////////////////////////////
 
+//////////////// Job Service ////////////////
 app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
@@ -167,8 +170,7 @@ app.service('jobService', ['$http', function ($http) {
 	//				update job
 }]);
 
-
-
+//////////////// Note Service ////////////////
 app.service('noteService', ['$http', function ($http) {
 
 	var urlBase = '/api/notes';
@@ -195,10 +197,54 @@ app.service('noteService', ['$http', function ($http) {
 
 }]);
 
+//////////////// MIGHT DELETE | USELESS SERVICE ////////////////
+app.service('updateJobsService', function () {
+	//	var jobs = ""; 
+	var jobs = ""; 
+
+	this.getJobs = function() {
+		return jobs; 
+	}
+
+	this.addToJobs = function( job ) {
+		jobs = job; 
+	}
+});
+
+//////////////// Tool Service ////////////////
+app.service('toolService', ['$http', function ($http) {
+
+	var urlBase = '/api/tools';
+
+	this.getTools = function() {
+		return $http.get( urlBase );
+	};
+
+	//	this.createNote = function( note, id ) {
+	//		return $http.post( urlBase, note, id );
+	//	}
+	//
+	//	this.getNoteWithId = function( id ) {
+	//		return $http.get( urlBase + '/' + id );
+	//	};
+	//
+	//	this.addTool = function() {
+	//		return $http.put( urlBase + '/' + id );
+	//	}
+	//
+	//	this.deleteCustomer = function (id) {
+	//		return $http.delete(urlBase + '/' + id);
+	//	};
+
+}]);
 
 
 
 
+
+////////////////////////////////////////////////
+///////////////// CONTROLLERS //////////////////
+////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
 function JobCtrl( $scope, jobService, noteService, $location ) {
@@ -248,20 +294,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	};
 
 }
-
-
-app.service('updateJobsService', function () {
-	//	var jobs = ""; 
-	var jobs = ""; 
-
-	this.getJobs = function() {
-		return jobs; 
-	}
-
-	this.addToJobs = function( job ) {
-		jobs = job; 
-	}
-});
 
 
 //////////////// Controller for Modal Logic ////////////////
@@ -330,9 +362,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		console.log(" insert into jobs db ", job ); 
 		jobService.createJob( job )
 		.success( function( data ) {
-//			updateJobsService.addToJobs( data ); 
+			//			updateJobsService.addToJobs( data ); 
 			window.location.reload(); 
-//			console.log( updateJobsService.getJobs() , " should not be null ")
+			//			console.log( updateJobsService.getJobs() , " should not be null ")
 			//			newJobFactory.setJob( data ); 
 			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
 		})
@@ -382,11 +414,19 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 
 //////////////// Navigation Controller ////////////////
-function NavCtrl($scope) {
+function NavCtrl($scope, toolService) {
 
 	//	$scope.goBack = function() {
 	//		$ionicNavBarDelegate.back();
 	//	};
+	toolService.getTools()
+	.success( function( data ) {
+		$scope.tools = data
+	})
+	.error( function( data ) {
+		console.log( "shit there was an error loading tools ")
+	})
+
 
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
@@ -474,18 +514,18 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	})
 
 
-//	$scope.createJob = function() {
-//		$http.post( '/api/jobs', $scope.formData )
-//		.success( function( data ) {
-//			$scope.formData = {}; // clear the form so users can enter 
-//			$scope.notes = data; 
-//			console.log( "successfully sent the form data to the notes node api | ", data ); 
-//		})
-//		.error( function( data ) {
-//			console.log( "Error! Something went wrong ... ", data)
-//			console.log( " " )
-//		})
-//	}
+	//	$scope.createJob = function() {
+	//		$http.post( '/api/jobs', $scope.formData )
+	//		.success( function( data ) {
+	//			$scope.formData = {}; // clear the form so users can enter 
+	//			$scope.notes = data; 
+	//			console.log( "successfully sent the form data to the notes node api | ", data ); 
+	//		})
+	//		.error( function( data ) {
+	//			console.log( "Error! Something went wrong ... ", data)
+	//			console.log( " " )
+	//		})
+	//	}
 
 }
 
