@@ -1,7 +1,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8284,6 +8284,12 @@ a.button {
   text-transform: uppercase;
   color: black; }
 
+.small-title-white {
+  font-size: 11.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white; }
+
 .large-regular-text {
   font-size: 18px;
   font-weight: normal;
@@ -8308,6 +8314,11 @@ a.button {
   font-size: 14.5px;
   font-weight: bold;
   color: black; }
+
+.action-text-white {
+  font-size: 14.5px;
+  font-weight: bold;
+  color: white; }
 
 .small-light-caps {
   text-transform: uppercase;
@@ -8350,6 +8361,12 @@ a:active {
 
 .alert {
   background-color: #f05a24; }
+
+.add {
+  background-color: #22b473; }
+
+.add-sub {
+  background-color: #C9E7D4; }
 
 .center-text {
   margin-left: 0 auto;
@@ -8584,3 +8601,38 @@ textarea[placeholder] {
   padding: 10px 20px;
   background-color: grey;
   text-transform: uppercase; }
+
+#add .first {
+  border: 0px; }
+
+.add-section {
+  background-color: white;
+  margin-left: 20px; }
+
+.add-type .button-bar {
+  height: 28.5px; }
+.add-type .button {
+  background-color: #ededed;
+  border: 0px;
+  text-align: left;
+  padding-top: 4px;
+  line-height: 28.5px; }
+.add-type .active {
+  background-color: white; }
+
+.white-container {
+  background-color: white; }
+
+#add-job-form {
+  display: none; }
+
+.add-sub {
+  width: 100%;
+  height: 47px; }
+
+.create-button {
+  clear: both;
+  float: right;
+  width: auto;
+  height: 35.5px !important;
+  padding: 0 20px 0 20px; }

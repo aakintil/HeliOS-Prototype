@@ -101,9 +101,7 @@ $(document).ready(function () {
 	// Check List Code
 	$(".checklist-item").click( function() {
 
-		console.log("hi");
 		var icon = $(this).children().first();
-		console.log(icon);
 		if (icon.hasClass('ion-ios7-checkmark-outline')) {
 			icon.removeClass('ion-ios7-checkmark-outline')
 			icon.addClass('ion-ios7-checkmark');
@@ -116,9 +114,7 @@ $(document).ready(function () {
 
 	$(".checklist-item").click( function() {
 
-		console.log("hi");
 		var icon = $(this).children().first();
-		console.log(icon);
 		if (icon.hasClass('ion-ios7-plus-outline')) {
 			icon.removeClass('ion-ios7-plus-outline')
 			icon.addClass('ion-ios7-plus');
@@ -150,6 +146,22 @@ $(document).ready(function () {
 		$(this).hide();
 		$(this).val("");
 		$(this).prevAll('.addListItemText').show();
+	});
+
+	// Code for adding note/jobs from the page
+	$('.add-type .button').click(function() {
+		$(this).addClass('active');
+		$(this).siblings('.button').removeClass('active');
+
+		if ($(this).hasClass('note')) {
+			console.log('top');
+			$('#add-job-form').hide();
+			$('#add-note-form').show();
+		} else {
+			console.log('bottom');
+			$('#add-job-form').show();
+			$('#add-note-form').hide();
+		}
 	});
 	
 });
