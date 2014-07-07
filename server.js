@@ -195,16 +195,16 @@ app.get( '/api/jobs', function ( req, res ) {
 
 
 // Get Job With Id 
-app.post('/api/jobs', function( req, res ) {
-	//	res.send('jobs should have an id ' + req.params.id);
-	var query = { '_id' : req.params.id };
-
-	Job.findOne( query, function( err, item ) {
-		console.log( "i am in the find one query function ", item );
-		res.json( item );
-	});
-
-});
+//app.post('/api/jobs', function( req, res ) {
+//	//	res.send('jobs should have an id ' + req.params.id);
+//	var query = { '_id' : req.params.id };
+//
+//	Job.findOne( query, function( err, item ) {
+//		console.log( "i am in the find one query function ", item );
+//		res.json( item );
+//	});
+//
+//});
 
 
 // Add a note to a job // UPDATE
@@ -229,12 +229,14 @@ app.post( '/api/jobs/:id', function( req, res ) {
 // Create a Job
 app.post( '/api/jobs', function( req, res ) {
 	////////////////// SET THIS UP ////////////////// 
-
+	console.log( " ===== MADE APPROPRIATE SERVER CALL ===== ")
+	console.log( " ")
+	console.log( req.body )
 	Job.create({ 
 		title: req.body.title,
 		members: req.body.members || "",
-		created: Date.now,
-		creator: "Admin", // have to change this to member_id or something like that
+		creator: "You", // have to change this to member_id or something like that, 
+		notes: req.body.note || "",
 		done : false
 	}, function( err, job ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js") }; 

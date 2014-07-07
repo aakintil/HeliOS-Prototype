@@ -250,14 +250,25 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 }
 
 
+app.service('updateJobsService', function () {
+	//	var jobs = ""; 
+	var jobs = ""; 
+
+	this.getJobs = function() {
+		return jobs; 
+	}
+
+	this.addToJobs = function( job ) {
+		jobs = job; 
+	}
+});
 
 
 //////////////// Controller for Modal Logic ////////////////
-// we should think about making one controller for the modals.
 function ModalCtrl( $scope, jobService, noteService ) {
 	// current modal variable
 	var $modal = ""; 
-	//	console.log( " jobs scope ", $scope.jobs)
+
 	jobService.getJobs()
 	.success( function( data ) {
 		$scope.jobs = data; 
@@ -306,6 +317,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		noteService.createNote( data )
 		.success( function( data ) {
 			console.log(" note created ", data );
+			// window.location.reload();
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
@@ -316,7 +328,17 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 	var sendToJobs = function( job ) {
 		console.log(" insert into jobs db ", job ); 
-		jobService.create
+		jobService.createJob( job )
+		.success( function( data ) {
+//			updateJobsService.addToJobs( data ); 
+			window.location.reload(); 
+//			console.log( updateJobsService.getJobs() , " should not be null ")
+			//			newJobFactory.setJob( data ); 
+			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
+		})
+		.error ( function ( data ) {
+			console.log( "you fucked up d")
+		})
 	}
 
 
@@ -438,7 +460,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
+function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 	$scope.jobs = ""; 
 	// onload, show all jobs
@@ -452,23 +474,19 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 	})
 
 
-	$scope.createJob = function() {
-		$http.post( '/api/jobs', $scope.formData )
-		.success( function( data ) {
-			$scope.formData = {}; // clear the form so users can enter 
-			$scope.notes = data; 
-			console.log( "successfully sent the form data to the notes node api | ", data ); 
-		})
-		.error( function( data ) {
-			console.log( "Error! Something went wrong ... ", data)
-			console.log( " " )
-		})
-	}
+//	$scope.createJob = function() {
+//		$http.post( '/api/jobs', $scope.formData )
+//		.success( function( data ) {
+//			$scope.formData = {}; // clear the form so users can enter 
+//			$scope.notes = data; 
+//			console.log( "successfully sent the form data to the notes node api | ", data ); 
+//		})
+//		.error( function( data ) {
+//			console.log( "Error! Something went wrong ... ", data)
+//			console.log( " " )
+//		})
+//	}
 
-	$scope.broadcastJob = function( id ) {
-		//		console.log( " the job ", get_object_id( id, Jobs ) ); 
-		//		console.log( "seeing if the http variable is available ", Job )
-	}
 }
 
 
