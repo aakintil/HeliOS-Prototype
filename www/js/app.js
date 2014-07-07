@@ -2,6 +2,9 @@
 
 //Globals
 var fadeSpeed = .5;
+var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
+
+
 
 //backStack, keeps track of the backstack for each seperate tab
 
@@ -115,21 +118,22 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 });
 
 
-var x = 5; 
 app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
-	var noteUrlBase = '/api/notes'
-	this.x = 5; 
+	var noteUrlBase = '/api/notes'; 
 
 	this.getJobs = function() {
-		this.x = $http.get( urlBase );
 		return $http.get( urlBase );
 	};
 
 	this.getJobWithId = function( id ) {
 		return $http.get( urlBase + '/' + id );
 	};
+
+	this.createJob = function( job ) {
+		return $http.post( urlBase, job );
+	}
 
 	//	this.getNoteWithId = function( id ) {
 	//		return $http.get( urlBase + '/' + id );
@@ -190,7 +194,6 @@ app.service('noteService', ['$http', function ($http) {
 	//	};
 
 }]);
-
 
 
 
@@ -313,6 +316,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 	var sendToJobs = function( job ) {
 		console.log(" insert into jobs db ", job ); 
+		jobService.create
 	}
 
 

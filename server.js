@@ -194,6 +194,19 @@ app.get( '/api/jobs', function ( req, res ) {
 
 
 
+// Get Job With Id 
+app.post('/api/jobs', function( req, res ) {
+	//	res.send('jobs should have an id ' + req.params.id);
+	var query = { '_id' : req.params.id };
+
+	Job.findOne( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+
+});
+
+
 // Add a note to a job // UPDATE
 app.post( '/api/jobs/:id', function( req, res ) {
 	console.log(" ===== IN THE JOB UPDATE CALL ====")
@@ -219,7 +232,7 @@ app.post( '/api/jobs', function( req, res ) {
 
 	Job.create({ 
 		title: req.body.title,
-		members: req.body.members,
+		members: req.body.members || "",
 		created: Date.now,
 		creator: "Admin", // have to change this to member_id or something like that
 		done : false
