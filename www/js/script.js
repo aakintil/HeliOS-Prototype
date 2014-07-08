@@ -94,9 +94,15 @@ $(document).ready(function () {
 	}); 
 
 	//	Expandable Code 
-	$(".expandable").click( function() {
-		$(this).find(".tool-submenu").slideToggle(); 
+	$("#uli .list").on("click", function( event ) {
+		console.log(" clicked nigga "); 
+		console.log( event.currentTarget.id ); 
+//		$(this).find(".tool-submenu").slideToggle(); 
 	}); 
+	
+//	$("#search-page").on("click", function() {
+//		console.log( " clicked expand nigga " ); 
+//	}); 
 
 	// Check List Code
 	$(".checklist-item").click( function() {
