@@ -218,8 +218,7 @@ $(document).ready(function () {
 		$('#input-job-hidden').trigger('input');
 	});
 
-<<<<<<< HEAD
-=======
+
 	$("#people-modal .done").click(function(){
 		var participants = "";
 		$("#people-search-bar").val("");
@@ -236,5 +235,4 @@ $(document).ready(function () {
 	 	$('#add-page').show();
 	});
 	
->>>>>>> 23c44dab8c05c18ad56e14babcc40d8a1a74fbf9
 });
