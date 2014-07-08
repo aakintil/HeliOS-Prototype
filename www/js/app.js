@@ -2,6 +2,9 @@
 
 //Globals
 var fadeSpeed = .5;
+var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
+
+
 
 //backStack, keeps track of the backstack for each seperate tab
 
@@ -59,12 +62,11 @@ var app = angular.module('starter', ['ionic'])
 //		},
 //	];
 //})
-.controller('NotesCtrl', function($scope) {
-	// add functions to take data from notes modal
-})
-.controller('AlertsCtrl', function($scope) {
 
-})
+
+////////////////////////////////////////////////
+///////////////// DIRECTIVES ///////////////////
+////////////////////////////////////////////////
 
 .directive('back', function () {
 	return {
@@ -114,22 +116,31 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 	};
 });
 
+////////////////////////////////////////////////
+////////////////// SERVICES ////////////////////
+////////////////////////////////////////////////
 
-var x = 5; 
+//////////////// Job Service ////////////////
 app.service('jobService', ['$http', function ($http) {
 
 	var urlBase = '/api/jobs';
-	var noteUrlBase = '/api/notes'
-	this.x = 5; 
+	var noteUrlBase = '/api/notes'; 
 
 	this.getJobs = function() {
-		this.x = $http.get( urlBase );
 		return $http.get( urlBase );
 	};
 
 	this.getJobWithId = function( id ) {
 		return $http.get( urlBase + '/' + id );
 	};
+
+	this.createJob = function( job ) {
+		return $http.post( urlBase, job );
+	}
+
+	this.getJobWithTitle = function( type, param ) {
+		return $http.get( urlBase + '/' + type + '/' + param );
+	}
 
 	//	this.getNoteWithId = function( id ) {
 	//		return $http.get( urlBase + '/' + id );
@@ -163,8 +174,7 @@ app.service('jobService', ['$http', function ($http) {
 	//				update job
 }]);
 
-
-
+//////////////// Note Service ////////////////
 app.service('noteService', ['$http', function ($http) {
 
 	var urlBase = '/api/notes';
@@ -189,13 +199,54 @@ app.service('noteService', ['$http', function ($http) {
 	//		return $http.delete(urlBase + '/' + id);
 	//	};
 
+	// change this to a simple getNote function 
+	this.getNoteWithMsg = function( type, param ) {
+		return $http.get( urlBase + '/' + type + '/' + param);
+	}
+
+}]);
+
+//////////////// MIGHT DELETE | USELESS SERVICE ////////////////
+app.service('updateJobsService', function () {
+	//	var jobs = ""; 
+	var jobs = ""; 
+
+	this.getJobs = function() {
+		return jobs; 
+	}
+
+	this.addToJobs = function( job ) {
+		jobs = job; 
+	}
+});
+
+//////////////// Tool Service ////////////////
+app.service('toolService', ['$http', function ($http) {
+
+	var urlBase = '/api/tools';
+	var store = ""; 
+
+	this.getTools = function() {
+		return $http.get( urlBase );
+	};
+
+	this.saveQuery = function( input ) {
+		store = input; 
+	}
+
+	this.getToolWithName = function( name ) {
+		return $http.get( urlBase + '/'  + name);
+	}
+
 }]);
 
 
 
 
 
-
+////////////////////////////////////////////////
+///////////////// CONTROLLERS //////////////////
+////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
 function JobCtrl( $scope, jobService, noteService, $location ) {
@@ -244,11 +295,10 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 }
 
 //////////////// Controller for Modal Logic ////////////////
-// we should think about making one controller for the modals.
 function ModalCtrl( $scope, jobService, noteService ) {
 	// current modal variable
 	var $modal = ""; 
-	//	console.log( " jobs scope ", $scope.jobs)
+
 	jobService.getJobs()
 	.success( function( data ) {
 		$scope.jobs = data; 
@@ -298,6 +348,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		noteService.createNote( data )
 		.success( function( data ) {
 			console.log(" note created ", data );
+			// window.location.reload();
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
@@ -308,6 +359,17 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 	var sendToJobs = function( job ) {
 		console.log(" insert into jobs db ", job ); 
+		jobService.createJob( job )
+		.success( function( data ) {
+			//			updateJobsService.addToJobs( data ); 
+			window.location.reload(); 
+			//			console.log( updateJobsService.getJobs() , " should not be null ")
+			//			newJobFactory.setJob( data ); 
+			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
+		})
+		.error ( function ( data ) {
+			console.log( "you fucked up d")
+		})
 	}
 
 
@@ -351,11 +413,10 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 
 //////////////// Navigation Controller ////////////////
-function NavCtrl($scope) {
-
-	//	$scope.goBack = function() {
-	//		$ionicNavBarDelegate.back();
-	//	};
+function NavCtrl($scope, toolService) {
+	var searchText = ""; 
+	console.log( searchText, " should change "); 
+	toolService.saveQuery( searchText ); 
 
 	$scope.getClass = function(path) { 
 		//		we have to do something to account for highlighting the add notes tab
@@ -377,7 +438,6 @@ function NavCtrl($scope) {
 		$("#hover").fadeIn(fadeSpeed);
 		$("#addJobModal").fadeIn(fadeSpeed);
 	}
-
 
 	$scope.showSelectionModal = function() {
 		console.log("iniit")
@@ -429,7 +489,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
+function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 	$scope.jobs = ""; 
 	// onload, show all jobs
@@ -448,26 +508,61 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 		$scope.query = inputQuery;
 	}
 
-	$scope.createJob = function() {
-		$http.post( '/api/jobs', $scope.formData )
-		.success( function( data ) {
-			$scope.formData = {}; // clear the form so users can enter 
-			$scope.notes = data; 
-			console.log( "successfully sent the form data to the notes node api | ", data ); 
-		})
-		.error( function( data ) {
-			console.log( "Error! Something went wrong ... ", data)
-			console.log( " " )
-		})
-	}
+	//	$scope.createJob = function() {
+	//		$http.post( '/api/jobs', $scope.formData )
+	//		.success( function( data ) {
+	//			$scope.formData = {}; // clear the form so users can enter 
+	//			$scope.notes = data; 
+	//			console.log( "successfully sent the form data to the notes node api | ", data ); 
+	//		})
+	//		.error( function( data ) {
+	//			console.log( "Error! Something went wrong ... ", data)
+	//			console.log( " " )
+	//		})
+	//	}
 
-	$scope.broadcastJob = function( id ) {
-		//		console.log( " the job ", get_object_id( id, Jobs ) ); 
-		//		console.log( "seeing if the http variable is available ", Job )
-	}
 }
 
-function ToolsCtrl( $scope, $rootScope, $http ) {
+
+
+//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobService, $location ) {
+	var absUrl = $location.$$absUrl;
+	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
+
+
+	toolService.getToolWithName( query )
+	.success( function( data ) {
+		$scope.tools = data; 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate tool name "); 
+	})
+
+	var name = query; 
+	var type = "name"
+	noteService.getNoteWithMsg( type, name )
+	.success( function( data ) {
+		$scope.notes = data; 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate note name "); 
+	})
+
+	var name = query; 
+	var type = "title"
+	jobService.getJobWithTitle( type, name )
+	.success( function( data ) {
+		$scope.jobs = data; 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate note name "); 
+	})
+
+
+}
+
+function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
@@ -476,20 +571,27 @@ function ToolsCtrl( $scope, $rootScope, $http ) {
 		$scope.query = inputQuery;
 	}
 
-	$scope.tools = [
-		{
-			name: 'Tool 1',
-			current_location: 'Current Location_1'
-		},
-		{
-			name: 'Tool 2',
-			current_location: 'Current Location_2'
-		},
-		{
-			name: 'Tool 3',
-			current_location: 'Current Location_3'
-		},
-	];
+	toolService.getTools()
+	.success( function( data ) {
+		$scope.tools = data; 
+	})
+	.error( function( data ) {
+		console.log( "error gathering tools from db " );
+	})
+//	$scope.tools = [
+//		{
+//			name: 'Tool 1',
+//			current_location: 'Current Location_1'
+//		},
+//		{
+//			name: 'Tool 2',
+//			current_location: 'Current Location_2'
+//		},
+//		{
+//			name: 'Tool 3',
+//			current_location: 'Current Location_3'
+//		},
+//	];
 }
 
 function ParticipantsCtrl( $scope, $rootScope, $http ) {

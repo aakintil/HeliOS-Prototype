@@ -14,7 +14,9 @@ var mongoose = require('mongoose'); 					// mongoose for mongodb
 var Schema = mongoose.Schema; 
 
 
-// configuration =================
+/////////////////////////////////////////////////////
+////////////////// CONFIGURATION ////////////////////
+/////////////////////////////////////////////////////
 
 //mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'); 	// connect to mongoDB database on modulus.io
 mongoose.connect( 'mongodb://localhost/helios-test' ); 
@@ -31,7 +33,9 @@ app.configure(function() {
 
 
 
-//////////////// RESTful API ////////////////
+////////////////////////////////////////////////
+///////////////// RESTFUL API //////////////////
+////////////////////////////////////////////////
 // have to create get, post, and delete models for Jobs, Alerts, Tools, and Member/Participants
 
 
@@ -56,13 +60,14 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [ { type: Schema.Types.ObjectId, ref: 'Tool' } ], 
-	notes : [ { type: String } ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : { type: String }, //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 
 
 // Tool Model 
 var Tool = mongoose.model( 'Tool', {
+	name : String,
 	current_location : String, 
 	home_location : String, 
 	replacement_for : String, 
@@ -73,12 +78,40 @@ var Tool = mongoose.model( 'Tool', {
 
 
 
-//////////////// ROUTES ////////////////
+//////////////////////////////////////////////
+////////////////// ROUTES ////////////////////
+//////////////////////////////////////////////
+
+
+////// TOOLS //////
+
+// Get ALL Tools
+app.get( '/api/tools', function ( req, res ) {
+	Tool.find( function( err, tools ) {
+		// if there is an error, send the error notification 
+		if ( err ) { res.send( err ); console.log("Error finding / getting appropriate tool  |  line 42 : server.js") }; 
+		res.json( tools ) // return all notes in the JSON format
+	})
+}); 
+
+// Get Tool With Name 
+app.get( '/api/tools/:name', function ( req, res ) {
+	console.log( "======== CALLED THE RIGHT METHOD =======")
+
+	console.log( "hopefully the name ", req.params.name ); 
+	var n = "^" + req.params.name; 
+	var name = new RegExp( n ); 
+	var query = { 'name' : name };
+
+	Tool.find( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+}); 
+
 
 
 ////// NOTES //////
-
-
 
 // Get ALL Notes
 app.get( '/api/notes', function ( req, res ) {
@@ -93,21 +126,18 @@ app.get( '/api/notes', function ( req, res ) {
 
 
 
-app.get('/api/notes/:id', function( req, res, id ) {
-	console.log( " the job ", jobs );
-	//	var d = {
-	//		t : "title"
-	//	}
-	//	res.json( d )
-	//	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
-	//	console.log('jobs should have an id ' + req.params.id);
-	//	var query = { '_id' : req.params.id };
+app.get('/api/notes/:type/:name', function( req, res  ) {
+	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
+	console.log( " the job ", req.params );
 
-	Note.findOne( query, function( err, item ) {
+	var n = "^" + req.params.name; 
+	var name = new RegExp( n ); 
+	var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
+
+	Note.find( query, function( err, item ) {
 		console.log( "i am in the find one query function ", item );
 		res.json( item );
 	});
-
 });
 
 
@@ -194,6 +224,20 @@ app.get( '/api/jobs', function ( req, res ) {
 
 
 
+app.get('/api/jobs/:type/:title', function( req, res  ) {
+	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
+	console.log( " the job ", req.params );
+
+	var n = "^" + req.params.title; 
+	var name = new RegExp( n ); 
+	var query = req.params.type === "title" ? { 'title' : name } : { '_id' : name };
+
+	Job.find( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+});
+
 // Add a note to a job // UPDATE
 app.post( '/api/jobs/:id', function( req, res ) {
 	console.log(" ===== IN THE JOB UPDATE CALL ====")
@@ -216,12 +260,14 @@ app.post( '/api/jobs/:id', function( req, res ) {
 // Create a Job
 app.post( '/api/jobs', function( req, res ) {
 	////////////////// SET THIS UP ////////////////// 
-
+	console.log( " ===== MADE APPROPRIATE SERVER CALL ===== ")
+	console.log( " ")
+	console.log( req.body )
 	Job.create({ 
 		title: req.body.title,
-		members: req.body.members,
-		created: Date.now,
-		creator: "Admin", // have to change this to member_id or something like that
+		members: req.body.members || "",
+		creator: "You", // have to change this to member_id or something like that, 
+		notes: req.body.note || "",
 		done : false
 	}, function( err, job ) {
 		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js") }; 

@@ -148,7 +148,7 @@ $(document).ready(function () {
 		}
 
 	});
-	
+
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
 		if(e.keyCode == 13)
@@ -158,19 +158,28 @@ $(document).ready(function () {
 	});
 
 	$('.addListItemInput').hide();
-	
+
 	$('.addListItemText').click(function() {
 		$(this).nextAll('.addListItemInput');
 		$(this).hide();
 		$(this).nextAll('.addListItemInput').show();
 		$(this).nextAll('.addListItemInput').focus();
 	});
-	
+
 	$('.addListItemInput').bind("enterKey", function() {
 		$(this).hide();
 		$(this).val("");
 		$(this).prevAll('.addListItemText').show();
 	});
+
+	// Code for handling search bar results
+	$('#search').bind("enterKey", function() {
+		var query = $( this ).val(); 
+		console.log( query, " should not be null");  
+		$(this).val("");
+		window.location = "search.html?"+query; 		
+	});
+
 
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
@@ -188,6 +197,8 @@ $(document).ready(function () {
 		}
 	});
 
+<<<<<<< HEAD
+=======
 	$('#input-job').click(function() {
 		$('#add-page').hide();
 		$('#job-modal').show();
@@ -225,4 +236,5 @@ $(document).ready(function () {
 	 	$('#add-page').show();
 	});
 	
+>>>>>>> 0cb6a4bcf6a511fcc6d91b79060c8d3825cca703
 });

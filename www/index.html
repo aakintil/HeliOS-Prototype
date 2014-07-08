@@ -36,11 +36,13 @@
 				<a class="button" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
 				<!-- <a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a> -->
 			</div>
-			<input id="search" type="text" placeholder="Search">
+			<input id="search" type="text" placeholder="Search"  autocomplete="off" ng-model="searchText" ng-change=""> 
+			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
 		</ion-nav-bar>
 
+
 		<!------------------- NOTIFICATIONS BAR ------------------->
-		<div id="notification"> STUFF </div>
+		<div id="notification"> </div>
 
 		<!------------------- MODALS ------------------->
 		<!--		Transparent Screen that will allow us to dismiss the dialog-->
@@ -92,7 +94,7 @@
 					</label>
 
 					<label class="item item-input">
-						<input type="text" placeholder="Add Participants (Optional)" ng-model="job.participants">
+						<input type="text" placeholder="Add Participants (Optional)" ng-model="job.members">
 					</label>
 
 					<label class="item item-input">
