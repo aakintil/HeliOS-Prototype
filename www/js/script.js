@@ -137,8 +137,6 @@ $(document).ready(function () {
 			}
 		}
 
-		console.log(selectedPeople);
-
 		if (icon.hasClass('ion-ios7-plus-outline')) {
 			icon.removeClass('ion-ios7-plus-outline')
 			icon.addClass('ion-ios7-plus');
@@ -218,7 +216,6 @@ $(document).ready(function () {
 		$('#input-job-hidden').trigger('input');
 	});
 
-
 	$("#people-modal .done").click(function(){
 		var participants = "";
 		$("#people-search-bar").val("");
@@ -234,5 +231,13 @@ $(document).ready(function () {
 		$('#people-modal').hide();
 	 	$('#add-page').show();
 	});
+
+	//Adding tools to an existing job
+	// $("#add-tool-to-job #done").click(function(){
+	// 	var toolList = [];
+	// 	$(".ion-ios7-checkmark").each(function(){
+	// 		toolList.push($(this).parent().attr('id'));
+	// 	});
+	// });
 	
 });

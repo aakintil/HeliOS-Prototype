@@ -158,6 +158,11 @@ app.service('jobService', ['$http', function ($http) {
 	this.updateJobWithNote = function( id ) {
 		return $http.post( urlBase + '/' + id )
 	}
+	
+	this.updateJobWithTools = function( type, param, id ) {
+		return $http.get( urlBase + '/' + type + '/' + param + '/' + id );
+	}
+
 
 	//		this.getNotesWithId = function( note, id ) {
 	//		return $http.put( noteUrlBase + '/' + id, note )
@@ -573,7 +578,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 }
 
 
-function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
+function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $location ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
@@ -589,6 +594,36 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
 	.error( function( data ) {
 		console.log( "error gathering tools from db " );
 	})
+
+	$scope.check = function( event ) {
+		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-checkmark-outline" ); 
+		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-checkmark" ); 
+	}
+
+	$scope.getToolList = function() {
+		var toolList = [];
+		var absUrl = $location.$$absUrl;
+		var job_id = absUrl.substr( absUrl.indexOf('?') + 1 );
+		$(".ion-ios7-checkmark").each(function(){
+			toolList.push($(this).parent().attr('id'));
+		});
+		console.log(toolList);
+		var x = {}; 
+		x.type = "update tools"; 
+		x.id = job_id; 
+		x.param = toolList; 
+		// var tools = toolList.join("+");  
+		jobService.updateJobWithTools( "tools" , toolList, job_id ) 
+		.success( function( data ) {
+			$scope.job_tools = data; 
+			console.log( "job with new tools ", data )
+		})
+		.error( function( data ) {
+			console.log( "we done goofed up"); 
+		})
+	}
+
+	
 	//	$scope.tools = [
 	//		{
 	//			name: 'Tool 1',
