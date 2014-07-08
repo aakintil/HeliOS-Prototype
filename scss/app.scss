@@ -25,6 +25,10 @@ $dark: $gray-dark;
 $base-background-color: $gray-light;
 
 //Base
+@font-face {
+        font-family: Gotham Narrow;
+        src: url(fonts/GothamNarrow-Book.otf);
+}
 $font-family-sans-serif: Gotham Narrow;
 
 // Items
@@ -287,8 +291,11 @@ textarea[placeholder] {
 	}
 
 	#search-search {
-		margin: 5px;
-		width: $search-bar-expanded;
+		margin: auto;
+		margin-left: 10px;
+		width: 85%;
+		border: 2px solid $gray-lighter;
+		height: (66/2)+px;
 	}
 
 	#search:focus {
@@ -560,9 +567,18 @@ textarea[placeholder] {
 	border: 0px;
 }
 
-.add-section {
-	background-color: white;
+.add-section li {
 	margin-left: 20px;
+}
+
+.add-section li.notab{
+	margin-left: 0px;
+}
+
+.add-section .item {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
 }
 
 .add-type {
@@ -603,5 +619,23 @@ textarea[placeholder] {
 	float: right;
 	width: auto;
 	height: (71/2)+px !important;
+	width: 140px;
 	padding: 0 20px 0 20px;
+}
+
+#add-modal {
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.job-selection {
+	border: 1px solid red;
+}
+
+.input-job-hidden {
+	/*display: none;*/
 }

@@ -173,4 +173,23 @@ $(document).ready(function () {
 		}
 	});
 
+<<<<<<< HEAD
+=======
+	$('#input-job').click(function() {
+		$('#add-page').hide();
+		$('#add-modal').show();
+	});
+
+	$("#add-modal .list").on("click", ".jobselection", function(event) { 
+		var id = event.currentTarget.id;
+		var title = $("#"+id).children().first()[0].innerText
+		$('#add-modal').hide();
+		$('#add-page').show();
+		$('#input-job').val(title);
+		$('#input-job-hidden').val(id);
+		$('#input-job-hidden').hide();
+		$('#input-job-hidden').trigger('input');
+	});
+	
+>>>>>>> 0cb6a4bcf6a511fcc6d91b79060c8d3825cca703
 });

@@ -98,6 +98,32 @@ $(document).ready(function () {
 		$(this).find(".tool-submenu").slideToggle(); 
 	}); 
 
+	// Check List Code
+	$(".checklist-item").click( function() {
+
+		var icon = $(this).children().first();
+		if (icon.hasClass('ion-ios7-checkmark-outline')) {
+			icon.removeClass('ion-ios7-checkmark-outline')
+			icon.addClass('ion-ios7-checkmark');
+		} else if(icon.hasClass('ion-ios7-checkmark')) {
+			icon.removeClass('ion-ios7-checkmark')
+			icon.addClass('ion-ios7-checkmark-outline')
+		}
+
+	});
+
+	$(".checklist-item").click( function() {
+
+		var icon = $(this).children().first();
+		if (icon.hasClass('ion-ios7-plus-outline')) {
+			icon.removeClass('ion-ios7-plus-outline')
+			icon.addClass('ion-ios7-plus');
+		} else if(icon.hasClass('ion-ios7-plus')) {
+			icon.removeClass('ion-ios7-plus')
+			icon.addClass('ion-ios7-plus-outline')
+		}
+
+	});
 	
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
@@ -106,7 +132,7 @@ $(document).ready(function () {
 			$(this).trigger("enterKey");
 		}
 	});
-	
+
 	$('.addListItemInput').hide();
 	
 	$('.addListItemText').click(function() {
@@ -121,32 +147,26 @@ $(document).ready(function () {
 		$(this).val("");
 		$(this).prevAll('.addListItemText').show();
 	});
-	
-	var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-	$("#tags").autocomplete({source: availableTags});
-	
+
+	// Code for adding note/jobs from the page
+	$('.add-type .button').click(function() {
+		$(this).addClass('active');
+		$(this).siblings('.button').removeClass('active');
+
+		if ($(this).hasClass('note')) {
+			console.log('top');
+			$('#add-job-form').hide();
+			$('#add-note-form').show();
+		} else {
+			console.log('bottom');
+			$('#add-job-form').show();
+			$('#add-note-form').hide();
+		}
+	});
+
+	$('#input-job').click(function() {
+		$('#add-page').hide();
+		$('#add-modal').show();
+	})
 	
 });

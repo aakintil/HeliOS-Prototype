@@ -24,7 +24,7 @@
 		<script src="js/script.js"></script>
 	</head>
 
-	<body ng-app="starter" ng-controller="ToolsCtrl">
+	<body ng-app="starter" ng-controller="JobsCtrl">
 
 		<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 			<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
@@ -33,20 +33,20 @@
 			</div>
 		</ion-nav-bar>
 
-
-
 		<ion-view class="nav-frame">
 			<ion-content>
 				<div class="section">
-					<div class="item item-divider home">
+					<div class="item item-divider add">
 						<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
 					</div>
 					<ul class="list">
-						<li class="item item-button-right" ng-repeat="tool in tools | filter: {name: query}">
-							<div class="list-item-title">{{tool.name}}</div>
-							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
-							<button class="button button-positive">
-								<i class="icon ion-plus-round"></i>
+						<li class="item item-button-right" ng-repeat="job in jobs">
+							<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
+								<div class="big-title">{{job.title}}</div>
+								<div class="small-regular-text">{{job.members}}</div>
+							</a>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
 						</li>
 					</ul>

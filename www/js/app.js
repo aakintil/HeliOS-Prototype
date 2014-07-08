@@ -263,7 +263,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-
 	noteService.getNotes()
 	.success( function( data ) {
 		$scope.notes = {}
@@ -277,8 +276,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	.error( function( data ) {
 		console.log( "Error with getting all jobs: ", data ); 
 	})
-
-
 
 	$scope.addNote = function(note) {
 		var form = {}; 
@@ -345,8 +342,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 	var sendToNotes = function( note ) {
 
 		var data = {}; 
+		console.log(note);
 		data.message = note.message; 
-		data.job_id = note.job === undefined ? "" : note.job._id; 
+		data.job_id = note.job_id === undefined ? "" : note.job_id; 
 		console.log(data)
 		noteService.createNote( data )
 		.success( function( data ) {
@@ -505,6 +503,12 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 		console.log( "Error with getting all jobs: ", data ); 
 	})
 
+	$scope.query = "";
+
+	$scope.setSearchQuery = function(inputQuery) {
+		console.log('hi');
+		$scope.query = inputQuery;
+	}
 
 	//	$scope.createJob = function() {
 	//		$http.post( '/api/jobs', $scope.formData )
@@ -560,4 +564,29 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 
 }
 
+function ToolsCtrl( $scope, $rootScope, $http ) {
+	//	console.log ( " scope.Jobs ", Jobs )
+
+	$scope.query = "";
+
+	$scope.setSearchQuery = function(inputQuery) {
+		console.log('hi');
+		$scope.query = inputQuery;
+	}
+
+	$scope.tools = [
+		{
+			name: 'Tool 1',
+			current_location: 'Current Location_1'
+		},
+		{
+			name: 'Tool 2',
+			current_location: 'Current Location_2'
+		},
+		{
+			name: 'Tool 3',
+			current_location: 'Current Location_3'
+		},
+	];
+}
 
