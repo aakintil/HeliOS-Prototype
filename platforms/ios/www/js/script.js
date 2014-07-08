@@ -167,6 +167,17 @@ $(document).ready(function () {
 	$('#input-job').click(function() {
 		$('#add-page').hide();
 		$('#add-modal').show();
-	})
+	});
+
+	$("#add-modal .list").on("click", ".jobselection", function(event) { 
+		var id = event.currentTarget.id;
+		var title = $("#"+id).children().first()[0].innerText
+		$('#add-modal').hide();
+		$('#add-page').show();
+		$('#input-job').val(title);
+		$('#input-job-hidden').val(id);
+		$('#input-job-hidden').hide();
+		$('#input-job-hidden').trigger('input');
+	});
 	
 });

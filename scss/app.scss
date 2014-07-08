@@ -297,8 +297,8 @@ textarea[placeholder] {
 		width: $search-bar;
 		height: (66/2)+px;
 	}
-
-	#search-search {
+	
+	.search-search {
 		margin: auto;
 		margin-left: 10px;
 		width: 85%;
@@ -631,7 +631,7 @@ textarea[placeholder] {
 	padding: 0 20px 0 20px;
 }
 
-#add-modal {
+.add-modal {
 	top: 0px;
 	right: 0px;
 	left: 0px;
@@ -645,7 +645,7 @@ textarea[placeholder] {
 }
 
 .input-job-hidden {
-	/*display: none;*/
+	/*display: noneΩ;*/
 }
 
 
