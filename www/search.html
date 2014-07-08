@@ -50,13 +50,22 @@
 				<!------------ Tools ------------>
 				<div class="section" >
 					<div class="item item-divider home">
-						<div class="section-header center-text">Search</div>
+						<div class="section-header center-text">Tools</div>
 					</div>
-					<ul class="list" ng-repeat="tool in results track by $index">
+					<ul class="list"  ng-if="tools.length !== 0" ng-repeat="tool in tools track by $index">
 						<li class="item regular-text item-button-right">
 							<div class="big-title">{{ tool.name }}</div>
 							<div class="small-regular-text">{{ tool.current_location }}</div>
 							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">{{ tool.replacement_for }}</div>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
+						</li>
+					</ul>
+					<!-- if there are no tools -->
+					<ul class="list" ng-if="tools.length === 0">
+						<li class="item regular-text item-button-right">
+							<div class="big-title"> No Tools For This Result </div>
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
@@ -67,13 +76,48 @@
 				<!------------ Notes ------------>
 				<div class="section" >
 					<div class="item item-divider home">
-						<div class="section-header center-text">Search</div>
+						<div class="section-header center-text">Notes</div>
 					</div>
-					<ul class="list" ng-repeat="tool in results track by $index">
+					<!-- if there are notes -->
+					<ul class="list"  ng-if="notes.length !== 0" ng-repeat="note in notes track by $index">
 						<li class="item regular-text item-button-right">
-							<div class="big-title">{{ tool.name }}</div>
-							<div class="small-regular-text">{{ tool.current_location }}</div>
-							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">{{ tool.replacement_for }}</div>
+							<div class="big-title">{{ note.message }}</div>
+							<div class="small-regular-text">{{ note.creator }}</div>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
+						</li>
+					</ul>
+
+					<!-- if there are no notes -->
+					<ul class="list" ng-if="notes.length === 0">
+						<li class="item regular-text item-button-right">
+							<div class="big-title"> No Notes For This Result </div>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
+						</li>
+					</ul>
+				</div>
+
+				<!------------ Jobs ------------>
+				<div class="section" >
+					<div class="item item-divider home">
+						<div class="section-header center-text">Jobs</div>
+					</div>
+					<ul class="list" ng-if="jobs.length !== 0" ng-repeat="job in jobs track by $index">
+						<li class="item regular-text item-button-right">
+							<div class="big-title">{{ job.title }}</div>
+							<div class="small-regular-text">{{ job.members }}</div>
+							<button class="button button-clear checklist-item">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
+						</li>
+					</ul>
+					<!-- if there are no jobs -->
+					<ul class="list" ng-if="jobs.length === 0">
+						<li class="item regular-text item-button-right">
+							<div class="big-title"> No Jobs For This Result </div>
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>

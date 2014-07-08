@@ -67,6 +67,7 @@ var Job = mongoose.model( 'Job', {
 
 // Tool Model 
 var Tool = mongoose.model( 'Tool', {
+	name : String,
 	current_location : String, 
 	home_location : String, 
 	replacement_for : String, 
@@ -125,21 +126,18 @@ app.get( '/api/notes', function ( req, res ) {
 
 
 
-app.get('/api/notes/:id', function( req, res, id ) {
-	console.log( " the job ", jobs );
-	//	var d = {
-	//		t : "title"
-	//	}
-	//	res.json( d )
-	//	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
-	//	console.log('jobs should have an id ' + req.params.id);
-	//	var query = { '_id' : req.params.id };
+app.get('/api/notes/:type/:name', function( req, res  ) {
+	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
+	console.log( " the job ", req.params );
 
-	Note.findOne( query, function( err, item ) {
+	var n = "^" + req.params.name; 
+	var name = new RegExp( n ); 
+	var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
+
+	Note.find( query, function( err, item ) {
 		console.log( "i am in the find one query function ", item );
 		res.json( item );
 	});
-
 });
 
 
@@ -226,18 +224,19 @@ app.get( '/api/jobs', function ( req, res ) {
 
 
 
-// Get Job With Id 
-//app.post('/api/jobs', function( req, res ) {
-//	//	res.send('jobs should have an id ' + req.params.id);
-//	var query = { '_id' : req.params.id };
-//
-//	Job.findOne( query, function( err, item ) {
-//		console.log( "i am in the find one query function ", item );
-//		res.json( item );
-//	});
-//
-//});
+app.get('/api/jobs/:type/:title', function( req, res  ) {
+	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
+	console.log( " the job ", req.params );
 
+	var n = "^" + req.params.title; 
+	var name = new RegExp( n ); 
+	var query = req.params.type === "title" ? { 'title' : name } : { '_id' : name };
+
+	Job.find( query, function( err, item ) {
+		console.log( "i am in the find one query function ", item );
+		res.json( item );
+	});
+});
 
 // Add a note to a job // UPDATE
 app.post( '/api/jobs/:id', function( req, res ) {

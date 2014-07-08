@@ -138,6 +138,10 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.post( urlBase, job );
 	}
 
+	this.getJobWithTitle = function( type, param ) {
+		return $http.get( urlBase + '/' + type + '/' + param );
+	}
+
 	//	this.getNoteWithId = function( id ) {
 	//		return $http.get( urlBase + '/' + id );
 	//	};
@@ -195,6 +199,11 @@ app.service('noteService', ['$http', function ($http) {
 	//		return $http.delete(urlBase + '/' + id);
 	//	};
 
+	// change this to a simple getNote function 
+	this.getNoteWithMsg = function( type, param ) {
+		return $http.get( urlBase + '/' + type + '/' + param);
+	}
+
 }]);
 
 //////////////// MIGHT DELETE | USELESS SERVICE ////////////////
@@ -228,7 +237,7 @@ app.service('toolService', ['$http', function ($http) {
 	this.getToolWithName = function( name ) {
 		return $http.get( urlBase + '/'  + name);
 	}
-	
+
 }]);
 
 
@@ -515,27 +524,37 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function SearchCtrl( $scope, $rootScope, $http, toolService, $location ) {
+function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobService, $location ) {
 	var absUrl = $location.$$absUrl;
 	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
- 
-	
-	toolService.getTools()
-	.success( function( data ) {
-		$scope.tools = data; 
-		console.log( "got all the tools, check it ", $scope.tools ); 
-	})
-	.error( function( data ) {
-		console.log( "shit there was an error loading tools "); 
-	})
+
 
 	toolService.getToolWithName( query )
 	.success( function( data ) {
-		$scope.results = data; 
-		console.log( $scope.result ); 
+		$scope.tools = data; 
 	})
 	.error( function( data ) {
 		console.log( " couldnt get appropriate tool name "); 
+	})
+
+	var name = query; 
+	var type = "name"
+	noteService.getNoteWithMsg( type, name )
+	.success( function( data ) {
+		$scope.notes = data; 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate note name "); 
+	})
+
+	var name = query; 
+	var type = "title"
+	jobService.getJobWithTitle( type, name )
+	.success( function( data ) {
+		$scope.jobs = data; 
+	})
+	.error( function( data ) {
+		console.log( " couldnt get appropriate note name "); 
 	})
 
 
