@@ -564,7 +564,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 
 }
 
-function ToolsCtrl( $scope, $rootScope, $http ) {
+function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
@@ -574,19 +574,26 @@ function ToolsCtrl( $scope, $rootScope, $http ) {
 		$scope.query = inputQuery;
 	}
 
-	$scope.tools = [
-		{
-			name: 'Tool 1',
-			current_location: 'Current Location_1'
-		},
-		{
-			name: 'Tool 2',
-			current_location: 'Current Location_2'
-		},
-		{
-			name: 'Tool 3',
-			current_location: 'Current Location_3'
-		},
-	];
+	toolService.getTools()
+	.success( function( data ) {
+		$scope.tools = data; 
+	})
+	.error( function( data ) {
+		console.log( "error gathering tools from db " );
+	})
+//	$scope.tools = [
+//		{
+//			name: 'Tool 1',
+//			current_location: 'Current Location_1'
+//		},
+//		{
+//			name: 'Tool 2',
+//			current_location: 'Current Location_2'
+//		},
+//		{
+//			name: 'Tool 3',
+//			current_location: 'Current Location_3'
+//		},
+//	];
 }
 
