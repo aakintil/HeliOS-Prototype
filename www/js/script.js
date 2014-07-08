@@ -197,8 +197,6 @@ $(document).ready(function () {
 		}
 	});
 
-<<<<<<< HEAD
-=======
 	$('#input-job').click(function() {
 		$('#add-page').hide();
 		$('#job-modal').show();
@@ -236,5 +234,4 @@ $(document).ready(function () {
 	 	$('#add-page').show();
 	});
 	
->>>>>>> 0cb6a4bcf6a511fcc6d91b79060c8d3825cca703
 });
