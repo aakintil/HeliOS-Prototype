@@ -569,7 +569,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	}
 
 	$scope.expand = function( event ) {
-		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle(); 
+		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
 	}
 
 }

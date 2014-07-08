@@ -8680,3 +8680,7 @@ textarea[placeholder] {
 
 .input-job-hidden {
   /*display: none;*/ }
+
+#search-page .small-regular-text {
+  font-size: 12.5px;
+  text-transform: uppercase; }
