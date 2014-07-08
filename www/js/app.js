@@ -243,9 +243,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 
 }
 
-
-
-
 //////////////// Controller for Modal Logic ////////////////
 // we should think about making one controller for the modals.
 function ModalCtrl( $scope, jobService, noteService ) {
@@ -448,7 +445,6 @@ function JobsCtrl( $scope, jobService, $rootScope, $http, jobService ) {
 	$scope.query = "";
 
 	$scope.setSearchQuery = function(inputQuery) {
-		console.log('hi');
 		$scope.query = inputQuery;
 	}
 
@@ -477,7 +473,6 @@ function ToolsCtrl( $scope, $rootScope, $http ) {
 	$scope.query = "";
 
 	$scope.setSearchQuery = function(inputQuery) {
-		console.log('hi');
 		$scope.query = inputQuery;
 	}
 
@@ -495,5 +490,80 @@ function ToolsCtrl( $scope, $rootScope, $http ) {
 			current_location: 'Current Location_3'
 		},
 	];
+}
+
+function ParticipantsCtrl( $scope, $rootScope, $http ) {
+	//	console.log ( " scope.Jobs ", Jobs )
+
+	$scope.query = "";
+
+	$scope.setSearchQuery = function(inputQuery) {
+		$scope.query = inputQuery;
+	}
+
+	$scope.people = [
+		{
+			name: 'Adam M',
+			id: '1'
+		},
+		{
+			name: 'Billy H',
+			id: '2'
+		},
+		{
+			name: 'Gilbert G',
+			id: '3'
+		},
+		{
+			name: 'Johnny P',
+			id: '4'
+		},
+		{
+			name: 'Jack C',
+			id: '5'
+		},
+		{
+			name: 'Tom D',
+			id: '6'
+		},
+		{
+			name: 'Robert N',
+			id: '7'
+		},
+		{
+			name: 'Robert H',
+			id: '8'
+		},
+		{
+			name: 'Tom C',
+			id: '9'
+		},
+		{
+			name: 'George P',
+			id: '10'
+		},
+		{
+			name: 'Al C',
+			id: '11'
+		},
+		{
+			name: 'Scarlet F',
+			id: '12'
+		},
+		{
+			name: 'Kate B',
+			id: '13'
+		},
+		{
+			name: 'Cate K',
+			id: '14'
+		},
+		{
+			name: 'Oliva M',
+			id: '15'
+		}
+	];
+
+	$scope.predicate = 'name';
 }
 

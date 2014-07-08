@@ -212,7 +212,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-
 	noteService.getNotes()
 	.success( function( data ) {
 		$scope.notes = {}
@@ -226,8 +225,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	.error( function( data ) {
 		console.log( "Error with getting all jobs: ", data ); 
 	})
-
-
 
 	$scope.addNote = function(note) {
 		var form = {}; 
@@ -297,8 +294,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 	var sendToNotes = function( note ) {
 
 		var data = {}; 
+		console.log(note);
 		data.message = note.message; 
-		data.job_id = note.job === undefined ? "" : note.job._id; 
+		data.job_id = note.job_id === undefined ? "" : note.job_id; 
 		console.log(data)
 		noteService.createNote( data )
 		.success( function( data ) {

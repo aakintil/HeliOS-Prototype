@@ -31,7 +31,7 @@
 
 
 		<!-- The add job page overlay -->
-		<div id="add-modal" class="modal" ng-model="JobsCtrl">
+		<div id="add-modal" class="modal" ng-controller="JobsCtrl">
 			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 				<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
 				<div class="button-bar nav-bar-buttons">
@@ -46,14 +46,9 @@
 							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
 						</div>
 						<ul class="list">
-							<li class="item item-button-right" ng-repeat="job in jobs">
-								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
-									<div class="big-title">{{job.title}}</div>
-									<div class="small-regular-text">{{job.members}}</div>
-								</a>
-								<button class="button button-clear checklist-item">
-									<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-								</button>
+							<li class="jobselection item item-button-right" ng-repeat="job in jobs" id={{job._id}}>
+								<div class="big-title">{{job.title}}</div>
+								<div class="small-regular-text">{{job.members}}</div>
 							</li>
 						</ul>
 					</div>
@@ -110,8 +105,8 @@
 								<li>
 									<label class="item item-input">
 										<i class="icon ion-search placeholder-icon"></i>
-										<input id="input-job" type="text" ng-model="note.job">
-										<!-- <select ng-model="note.job" ng-options="job.title for job in jobs"></select> -->
+										<input id="input-job" placeholder="Add to Job (Optional)" type="text">
+										<input id="input-job-hidden" type="text" ng-model="note.job_id">
 									</label>
 								</li>
 								<li class="notab">

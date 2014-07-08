@@ -8445,7 +8445,7 @@ textarea[placeholder] {
     border: 2px solid #989898;
     width: 39%;
     height: 33px; }
-  #nav-bar #search-search {
+  #nav-bar .search-search {
     margin: auto;
     margin-left: 10px;
     width: 85%;
@@ -8652,7 +8652,7 @@ textarea[placeholder] {
   width: 140px;
   padding: 0 20px 0 20px; }
 
-#add-modal {
+.add-modal {
   top: 0px;
   right: 0px;
   left: 0px;

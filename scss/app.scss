@@ -26,9 +26,10 @@ $base-background-color: $gray-light;
 
 //Base
 @font-face {
-        font-family: Gotham Narrow;
-        src: url(fonts/GothamNarrow-Book.otf);
+    font-family: Gotham Narrow;
+    src: url(fonts/GothamNarrow-Book.otf);
 }
+
 $font-family-sans-serif: Gotham Narrow;
 
 // Items
@@ -285,7 +286,7 @@ input[placeholder],
 		height: (66/2)+px;
 	}
 	
-	#search-search {
+	.search-search {
 		margin: auto;
 		margin-left: 10px;
 		width: 85%;
@@ -600,7 +601,7 @@ input[placeholder],
 	padding: 0 20px 0 20px;
 }
 
-#add-modal {
+.add-modal {
 	top: 0px;
 	right: 0px;
 	left: 0px;
