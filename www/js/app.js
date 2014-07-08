@@ -561,13 +561,16 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	})
 
 	$scope.goToJobPage = function( element ) {
-//		console.log( " was called with ", element ); 
+		//		console.log( " was called with ", element ); 
 		var id = element.job_id || element._id || ""; 
 		console.log( " a job id of ", id ); 
 		var url = id === "" ? "personal-notes.html" : "job.html?id=" + id; 
 		window.location = url; 
 	}
 
+	$scope.expand = function( event ) {
+		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle(); 
+	}
 
 }
 

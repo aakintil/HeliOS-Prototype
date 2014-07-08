@@ -8621,7 +8621,7 @@ textarea[placeholder] {
 .expandable .tool-submenu {
   display: none;
   padding: 10px 20px;
-  background-color: grey;
+  background-color: #e0e0e0;
   text-transform: uppercase; }
 
 #add .first {
