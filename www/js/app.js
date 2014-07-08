@@ -526,7 +526,6 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 }
 
 
-
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
 function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobService, $location ) {
 	var absUrl = $location.$$absUrl;
@@ -561,8 +560,17 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 		console.log( " couldnt get appropriate note name "); 
 	})
 
+	$scope.goToJobPage = function( element ) {
+		console.log( " was called with ", element ); 
+		var id = element.job_id || element._id || ""; 
+		console.log( " a job id of ", id ); 
+		var url = id === "" ? "personal-notes.html" : "job.html?id=" + id; 
+		window.location = url; 
+	}
+
 
 }
+
 
 function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
@@ -581,19 +589,19 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService ) {
 	.error( function( data ) {
 		console.log( "error gathering tools from db " );
 	})
-//	$scope.tools = [
-//		{
-//			name: 'Tool 1',
-//			current_location: 'Current Location_1'
-//		},
-//		{
-//			name: 'Tool 2',
-//			current_location: 'Current Location_2'
-//		},
-//		{
-//			name: 'Tool 3',
-//			current_location: 'Current Location_3'
-//		},
-//	];
+	//	$scope.tools = [
+	//		{
+	//			name: 'Tool 1',
+	//			current_location: 'Current Location_1'
+	//		},
+	//		{
+	//			name: 'Tool 2',
+	//			current_location: 'Current Location_2'
+	//		},
+	//		{
+	//			name: 'Tool 3',
+	//			current_location: 'Current Location_3'
+	//		},
+	//	];
 }
 

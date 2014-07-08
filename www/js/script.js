@@ -173,8 +173,7 @@ $(document).ready(function () {
 		}
 	});
 
-<<<<<<< HEAD
-=======
+
 	$('#input-job').click(function() {
 		$('#add-page').hide();
 		$('#add-modal').show();
@@ -190,6 +189,5 @@ $(document).ready(function () {
 		$('#input-job-hidden').hide();
 		$('#input-job-hidden').trigger('input');
 	});
-	
->>>>>>> 0cb6a4bcf6a511fcc6d91b79060c8d3825cca703
+
 });

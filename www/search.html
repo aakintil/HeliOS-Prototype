@@ -53,6 +53,7 @@
 						<div class="section-header center-text">Tools</div>
 					</div>
 					<ul class="list"  ng-if="tools.length !== 0" ng-repeat="tool in tools track by $index">
+						<!-- ng-click="expandTool()" -->
 						<li class="item regular-text item-button-right">
 							<div class="big-title">{{ tool.name }}</div>
 							<div class="small-regular-text">{{ tool.current_location }}</div>
@@ -80,7 +81,7 @@
 					</div>
 					<!-- if there are notes -->
 					<ul class="list"  ng-if="notes.length !== 0" ng-repeat="note in notes track by $index">
-						<li class="item regular-text item-button-right">
+						<li class="item regular-text item-button-right" ng-click="goToJobPage( note )">
 							<div class="big-title">{{ note.message }}</div>
 							<div class="small-regular-text">{{ note.creator }}</div>
 							<button class="button button-clear checklist-item">
@@ -106,7 +107,7 @@
 						<div class="section-header center-text">Jobs</div>
 					</div>
 					<ul class="list" ng-if="jobs.length !== 0" ng-repeat="job in jobs track by $index">
-						<li class="item regular-text item-button-right">
+						<li class="item regular-text item-button-right" ng-click="goToJobPage( job )">
 							<div class="big-title">{{ job.title }}</div>
 							<div class="small-regular-text">{{ job.members }}</div>
 							<button class="button button-clear checklist-item">

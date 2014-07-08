@@ -26,10 +26,13 @@ $base-background-color: $gray-light;
 
 //Base
 @font-face {
-        font-family: Gotham Narrow;
-        src: url(fonts/GothamNarrow-Book.otf);
+	font-family: "Gotham Narrow";
+	src: url(fonts/GothamNarrow-Book.otf);
 }
-$font-family-sans-serif: Gotham Narrow;
+
+// Fonts
+$font-family-sans-serif: "Gotham Narrow";
+
 
 // Items
 $item-border-width: 1px;
@@ -71,6 +74,11 @@ $item-subtitle: (23/2)+px;
 	transition:  all .25s linear;
 }
 
+// remove later after testing
+body {
+	font-family: $font-family-sans-serif; 
+}
+
 
 // Text Styles
 
@@ -95,7 +103,7 @@ $item-subtitle: (23/2)+px;
 }
 
 .large-regular-text {
- 	font-size: (36/2)+px;
+	font-size: (36/2)+px;
 	font-weight: normal;
 	color: black;
 }
