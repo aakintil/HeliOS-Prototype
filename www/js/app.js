@@ -367,7 +367,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		jobService.createJob( job )
 		.success( function( data ) {
 			//			updateJobsService.addToJobs( data ); 
-			window.location.reload(); 
+//			window.location.reload(); 
 			//			console.log( updateJobsService.getJobs() , " should not be null ")
 			//			newJobFactory.setJob( data ); 
 			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
