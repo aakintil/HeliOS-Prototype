@@ -3,8 +3,15 @@
 //Globals
 var fadeSpeed = .5;
 var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
-
-
+var personalNoteId = "111111111111111111111111"; 
+// Formats console output nicer
+var debug = {
+	log : function( input ) {
+		console.log( " " ); 
+		console.log( input );
+		console.log( " " ); 
+	}	
+}
 
 //backStack, keeps track of the backstack for each seperate tab
 
@@ -264,6 +271,7 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	jobService.getJobWithId( jobId )
 	.success( function( data ) {
 		$scope.job = data; 
+<<<<<<< HEAD
 		var date = new Date($scope.job.created);
 		var dateString = "";
 		dateString += (date.getMonth() + 1) + "/" + date.getDay() + "/" + date.getFullYear().toString().substring(2);
@@ -271,22 +279,26 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		$scope.job_tool_ids = $scope.job.tools;
 
 
+=======
+		$scope.tools = $scope.job.tools;
+		$scope.notes = $scope.job.notes; 
+>>>>>>> afeed568ace5d92eb8033880a898c120fc9f0209
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-	noteService.getNotes()
-	.success( function( data ) {
-		$scope.notes = {}
-		var i = "";
-		for ( var i in data ) {
-			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
-		}
-	})
-	.error( function( data ) {
-		console.log( "Error with getting all jobs: ", data ); 
-	})
+	//	noteService.getNotes()
+	//	.success( function( data ) {
+	//		$scope.notes = {}
+	//		var i = "";
+	//		for ( var i in data ) {
+	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
+	//		}
+	//	})
+	//	.error( function( data ) {
+	//		console.log( "Error with getting all jobs: ", data ); 
+	//	})
 
 	$scope.addNote = function(note) {
 		var form = {}; 
@@ -352,19 +364,19 @@ function ModalCtrl( $scope, jobService, noteService ) {
 	var sendToNotes = function( note ) {
 
 		var data = {}; 
-		console.log(note);
+		debug.log( note )
 		data.message = note.message; 
-		data.job_id = note.job_id === undefined ? "" : note.job_id; 
-		console.log(data)
+		data.job_id = note.job_id === undefined ? personalNoteId : note.job_id; 
+
 		noteService.createNote( data )
 		.success( function( data ) {
-			console.log(" note created ", data );
+			var job = data; 
+			console.log(" note created ", job.notes );
 			// window.location.reload();
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
 		})
-
 
 	}
 
@@ -372,8 +384,11 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		console.log(" insert into jobs db ", job ); 
 		jobService.createJob( job )
 		.success( function( data ) {
+			console.log(" the return ==== ")
+			console.log( data )
+			$scope.jobs = data; 
 			//			updateJobsService.addToJobs( data ); 
-			window.location.reload(); 
+			//			window.location.reload(); 
 			//			console.log( updateJobsService.getJobs() , " should not be null ")
 			//			newJobFactory.setJob( data ); 
 			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
@@ -391,8 +406,8 @@ function ModalCtrl( $scope, jobService, noteService ) {
 			console.log( "please fill out form "); // turn into an alert / notification	
 		}
 		else { // only notes contain messages, and messages are required fields
-			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
-			console.log( "submit successfully called" ); 
+			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType );
+			debug.log( "submit successfully called" ); 
 			$scope.hideModal(); 	
 		}
 		$scope.showFeedback( formType ); 
@@ -501,7 +516,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
 function JobsCtrl( $scope, $rootScope, $http, jobService ) {
-	//	console.log ( " scope.Jobs ", Jobs )
+	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
 	// onload, show all jobs
 	jobService.getJobs()

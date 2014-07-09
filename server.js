@@ -63,7 +63,7 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [{ type: Schema.ObjectId, ref: 'Tool' }], 
-	notes : [ String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : [{ type: Schema.ObjectId, ref: 'Note' }], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 
@@ -153,20 +153,29 @@ app.post( '/api/notes', function( req, res ) {
 	var msg = req.body.note === undefined ? req.body.message : req.body.note.message;
 	var j_id = req.body.id || req.body.job_id; 
 
+	// find the appropriate job
+	var query = { '_id' : j_id };
 
 	Note.create({ 
 		message : msg,
-		creator : "Admin",
+		creator : "You",
 		job_id : j_id,
 		done : false
 	}, function( err, note ) {
-		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
-		console.log( note._id , " SHOULD HAVE THE NOTE ID"); 
-		//		res.json( note ); 
-		Note.find( { job_id : req.body.id }, function( err, notes ) {
-			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note AFTER CREATING one |  line 60 : server.js") };
-			res.json( notes ) // return all notes in the JSON format after we create another
-		})
+		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 162 : server.js") }; 
+		note.save(); 
+
+		// find the right job and attach note id to it and populate
+		Job.findOne( query, function( err, job ) {
+			if ( err ) { console.log( " couldn't find the job ") }; 
+			job.notes.push( note._id );
+			job.save(); 
+		}).populate("notes").exec( function( err, job ) {
+			if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+			console.log( " the new note should be in here ======= \n", job )
+			//			console.log( " the old note ", job.notes )
+			res.json( job )
+		});
 	})
 }); 
 
@@ -203,7 +212,7 @@ app.get('/api/jobs/:id', function( req, res ) {
 	//	res.send('jobs should have an id ' + req.params.id);
 	var query = { '_id' : req.params.id };
 
-	Job.findOne( query ).populate("tools").exec( function( err, job ) {
+	Job.findOne( query ).populate("tools").populate("notes").exec( function( err, job ) {
 		if ( err ) { console.log( "you don goofed ") }; 
 		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
@@ -304,26 +313,132 @@ app.post( '/api/jobs/:id', function( req, res ) {
 
 
 // Create a Job
-app.post( '/api/jobs', function( req, res ) {
-	////////////////// SET THIS UP ////////////////// 
-	console.log( " ===== MADE APPROPRIATE SERVER CALL ===== ")
-	console.log( " ")
-	console.log( req.body )
-	Job.create({ 
-		title: req.body.title,
-		members: req.body.members || "",
-		creator: "You", // have to change this to member_id or something like that, 
-		notes: req.body.note || "",
-		done : false
-	}, function( err, job ) {
-		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
+// old create job
+//app.post( '/api/jobs', function( req, res ) {
+//	////////////////// SET THIS UP ////////////////// 
+//	console.log( " ===== MADE APPROPRIATE SERVER CALL ===== ")
+//	console.log( " ")
+//	console.log( req.body )
+//	Job.create({ 
+//		title: req.body.title,
+//		members: req.body.members || "",
+//		creator: "You", // have to change this to member_id or something like that, 
+//		notes: req.body.note || "",
+//		done : false
+//	}, function( err, job ) {
+//		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
+//
+//		Job.find( function( err, jobs ) {
+//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate job AFTER CREATING one |  line 136 : server.js") };
+//			res.json( jobs ) // return all notes in the JSON format after we create another
+//		})
+//	})
+//}); 
 
-		Job.find( function( err, jobs ) {
-			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate job AFTER CREATING one |  line 136 : server.js") };
-			res.json( jobs ) // return all notes in the JSON format after we create another
+app.post( '/api/jobs', function( req, res ) {
+	var msg = req.body.note || "" ;
+	var members = req.body.members || ""; 
+	id = []; 
+	console.log( req.body , " lOOK HERE " )
+
+	if ( msg.length === 0 ) {
+		//		then we don't have to create a note
+		Job.create({ 
+			title: req.body.title,
+			members: members,
+			creator: "You", // have to change this to member_id or something like that, 
+			done : false
+		}, function( err, job ) {
+			if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
+
+			Job.find( function( err, jobs ) {
+				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+				//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
+			})
+
 		})
-	})
-}); 
+	}
+	else {
+
+		Note.create({ 
+			message : msg,
+			creator : "You",
+			done : false
+		}, function( err, note ) {
+			if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 162 : server.js") }; 
+
+			//			var query = { _id : job._id }; 
+			Job.create({ 
+				title: req.body.title,
+				members: members,
+				creator: "You", // have to change this to member_id or something like that, 
+				done : false
+			}, function( err, job ) {
+				if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
+
+				console.log( "  " ); 
+
+				console.log( "  " ); 
+				if ( job.notes === undefined)
+					job.notes = note._id; 
+				else
+					job.notes.push( note._id ); 
+
+				job.save( function( err, i ) {
+					if ( err ) { console.log (" common ")}
+					//					console.log( " after save ", i._id , " |  ", job._id, " |  ", "53bca47cffd0360000000002" ); 
+
+					query = { "notes" : note._id }; 
+					Job.findOne( query, function( err, job ) {
+						if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+						//						console.log( "========== \n", job ); 
+						//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
+					}).populate("notes").exec( function( err, job ) {
+						if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+
+						Job.find( function( err, jobs ) { 
+							if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+							res.json( jobs ); 
+						})
+						//						res.json( job )
+					});
+				}); 
+
+			})
+
+		}); 
+
+	}					
+})
+
+
+
+//		else {
+// create the note
+//			Note.create({ 
+//				message : msg,
+//				creator : "You",
+//				done : false
+//			}, function( err, note ) {
+//				if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 162 : server.js") }; 
+//
+//				var query = { _id : job._id }; 
+//				Job.findOne( query, function( err, job ) {
+//					if ( err ) { console.log( " couldn't find the job ") }; 
+//					job.notes.push( note._id );
+//					job.save(); 
+//				}).populate("notes").exec( function( err, job ) {
+//					if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+//					console.log( " the new note ", job ); 
+//					//			console.log( " the old note ", job.notes )
+////					res.json( job )
+//				});
+//			})
+
+
+
+
+//		}
 
 
 // Delete a Job 
