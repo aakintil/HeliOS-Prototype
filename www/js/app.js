@@ -158,7 +158,7 @@ app.service('jobService', ['$http', function ($http) {
 	this.updateJobWithNote = function( id ) {
 		return $http.post( urlBase + '/' + id )
 	}
-	
+
 	this.updateJobWithTools = function( type, param, id ) {
 		return $http.get( urlBase + '/' + type + '/' + param + '/' + id );
 	}
@@ -263,6 +263,9 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	jobService.getJobWithId( jobId )
 	.success( function( data ) {
 		$scope.job = data; 
+		$scope.job_tool_ids = $scope.job.tools;
+
+
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
@@ -271,10 +274,8 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	noteService.getNotes()
 	.success( function( data ) {
 		$scope.notes = {}
-		console.log(" in here "); 
 		var i = "";
 		for ( var i in data ) {
-			console.log ( " All notes ", data[i].job_id )
 			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
 		}
 	})
@@ -623,7 +624,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		})
 	}
 
-	
+
 	//	$scope.tools = [
 	//		{
 	//			name: 'Tool 1',
