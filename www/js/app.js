@@ -302,9 +302,9 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		console.log(note.message); 
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
-		var domNote = $("<li class='item regular-text item-button-right insert'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
+		var domNote = $("<li class='item regular-text item-button-right'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
 		$(".insert").append( domNote ); 
-
+		
 		noteService.createNote( form )
 		.success( function( data ) {
 			console.log( "all notes from this job successfully created | ", data )
