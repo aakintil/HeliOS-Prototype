@@ -8540,6 +8540,11 @@ textarea {
   .offset .item-divider i {
     color: black; }
 
+.checked {
+  opacity: 0.5; }
+  .checked .button {
+    color: black; }
+
 #hover,
 .popup-modal {
   display: none; }

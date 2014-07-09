@@ -6,8 +6,10 @@ var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "
 var personalNoteId = "111111111111111111111111"; 
 // Formats console output nicer
 var debug = {
-	log : function( input ) {
+	log : function( prefix, input ) {
 		console.log( " " ); 
+		console.log( prefix );
+		console.log( "--------------------------" ); 
 		console.log( input );
 		console.log( " " ); 
 	}	
@@ -204,8 +206,9 @@ app.service('noteService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + id );
 	};
 
-	this.addTool = function() {
-		return $http.put( urlBase + '/' + id );
+	this.changeStatus = function( note ) {
+//		console.log( "see meee here ", note )
+		return $http.put( urlBase + '/' + note._id + '/' + note.status ); 
 	}
 
 	//	this.deleteCustomer = function (id) {
@@ -283,18 +286,6 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-	//	noteService.getNotes()
-	//	.success( function( data ) {
-	//		$scope.notes = {}
-	//		var i = "";
-	//		for ( var i in data ) {
-	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
-	//		}
-	//	})
-	//	.error( function( data ) {
-	//		console.log( "Error with getting all jobs: ", data ); 
-	//	})
-
 	$scope.addNote = function(note) {
 		var form = {}; 
 		form.note = note; 
@@ -304,7 +295,7 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $("<li class='item regular-text item-button-right'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
 		$(".insert").append( domNote ); 
-		
+
 		noteService.createNote( form )
 		.success( function( data ) {
 			console.log( "all notes from this job successfully created | ", data )
@@ -318,6 +309,41 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	$scope.addTool = function(tool) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
+
+	$scope.s = "unchecked"; 
+	$scope.changeStatus = function( note, event ) {
+		//		debug.log( " should be the note ", note ); 
+		var status = note.status ; 
+		//		$(event.currentTarget).parent().toggleClass( function() {
+		//			if ( $(this).is(".unchecked") ) { status = "checked"; return "checked"; }	
+		//			else { status = "unchecked"; return "unchecked" }
+		//		}); 
+		if ( $scope.s === "unchecked") { console.log("it's unchecked so check it"); $scope.s = "checked" }
+		else { console.log("it's checked so uncheck it"); $scope.s = "unchecked";  }
+		//		debug.log( " should be the class ", $(event.currentTarget).parent()); 
+		//		debug.log( " should be the class ", $scope.s ); 
+		
+		noteService.changeStatus( note )
+		.success( function( data ) {
+//			debug.log( " a changed status ", data ); 
+			console.log( $(event.currentTarget));
+		})
+		.error( function( data ) {
+			debug.log( "error chaging note status", data ); 
+		})
+	}
+
+	//	noteService.getNotes()
+	//	.success( function( data ) {
+	//		$scope.notes = {}
+	//		var i = "";
+	//		for ( var i in data ) {
+	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
+	//		}
+	//	})
+	//	.error( function( data ) {
+	//		console.log( "Error with getting all jobs: ", data ); 
+	//	})
 
 }
 

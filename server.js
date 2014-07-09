@@ -52,7 +52,7 @@ app.configure(function() {
 // Notes Model 
 var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
-	status : String, 
+	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : String 
 	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
@@ -144,6 +144,26 @@ app.get('/api/notes/:type/:name', function( req, res  ) {
 		res.json( item );
 	});
 });
+
+
+
+app.put( '/api/notes/:id/:status', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var status = req.params.status; 
+	var newStatus = {
+		unchecked: "checked", 
+		checked: "unchecked"
+	}
+	console.log( newStatus[ status ] ); 
+	Note.findOne( query, function( err, note ) {
+		if ( err ) { console.log( " couldn't find the job ") }; 
+		note.status = newStatus[ status ]; 
+		note.save(); 
+		res.json( note ); 
+	})
+})
 
 
 
@@ -352,12 +372,12 @@ app.post( '/api/jobs', function( req, res ) {
 			done : false
 		}, function( err, job ) {
 			if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
-			
+
 			res.json( job ); 
-//			Job.find( function( err, jobs ) {
-//				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
-//				res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
-//			})
+			//			Job.find( function( err, jobs ) {
+			//				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+			//				res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
+			//			})
 
 		})
 	}
@@ -401,7 +421,7 @@ app.post( '/api/jobs', function( req, res ) {
 
 						Job.find( function( err, jobs ) { 
 							if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-//							res.json( jobs ); 
+							//							res.json( jobs ); 
 						})
 						//						res.json( job )
 					});

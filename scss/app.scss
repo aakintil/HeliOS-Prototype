@@ -447,6 +447,15 @@ textarea {
 	}
 }
 
+.checked {
+	opacity: 0.5; 
+	
+	.button {
+		color: black; 
+	}
+}
+
+
 // Modals
 #hover, 
 .popup-modal {
@@ -685,10 +694,10 @@ textarea {
 
 // Search Page
 #search-page {
-	
 	.small-regular-text {
 		font-size: (25/2)+px; 
 		text-transform: uppercase; 
-	}
-	
+	}	
 }
+
+
