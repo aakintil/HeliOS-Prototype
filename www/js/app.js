@@ -307,7 +307,7 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		
 		noteService.createNote( form )
 		.success( function( data ) {
-//			console.log( "all notes from this job successfully created | ", data )
+			console.log( "all notes from this job successfully created | ", data )
 //			$scope.notes = $scope.job.notes; 
 		})
 		.error( function( data ) {
