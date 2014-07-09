@@ -22,7 +22,9 @@ var Schema = mongoose.Schema;
 
 
 /// ~~~~~~~UN COMMENENETNT!!!!!!!! ???/////
-mongoose.connect( 'mongodb://localhost/helios-test' ); 
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
+mongoose.connect(mongoUri);
+//mongoose.connect( 'mongodb://localhost/helios-test' ); 
 
 
 app.configure(function() {
