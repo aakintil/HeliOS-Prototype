@@ -505,7 +505,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
 function JobsCtrl( $scope, $rootScope, $http, jobService ) {
-	//	console.log ( " scope.Jobs ", Jobs )
+	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
 	// onload, show all jobs
 	jobService.getJobs()
