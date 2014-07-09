@@ -27,7 +27,7 @@ $base-background-color: $gray-light;
 //Base
 @font-face {
 	font-family: "Gotham Narrow";
-	src: url(fonts/GothamNarrow-Book.otf);
+	src: url(fonts/GothamNarrow-Book.otf) format('opentype');;
 }
 
 // Fonts
@@ -76,13 +76,14 @@ $item-subtitle: (23/2)+px;
 
 // remove later after testing
 body {
-	font-family: $font-family-sans-serif; 
+	font-family: "Times"; 
 }
 
 
 // Text Styles
 
 .big-title {
+	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px;
 	font-weight: bold;
 	color: black;

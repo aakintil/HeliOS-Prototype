@@ -68,6 +68,16 @@ var j10 = {
 	created: Date.now(), 
 	creator:
 }
+	
+	//	+id: ObjectId("53bc97aa2c84000000000001")
+// super important! 
+var mpn = {
+	_id: ObjectId("111111111111111111111111"),
+	title: "My Personal Notes", 
+	members: [], 
+	created: Date.now(), 
+	creator: "You"
+}
 
 
 

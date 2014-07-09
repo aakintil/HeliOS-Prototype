@@ -1,12 +1,12 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Gotham Narrow";
-  src: url(fonts/GothamNarrow-Book.otf); }
+  src: url(fonts/GothamNarrow-Book.otf) format("opentype"); }
 
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8279,9 +8279,10 @@ a.button {
   transition: all .25s linear; }
 
 body {
-  font-family: "Gotham Narrow"; }
+  font-family: "Times"; }
 
 .big-title {
+  font-family: "Gotham Narrow";
   font-size: 18px;
   font-weight: bold;
   color: black; }
