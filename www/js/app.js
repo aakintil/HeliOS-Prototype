@@ -21,7 +21,7 @@ var app = angular.module('starter', ['ionic'])
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 		}
 		if(window.StatusBar) {
-			StatusBar.styleDefault();
+			StatusBar.hide();
 		}
 	});
 })
@@ -76,22 +76,23 @@ var app = angular.module('starter', ['ionic'])
 				//window.history.back();
 
 				// go back to the last page for this tab, if there aren't any more pages to go back to, do nothing
-				var currentBackStack = localStorage.getItem('currentBackStackName');
-				if (currentBackStack == null) {
-					currentBackStack = 'jobs'
-					localStorage.setItem('currentBackStackName', currentBackStack);
-				}
-				var curStack = JSON.parse(localStorage.getItem(currentBackStack));
-				if (curStack == null) {
-					curStack = new Array();
-				}
-				if (curStack.length > 0) {
-					var backpage = curStack[curStack.length-1];
-					console.log(backpage);
-					curStack.pop();
-					localStorage.setItem(currentBackStack, JSON.stringify(curStack));
-					window.location = backpage;
-				}
+				window.history.back();
+				// var currentBackStack = localStorage.getItem('currentBackStackName');
+				// if (currentBackStack == null) {
+				// 	currentBackStack = 'jobs'
+				// 	localStorage.setItem('currentBackStackName', currentBackStack);
+				// }
+				// var curStack = JSON.parse(localStorage.getItem(currentBackStack));
+				// if (curStack == null) {
+				// 	curStack = new Array();
+				// }
+				// if (curStack.length > 0) {
+				// 	var backpage = curStack[curStack.length-1];
+				// 	console.log(backpage);
+				// 	curStack.pop();
+				// 	localStorage.setItem(currentBackStack, JSON.stringify(curStack));
+				// 	window.location = backpage;
+				// }
 			});
 		},
 		controller: 'NavCtrl'
@@ -263,6 +264,10 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	jobService.getJobWithId( jobId )
 	.success( function( data ) {
 		$scope.job = data; 
+		var date = new Date($scope.job.created);
+		var dateString = "";
+		dateString += (date.getMonth() + 1) + "/" + date.getDay() + "/" + date.getFullYear().toString().substring(2);
+		$scope.job.created = dateString;
 		$scope.job_tool_ids = $scope.job.tools;
 
 

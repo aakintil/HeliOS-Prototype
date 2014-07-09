@@ -25,14 +25,14 @@
 	</head>
 
 	<body ng-app="starter">
-		
+
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-light.svg"></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a>
+				<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></a>
+				<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-colored.svg"></a>
+				<a class="button" ng-click="showSelectionModal()" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
 			</div>
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
@@ -66,7 +66,7 @@
 
 			<!-- Transparent Screen that will allow us to dismiss the dialog -->
 			<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-			<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
+<!-- 			<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
 			<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
 				<form ng-submit="createTask(task)">
@@ -74,13 +74,12 @@
 						<p class="input-header"> Select </p>
 						<button class="button button-full button-dark" ng-click="showModal('note')">Add A Note</button>
 						<button class="button button-full button-dark" ng-click="showModal('job')">Add A Job</button>
-						<!-- end of list-->
 					</div>
 				</form>
-			</div>
+			</div> -->
 
 			<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-			<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
+<!-- 			<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
 				<form ng-submit="createTask(task)">
 					<div class="list">
 						<p class="input-header"> Add New Note </p>
@@ -98,12 +97,11 @@
 
 						<button class="button button-full button-dark" >Create Note</button>
 
-						<!-- end of list-->
 					</div>
 				</form>
 			</div>
-
-			<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
+ -->
+<!-- 			<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
 				<form ng-submit="createTask(task)">
 					<div class="list">
 						<p class="input-header"> Add New Job </p>
@@ -121,10 +119,9 @@
 
 						<button class="button button-full button-dark" >Create Job</button>
 
-						<!-- end of list-->
 					</div>
 				</form>
-			</div>  
+			</div>  --> 
 
-		</body>
-	</html>
+			</body>
+		</html>

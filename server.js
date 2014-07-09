@@ -19,6 +19,9 @@ var Schema = mongoose.Schema;
 /////////////////////////////////////////////////////
 
 //mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'); 	// connect to mongoDB database on modulus.io
+
+
+/// ~~~~~~~UN COMMENENETNT!!!!!!!! ???/////
 mongoose.connect( 'mongodb://localhost/helios-test' ); 
 
 

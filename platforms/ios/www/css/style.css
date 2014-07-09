@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Gotham Narrow";
-  src: url(fonts/GothamNarrow-Book.otf); }
+  src: url("../fonts/GothamNarrow-Book.otf"); }
 
 input {
   background-color: whitesmoke; }
@@ -3641,7 +3641,7 @@ a.subdued {
     text-decoration: none; }
   .bar-positive .button.active, .bar-positive .button.activated {
     border-color: #cacaca;
-    background-color: #6d6e70;
+    background-color: rgba(124, 124, 124, 0.2);
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-positive .button.button-clear {
     border-color: transparent;
@@ -4554,7 +4554,7 @@ a.subdued {
   .item .item-content.active.item-positive,
   .item .item-content.activated.item-positive {
     border-color: #cacaca;
-    background-color: #6d6e70; }
+    background-color: rgba(124, 124, 124, 0.2); }
   .item.active.item-calm,
   .item.activated.item-calm,
   .item-complex.active .item-content.item-calm,
@@ -4709,7 +4709,7 @@ a.item-content {
   color: white; }
   .item-complex.item-positive > .item-content.active, .item-complex.item-positive > .item-content:active {
     border-color: #cacaca;
-    background-color: #6d6e70; }
+    background-color: rgba(124, 124, 124, 0.2); }
 .item-complex.item-calm > .item-content {
   border-color: #1aaac3;
   background-color: #43cee6;
@@ -6321,7 +6321,7 @@ progress {
       text-decoration: none; }
     .button.button-positive.active, .button.button-positive.activated {
       border-color: #cacaca;
-      background-color: #6d6e70;
+      background-color: rgba(124, 124, 124, 0.2);
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-positive.button-clear {
       border-color: transparent;
@@ -8321,7 +8321,8 @@ body {
 .action-text {
   font-size: 14.5px;
   font-weight: bold;
-  color: black; }
+  color: black;
+  text-transform: none; }
 
 .action-text-white {
   font-size: 14.5px;
@@ -8399,12 +8400,14 @@ a:active {
   .offset .item-divider {
     background-color: #989898; }
 
+.list-action-item {
+  margin-top: 8px; }
+
 .alert-extras {
   position: relative;
   margin-top: 16px;
   padding-bottom: 10px;
-  margin-bottom: 5px;
-  border: 1px solid red; }
+  margin-bottom: 5px; }
   .alert-extras .alert-type {
     left: 0px;
     bottom: 0;
@@ -8445,6 +8448,9 @@ textarea[placeholder] {
   font-weight: normal;
   line-height: 30px;
   padding-left: 5px; }
+
+textarea {
+  resize: none; }
 
 #nav-bar {
   height: 60px;
@@ -8697,7 +8703,7 @@ textarea[placeholder] {
   display: none; }
 
 .job-selection {
-  border: 1px solid red; }
+  /*border: 1px solid red;*/ }
 
 .input-job-hidden {
   /*display: noneΩ;*/ }
