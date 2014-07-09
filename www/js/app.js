@@ -366,6 +366,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		console.log(" insert into jobs db ", job ); 
 		jobService.createJob( job )
 		.success( function( data ) {
+			console.log(" the return ==== ")
+			console.log( data )
+			$scope.jobs = data; 
 			//			updateJobsService.addToJobs( data ); 
 //			window.location.reload(); 
 			//			console.log( updateJobsService.getJobs() , " should not be null ")

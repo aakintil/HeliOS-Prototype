@@ -372,27 +372,34 @@ app.post( '/api/jobs', function( req, res ) {
 				done : false
 			}, function( err, job ) {
 				if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
-				//				console.log( " job === ", job); 
+
 				console.log( "  " ); 
-				//				console.log( " note === ", note); 
+
 				console.log( "  " ); 
-				job.notes.push( note._id )
-				//				console.log( " notes array ==== ", job.notes ); 
+				if ( job.notes === undefined)
+					job.notes = note._id; 
+				else
+					job.notes.push( note._id ); 
+
 				job.save( function( err, i ) {
 					if ( err ) { console.log (" common ")}
 					//					console.log( " after save ", i._id , " |  ", job._id, " |  ", "53bca47cffd0360000000002" ); 
+
+					query = { "notes" : note._id }; 
+					Job.findOne( query, function( err, job ) {
+						if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+						//						console.log( "========== \n", job ); 
+						//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
+					}).populate("notes").exec( function( err, job ) {
+						if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+
+						Job.find( function( err, jobs ) { 
+							if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+							res.json( jobs ); 
+						})
+						//						res.json( job )
+					});
 				}); 
-				query = { "_id" : job._id }; 
-				Job.findOne( query, function( err, job ) {
-					if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
-					console.log( " the new note ", job ); 
-					//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
-				}).populate("notes").exec( function( err, job ) {
-					if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-					//					console.log( " the new note ", job ); 
-					//			console.log( " the old note ", job.notes )
-					//					res.json( job )
-				});
 
 			})
 
