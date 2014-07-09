@@ -22,7 +22,7 @@ var Schema = mongoose.Schema;
 
 
 /// ~~~~~~~UN COMMENENETNT!!!!!!!! ???/////
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/helios-test';
 mongoose.connect(mongoUri);
 //mongoose.connect( 'mongodb://localhost/helios-test' ); 
 
@@ -480,7 +480,7 @@ app.get( '*', function( req, res ) {
 
 
 
-var port = Number(process.env.PORT || 5000);
+var port = Number(process.env.PORT || 3000);
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
