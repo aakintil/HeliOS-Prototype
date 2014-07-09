@@ -4,7 +4,14 @@
 var fadeSpeed = .5;
 var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
 
-
+// Formats console output nicer
+var debug = {
+	log : function( input ) {
+		console.log( " " ); 
+		console.log( input );
+		console.log( " " ); 
+	}	
+}
 
 //backStack, keeps track of the backstack for each seperate tab
 
@@ -346,10 +353,10 @@ function ModalCtrl( $scope, jobService, noteService ) {
 	var sendToNotes = function( note ) {
 
 		var data = {}; 
-		console.log(note);
+		debug.log( note )
 		data.message = note.message; 
-		data.job_id = note.job_id === undefined ? "" : note.job_id; 
-		console.log(data)
+		data.job_id = note.job_id === undefined ? "1" : note.job_id; 
+
 		noteService.createNote( data )
 		.success( function( data ) {
 			console.log(" note created ", data );
@@ -358,7 +365,6 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
 		})
-
 
 	}
 
@@ -370,7 +376,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 			console.log( data )
 			$scope.jobs = data; 
 			//			updateJobsService.addToJobs( data ); 
-//			window.location.reload(); 
+			//			window.location.reload(); 
 			//			console.log( updateJobsService.getJobs() , " should not be null ")
 			//			newJobFactory.setJob( data ); 
 			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
@@ -388,8 +394,8 @@ function ModalCtrl( $scope, jobService, noteService ) {
 			console.log( "please fill out form "); // turn into an alert / notification	
 		}
 		else { // only notes contain messages, and messages are required fields
-			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType ); 
-			console.log( "submit successfully called" ); 
+			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType );
+			debug.log( "submit successfully called" ); 
 			$scope.hideModal(); 	
 		}
 		$scope.showFeedback( formType ); 
