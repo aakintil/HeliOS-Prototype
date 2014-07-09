@@ -24,12 +24,12 @@
 		<script src="js/script.js"></script>
 	</head>
 
-	<body ng-app="starter" ng-controller="ToolsCtrl">
+	<body ng-app="starter" ng-controller="ToolsCtrl" id="add-tool-to-job">
 
 		<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
-			<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
+			<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" class="search-search" type="text"/>
 			<div class="button-bar nav-bar-buttons">
-				<div class="button">Done</div>
+				<div id="done" class="button" ng-click="getToolList()">Done</div>
 			</div>
 		</ion-nav-bar>
 
@@ -37,16 +37,16 @@
 
 		<ion-view class="nav-frame">
 			<ion-content>
-				<div class="section">
+				<div id="add-tools" class="section">
 					<div class="item item-divider home">
 						<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
 					</div>
 					<ul class="list">
 						<li class="item item-button-right" ng-repeat="tool in tools | filter: {name: query}">
-							<div class="list-item-title">{{tool.name}}</div>
-							<div class="list-item-subtitle">Current Location: {{tool.current_location}}</div>
-							<button class="button button-positive">
-								<i class="icon ion-plus-round"></i>
+							<div class="big-title">{{tool.name}}</div>
+							<div class="small-regular-text">Current Location: {{tool.current_location}}</div>
+							<button ng-click="check($event)" class="button button-clear checklist-item" id="{{tool._id}}">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
 						</li>
 					</ul>

@@ -6,7 +6,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8398,6 +8398,26 @@ a:active {
   width: 95.4%; }
   .offset .item-divider {
     background-color: #989898; }
+
+.alert-extras {
+  position: relative;
+  margin-top: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border: 1px solid red; }
+  .alert-extras .alert-type {
+    left: 0px;
+    bottom: 0;
+    position: absolute; }
+  .alert-extras .alert-time {
+    right: -50px;
+    position: absolute;
+    bottom: 0; }
+
+.alert-text {
+  overflow: ellipsis;
+  max-width: 100%;
+  margin-right: 50px; }
 
 .detail {
   margin-bottom: 10.5px; }
