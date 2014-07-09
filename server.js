@@ -155,7 +155,7 @@ app.post( '/api/notes', function( req, res ) {
 
 	Note.create({ 
 		message : msg,
-		creator : "Admin",
+		creator : "You",
 		job_id : j_id,
 		done : false
 	}, function( err, note ) {
@@ -169,7 +169,7 @@ app.post( '/api/notes', function( req, res ) {
 			job.save(); 
 		}).populate("notes").exec( function( err, job ) {
 			if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-			console.log( " the new note ", job )
+			console.log( " the new note should be in here ======= \n", job )
 			//			console.log( " the old note ", job.notes )
 			res.json( job )
 		});

@@ -3,7 +3,7 @@
 //Globals
 var fadeSpeed = .5;
 var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
-
+var personalNoteId = "111111111111111111111111"; 
 // Formats console output nicer
 var debug = {
 	log : function( input ) {
@@ -355,11 +355,12 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		var data = {}; 
 		debug.log( note )
 		data.message = note.message; 
-		data.job_id = note.job_id === undefined ? "1" : note.job_id; 
+		data.job_id = note.job_id === undefined ? personalNoteId : note.job_id; 
 
 		noteService.createNote( data )
 		.success( function( data ) {
-			console.log(" note created ", data );
+			var job = data; 
+			console.log(" note created ", job.notes );
 			// window.location.reload();
 		})
 		.error( function( data ) {
