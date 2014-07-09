@@ -59,7 +59,7 @@ var Job = mongoose.model( 'Job', {
 	members : { type: String }, 
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
-	tools : [{ type: Schema.ObjectId, ref: 'Tools' }], 
+	tools : [{ type: Schema.ObjectId, ref: 'Tool' }], 
 	notes : [ String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
@@ -200,11 +200,11 @@ app.get('/api/jobs/:id', function( req, res ) {
 	//	res.send('jobs should have an id ' + req.params.id);
 	var query = { '_id' : req.params.id };
 
-	Job.findOne( query, function( err, item ) {
-		console.log( "i am in the find one query function ", item );
-		res.json( item );
+	Job.findOne( query ).populate("tools").exec( function( err, job ) {
+		if ( err ) { console.log( "you don goofed ") }; 
+		console.log( "LOOK AT MEEEEE ", job );
+		res.json( job )
 	});
-
 });
 
 
@@ -242,32 +242,40 @@ app.get( '/api/jobs', function ( req, res ) {
 app.get('/api/jobs/:type/:title', function( req, res  ) {
 	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
 	console.log( " the job ", req.params );
-		var n = "^" + req.params.title; 
-		var name = new RegExp( n ); 
-		var query = req.params.type === "title" ? { 'title' : name } : { '_id' : name };
+	var n = "^" + req.params.title; 
+	var name = new RegExp( n ); 
+	var query = req.params.type === "title" ? { 'title' : name } : { '_id' : name };
 
-		Job.find( query, function( err, item ) {
+	Job.find( query, function( err, item ) {
 		console.log( "i am in the find one query function ", item );
 		res.json( item );
-		});
+	});
 
 });
 
 
 app.get( '/api/jobs/:type/:title/:id', function( req, res ) {
-		console.log( "======== CALLED THE METHOD TO UPDATE JOBS WITH TOOLS =======")
-		// console.log( " the job ", req.params );
-		var query = { '_id' : req.params.id }; 
-		var new_tools = req.params.title; 
-		var new_tools_array = new_tools.split(",");
-		// console.log( query, " , please be in here")
-		Job.findOne( query, function( err, job ) {
-			console.log( "the tools ", typeof job.tools_array );
-			// job.tools.push( tools ); 
-			console.log(new_tools_array);
-			job.update( { tools : new_tools_array }, function(){console.log("hi")} ); 
-			res.json( job );
-		});
+	console.log( "======== CALLED THE METHOD TO UPDATE JOBS WITH TOOLS =======")
+	// console.log( " the job ", req.params );
+	var query = { '_id' : req.params.id }; 
+	var new_tools = req.params.title; 
+	var new_tools_array = new_tools.split(",");
+	// console.log( query, " , please be in here")
+
+	Job.findOne( query, function( err, job ) {
+		console.log( "the tools ", typeof job.tools );
+		// job.tools.push( tools ); 
+		console.log(new_tools_array);
+		//		job.update( { tools : new_tools_array }, function() { console.log("updated job") } ); 
+		var i = 0; 
+		for ( var i in new_tools_array ) {
+			var id = mongoose.Types.ObjectId( new_tools_array[ i ] ); 
+			job.tools.push( id ); 
+		}
+
+		job.save(); 
+		res.json( job );
+	});
 }); 
 
 
