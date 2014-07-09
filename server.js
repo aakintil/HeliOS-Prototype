@@ -19,7 +19,12 @@ var Schema = mongoose.Schema;
 /////////////////////////////////////////////////////
 
 //mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'); 	// connect to mongoDB database on modulus.io
-mongoose.connect( 'mongodb://localhost/helios-test' ); 
+
+
+/// ~~~~~~~UN COMMENENETNT!!!!!!!! ???/////
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/helios-test';
+mongoose.connect(mongoUri);
+//mongoose.connect( 'mongodb://localhost/helios-test' ); 
 
 
 app.configure(function() {
@@ -474,7 +479,15 @@ app.get( '*', function( req, res ) {
 })
 
 
+
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
+
+
+// UNCOMMMENENENENT //
 // listen (start app with node server.js) ======================================
-app.listen(3000, "localhost");
+//app.listen(3000, "localhost");
 //console.log( "commonnn   ", app.get('port') );
-console.log("App listening on port 3000");
+//console.log("App listening on port 3000");

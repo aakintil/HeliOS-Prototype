@@ -33,9 +33,10 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/jobs-light.svg"></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
+				<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-colored.svg"></a>
+				<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></a>
+				<a class="button" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
+
 			</div>
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
@@ -46,7 +47,7 @@
 					<div class="item item-divider home">
 						<div class="left-title-button"><back>Back</back></div>
 						<div class="center-text">{{job.title}}</div>
-						<div class="right-title-button">Right Side</div>
+						<!-- <div class="right-title-button">Right Side</div> -->
 					</div>
 					<div class="big-title offset">{{job.title}}</div>
 					<!-- <ul class="list">
@@ -68,17 +69,17 @@
 						</button>
 					</div>
 					<ul class="list">
+						<li class="item" id="addNoteFromJob">
+							<div class="addListItemText action-text list-action-item">
+								+ Add Note
+							</div>
+							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
+						</li>
 						<li class="item regular-text item-button-right" ng-repeat="note in notes track by $index">
 							{{ note.message }}
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
-						</li>
-						<li class="item" id="addNoteFromJob">
-							<div class="addListItemText action-text">
-								+ Add Note
-							</div>
-							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
 					</ul>
 				</div>
@@ -91,17 +92,17 @@
 						</button>
 					</div>
 					<ul class="list">
+						<li class="item" id="addToolFromJob">
+							<a href="addTool.html?{{job._id}}">
+								<div class="addListItemText action-text list-action-item">+ Add Tool</div>
+							</a>
+						</li>
 						<li class="item item-button-right" ng-repeat="tool in job.tools">
 							<div class="big-title">{{tool.name}}</div>
 							<div class="detail-text ">Current Location: {{tool.current_location}}</div>
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
-						</li>
-						<li class="item" id="addToolFromJob">
-							<a href="addTool.html?{{job._id}}">
-								<div class="addListItemText action-text">+ Add Tool</div>
-							</a>
 						</li>
 					</ul>
 				</div>
@@ -122,7 +123,7 @@
 							</div>
 
 							<div class="detail">
-								<span class="small-light-caps">Participants:</span> 
+								<span class="small-light-caps">Collaborators:</span> 
 								<span class="action-text">{{job.members}}</span> 
 
 							</div>
@@ -134,13 +135,19 @@
 					</div>
 					<ul class="list">
 						<li class="item action-text">
-							Add or Remove a Participant
+							<div class="list-action-item">
+								Add or Remove a Collaborators
+							</div>
 						</li>
 						<li class="item action-text">
-							Update Job Template
+							<div class="list-action-item">
+								Update Job Template
+							</div>
 						</li>
 						<li class="item action-text">
-							Save as New Job Template
+							<div class="list-action-item">
+								Save as New Job Template
+							</div>
 						</li>
 					</ul>
 				</div>

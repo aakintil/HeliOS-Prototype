@@ -19,7 +19,7 @@ $error: rgba( 239, 78, 58, 1 );
 
 // Overridden Variables
 $positive: #f0f0f0;
-$positive-active: #6d6e70;
+$positive-active: rgba(124, 124, 124, .2);
 $button-positive-active-bg: $positive-active; 
 $dark: $gray-dark;
 $base-background-color: $gray-light;
@@ -27,7 +27,7 @@ $base-background-color: $gray-light;
 //Base
 @font-face {
 	font-family: "Gotham Narrow";
-	src: url(fonts/GothamNarrow-Book.otf) format('opentype');;
+	src: url("../fonts/GothamNarrow-Book.otf");
 }
 
 // Fonts
@@ -76,7 +76,7 @@ $item-subtitle: (23/2)+px;
 
 // remove later after testing
 body {
-	font-family: "Times"; 
+	font-family: "Gotham Narrow" ; 
 }
 
 
@@ -131,6 +131,7 @@ body {
 	font-size: (29/2)+px;
 	font-weight: bold;
 	color: black;
+	text-transform: none;
 }
 
 .action-text-white {
@@ -229,13 +230,16 @@ a:active {
 	}
 }
 
+.list-action-item {
+	margin-top: 8px;
+}
+
 .alert-extras {
 
 	position: relative;
 	margin-top: 16px;
 	padding-bottom: 10px;
 	margin-bottom: 5px;
-	border: 1px solid red;
 
 	.alert-type {
 		left: 0px;
@@ -292,6 +296,10 @@ textarea[placeholder] {
 	font-weight: normal;
 	line-height: 30px;
 	padding-left: 5px;
+}
+
+textarea {
+    resize: none;
 }
 
 #nav-bar {
@@ -670,7 +678,7 @@ textarea[placeholder] {
 }
 
 .job-selection {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 }
 
 .input-job-hidden {

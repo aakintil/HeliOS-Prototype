@@ -1,88 +1,92 @@
 $(document).ready(function () {
 
-	function switchToStack(stack) {
-		localStorage.setItem('currentBackStackName', stack);
-	}
-
-	function getCurrentStackName() {
-		return localStorage.getItem('currentBackStackName');
-	}
-
-	function getCurrentBackStack() {
-		var currentBackStackName = getCurrentStackName();
-		if (currentBackStackName == null) {
-			currentBackStackName = 'jobs';
-			localStorage.setItem('currentBackStackName', currentBackStackName);
-		}
-
-		var currentBackStack = JSON.parse(localStorage.getItem(currentBackStackName));
-		if (currentBackStack == null || currentBackStack == "") {
-			console.log("GETCUR: " + currentBackStack);
-			currentBackStack = [];
-		}
-		return currentBackStack;
-	}
-
-	function setCurrentBackStack(stack) {
-		localStorage.setItem(getCurrentStackName(), JSON.stringify(stack));
-	}
-
-	function popFromStack() {
-		var stack = getCurrentBackStack();
-		var mrsi = stack.pop();
-		setCurrentBackStack(stack);
-		return mrsi;
-	}
-
-	function saveCurrentPagetoCurrentStack() {
-		console.log("Should be adding current page");
-		var currentStack = getCurrentBackStack();
-		console.log(currentStack);
-		currentStack.push(document.location.href);
-		console.log(currentStack);
-		setCurrentBackStack(currentStack);
-	}
-
-	$(".jobs").click(function (e) {
-		saveCurrentPagetoCurrentStack();
-
-		switchToStack('jobs');
-		var popStack = popFromStack();
-		if (popStack != undefined) {
-			document.location.href = popStack;
-		} else {
-			document.location.href = "http://localhost:8100/index.html";
-		}
-
+	$('a').click(function() {
+		console.log("hi");
 	});
 
-	$(".notes").click(function (e) {
-		saveCurrentPagetoCurrentStack();
+	// function switchToStack(stack) {
+	// 	localStorage.setItem('currentBackStackName', stack);
+	// }
 
-		switchToStack('notes');
-		var popStack = popFromStack();
-		if (popStack != undefined) {
-			document.location.href = popStack;
-		} else {
-			document.location.href = "http://localhost:8100/notes.html";
-		}
-	});
+	// function getCurrentStackName() {
+	// 	return localStorage.getItem('currentBackStackName');
+	// }
 
-	$(".alerts").click(function (e) {
-		saveCurrentPagetoCurrentStack();
+	// function getCurrentBackStack() {
+	// 	var currentBackStackName = getCurrentStackName();
+	// 	if (currentBackStackName == null) {
+	// 		currentBackStackName = 'jobs';
+	// 		localStorage.setItem('currentBackStackName', currentBackStackName);
+	// 	}
 
-		switchToStack('notes');
-		var popStack = popFromStack();
-		if (popStack != undefined) {
-			document.location.href = popStack;
-		} else {
-			document.location.href = "http://localhost:8100/alerts.html";
-		}
-	});
+	// 	var currentBackStack = JSON.parse(localStorage.getItem(currentBackStackName));
+	// 	if (currentBackStack == null || currentBackStack == "") {
+	// 		console.log("GETCUR: " + currentBackStack);
+	// 		currentBackStack = [];
+	// 	}
+	// 	return currentBackStack;
+	// }
 
-	$("a:not(.nav-bar-buttons > a)").click(function () {
-		saveCurrentPagetoCurrentStack();
-	});
+	// function setCurrentBackStack(stack) {
+	// 	localStorage.setItem(getCurrentStackName(), JSON.stringify(stack));
+	// }
+
+	// function popFromStack() {
+	// 	var stack = getCurrentBackStack();
+	// 	var mrsi = stack.pop();
+	// 	setCurrentBackStack(stack);
+	// 	return mrsi;
+	// }
+
+	// function saveCurrentPagetoCurrentStack() {
+	// 	console.log("Should be adding current page");
+	// 	var currentStack = getCurrentBackStack();
+	// 	console.log(currentStack);
+	// 	currentStack.push(document.location.href);
+	// 	console.log(currentStack);
+	// 	setCurrentBackStack(currentStack);
+	// }
+
+	// $(".jobs").click(function (e) {
+	// 	saveCurrentPagetoCurrentStack();
+
+	// 	switchToStack('jobs');
+	// 	var popStack = popFromStack();
+	// 	if (popStack != undefined) {
+	// 		document.location.href = popStack;
+	// 	} else {
+	// 		document.location.href = "http://localhost:8100/index.html";
+	// 	}
+
+	// });
+
+	// $(".notes").click(function (e) {
+	// 	saveCurrentPagetoCurrentStack();
+
+	// 	switchToStack('notes');
+	// 	var popStack = popFromStack();
+	// 	if (popStack != undefined) {
+	// 		document.location.href = popStack;
+	// 	} else {
+	// 		document.location.href = "http://localhost:8100/notes.html";
+	// 	}
+	// });
+
+	// $(".alerts").click(function (e) {
+	// 	saveCurrentPagetoCurrentStack();
+
+	// 	switchToStack('notes');
+	// 	var popStack = popFromStack();
+	// 	if (popStack != undefined) {
+	// 		document.location.href = popStack;
+	// 	} else {
+	// 		document.location.href = "http://localhost:8100/alerts.html";
+	// 	}
+	// });
+
+	// $("a:not(.nav-bar-buttons > a)").click(function () {
+	// 	saveCurrentPagetoCurrentStack();
+	// });
 
 
 
@@ -101,8 +105,6 @@ $(document).ready(function () {
 	var selectedPeople = [];
 
 	$("#people-search-bar").on('input', function() {
-
-		console.log("In People Search Bar");
 
 		$("#people-modal .personselection button").each(function() {
 			var curId = $(this)[0].id;
