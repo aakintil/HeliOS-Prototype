@@ -31,9 +31,9 @@
 
 
 		<!-- The add job page overlay -->
-		<div id="add-modal" class="modal" ng-controller="JobsCtrl">
+		<div id="job-modal" class="add-modal modal" ng-controller="JobsCtrl">
 			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
-				<input ng-model="inputQuery" ng-change="setSearchQuery(inputQuery)" id="search-search" type="text"/>
+				<input ng-model="inputQuery" class="search-search" type="text"/>
 				<div class="button-bar nav-bar-buttons">
 					<div class="button">Done</div>
 				</div>
@@ -46,9 +46,39 @@
 							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
 						</div>
 						<ul class="list">
-							<li class="jobselection item item-button-right" ng-repeat="job in jobs" id={{job._id}}>
+							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}">
 								<div class="big-title">{{job.title}}</div>
 								<div class="small-regular-text">{{job.members}}</div>
+							</li>
+						</ul>
+					</div>
+
+				</ion-content>
+			</ion-view>
+		</div>
+
+
+		<!-- The add participants page overlay -->
+		<div id="people-modal" class="add-modal modal" ng-controller="ParticipantsCtrl as PartCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input ng-model="PartCtrl.searchText" id="people-search-bar" class="search-search" type="text"/>
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done">Done</div>
+				</div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content>
+					<div class="section">
+						<div class="item item-divider add">
+							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
+						</div>
+						<ul class="list">
+							<li class="personselection item item-button-right" ng-repeat="person in people | filter:PartCtrl.searchText "> <!-- | orderBy:predicate"> -->
+								<div class="big-title">{{person.name}}</div>
+								<button class="button button-clear checklist-item" id="{{person.id}}">
+									<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+								</button>
 							</li>
 						</ul>
 					</div>
@@ -131,7 +161,7 @@
 									<li>
 										<label class="item item-input">
 											<i class="icon ion-ios7-people-outline placeholder-icon"></i>
-											<input type="text" placeholder="Add Participants (Optional)" ng-model="job.participants">
+											<input type="text" id="input-participants" placeholder="Add Participants (Optional)" ng-model="job.members">
 										</label>
 									</li>
 									<li>

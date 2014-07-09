@@ -96,25 +96,47 @@ $(document).ready(function () {
 	//	Expandable Code 
 	$(".expandable").click( function() {
 		$(this).find(".tool-submenu").slideToggle(); 
-	}); 
+	});  
+
+	var selectedPeople = [];
+
+	$("#people-search-bar").on('input', function() {
+
+		console.log("In People Search Bar");
+
+		$("#people-modal .personselection button").each(function() {
+			var curId = $(this)[0].id;
+
+			var icon = $(this).children().first();
+			if ($.inArray(curId, selectedPeople) != -1) {
+				icon.removeClass('ion-ios7-checkmark-outline');
+				icon.addClass('ion-ios7-checkmark');
+			} else {
+				icon.removeClass('ion-ios7-checkmark');
+				icon.addClass('ion-ios7-checkmark-outline');
+			}
+		})
+	});
 
 	// Check List Code
-	$(".checklist-item").click( function() {
+	$("#people-modal .list").on('click', '.checklist-item', function() {
+
+		var id = $(this)[0].id;
 
 		var icon = $(this).children().first();
 		if (icon.hasClass('ion-ios7-checkmark-outline')) {
-			icon.removeClass('ion-ios7-checkmark-outline')
+			icon.removeClass('ion-ios7-checkmark-outline');
 			icon.addClass('ion-ios7-checkmark');
+			selectedPeople.push(id);
 		} else if(icon.hasClass('ion-ios7-checkmark')) {
-			icon.removeClass('ion-ios7-checkmark')
-			icon.addClass('ion-ios7-checkmark-outline')
+			icon.removeClass('ion-ios7-checkmark');
+			icon.addClass('ion-ios7-checkmark-outline');
+			var index = selectedPeople.indexOf(id);
+			if (index > -1) {
+				selectedPeople.splice(index, 1);
+			}
 		}
 
-	});
-
-	$(".checklist-item").click( function() {
-
-		var icon = $(this).children().first();
 		if (icon.hasClass('ion-ios7-plus-outline')) {
 			icon.removeClass('ion-ios7-plus-outline')
 			icon.addClass('ion-ios7-plus');
@@ -124,7 +146,7 @@ $(document).ready(function () {
 		}
 
 	});
-	
+
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
 		if(e.keyCode == 13)
@@ -134,19 +156,28 @@ $(document).ready(function () {
 	});
 
 	$('.addListItemInput').hide();
-	
+
 	$('.addListItemText').click(function() {
 		$(this).nextAll('.addListItemInput');
 		$(this).hide();
 		$(this).nextAll('.addListItemInput').show();
 		$(this).nextAll('.addListItemInput').focus();
 	});
-	
+
 	$('.addListItemInput').bind("enterKey", function() {
 		$(this).hide();
 		$(this).val("");
 		$(this).prevAll('.addListItemText').show();
 	});
+
+	// Code for handling search bar results
+	$('#search').bind("enterKey", function() {
+		var query = $( this ).val(); 
+		console.log( query, " should not be null");  
+		$(this).val("");
+		window.location = "search.html?"+query; 		
+	});
+
 
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
@@ -166,18 +197,47 @@ $(document).ready(function () {
 
 	$('#input-job').click(function() {
 		$('#add-page').hide();
-		$('#add-modal').show();
+		$('#job-modal').show();
 	});
 
-	$("#add-modal .list").on("click", ".jobselection", function(event) { 
+	$('#input-participants').click(function() {
+		$('#add-page').hide();
+		$('#people-modal').show();
+	});
+
+	$("#job-modal .list").on("click", ".jobselection", function(event) { 
 		var id = event.currentTarget.id;
-		var title = $("#"+id).children().first()[0].innerText
-		$('#add-modal').hide();
+		var title = $("#"+id).children().first()[0].innerText;
+		$('#job-modal').hide();
 		$('#add-page').show();
 		$('#input-job').val(title);
 		$('#input-job-hidden').val(id);
 		$('#input-job-hidden').hide();
 		$('#input-job-hidden').trigger('input');
 	});
+
+	$("#people-modal .done").click(function(){
+		var participants = "";
+		$("#people-search-bar").val("");
+		$("#people-modal li").each(function() {
+			if( $(this).find('button i.ion-ios7-checkmark').length !=0 ) {
+				participants += $(this).find('.big-title').first()[0].innerText;
+				participants += ", ";
+			}
+		});
+		participants = participants.substring(0, participants.length-2);
+		$('#input-participants').val(participants);
+		$('#input-participants').trigger('input');
+		$('#people-modal').hide();
+	 	$('#add-page').show();
+	});
+
+	//Adding tools to an existing job
+	// $("#add-tool-to-job #done").click(function(){
+	// 	var toolList = [];
+	// 	$(".ion-ios7-checkmark").each(function(){
+	// 		toolList.push($(this).parent().attr('id'));
+	// 	});
+	// });
 	
 });
