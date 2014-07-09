@@ -479,7 +479,15 @@ app.get( '*', function( req, res ) {
 })
 
 
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
+
+
+// UNCOMMMENENENENT //
 // listen (start app with node server.js) ======================================
-app.listen(3000, "localhost");
+//app.listen(3000, "localhost");
 //console.log( "commonnn   ", app.get('port') );
-console.log("App listening on port 3000");
+//console.log("App listening on port 3000");
