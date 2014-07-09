@@ -39,6 +39,9 @@
 				</div>
 			</ion-nav-bar>
 
+			<!------------------- NOTIFICATIONS BAR ------------------->
+			<div id="notification"> </div>
+
 			<ion-view class="nav-frame">
 				<ion-content>
 					<div class="section">
@@ -114,8 +117,8 @@
 
 					<div class="section add-type">
 						<div class="button-bar">
-						  <div class="button note active action-text">Note</div>
-						  <div class="button job action-text">Job</div>
+							<div class="button note active action-text">Note</div>
+							<div class="button job action-text">Job</div>
 						</div>
 					</div>
 
@@ -123,65 +126,65 @@
 						<form ng-submit="submit(note)">
 							<ul class="list">
 								<div class="white-container">
-								<li>
-									<label class="item item-input first">
-										<textarea placeholder="Enter Your Note" ng-model="note.message"> </textarea>
-									</label>
-								</li>
-								<li>
-									<label class="item item-input">
-										<i class="icon ion-camera placeholder-icon"></i>
-										<input type="text" placeholder="Add Photo (Optional)">
-									</label>
-								</li>
-								<li>
-									<label class="item item-input">
-										<i class="icon ion-search placeholder-icon"></i>
-										<input id="input-job" placeholder="Add to Job (Optional)" type="text">
-										<input id="input-job-hidden" type="text" ng-model="note.job_id">
-									</label>
-								</li>
-								<li class="notab">
-									<div class="add-sub">
-										<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Note</button>
-									</div>
-								</li>
-							</ul>
-						</form>
-					</div>
-
-					<div class="white-container" ng-controller="ModalCtrl">
-						<form ng-submit="submit(job)">
-							<div class="section add-section" id="add-job-form">
-								<ul class="list">
 									<li>
 										<label class="item item-input first">
-											<i class="icon ion-ios7-briefcase-outline"></i>
-											<input type="text" placeholder="Job Title" ng-model="job.title">
+											<textarea placeholder="Enter Your Note" ng-model="note.message"> </textarea>
 										</label>
 									</li>
 									<li>
 										<label class="item item-input">
-											<i class="icon ion-ios7-people-outline placeholder-icon"></i>
-											<input type="text" id="input-participants" placeholder="Add Participants (Optional)" ng-model="job.members">
+											<i class="icon ion-camera placeholder-icon"></i>
+											<input type="text" placeholder="Add Photo (Optional)">
 										</label>
 									</li>
 									<li>
 										<label class="item item-input">
-											<textarea placeholder="Add Note (Optional)" ng-model="job.note"> </textarea>
+											<i class="icon ion-search placeholder-icon"></i>
+											<input id="input-job" placeholder="Add to Job (Optional)" type="text">
+											<input id="input-job-hidden" type="text" ng-model="note.job_id">
 										</label>
 									</li>
-									<div class="add-sub">
-										<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Job</button>
-									</div>
-								</ul>
+									<li class="notab">
+										<div class="add-sub">
+											<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Note</button>
+										</div>
+									</li>
+									</ul>
+								</form>
 							</div>
-						</form>
-					</div>
 
-				</ion-content>
-			</ion-view>
-		</div>
+						<div class="white-container" ng-controller="ModalCtrl">
+							<form ng-submit="submit(job)">
+								<div class="section add-section" id="add-job-form">
+									<ul class="list">
+										<li>
+											<label class="item item-input first">
+												<i class="icon ion-ios7-briefcase-outline"></i>
+												<input type="text" placeholder="Job Title" ng-model="job.title">
+											</label>
+										</li>
+										<li>
+											<label class="item item-input">
+												<i class="icon ion-ios7-people-outline placeholder-icon"></i>
+												<input type="text" id="input-participants" placeholder="Add Participants (Optional)" ng-model="job.members">
+											</label>
+										</li>
+										<li>
+											<label class="item item-input">
+												<textarea placeholder="Add Note (Optional)" ng-model="job.note"> </textarea>
+											</label>
+										</li>
+										<div class="add-sub">
+											<button type="submit" id="submit" value="Submit" class="button add create-button action-text-white">Create Job</button>
+										</div>
+									</ul>
+								</div>
+							</form>
+						</div>
 
-	</body>
-</html>
+						</ion-content>
+					</ion-view>
+				</div>
+
+			</body>
+		</html>

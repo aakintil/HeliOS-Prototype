@@ -257,6 +257,13 @@ app.service('toolService', ['$http', function ($http) {
 }]);
 
 
+//////////////// Tool Service ////////////////
+app.service('notifications', ['$http', function ($http) {
+	this.message = "test"
+	this.ctrl = ""; 
+	
+}]);
+
 
 
 
@@ -265,8 +272,9 @@ app.service('toolService', ['$http', function ($http) {
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location ) {
+function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 
+	debug.log( "hopefully this will change", notifications )
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
 
@@ -348,7 +356,7 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 }
 
 //////////////// Controller for Modal Logic ////////////////
-function ModalCtrl( $scope, jobService, noteService ) {
+function ModalCtrl( $scope, jobService, noteService, notifications ) {
 	// current modal variable
 	var $modal = ""; 
 
@@ -402,6 +410,10 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		.success( function( data ) {
 			var job = data; 
 			console.log(" note created ", job.notes );
+//			debug.log( "notifications", notifications.notify ); 
+			var msg = "Note Successfully Created"; 
+			notifications.message = msg;
+			notifications.ctrl = "Job"; 
 			window.location = url; 
 		})
 		.error( function( data ) {
