@@ -263,25 +263,24 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	jobService.getJobWithId( jobId )
 	.success( function( data ) {
 		$scope.job = data; 
-		$scope.job_tool_ids = $scope.job.tools;
-
-
+		$scope.tools = $scope.job.tools;
+		$scope.notes = $scope.job.notes; 
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-	noteService.getNotes()
-	.success( function( data ) {
-		$scope.notes = {}
-		var i = "";
-		for ( var i in data ) {
-			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
-		}
-	})
-	.error( function( data ) {
-		console.log( "Error with getting all jobs: ", data ); 
-	})
+	//	noteService.getNotes()
+	//	.success( function( data ) {
+	//		$scope.notes = {}
+	//		var i = "";
+	//		for ( var i in data ) {
+	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
+	//		}
+	//	})
+	//	.error( function( data ) {
+	//		console.log( "Error with getting all jobs: ", data ); 
+	//	})
 
 	$scope.addNote = function(note) {
 		var form = {}; 

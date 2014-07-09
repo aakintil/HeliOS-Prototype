@@ -60,7 +60,7 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [{ type: Schema.ObjectId, ref: 'Tool' }], 
-	notes : [ String ], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
+	notes : [{ type: Schema.ObjectId, ref: 'Note' }], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
 
@@ -150,6 +150,8 @@ app.post( '/api/notes', function( req, res ) {
 	var msg = req.body.note === undefined ? req.body.message : req.body.note.message;
 	var j_id = req.body.id || req.body.job_id; 
 
+	// find the appropriate job
+	var query = { '_id' : j_id };
 
 	Note.create({ 
 		message : msg,
@@ -157,13 +159,20 @@ app.post( '/api/notes', function( req, res ) {
 		job_id : j_id,
 		done : false
 	}, function( err, note ) {
-		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 57 : server.js") }; 
-		console.log( note._id , " SHOULD HAVE THE NOTE ID"); 
-		//		res.json( note ); 
-		Note.find( { job_id : req.body.id }, function( err, notes ) {
-			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note AFTER CREATING one |  line 60 : server.js") };
-			res.json( notes ) // return all notes in the JSON format after we create another
-		})
+		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 162 : server.js") }; 
+		note.save(); 
+		
+		// find the right job and attach note id to it and populate
+		Job.findOne( query, function( err, job ) {
+			if ( err ) { console.log( " couldn't find the job ") }; 
+			job.notes.push( note._id );
+			job.save(); 
+		}).populate("notes").exec( function( err, job ) {
+			if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+			console.log( " the new note ", job )
+			//			console.log( " the old note ", job.notes )
+			res.json( job )
+		});
 	})
 }); 
 
@@ -200,7 +209,7 @@ app.get('/api/jobs/:id', function( req, res ) {
 	//	res.send('jobs should have an id ' + req.params.id);
 	var query = { '_id' : req.params.id };
 
-	Job.findOne( query ).populate("tools").exec( function( err, job ) {
+	Job.findOne( query ).populate("tools").populate("notes").exec( function( err, job ) {
 		if ( err ) { console.log( "you don goofed ") }; 
 		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
