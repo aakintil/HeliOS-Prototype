@@ -8278,9 +8278,6 @@ a.button {
   -o-transition: all .25s linear;
   transition: all .25s linear; }
 
-body {
-  font-family: "Gotham Narrow"; }
-
 .big-title {
   font-family: "Gotham Narrow";
   font-size: 18px;

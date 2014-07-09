@@ -299,10 +299,19 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		var form = {}; 
 		form.note = note; 
 		form.id = jobId; 
+		console.log(note.message); 
+		// so we don't have to refresh
+		// create a dom element but when the user returns to the page, the actual note element will be there
+		var domNote = $("<li class='item regular-text item-button-right insert'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
+		$(".insert").append( domNote ); 
+		
 		noteService.createNote( form )
 		.success( function( data ) {
-			console.log( "all notes from this job successfully created | ", data )
-			$scope.notes = data; 
+//			console.log( "all notes from this job successfully created | ", data )
+//			$scope.notes = $scope.job.notes; 
+		})
+		.error( function( data ) {
+			console.log( "error creating a note on jobs page"); 
 		})
 	};
 
@@ -632,7 +641,9 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		jobService.updateJobWithTools( "tools" , toolList, job_id ) 
 		.success( function( data ) {
 			$scope.job_tools = data; 
-			console.log( "job with new tools ", data )
+			console.log( "job with new tools ", job_id ); 
+			var url = "job.html?id=" + job_id; 
+			window.location = url; 
 		})
 		.error( function( data ) {
 			console.log( "we done goofed up"); 
