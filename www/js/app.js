@@ -304,11 +304,11 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $("<li class='item regular-text item-button-right insert'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
 		$(".insert").append( domNote ); 
-		
+
 		noteService.createNote( form )
 		.success( function( data ) {
 			console.log( "all notes from this job successfully created | ", data )
-//			$scope.notes = $scope.job.notes; 
+			//			$scope.notes = $scope.job.notes; 
 		})
 		.error( function( data ) {
 			console.log( "error creating a note on jobs page"); 
@@ -366,17 +366,17 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 	$scope.form = {}; 
 	var sendToNotes = function( note ) {
-
 		var data = {}; 
 		debug.log( note )
 		data.message = note.message; 
 		data.job_id = note.job_id === undefined ? personalNoteId : note.job_id; 
+		var url = "job.html?id=" + data.job_id; 
 
 		noteService.createNote( data )
 		.success( function( data ) {
 			var job = data; 
 			console.log(" note created ", job.notes );
-			// window.location.reload();
+			window.location = url; 
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
@@ -388,14 +388,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		console.log(" insert into jobs db ", job ); 
 		jobService.createJob( job )
 		.success( function( data ) {
-			console.log(" the return ==== ")
-			console.log( data )
-			$scope.jobs = data; 
-			//			updateJobsService.addToJobs( data ); 
-			//			window.location.reload(); 
-			//			console.log( updateJobsService.getJobs() , " should not be null ")
-			//			newJobFactory.setJob( data ); 
-			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
+			var url = "job.html?id=" + data._id; 
+			debug.log( data );
+			window.location = url; 
 		})
 		.error ( function ( data ) {
 			console.log( "you fucked up d")
@@ -412,7 +407,7 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		else { // only notes contain messages, and messages are required fields
 			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType );
 			debug.log( "submit successfully called" ); 
-			$scope.hideModal(); 	
+			$scope.hideModal(); 
 		}
 		$scope.showFeedback( formType ); 
 	}
@@ -592,7 +587,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 		//		console.log( " was called with ", element ); 
 		var id = element.job_id || element._id || ""; 
 		console.log( " a job id of ", id ); 
-		var url = id === "" ? "personal-notes.html" : "job.html?id=" + id; 
+		var url = "job.html?id=" + id; 
 		window.location = url; 
 	}
 

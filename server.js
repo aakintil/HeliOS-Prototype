@@ -352,11 +352,12 @@ app.post( '/api/jobs', function( req, res ) {
 			done : false
 		}, function( err, job ) {
 			if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
-
-			Job.find( function( err, jobs ) {
-				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
-				//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
-			})
+			
+			res.json( job ); 
+//			Job.find( function( err, jobs ) {
+//				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+//				res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
+//			})
 
 		})
 	}
@@ -394,13 +395,13 @@ app.post( '/api/jobs', function( req, res ) {
 					Job.findOne( query, function( err, job ) {
 						if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
 						//						console.log( "========== \n", job ); 
-						//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
+						res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
 					}).populate("notes").exec( function( err, job ) {
 						if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
 
 						Job.find( function( err, jobs ) { 
 							if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-							res.json( jobs ); 
+//							res.json( jobs ); 
 						})
 						//						res.json( job )
 					});
@@ -482,7 +483,7 @@ app.get( '*', function( req, res ) {
 
 var port = Number(process.env.PORT || 3000);
 app.listen(port, function() {
-  console.log("Listening on " + port);
+	console.log("Listening on " + port);
 });
 
 
