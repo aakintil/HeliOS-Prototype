@@ -8383,6 +8383,9 @@ a:active {
   width: 70%;
   text-align: center; }
 
+.right-text {
+  float: right; }
+
 .left-title-button {
   float: left;
   width: 15%; }
@@ -8463,9 +8466,6 @@ textarea {
   text-align: vertical;
   line-height: 60px !important; }
 
-#doneBut {
-  width: 30px; }
-
 #nav-bar {
   height: 60px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.42); }
@@ -8494,7 +8494,7 @@ textarea {
   #nav-bar .search-search {
     margin: auto;
     margin-left: 10px;
-    width: 80%;
+    width: 70%;
     border: 2px solid #989898;
     height: 33px; }
   #nav-bar #search:focus {

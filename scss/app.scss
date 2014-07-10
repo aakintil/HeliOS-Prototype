@@ -209,6 +209,10 @@ a:active {
 	text-align: center;
 }
 
+.right-text {
+	float: right;
+}
+
 .left-title-button {
 	float: left;
 	width: 15%;
@@ -318,10 +322,6 @@ textarea {
 	line-height: 60px !important;
 }
 
-#doneBut {
-	width: 30px; 
-}
-
 #nav-bar {
 
 	height: $nav-bar-height;
@@ -362,7 +362,7 @@ textarea {
 	.search-search {
 		margin: auto;
 		margin-left: 10px;
-		width: 80%;
+		width: 70%; 
 		border: 2px solid $gray-lighter;
 		height: (66/2)+px;
 	}
