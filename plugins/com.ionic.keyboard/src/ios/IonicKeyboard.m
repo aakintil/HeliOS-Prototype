@@ -14,7 +14,7 @@
     __weak IonicKeyboard* weakSelf = self;
 
     //set defaults
-    self.hideKeyboardAccessoryBar = YES;
+    self.hideKeyboardAccessoryBar = NO;
     self.disableScroll = NO;
     //self.styleDark = NO;
     
