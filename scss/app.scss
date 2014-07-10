@@ -45,8 +45,8 @@ $item-light-border: rgb(185, 185, 185);
 
 
 // Search
-$search-bar: 39%; 
-$search-bar-expanded: 75%; 
+$search-bar: 30%; 
+$search-bar-expanded: 65%; 
 
 //Forms
 input {
@@ -345,8 +345,8 @@ textarea {
 	}
 
 	.icon {
-		max-height: 45px;
-		max-width: 45px;
+		max-height: 25px;
+		max-width: 25px;
 		position: absolute;
 		top: 0;
 		bottom: 0;

@@ -8471,7 +8471,7 @@ textarea {
     margin: auto;
     margin-right: 10px;
     border: 2px solid #989898;
-    width: 39%;
+    width: 30%;
     height: 33px; }
   #nav-bar .search-search {
     margin: auto;
@@ -8480,10 +8480,10 @@ textarea {
     border: 2px solid #989898;
     height: 33px; }
   #nav-bar #search:focus {
-    width: 75%; }
+    width: 65%; }
   #nav-bar .icon {
-    max-height: 45px;
-    max-width: 45px;
+    max-height: 25px;
+    max-width: 25px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -8499,7 +8499,7 @@ textarea {
   top: 60px;
   background-color: #F0F0F0;
   border: 2px solid #989898;
-  width: 75%;
+  width: 65%;
   z-index: 20;
   position: absolute;
   right: 0;
