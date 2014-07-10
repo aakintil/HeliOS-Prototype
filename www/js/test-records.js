@@ -146,3 +146,68 @@ var s93 = {
 	home_location: "Saturn 3", 	
 }
 
+
+var job1 = {
+	title: "Replace Faulty Bolts", 
+	members: "You, Olga K.", 
+	created: Date.now(), 
+	creator: "Olga K.", 
+}
+
+var note = {
+	message: "Check areas 1, 5, 8, 12, 17, 21, and 22 on the ArcJet for faulty bolts.", 
+	creator: "Olga K.", 
+}
+
+
+var jobs = [
+	{
+		title: "Empty Bad Canisters", 
+		members: "Adam J., Olga K.", 
+		created: Date.now(), 
+		creator: "Adam J."
+	}, 
+
+	{
+		title: "Change Motion Sensor", 
+		members: "Jack N.", 
+		created: Date.now(), 
+		creator: "Jack N.", 
+	}, 
+	{
+		title: "Repair Broken Sensor", 
+		members: "Tomokazu Z.", 
+		created: Date.now(), 
+		creator: "Tomokazu Z.", 
+	}, 
+	{
+		title: "Repair Broken Sensor", 
+		members: "Suzuki Y., Olga K., Jack N.", 
+		created: Date.now(), 
+		creator: "Suzuki Y.", 
+	},
+	{
+		title: "Gather CNC Spool", 
+		members: "Alexander B., Olga K.", 
+		created: Date.now(), 
+		creator: "Alexander B.", 
+	}, 
+	{
+		title: "Setup For Test Shot", 
+		members: "Baptista C.", 
+		created: Date.now(), 
+		creator: "Baptista C.", 
+	}, 
+	{
+		title: "Align Gun", 
+		members: "Jose R., Olga K., Suzuki Y.",  
+		created: Date.now(), 
+		creator: "Jose R.", 
+	}, 
+	{
+		title: "Install Brackets", 
+		members: "Alexander B., Jose R.", 
+		created: Date.now(), 
+		creator: "Alexander B.", 
+	}
+]; 
