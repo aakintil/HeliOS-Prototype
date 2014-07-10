@@ -8647,10 +8647,11 @@ textarea {
   #notification div {
     position: relative;
     margin: 0 auto;
+    padding-top: 10px;
     color: white;
     font-size: 18px;
-    line-height: 60px;
-    width: 50%;
+    line-height: 20px;
+    width: 75%;
     text-align: center; }
 
 .success {

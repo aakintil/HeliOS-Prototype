@@ -602,10 +602,11 @@ textarea {
 	div {
 		position: relative;
 		margin: 0 auto; 
+		padding-top: 10px;
 		color: white; 
 		font-size: $item-title; 
-		line-height: $nav-bar-height; 
-		width: 50%; 
+		line-height: $nav-bar-height/3; 
+		width: 75%; 
 		text-align: center; 
 	}
 }
