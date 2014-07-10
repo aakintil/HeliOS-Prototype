@@ -323,15 +323,18 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 	$scope.changeStatus = function( note, event ) {
 
 		var el = $(event.currentTarget).parent(); 
+		var check = $(event.currentTarget).find("i"); 
 		var status = ""; 
 		debug.log( "shoudl have class", el); 
 
 		if ( el.hasClass("checked") ) {
 			el.removeClass("checked");
+			check.attr("class", "icon ion-ios7-checkmark-outline")
 			status = "na"; 
 		}
 		else {
 			el.addClass("checked"); 
+			check.attr("class", "icon ion-ios7-checkmark")
 			status = "checked"; 
 		}
 

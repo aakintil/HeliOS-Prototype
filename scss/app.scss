@@ -296,7 +296,7 @@ textarea[placeholder] {
 }
 
 textarea {
-    resize: none;
+	resize: none;
 }
 
 #nav-bar {
@@ -331,7 +331,7 @@ textarea {
 		width: $search-bar;
 		height: (66/2)+px;
 	}
-	
+
 	.search-search {
 		margin: auto;
 		margin-left: 10px;
@@ -448,10 +448,22 @@ textarea {
 }
 
 .checked {
-	opacity: 0.5; 
+	color: $gray-lighter; 
+	opacity: 0.85;
 	
+	-webkit-transition: all 0.5s linear; 
+	-moz-transition:  all 0.5s linear; 
+	-ms-transition: all 0.5s linear; 
+	-o-transition: all 0.5s linear; 
+	transition:  all 0.5s linear;
+
 	.button {
-		color: black; 
+		
+		-webkit-transition: all 0.5s linear; 
+		-moz-transition:  all 0.5s linear; 
+		-ms-transition: all 0.5s linear; 
+		-o-transition: all 0.5s linear; 
+		transition:  all 0.5s linear;
 	}
 }
 

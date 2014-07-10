@@ -8541,9 +8541,19 @@ textarea {
     color: black; }
 
 .checked {
-  opacity: 0.5; }
+  color: #989898;
+  opacity: 0.85;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear; }
   .checked .button {
-    color: black; }
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear; }
 
 #hover,
 .popup-modal {
