@@ -203,6 +203,7 @@ app.service('noteService', ['$http', function ($http) {
 	};
 
 	this.createNote = function( note, id ) {
+		console.log("creating note");
 		return $http.post( urlBase, note, id );
 	}
 
@@ -383,7 +384,6 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
 
-
 	$scope.expandNote = function( event ) {
 		$(event.currentTarget).find("p").toggleClass("expanded-note");
 	}
@@ -543,7 +543,7 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 			notifications.show( info, url);
 		})
 		.error ( function ( data ) {
-			console.log( "you fucked up d")
+			console.log( "Did not work")
 		})
 	}
 

@@ -370,9 +370,10 @@ app.post( '/api/jobs/:id', function( req, res ) {
 
 app.post( '/api/jobs', function( req, res ) {
 	var msg = req.body.note || "" ;
-	var members = req.body.members || ""; 
+	var m = req.body.members || ""; 
+	var members = m === "" ? "You" : "You, " + m; 
 	id = []; 
-	console.log( req.body , " lOOK HERE " )
+	console.log( req.body , " Look Here " );
 
 	if ( msg.length === 0 ) {
 		//		then we don't have to create a note
