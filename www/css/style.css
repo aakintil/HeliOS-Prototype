@@ -8278,10 +8278,8 @@ a.button {
   -o-transition: all .25s linear;
   transition: all .25s linear; }
 
-body {
-  font-family: "Gotham Narrow"; }
-
 .big-title {
+  font-family: "Gotham Narrow";
   font-size: 18px;
   font-weight: bold;
   color: black; }
@@ -8564,6 +8562,22 @@ textarea {
   text-overflow: initial !important;
   overflow: initial !important; }
 
+.checked {
+  color: #989898;
+  opacity: 0.85;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear; }
+  .checked .button {
+    opacity: 1;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear; }
+
 #hover,
 .popup-modal {
   display: none; }
@@ -8738,3 +8752,23 @@ textarea {
 
 .input-job-hidden {
   /*display: noneΩ;*/ }
+
+#search-page .small-regular-text {
+  font-size: 12.5px;
+  text-transform: uppercase; }
+
+#job-title {
+  position: relative; }
+  #job-title .button {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    margin-right: 47px; }
+
+.completed {
+  opacity: 0.5;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear; }

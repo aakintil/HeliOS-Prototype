@@ -6,8 +6,10 @@ var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "
 var personalNoteId = "111111111111111111111111"; 
 // Formats console output nicer
 var debug = {
-	log : function( input ) {
+	log : function( prefix, input ) {
 		console.log( " " ); 
+		console.log( prefix );
+		console.log( "--------------------------" ); 
 		console.log( input );
 		console.log( " " ); 
 	}	
@@ -171,6 +173,10 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + type + '/' + param + '/' + id );
 	}
 
+	this.changeJobStatus = function( job ) {
+		return $http.put( urlBase + '/' + job.id + '/' + job.status ); 
+	}
+
 
 	//		this.getNotesWithId = function( note, id ) {
 	//		return $http.put( noteUrlBase + '/' + id, note )
@@ -204,8 +210,9 @@ app.service('noteService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + id );
 	};
 
-	this.addTool = function() {
-		return $http.put( urlBase + '/' + id );
+	this.changeStatus = function( note ) {
+		//		console.log( "see meee here ", note )
+		return $http.put( urlBase + '/' + note.id + '/' + note.status ); 
 	}
 
 	//	this.deleteCustomer = function (id) {
@@ -254,6 +261,36 @@ app.service('toolService', ['$http', function ($http) {
 }]);
 
 
+//////////////// Tool Service ////////////////
+app.service('notifications', ['$http', function ($http) {
+	this.message = "test"
+	this.ctrl = ""; 
+
+	this.show = function( formType ) {
+		var title = ""; 
+		var notice = ""; 
+
+		if (formType === undefined) {
+			notice = "appear error"; 
+			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
+		}
+		else {
+			// title can be the formType.title
+			formType.job !== undefined ? title = "Note" : title = "Job"; 
+
+			// add the formtype title to the notification page
+			notice = "appear success"; 
+			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
+		}
+
+		setTimeout(function() {
+			$("#notification").removeClass( notice ).addClass( "disappear" ); 
+		}, 2400);	
+	}
+
+
+}]);
+
 
 
 
@@ -262,8 +299,9 @@ app.service('toolService', ['$http', function ($http) {
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location ) {
+function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 
+	debug.log( "hopefully this will change", notifications )
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1);
 
@@ -306,31 +344,29 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		$scope.job_tool_ids = $scope.job.tools;
 		$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
+		$scope.complete = $scope.job.status; 
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-	//	noteService.getNotes()
-	//	.success( function( data ) {
-	//		$scope.notes = {}
-	//		var i = "";
-	//		for ( var i in data ) {
-	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
-	//		}
-	//	})
-	//	.error( function( data ) {
-	//		console.log( "Error with getting all jobs: ", data ); 
-	//	})
-
 	$scope.addNote = function(note) {
 		var form = {}; 
 		form.note = note; 
 		form.id = jobId; 
+		console.log(note.message); 
+		// so we don't have to refresh
+		// create a dom element but when the user returns to the page, the actual note element will be there
+		var domNote = $("<li class='item regular-text item-button-right'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
+		$(".insert").append( domNote ); 
+
 		noteService.createNote( form )
 		.success( function( data ) {
 			console.log( "all notes from this job successfully created | ", data )
-			$scope.notes = data; 
+			//			$scope.notes = $scope.job.notes; 
+		})
+		.error( function( data ) {
+			console.log( "error creating a note on jobs page"); 
 		})
 	};
 
@@ -342,10 +378,81 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 	$scope.expandNote = function( event ) {
 		$(event.currentTarget).find("p").toggleClass("expanded-note");
 	}
+
+	$scope.s = "unchecked"; 
+	$scope.status = ""; 
+	$scope.changeStatus = function( note, event ) {
+
+		var el = $(event.currentTarget).parent(); 
+		var check = $(event.currentTarget).find("i"); 
+		var status = ""; 
+		debug.log( "shoudl have class", el); 
+
+		if ( el.hasClass("checked") ) {
+			el.removeClass("checked");
+			check.attr("class", "icon ion-ios7-checkmark-outline")
+			status = "na"; 
+		}
+		else {
+			el.addClass("checked"); 
+			check.attr("class", "icon ion-ios7-checkmark")
+			status = "checked"; 
+		}
+
+		var data = {
+			id: note._id, 
+			status: status
+		}
+		console.log( " should not throw bloody errors ", data )
+		noteService.changeStatus( data )
+		.success( function( data ) {
+			debug.log( " a changed status ", data.status ); 
+		})
+		.error( function( data ) {
+			debug.log( "error chaging note status", data ); 
+		})
+	}
+
+	$scope.changeJobStatus = function( job, event ) {
+		var el = $(event.currentTarget).parent(); 
+		var opaque = el.parent().siblings(); 
+		var check = $(event.currentTarget).find("i"); 
+		var status = ""; 
+
+		// also have to send a notification when job is clicked
+		// everything greys out except for the title and the checkbox
+
+		//		debug.log( "shoudl have class", ); 
+		//		opaque.addClass("completed"); 
+		if ( opaque.hasClass("completed") ) {
+			opaque.removeClass("completed");
+			check.attr("class", "icon ion-ios7-checkmark-outline")
+			status = "na"; 
+		}
+		else {
+			opaque.addClass("completed"); 
+			check.attr("class", "icon ion-ios7-checkmark")
+			status = "completed"; 
+		}
+		//		
+		var data = {
+			id: job._id, 
+			status: status
+		}
+		console.log( " should not throw bloody errors ", data )
+		jobService.changeJobStatus( data )
+		.success( function( data ) {
+			debug.log( " a changed status ", data.status ); 
+		})
+		.error( function( data ) {
+			debug.log( "error chaging note status", data ); 
+		})
+	}
+
 }
 
 //////////////// Controller for Modal Logic ////////////////
-function ModalCtrl( $scope, jobService, noteService ) {
+function ModalCtrl( $scope, jobService, noteService, notifications ) {
 	// current modal variable
 	var $modal = ""; 
 
@@ -389,17 +496,21 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 	$scope.form = {}; 
 	var sendToNotes = function( note ) {
-
 		var data = {}; 
 		debug.log( note )
 		data.message = note.message; 
 		data.job_id = note.job_id === undefined ? personalNoteId : note.job_id; 
+		var url = "job.html?id=" + data.job_id; 
 
 		noteService.createNote( data )
 		.success( function( data ) {
 			var job = data; 
 			console.log(" note created ", job.notes );
-			// window.location.reload();
+			//			debug.log( "notifications", notifications.notify ); 
+			var msg = "Note Successfully Created"; 
+			notifications.message = msg;
+			notifications.ctrl = "Job"; 
+			window.location = url; 
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
@@ -411,14 +522,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		console.log(" insert into jobs db ", job ); 
 		jobService.createJob( job )
 		.success( function( data ) {
-			console.log(" the return ==== ")
-			console.log( data )
-			$scope.jobs = data; 
-			//			updateJobsService.addToJobs( data ); 
-			//			window.location.reload(); 
-			//			console.log( updateJobsService.getJobs() , " should not be null ")
-			//			newJobFactory.setJob( data ); 
-			//			console.log( newJobFactory.$get() ," will hopefully return a non null object ")
+			var url = "job.html?id=" + data._id; 
+			debug.log( data );
+			window.location = url; 
 		})
 		.error ( function ( data ) {
 			console.log( "you fucked up d")
@@ -435,31 +541,9 @@ function ModalCtrl( $scope, jobService, noteService ) {
 		else { // only notes contain messages, and messages are required fields
 			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType );
 			debug.log( "submit successfully called" ); 
-			$scope.hideModal(); 	
+			$scope.hideModal(); 
 		}
 		$scope.showFeedback( formType ); 
-	}
-
-	$scope.showFeedback = function( formType ) {
-		var title = ""; 
-		var notice = ""; 
-
-		if (formType === undefined) {
-			notice = "appear error"; 
-			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
-		}
-		else {
-			// title can be the formType.title
-			formType.job !== undefined ? title = "Note" : title = "Job"; 
-
-			// add the formtype title to the notification page
-			notice = "appear success"; 
-			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
-		}
-
-		setTimeout(function() {
-			$("#notification").removeClass( notice ).addClass( "disappear" ); 
-		}, 2400);	
 	}
 
 }
@@ -679,7 +763,9 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		jobService.updateJobWithTools( "tools" , toolList, job_id ) 
 		.success( function( data ) {
 			$scope.job_tools = data; 
-			console.log( "job with new tools ", data )
+			console.log( "job with new tools ", job_id ); 
+			var url = "job.html?id=" + job_id; 
+			window.location = url; 
 		})
 		.error( function( data ) {
 			console.log( "we done goofed up"); 

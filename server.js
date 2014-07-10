@@ -52,7 +52,8 @@ app.configure(function() {
 // Notes Model 
 var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
-	status : String, 
+	status : String,
+//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : String 
 	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
@@ -147,6 +148,23 @@ app.get('/api/notes/:type/:name', function( req, res  ) {
 
 
 
+app.put( '/api/notes/:id/:status', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+//	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
+	Note.findOne( query, function( err, note ) {
+		if ( err ) { console.log( " couldn't find the job ") }; 
+		note.status = status; 
+		note.save(); 
+		res.json( note ); 
+	})
+})
+
+
+
 // Create a Note
 app.post( '/api/notes', function( req, res ) {
 	console.log(" ===== IN THE NOTES POST CALL ===== ", req.body ); 
@@ -204,8 +222,21 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 
 
-
-
+// change the status of a job
+app.put( '/api/jobs/:id/:status', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+//	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
+	Job.findOne( query, function( err, job ) {
+		if ( err ) { console.log( " couldn't find the job ") }; 
+		job.status = status; 
+		job.save(); 
+		res.json( job ); 
+	})
+})
 
 
 
@@ -216,7 +247,7 @@ app.get('/api/jobs/:id', function( req, res ) {
 
 	Job.findOne( query ).populate("tools").populate("notes").exec( function( err, job ) {
 		if ( err ) { console.log( "you don goofed ") }; 
-		console.log( "LOOK AT MEEEEE ", job );
+//		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
 	});
 });
@@ -353,10 +384,11 @@ app.post( '/api/jobs', function( req, res ) {
 		}, function( err, job ) {
 			if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
 
-			Job.find( function( err, jobs ) {
-				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
-				//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
-			})
+			res.json( job ); 
+			//			Job.find( function( err, jobs ) {
+			//				if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
+			//				res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
+			//			})
 
 		})
 	}
@@ -394,13 +426,13 @@ app.post( '/api/jobs', function( req, res ) {
 					Job.findOne( query, function( err, job ) {
 						if ( err ) { res.send( err ); console.log("Error finding appropriate job | server.js") };
 						//						console.log( "========== \n", job ); 
-						//				res.json( jobs ) // return all jobs (might change to a singular job if we want to go to that job page)
+						res.json( job ) // return all jobs (might change to a singular job if we want to go to that job page)
 					}).populate("notes").exec( function( err, job ) {
 						if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
 
 						Job.find( function( err, jobs ) { 
 							if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-							res.json( jobs ); 
+							//							res.json( jobs ); 
 						})
 						//						res.json( job )
 					});
@@ -482,7 +514,7 @@ app.get( '*', function( req, res ) {
 
 var port = Number(process.env.PORT || 3000);
 app.listen(port, function() {
-  console.log("Listening on " + port);
+	console.log("Listening on " + port);
 });
 
 

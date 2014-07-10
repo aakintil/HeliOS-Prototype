@@ -54,6 +54,11 @@
 			<input id="search" type="text" placeholder="Search" ng-if="headerType != 'search'">
 		</ion-nav-bar>
 
+
+		<!------------------- NOTIFICATIONS BAR ------------------->
+		<div id="notification"> </div>
+
+
 		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content class="job">
 				<div class="section">
@@ -67,19 +72,19 @@
 						<div class="center-text">{{job.title}}</div>
 						<!-- <div class="right-title-button">Right Side</div> -->
 					</div>
-					<div class="big-title offset">{{job.title}}</div>
-					<!-- <ul class="list">
-<li class="item job-header">
-<div class="list-item-title">{{job.title}}</div>
-<div class="list-item-details"><span class="list-item-subtitle-title">Created:</span> <span class="list-item-subtitle">{{job.create}}</span> <span class="list-item-subtitle-title">By</span><span class="list-item-subtitle"> {{job.creator}}</span></div>
-<div class="list-item-details"><span class="list-item-subtitle-title">Participants: </span><span class="list-item-subtitle">{{job.members}}</span></div>
-</li>
-</ul> -->
+					<div id="job-title" class="{{note.status}}">
+						<div class="big-title offset item-button-right">{{job.title}}</div>
+
+						<button ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item">
+							<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+						</button>
+					</div>
+
 				</div>
 
 				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
-				<div class="section offset">
+				<div class="section offset {{ complete }}">
 					<div class="item item-button-right item-divider">
 						<div class="section-header small-title"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
 						<button class="collapsable button button-clear button-positive">
@@ -102,7 +107,7 @@
 					</ul>
 				</div>
 
-				<div class="section offset">
+				<div class="section offset {{ complete }}">
 					<div class="item item-button-right item-divider">
 						<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
 						<button class="collapsable button button-clear button-positive">
@@ -170,7 +175,7 @@
 					</ul>
 				</div>
 
-				<div class="section offset">
+				<div class="section offset {{ complete }}">
 					<div class="item item-button-right item-divider">
 						<div class="section-header small-title">
 

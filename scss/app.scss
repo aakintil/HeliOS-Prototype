@@ -76,14 +76,12 @@ $item-subtitle: (23/2)+px;
 }
 
 // remove later after testing
-body {
-	font-family: $font-family-sans-serif; 
-}
 
 
 // Text Styles
 
 .big-title {
+	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px;
 	font-weight: bold;
 	color: black;
@@ -309,7 +307,7 @@ textarea[placeholder] {
 }
 
 textarea {
-    resize: none;
+	resize: none;
 }
 
 .done-button {
@@ -356,7 +354,7 @@ textarea {
 	.search-border {
 		border: 2px solid $magenta-search !important;
 	}
-	
+
 	.search-search {
 		margin: auto;
 		margin-left: 10px;
@@ -480,6 +478,27 @@ textarea {
 	text-overflow: initial !important;
 	overflow: initial !important;
 }
+
+.checked {
+	color: $gray-lighter; 
+	opacity: 0.85;
+
+	-webkit-transition: all 0.5s linear; 
+	-moz-transition:  all 0.5s linear; 
+	-ms-transition: all 0.5s linear; 
+	-o-transition: all 0.5s linear; 
+	transition:  all 0.5s linear;
+
+	.button {
+		opacity: 1; 
+		-webkit-transition: all 0.5s linear; 
+		-moz-transition:  all 0.5s linear; 
+		-ms-transition: all 0.5s linear; 
+		-o-transition: all 0.5s linear; 
+		transition:  all 0.5s linear;
+	}
+}
+
 
 // Modals
 #hover, 
@@ -728,3 +747,35 @@ textarea {
 .input-job-hidden {
 	/*display: noneΩ;*/
 }
+
+
+// Search Page
+#search-page {
+	.small-regular-text {
+		font-size: (25/2)+px; 
+		text-transform: uppercase; 
+	}	
+}
+
+
+#job-title {
+	position: relative;
+
+	.button {
+		position: absolute; 
+		right: 0; 
+		top: -10px; 
+		margin-right: 47px; 
+	}
+}
+
+.completed {
+	opacity: 0.5; 
+	
+	-webkit-transition: all 0.5s linear; 
+	-moz-transition:  all 0.5s linear; 
+	-ms-transition: all 0.5s linear; 
+	-o-transition: all 0.5s linear; 
+	transition:  all 0.5s linear;
+}
+
