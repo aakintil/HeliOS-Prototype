@@ -318,6 +318,10 @@ textarea {
 	line-height: 60px !important;
 }
 
+#doneBut {
+	width: 30px; 
+}
+
 #nav-bar {
 
 	height: $nav-bar-height;
@@ -358,7 +362,7 @@ textarea {
 	.search-search {
 		margin: auto;
 		margin-left: 10px;
-		width: 85%;
+		width: 80%;
 		border: 2px solid $gray-lighter;
 		height: (66/2)+px;
 	}

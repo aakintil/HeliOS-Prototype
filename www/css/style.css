@@ -6,7 +6,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8463,6 +8463,9 @@ textarea {
   text-align: vertical;
   line-height: 60px !important; }
 
+#doneBut {
+  width: 30px; }
+
 #nav-bar {
   height: 60px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.42); }
@@ -8491,7 +8494,7 @@ textarea {
   #nav-bar .search-search {
     margin: auto;
     margin-left: 10px;
-    width: 85%;
+    width: 80%;
     border: 2px solid #989898;
     height: 33px; }
   #nav-bar #search:focus {
