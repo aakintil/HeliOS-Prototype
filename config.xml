@@ -22,4 +22,8 @@
     <!-- <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="false" />
     </feature> -->
+
+    <feature name="Keyboard">
+        <param name="ios-package" value="IonicKeyboard" onload="true" />
+    </feature>
 </widget>
