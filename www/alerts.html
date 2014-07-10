@@ -30,9 +30,9 @@
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
-				<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></a>
-				<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-colored.svg"></a>
-				<a class="button" ng-click="showSelectionModal()" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-colored.svg"></div>
+				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
 			</div>
 			<input id="search" type="text" placeholder="Search">
 		</ion-nav-bar>
@@ -44,24 +44,26 @@
 			<ion-content>
 				<div id="alerts" class="section">
 					<div class="item item-divider alert">
-						<div class="left-title-button"><back></back></div>
+						<div class="left-title-button">&nbsp;</div>
 						<div class="center-text">Notifications</div>
 						<div class="right-title-button"><!-- Mark as read --></div>
 					</div>
 					<div class="list">
-						<div class="item item-button-right">
-							<div class="alert-extras">
-								<div class="small-light-caps alert-type">
-									<img class="medium-icon" src="img/icons/home-gray.svg">
-									Note
-								</div>
-								<div class="small-light-caps alert-time">2 Minutes Ago</div>
-							</div>
-							<div class="regular-text alert-text"> 
-								Olga K. added note to the job Replace Bolts on ArcJet.
-							</div>
-						</div>
 
+						<a href="job.html?id=53b5d0021b3f87c3f30a4a45&type=alert">
+							<div class="item item-button-right">
+								<div class="alert-extras">
+									<div class="small-light-caps alert-type">
+										<img class="medium-icon" src="img/icons/home-gray.svg">
+										Note
+									</div>
+									<div class="small-light-caps alert-time">2 Minutes Ago</div>
+								</div>
+								<div class="regular-text alert-text"> 
+									Olga K. added note to the job Replace Faulty Bolts.
+								</div>
+							</div>
+						</a>
 					</div>
 
 					</ion-content>

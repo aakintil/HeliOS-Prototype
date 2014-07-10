@@ -106,7 +106,7 @@ app.get( '/api/tools/:name', function ( req, res ) {
 
 	console.log( "hopefully the name ", req.params.name ); 
 	var n = "^" + req.params.name; 
-	var name = new RegExp( n ); 
+	var name = new RegExp( n, "i" ); 
 	var query = { 'name' : name };
 
 	Tool.find( query, function( err, item ) {
@@ -137,7 +137,7 @@ app.get('/api/notes/:type/:name', function( req, res  ) {
 	console.log( " the job ", req.params );
 
 	var n = "^" + req.params.name; 
-	var name = new RegExp( n ); 
+	var name = new RegExp( n, "i" ); 
 	var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
 
 	Note.find( query, function( err, item ) {
@@ -288,7 +288,7 @@ app.get('/api/jobs/:type/:title', function( req, res  ) {
 	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
 	console.log( " the job ", req.params );
 	var n = "^" + req.params.title; 
-	var name = new RegExp( n ); 
+	var name = new RegExp( n, "i" ); 
 	var query = req.params.type === "title" ? { 'title' : name } : { '_id' : name };
 
 	Job.find( query, function( err, item ) {

@@ -30,15 +30,28 @@
 	<body ng-app="starter">
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
-			<div class="button-bar nav-bar-buttons">
+			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'home'">
 				<!-- place in a.button -->
-
-				<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-colored.svg"></a>
-				<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></a>
-				<a class="button" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-colored.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
+				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
+			</div>
+			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'alert'">
+				<!-- place in a.button -->
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-colored.svg"></div>
+				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
+			</div>
+			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'search'">
+				<!-- place in a.button -->
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
+				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
+			</div>
 
 			</div>
-			<input id="search" type="text" placeholder="Search">
+			<input id="search" type="text" placeholder="Search" class="search-border" ng-if="headerType == 'search'">
+			<input id="search" type="text" placeholder="Search" ng-if="headerType != 'search'">
 		</ion-nav-bar>
 
 
@@ -49,8 +62,13 @@
 		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content class="job">
 				<div class="section">
-					<div class="item item-divider home">
-						<div class="left-title-button"><back>Back</back></div>
+					<div class="item item-divider {{headerType}} header-row">
+						<div class="left-title-button">
+							<back>
+								<i class="icon ion-chevron-left back-icon"></i>
+								Back
+							</back>
+						</div>
 						<div class="center-text">{{job.title}}</div>
 						<!-- <div class="right-title-button">Right Side</div> -->
 					</div>
@@ -73,16 +91,16 @@
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
-					<ul class="list insert">
+					<ul class="list notes">
 						<li class="item" id="addNoteFromJob">
 							<div class="addListItemText action-text list-action-item">
 								+ Add Note
 							</div>
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						<li class="item regular-text item-button-right {{note.status}}" ng-repeat="note in notes track by $index">
-							{{ note.message }}
-							<button ng-click="changeStatus( {{note}}, $event )" class="button button-clear checklist-item">
+						<li class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote($event)">
+							<p class="regular-text">{{ note.message }}</p>
+							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
 						</li>
@@ -102,13 +120,58 @@
 								<div class="addListItemText action-text list-action-item">+ Add Tool</div>
 							</a>
 						</li>
-						<li class="item item-button-right" ng-repeat="tool in job.tools">
+						<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
+							<div class="big-title">{{ tool.name }}</div>
+							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
+							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
+							</div>
+
+							<div class="tool-submenu">
+								<div class="main-submenu">
+									<p>
+										<span class="small-light-caps">
+											Home Location: Venus 2
+										</span>
+									</p>
+									<p>
+										<span class="small-light-caps">
+											Last Used: 5/3/14 by
+										</span>
+										<span class="small-regular-text">
+											Olga L
+										</span>
+									</p>
+									<p>
+										<span class="small-light-caps">
+											Last Calibrated: 6/16/13 by
+										</span>
+										<span class="small-regular-text">
+											Nick R
+										</span>
+									</p>
+								</div>
+								<div class="tool-submenu-replacement">
+									<span class="action-text">
+										{{ tool.replacement_for }}
+									</span>
+									<p>
+										<span class="small-light-caps">
+											Reason:
+										</span> 
+										<span class="small-regular-text">
+											Tool Uncalibrated
+										</span>
+									</p>
+								</div>
+							</div>
+						</li>
+						<!-- <li class="item item-button-right" ng-repeat="tool in job.tools">
 							<div class="big-title">{{tool.name}}</div>
 							<div class="detail-text ">Current Location: {{tool.current_location}}</div>
 							<button class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 							</button>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 
