@@ -266,12 +266,12 @@ app.service('notifications', ['$http', function ($http) {
 	this.message = "test"
 	this.ctrl = ""; 
 
-	this.show = function( data, redirect ) {
+	this.show = function( data, url ) {
 		var title = data.title; 
 		var msg = data.msg; 
 		var notice = "";
 		console.log( data , "in notifications"); 
-		
+
 		if (data === undefined) {
 			notice = "appear error"; 
 			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
@@ -289,7 +289,7 @@ app.service('notifications', ['$http', function ($http) {
 			$("#notification").removeClass( notice ).addClass( "disappear" ); 
 
 			setTimeout( function() {
-				if ( redirect !== undefined ) { redirect() }
+				if ( url !== undefined ) { window.location = url; }
 			}, 300); 
 
 		}, 2400);
@@ -485,12 +485,11 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 		noteService.createNote( data )
 		.success( function( data ) {
 			var job = data; 
-			console.log(" note created ", job.notes );
-			//			debug.log( "notifications", notifications.notify ); 
-			var msg = "Note Successfully Created"; 
-			notifications.message = msg;
-			notifications.ctrl = "Job"; 
-			window.location = url; 
+			console.log(" note created " );
+			var info = {}; 
+			info.title = ""; 
+			info.msg = "Note Successfully Created"; 
+			notifications.show( info, url); 
 		})
 		.error( function( data ) {
 			console.log(" could not create note ", data ); 
@@ -503,8 +502,12 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 		jobService.createJob( job )
 		.success( function( data ) {
 			var url = "job.html?id=" + data._id; 
-			debug.log( data );
-			window.location = url; 
+			console.log( data );
+			
+			var info = {}; 
+			info.title = ""; 
+			info.msg = "Job Successfully Created"; 
+			notifications.show( info, url);
 		})
 		.error ( function ( data ) {
 			console.log( "you fucked up d")
@@ -515,15 +518,15 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 	$scope.submit = function( formType ) {
 
 		if ( formType === undefined ) {
-			$scope.hideModal();
+			//			$scope.hideModal();
 			console.log( "please fill out form "); // turn into an alert / notification	
 		}
 		else { // only notes contain messages, and messages are required fields
 			formType.message !== undefined ? sendToNotes( formType ) : sendToJobs( formType );
 			debug.log( "submit successfully called" ); 
-			$scope.hideModal(); 
+			//			$scope.hideModal(); 
 		}
-		$scope.showFeedback( formType ); 
+
 	}
 
 }
