@@ -450,7 +450,7 @@ textarea {
 .checked {
 	color: $gray-lighter; 
 	opacity: 0.85;
-	
+
 	-webkit-transition: all 0.5s linear; 
 	-moz-transition:  all 0.5s linear; 
 	-ms-transition: all 0.5s linear; 
@@ -458,7 +458,7 @@ textarea {
 	transition:  all 0.5s linear;
 
 	.button {
-		
+		opacity: 1; 
 		-webkit-transition: all 0.5s linear; 
 		-moz-transition:  all 0.5s linear; 
 		-ms-transition: all 0.5s linear; 
@@ -715,12 +715,22 @@ textarea {
 
 #job-title {
 	position: relative;
-	
+
 	.button {
 		position: absolute; 
 		right: 0; 
 		top: -10px; 
 		margin-right: 40px; 
 	}
+}
+
+.completed {
+	opacity: 0.5; 
+	
+	-webkit-transition: all 0.5s linear; 
+	-moz-transition:  all 0.5s linear; 
+	-ms-transition: all 0.5s linear; 
+	-o-transition: all 0.5s linear; 
+	transition:  all 0.5s linear;
 }
 

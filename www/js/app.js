@@ -173,6 +173,10 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + type + '/' + param + '/' + id );
 	}
 
+	this.changeJobStatus = function( job ) {
+		return $http.put( urlBase + '/' + job.id + '/' + job.status ); 
+	}
+
 
 	//		this.getNotesWithId = function( note, id ) {
 	//		return $http.put( noteUrlBase + '/' + id, note )
@@ -262,6 +266,29 @@ app.service('notifications', ['$http', function ($http) {
 	this.message = "test"
 	this.ctrl = ""; 
 
+	this.show = function( formType ) {
+		var title = ""; 
+		var notice = ""; 
+
+		if (formType === undefined) {
+			notice = "appear error"; 
+			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
+		}
+		else {
+			// title can be the formType.title
+			formType.job !== undefined ? title = "Note" : title = "Job"; 
+
+			// add the formtype title to the notification page
+			notice = "appear success"; 
+			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
+		}
+
+		setTimeout(function() {
+			$("#notification").removeClass( notice ).addClass( "disappear" ); 
+		}, 2400);	
+	}
+
+
 }]);
 
 
@@ -289,6 +316,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 		$scope.job_tool_ids = $scope.job.tools;
 		$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
+		$scope.complete = $scope.job.status; 
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
@@ -351,37 +379,41 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 			debug.log( "error chaging note status", data ); 
 		})
 	}
-
+	
 	$scope.changeJobStatus = function( job, event ) {
 		var el = $(event.currentTarget).parent(); 
 		var opaque = el.parent().siblings(); 
 		var check = $(event.currentTarget).find("i"); 
 		var status = ""; 
-//		debug.log( "shoudl have class", ); 
 
-//		if ( el.hasClass("checked") ) {
-//			el.removeClass("checked");
-//			check.attr("class", "icon ion-ios7-checkmark-outline")
-//			status = "na"; 
-//		}
-//		else {
-//			el.addClass("checked"); 
-//			check.attr("class", "icon ion-ios7-checkmark")
-//			status = "checked"; 
-//		}
-//		// everything greys out except for the title and the checkbox
-//		var data = {
-//			id: job._id, 
-//			status: status
-//		}
-//		console.log( " should not throw fucking errors ", data )
-//		jobService.changeStatus( data )
-//		.success( function( data ) {
-//			debug.log( " a changed status ", data.status ); 
-//		})
-//		.error( function( data ) {
-//			debug.log( "error chaging note status", data ); 
-//		})
+		// also have to send a notification when job is clicked
+		// everything greys out except for the title and the checkbox
+
+		//		debug.log( "shoudl have class", ); 
+		//		opaque.addClass("completed"); 
+		if ( opaque.hasClass("completed") ) {
+			opaque.removeClass("completed");
+			check.attr("class", "icon ion-ios7-checkmark-outline")
+			status = "na"; 
+		}
+		else {
+			opaque.addClass("completed"); 
+			check.attr("class", "icon ion-ios7-checkmark")
+			status = "completed"; 
+		}
+		//		
+		//		var data = {
+		//			id: job._id, 
+		//			status: status
+		//		}
+		//		console.log( " should not throw fucking errors ", data )
+		//		jobService.changeStatus( data )
+		//		.success( function( data ) {
+		//			debug.log( " a changed status ", data.status ); 
+		//		})
+		//		.error( function( data ) {
+		//			debug.log( "error chaging note status", data ); 
+		//		})
 	}
 
 	//	noteService.getNotes()
@@ -491,28 +523,6 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 			$scope.hideModal(); 
 		}
 		$scope.showFeedback( formType ); 
-	}
-
-	$scope.showFeedback = function( formType ) {
-		var title = ""; 
-		var notice = ""; 
-
-		if (formType === undefined) {
-			notice = "appear error"; 
-			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
-		}
-		else {
-			// title can be the formType.title
-			formType.job !== undefined ? title = "Note" : title = "Job"; 
-
-			// add the formtype title to the notification page
-			notice = "appear success"; 
-			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
-		}
-
-		setTimeout(function() {
-			$("#notification").removeClass( notice ).addClass( "disappear" ); 
-		}, 2400);	
 	}
 
 }
