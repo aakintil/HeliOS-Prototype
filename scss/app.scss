@@ -66,6 +66,16 @@ $item-subtitle: (23/2)+px;
 
 // Custom
 
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select:html;
+    -khtml-user-select:html;
+    -moz-user-select:html;
+    -ms-user-select:html;
+    user-select:html;
+}
+
 //was gonna use this for transitions but might have to change 
 * {
 	-webkit-transition: all .25s linear; 

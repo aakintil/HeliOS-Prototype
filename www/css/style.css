@@ -8272,6 +8272,15 @@ a.button {
   transition: none !important; }
 
 * {
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: html;
+  -khtml-user-select: html;
+  -moz-user-select: html;
+  -ms-user-select: html;
+  user-select: html; }
+
+* {
   -webkit-transition: all .25s linear;
   -moz-transition: all .25s linear;
   -ms-transition: all .25s linear;
