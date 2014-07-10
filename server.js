@@ -222,8 +222,21 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 
 
-
-
+// change the status of a job
+app.put( '/api/jobs/:id/:status', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+//	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
+	Job.findOne( query, function( err, job ) {
+		if ( err ) { console.log( " couldn't find the job ") }; 
+		job.status = status; 
+		job.save(); 
+		res.json( job ); 
+	})
+})
 
 
 

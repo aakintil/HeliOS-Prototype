@@ -370,7 +370,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 			id: note._id, 
 			status: status
 		}
-		console.log( " should not throw fucking errors ", data )
+		console.log( " should not throw bloody errors ", data )
 		noteService.changeStatus( data )
 		.success( function( data ) {
 			debug.log( " a changed status ", data.status ); 
@@ -379,7 +379,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 			debug.log( "error chaging note status", data ); 
 		})
 	}
-	
+
 	$scope.changeJobStatus = function( job, event ) {
 		var el = $(event.currentTarget).parent(); 
 		var opaque = el.parent().siblings(); 
@@ -402,31 +402,19 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 			status = "completed"; 
 		}
 		//		
-		//		var data = {
-		//			id: job._id, 
-		//			status: status
-		//		}
-		//		console.log( " should not throw fucking errors ", data )
-		//		jobService.changeStatus( data )
-		//		.success( function( data ) {
-		//			debug.log( " a changed status ", data.status ); 
-		//		})
-		//		.error( function( data ) {
-		//			debug.log( "error chaging note status", data ); 
-		//		})
+		var data = {
+			id: job._id, 
+			status: status
+		}
+		console.log( " should not throw bloody errors ", data )
+		jobService.changeJobStatus( data )
+		.success( function( data ) {
+			debug.log( " a changed status ", data.status ); 
+		})
+		.error( function( data ) {
+			debug.log( "error chaging note status", data ); 
+		})
 	}
-
-	//	noteService.getNotes()
-	//	.success( function( data ) {
-	//		$scope.notes = {}
-	//		var i = "";
-	//		for ( var i in data ) {
-	//			if ( data[i].job_id === jobId ) { $scope.notes[ i ] = data[ i ]  }; 
-	//		}
-	//	})
-	//	.error( function( data ) {
-	//		console.log( "Error with getting all jobs: ", data ); 
-	//	})
 
 }
 
