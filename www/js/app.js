@@ -265,7 +265,35 @@ app.service('toolService', ['$http', function ($http) {
 function JobCtrl( $scope, jobService, noteService, $location ) {
 
 	var absUrl = $location.$$absUrl;
-	var jobId = absUrl.substr( absUrl.indexOf('=') + 1 );
+	var jobId = absUrl.substr( absUrl.indexOf('=') + 1);
+
+	$scope.headerType = "home";
+	var paramString = absUrl.substring(absUrl.indexOf('?')+1);
+	
+	if (paramString) {
+		var params = paramString.split('&');
+
+		if (params.length >= 1) {
+			var id = params[0].substring(3);
+			if (id) {
+				jobId = id;
+			}
+		}
+
+		if (params.length >= 2) {
+			var type = params[1].substring(5);
+			if (type) {
+				$scope.headerType = type;
+			}
+		}
+	}
+
+	$scope.expand = function( event ) {
+		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
+	}
+
+	console.log($scope.headerType);
+	console.log(jobId);
 
 	// Show the job with the given id
 	jobService.getJobWithId( jobId )
@@ -310,6 +338,10 @@ function JobCtrl( $scope, jobService, noteService, $location ) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
 
+
+	$scope.expandNote = function( event ) {
+		$(event.currentTarget).find("p").toggleClass("expanded-note");
+	}
 }
 
 //////////////// Controller for Modal Logic ////////////////
@@ -434,41 +466,53 @@ function ModalCtrl( $scope, jobService, noteService ) {
 
 
 //////////////// Navigation Controller ////////////////
-function NavCtrl($scope, toolService) {
+function NavCtrl($scope, toolService, $location) {
 	var searchText = ""; 
-	console.log( searchText, " should change "); 
 	toolService.saveQuery( searchText ); 
 
-	$scope.getClass = function(path) { 
-		//		we have to do something to account for highlighting the add notes tab
-		if (window.location.href.indexOf(path) != -1) {
-			return "active"
-		} else {
-			return ""
+	var absUrl = $location.$$absUrl;
+	$scope.headerType = "home";
+	var paramString = absUrl.substring(absUrl.indexOf('?')+1);
+	
+	if (paramString) {
+		var params = paramString.split('&');
+		if (params.length >= 2) {
+			var type = params[1].substring(5);
+			if (type) {
+				$scope.headerType = type;
+			}
 		}
 	}
 
-	$scope.showAddNoteModal = function() {
-		console.log("calling show note modal"); 
-		$("#hover").fadeIn(fadeSpeed);
-		$("#addNoteModal").fadeIn(fadeSpeed);
-	}
+	// $scope.getClass = function(path) { 
+	// 	//		we have to do something to account for highlighting the add notes tab
+	// 	if (window.location.href.indexOf(path) != -1) {
+	// 		return "active"
+	// 	} else {
+	// 		return ""
+	// 	}
+	// }
 
-	$scope.showAddJobModal = function() {
-		console.log("calling show job modal"); 
-		$("#hover").fadeIn(fadeSpeed);
-		$("#addJobModal").fadeIn(fadeSpeed);
-	}
+	// $scope.showAddNoteModal = function() {
+	// 	console.log("calling show note modal"); 
+	// 	$("#hover").fadeIn(fadeSpeed);
+	// 	$("#addNoteModal").fadeIn(fadeSpeed);
+	// }
 
-	$scope.showSelectionModal = function() {
-		console.log("iniit")
+	// $scope.showAddJobModal = function() {
+	// 	console.log("calling show job modal"); 
+	// 	$("#hover").fadeIn(fadeSpeed);
+	// 	$("#addJobModal").fadeIn(fadeSpeed);
+	// }
 
-		$("#addJobModal").fadeOut(fadeSpeed);
-		$("#addNoteModal").fadeOut(fadeSpeed);
+	// $scope.showSelectionModal = function() {
 
-		$("#hover").fadeIn(fadeSpeed );
-		$("#selectionModal").fadeIn( fadeSpeed ); 
-	}
+	// 	$("#addJobModal").fadeOut(fadeSpeed);
+	// 	$("#addNoteModal").fadeOut(fadeSpeed);
+
+	// 	$("#hover").fadeIn(fadeSpeed );
+	// 	$("#selectionModal").fadeIn( fadeSpeed ); 
+	// }
 
 }
 
@@ -550,6 +594,9 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	var absUrl = $location.$$absUrl;
 	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
 
+	$('#search').val(query);
+	$('#search').trigger('input');
+
 
 	toolService.getToolWithName( query )
 	.success( function( data ) {
@@ -583,7 +630,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 		//		console.log( " was called with ", element ); 
 		var id = element.job_id || element._id || ""; 
 		console.log( " a job id of ", id ); 
-		var url = id === "" ? "personal-notes.html" : "job.html?id=" + id; 
+		var url = id === "" ? "personal-notes.html" : "job.html?id=" + id + "&type=search"; 
 		window.location = url; 
 	}
 

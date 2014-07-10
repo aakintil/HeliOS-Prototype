@@ -12,6 +12,7 @@ $white-text: white;
 $blue-home: #2a9acd;
 $red-alert: #f05a24;
 $green-add: #22b473;
+$magenta-search: #9422af;
 
 $success: rgba( 143, 203, 33, 1 ); 
 $warning: rgba( 234, 173, 22, 1 ); 
@@ -109,15 +110,16 @@ body {
 }
 
 .regular-text {
-	font-size: (36/2)+px;
-	font-weight: normal;
-	color: black;
+	font-size: (36/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
 }
 
 .small-regular-text {
 	font-size: (29/2)+px;
 	font-weight: normal;
 	color: black;
+	text-transform: none !important;
 }
 
 .detail-text {
@@ -196,26 +198,30 @@ a:active {
 	background-color: $green-add;
 }
 
+.search {
+	background-color: $magenta-search;
+}
+
 .add-sub {
 	background-color: #C9E7D4;
 }
 
 .center-text {
-	margin-left: 0 auto;
-	margin-right: 0 auto;
-	width: 50%;
-	display: inline-block;
+	width: 70%;
+	text-align: center;
 }
 
 .left-title-button {
-	display: inline-block;
-	width: 10%;
+	float: left;
+	width: 15%;
 }
 
 .right-title-button {
 	display: inline-block;
 	float: right;
-	width: 10%;
+	width: 15%;
+}
+.back-icon {
 }
 
 .offset {
@@ -236,7 +242,7 @@ a:active {
 .alert-extras {
 
 	position: relative;
-	margin-top: 16px;
+	margin-top: 10px;
 	padding-bottom: 10px;
 	margin-bottom: 5px;
 
@@ -255,9 +261,10 @@ a:active {
 }
 
 .alert-text {
-	overflow: ellipsis;
-	max-width: 100%;
-	margin-right: 50px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: 1px solid red-alert;
 }
 
 .detail {
@@ -289,6 +296,10 @@ a:active {
 	}
 }
 
+.addListItemInput {
+	background-color: white;
+}
+
 input[placeholder], 
 textarea[placeholder] {
 	font-size: 18px; 
@@ -299,6 +310,14 @@ textarea[placeholder] {
 
 textarea {
     resize: none;
+}
+
+.done-button {
+	font-size: (36/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
+	text-align: vertical;
+	line-height: 60px !important;
 }
 
 #nav-bar {
@@ -332,6 +351,10 @@ textarea {
 		border: 2px solid $gray-lighter;
 		width: $search-bar;
 		height: (66/2)+px;
+	}
+
+	.search-border {
+		border: 2px solid $magenta-search !important;
 	}
 	
 	.search-search {
@@ -447,6 +470,15 @@ textarea {
 			color: black;
 		}
 	}
+}
+
+.expanded-note {
+	height: auto;
+	word-wrap: normal;
+
+	white-space: initial !important;
+	text-overflow: initial !important;
+	overflow: initial !important;
 }
 
 // Modals
@@ -598,10 +630,23 @@ textarea {
 .expandable {
 
 	.tool-submenu {
+		margin-left: -15px !important;
+		margin-bottom: -15px !important;
+		margin-top: 10px;
 		display: none; 
-		padding: 10px 20px; 
 		background-color: #e0e0e0; 
-		text-transform: uppercase; 
+		width: 1000px !important;
+		position: relative;
+		border: 1px solid $gray-light;
+	}
+
+	.main-submenu {
+		margin: 10px 20px; 
+	}
+
+	.tool-submenu-replacement {
+		background-color: #F0F0C7;
+		padding: 10px 20px;
 	}
 }
 
@@ -682,15 +727,4 @@ textarea {
 
 .input-job-hidden {
 	/*display: noneΩ;*/
-}
-
-
-// Search Page
-#search-page {
-	
-	.small-regular-text {
-		font-size: (25/2)+px; 
-		text-transform: uppercase; 
-	}
-	
 }
