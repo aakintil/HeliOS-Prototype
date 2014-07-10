@@ -713,3 +713,14 @@ textarea {
 }
 
 
+#job-title {
+	position: relative;
+	
+	.button {
+		position: absolute; 
+		right: 0; 
+		top: -10px; 
+		margin-right: 40px; 
+	}
+}
+

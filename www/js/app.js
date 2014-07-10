@@ -350,7 +350,38 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 		.error( function( data ) {
 			debug.log( "error chaging note status", data ); 
 		})
+	}
 
+	$scope.changeJobStatus = function( job, event ) {
+		var el = $(event.currentTarget).parent(); 
+		var opaque = el.parent().siblings(); 
+		var check = $(event.currentTarget).find("i"); 
+		var status = ""; 
+//		debug.log( "shoudl have class", ); 
+
+//		if ( el.hasClass("checked") ) {
+//			el.removeClass("checked");
+//			check.attr("class", "icon ion-ios7-checkmark-outline")
+//			status = "na"; 
+//		}
+//		else {
+//			el.addClass("checked"); 
+//			check.attr("class", "icon ion-ios7-checkmark")
+//			status = "checked"; 
+//		}
+//		// everything greys out except for the title and the checkbox
+//		var data = {
+//			id: job._id, 
+//			status: status
+//		}
+//		console.log( " should not throw fucking errors ", data )
+//		jobService.changeStatus( data )
+//		.success( function( data ) {
+//			debug.log( " a changed status ", data.status ); 
+//		})
+//		.error( function( data ) {
+//			debug.log( "error chaging note status", data ); 
+//		})
 	}
 
 	//	noteService.getNotes()

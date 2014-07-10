@@ -8724,3 +8724,11 @@ textarea {
 #search-page .small-regular-text {
   font-size: 12.5px;
   text-transform: uppercase; }
+
+#job-title {
+  position: relative; }
+  #job-title .button {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    margin-right: 40px; }
