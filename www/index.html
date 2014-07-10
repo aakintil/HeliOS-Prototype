@@ -130,7 +130,7 @@
 					</div>
 					<div class="list">
 						<ul class="list">
-							<li class="item item-button-right" ng-repeat="job in jobs" ng-if="job._id !== '111111111111111111111111'">
+							<li class="item item-button-right" ng-repeat="job in jobs | orderBy:predicate" ng-if="job._id !== '111111111111111111111111' && job.members.indexOf('You') !== -1">
 								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
 									<div class="big-title">{{job.title}}</div>
 									<div class="small-regular-text">{{job.members}}</div>
@@ -144,25 +144,15 @@
 					<div class="item item-divider">
 						<div class="section-header">Other Jobs</div>
 					</div>
-					<div class="item item-button-right">
-						<a href="job.html?id=1" ng-click="broadcastJob(1)">
-							<div class="big-title">Backlog Stations</div>
-							<div class="small-regular-text">Derin M.</div>
-						</a>
-					</div>
-
-					<div class="item item-button-right">
-						<a href="job.html?id=1" ng-click="broadcastJob(1)">
-							<div class="big-title">Replace ArcJet Tubes</div>
-							<div class="small-regular-text">Lisa D, Christine E, Elisa M</div>
-						</a>
-					</div>
-
-					<div class="item item-button-right">
-						<a href="job.html?id=1" ng-click="broadcastJob(1)">
-							<div class="big-title">Rearrange Work Station</div>
-							<div class="small-regular-text">Melissa M</div>
-						</a>
+					<div class="list">
+						<ul class="list">
+							<li class="item item-button-right" ng-repeat="job in jobs | orderBy:predicate" ng-if="job._id !== '111111111111111111111111' && job.members.indexOf('You') === -1"">
+								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
+									<div class="big-title">{{job.title}}</div>
+									<div class="small-regular-text">{{job.members}}</div>
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 

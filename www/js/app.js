@@ -657,6 +657,8 @@ function NotesCtrl( $scope, $http ) { //$http variale
 function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
+
+	$scope.predicate = 'title';
 	// onload, show all jobs
 	jobService.getJobs()
 	.success( function( data ) {
@@ -745,6 +747,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
+	$scope.predicate = 'name';
 
 	$scope.setSearchQuery = function(inputQuery) {
 		$scope.query = inputQuery;
