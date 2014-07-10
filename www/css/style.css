@@ -8523,6 +8523,9 @@ textarea {
   right: 0;
   margin-right: 10px; }
 
+.nav-frame {
+  top: 17px; }
+
 .section .list .item {
   min-height: 62.5px; }
 .section .item-divider {
