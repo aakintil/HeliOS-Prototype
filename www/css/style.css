@@ -8383,6 +8383,9 @@ a:active {
   width: 70%;
   text-align: center; }
 
+.right-text {
+  float: right; }
+
 .left-title-button {
   float: left;
   width: 15%; }
