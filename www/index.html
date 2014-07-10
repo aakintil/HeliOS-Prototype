@@ -107,7 +107,6 @@
 
 
 
-		<!------------------- JOBS VIEW ------------------->
 		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobsCtrl" class="nav-frame">
 			<ion-content>
 				<div class="section" >
@@ -131,7 +130,7 @@
 					</div>
 					<div class="list">
 						<ul class="list">
-							<li class="item item-button-right" ng-repeat="job in jobs">
+							<li class="item item-button-right" ng-repeat="job in jobs" ng-if="job._id !== '111111111111111111111111'">
 								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
 									<div class="big-title">{{job.title}}</div>
 									<div class="small-regular-text">{{job.members}}</div>

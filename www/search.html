@@ -90,7 +90,7 @@
 										</span>
 									</p>
 								</div>
-								<div class="tool-submenu-replacement">
+								<div class="tool-submenu-replacement" ng-if="tool.replacement_for">
 									<span class="action-text">
 										{{ tool.replacement_for }}
 									</span>
@@ -99,7 +99,7 @@
 											Reason:
 										</span> 
 										<span class="small-regular-text">
-											Tool Uncalibrated
+											Tool Uncalibrated {{tool.replacement_for}} 
 										</span>
 									</p>
 								</div>

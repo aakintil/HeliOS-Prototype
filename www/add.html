@@ -53,7 +53,7 @@
 							<div class="right-text">Select Job</div>
 						</div>
 						<ul class="list">
-							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}">
+							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}" ng-if="job._id !== '111111111111111111111111'">
 								<div class="big-title">{{job.title}}</div>
 								<div class="small-regular-text">{{job.members}}</div>
 							</li>
