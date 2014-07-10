@@ -875,7 +875,7 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 			id: '14'
 		},
 		{
-			name: 'Oliva M',
+			name: 'Olga K',
 			id: '15'
 		}
 	];
