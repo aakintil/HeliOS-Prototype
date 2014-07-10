@@ -52,7 +52,8 @@ app.configure(function() {
 // Notes Model 
 var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
-	status : { type: String, default: 'unchecked' }, 
+	status : String,
+//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : String 
 	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
@@ -149,17 +150,14 @@ app.get('/api/notes/:type/:name', function( req, res  ) {
 
 app.put( '/api/notes/:id/:status', function( req, res ) {
 	console.log( "------- SEE MEEE ------- ");
-	console.log( req.params );
+//	console.log( req.params );
 	var query = { _id : req.params.id }; 
-	var status = req.params.status; 
-	var newStatus = {
-		unchecked: "checked", 
-		checked: "unchecked"
-	}
-	console.log( newStatus[ status ] ); 
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
 	Note.findOne( query, function( err, note ) {
 		if ( err ) { console.log( " couldn't find the job ") }; 
-		note.status = newStatus[ status ]; 
+		note.status = status; 
 		note.save(); 
 		res.json( note ); 
 	})
@@ -236,7 +234,7 @@ app.get('/api/jobs/:id', function( req, res ) {
 
 	Job.findOne( query ).populate("tools").populate("notes").exec( function( err, job ) {
 		if ( err ) { console.log( "you don goofed ") }; 
-		console.log( "LOOK AT MEEEEE ", job );
+//		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
 	});
 });

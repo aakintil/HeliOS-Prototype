@@ -207,8 +207,8 @@ app.service('noteService', ['$http', function ($http) {
 	};
 
 	this.changeStatus = function( note ) {
-//		console.log( "see meee here ", note )
-		return $http.put( urlBase + '/' + note._id + '/' + note.status ); 
+		//		console.log( "see meee here ", note )
+		return $http.put( urlBase + '/' + note.id + '/' + note.status ); 
 	}
 
 	//	this.deleteCustomer = function (id) {
@@ -261,7 +261,7 @@ app.service('toolService', ['$http', function ($http) {
 app.service('notifications', ['$http', function ($http) {
 	this.message = "test"
 	this.ctrl = ""; 
-	
+
 }]);
 
 
@@ -319,26 +319,35 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 	};
 
 	$scope.s = "unchecked"; 
+	$scope.status = ""; 
 	$scope.changeStatus = function( note, event ) {
-		//		debug.log( " should be the note ", note ); 
-		var status = note.status ; 
-		//		$(event.currentTarget).parent().toggleClass( function() {
-		//			if ( $(this).is(".unchecked") ) { status = "checked"; return "checked"; }	
-		//			else { status = "unchecked"; return "unchecked" }
-		//		}); 
-		if ( $scope.s === "unchecked") { console.log("it's unchecked so check it"); $scope.s = "checked" }
-		else { console.log("it's checked so uncheck it"); $scope.s = "unchecked";  }
-		//		debug.log( " should be the class ", $(event.currentTarget).parent()); 
-		//		debug.log( " should be the class ", $scope.s ); 
-		
-		noteService.changeStatus( note )
+
+		var el = $(event.currentTarget).parent(); 
+		var status = ""; 
+		debug.log( "shoudl have class", el); 
+
+		if ( el.hasClass("checked") ) {
+			el.removeClass("checked");
+			status = "na"; 
+		}
+		else {
+			el.addClass("checked"); 
+			status = "checked"; 
+		}
+
+		var data = {
+			id: note._id, 
+			status: status
+		}
+		console.log( " should not throw fucking errors ", data )
+		noteService.changeStatus( data )
 		.success( function( data ) {
-//			debug.log( " a changed status ", data ); 
-			console.log( $(event.currentTarget));
+			debug.log( " a changed status ", data.status ); 
 		})
 		.error( function( data ) {
 			debug.log( "error chaging note status", data ); 
 		})
+
 	}
 
 	//	noteService.getNotes()
@@ -410,7 +419,7 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 		.success( function( data ) {
 			var job = data; 
 			console.log(" note created ", job.notes );
-//			debug.log( "notifications", notifications.notify ); 
+			//			debug.log( "notifications", notifications.notify ); 
 			var msg = "Note Successfully Created"; 
 			notifications.message = msg;
 			notifications.ctrl = "Job"; 

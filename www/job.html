@@ -80,7 +80,7 @@
 							</div>
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						<li class="item regular-text item-button-right {{ note.status }}" ng-repeat="note in notes track by $index">
+						<li class="item regular-text item-button-right {{note.status}}" ng-repeat="note in notes track by $index">
 							{{ note.message }}
 							<button ng-click="changeStatus( {{note}}, $event )" class="button button-clear checklist-item">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
