@@ -8624,13 +8624,12 @@ textarea {
     margin: 0 auto;
     color: white;
     font-size: 18px;
-    text-transform: uppercase;
     line-height: 60px;
     width: 50%;
     text-align: center; }
 
 .success {
-  background-color: #8fcb21; }
+  background-color: #292929; }
 
 .error {
   background-color: #ef4e3a; }

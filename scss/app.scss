@@ -568,7 +568,6 @@ textarea {
 		margin: 0 auto; 
 		color: white; 
 		font-size: $item-title; 
-		text-transform: uppercase; 
 		line-height: $nav-bar-height; 
 		width: 50%; 
 		text-align: center; 
@@ -576,7 +575,7 @@ textarea {
 }
 
 .success {
-	background-color: $success;  
+	background-color: #292929;  
 }
 
 .error {

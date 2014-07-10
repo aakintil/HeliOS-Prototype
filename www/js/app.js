@@ -266,26 +266,35 @@ app.service('notifications', ['$http', function ($http) {
 	this.message = "test"
 	this.ctrl = ""; 
 
-	this.show = function( formType ) {
-		var title = ""; 
-		var notice = ""; 
-
-		if (formType === undefined) {
+	this.show = function( data, redirect ) {
+		var title = data.title; 
+		var msg = data.msg; 
+		var notice = "";
+		console.log( data , "in notifications"); 
+		
+		if (data === undefined) {
 			notice = "appear error"; 
 			$("#notification").addClass( notice ).html("<div> An Error Occurred... </div>"); 
 		}
 		else {
 			// title can be the formType.title
-			formType.job !== undefined ? title = "Note" : title = "Job"; 
+			// formType.job !== undefined ? title = "Note" : title = "Job"; 
 
 			// add the formtype title to the notification page
 			notice = "appear success"; 
-			$("#notification").addClass( notice ).html("<div> Your " + title + " Was Successfully Created ! </div>");
+			$("#notification").addClass( notice ).html("<div>" + title + " " + msg + "</div>");
 		}
 
 		setTimeout(function() {
 			$("#notification").removeClass( notice ).addClass( "disappear" ); 
-		}, 2400);	
+
+			setTimeout( function() {
+				if ( redirect !== undefined ) { redirect() }
+			}, 300); 
+
+		}, 2400);
+
+
 	}
 
 
@@ -406,10 +415,14 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 			id: job._id, 
 			status: status
 		}
-		console.log( " should not throw bloody errors ", data )
+		//		console.log( " should not throw bloody errors ", data )
 		jobService.changeJobStatus( data )
 		.success( function( data ) {
-			debug.log( " a changed status ", data.status ); 
+			//			debug.log( " a changed status ", data.status ); 
+			var info = {}; 
+			info.title = data.title; 
+			info.msg = data.status === "completed" ? "is marked as complete" : "is still in progress"; 
+			notifications.show( info ); 
 		})
 		.error( function( data ) {
 			debug.log( "error chaging note status", data ); 
