@@ -67,13 +67,13 @@ $item-subtitle: (23/2)+px;
 // Custom
 
 * {
-    margin: 0;
-    padding: 0;
-    -webkit-user-select:html;
-    -khtml-user-select:html;
-    -moz-user-select:html;
-    -ms-user-select:html;
-    user-select:html;
+	margin: 0;
+	padding: 0;
+	-webkit-user-select:html;
+	-khtml-user-select:html;
+	-moz-user-select:html;
+	-ms-user-select:html;
+	user-select:html;
 }
 
 //was gonna use this for transitions but might have to change 
@@ -124,7 +124,7 @@ $item-subtitle: (23/2)+px;
 }
 
 .small-regular-text {
-	font-size: (29/2)+px;
+	font-size: (26/2)+px;
 	font-weight: normal;
 	color: black;
 	text-transform: none !important;
@@ -166,6 +166,8 @@ $item-subtitle: (23/2)+px;
 	height: (40/2)+px;
 	margin-right: 10px;
 	margin-bottom: -2px;
+	margin-top: 7px; 
+	float: left; 
 }
 
 // Link Styles
@@ -427,8 +429,13 @@ textarea {
 		}
 	}
 
+	.short {
+		height: 6px !important; 
+		width: 100%; 
+	}
+
 	.item-divider {
-		min-height: (56/2)+px;
+		min-height: (24/2)+px;
 
 		.section-header {
 			/*line-height: (15)+px;*/
@@ -785,11 +792,16 @@ textarea {
 
 .completed {
 	opacity: 0.5; 
-	
+
 	-webkit-transition: all 0.5s linear; 
 	-moz-transition:  all 0.5s linear; 
 	-ms-transition: all 0.5s linear; 
 	-o-transition: all 0.5s linear; 
 	transition:  all 0.5s linear;
 }
+
+
+.home + .list > .small-regular-text {
+	margin-left: 27px; 
+}	
 
