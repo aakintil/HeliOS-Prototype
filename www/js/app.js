@@ -203,6 +203,7 @@ app.service('noteService', ['$http', function ($http) {
 	};
 
 	this.createNote = function( note, id ) {
+		console.log("creating note");
 		return $http.post( urlBase, note, id );
 	}
 
@@ -292,7 +293,7 @@ app.service('notifications', ['$http', function ($http) {
 				if ( url !== undefined ) { window.location = url; }
 			}, 300); 
 
-		}, 2400);
+		}, 1500);
 
 
 	}
@@ -382,7 +383,6 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 	$scope.addTool = function(tool) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
-
 
 	$scope.expandNote = function( event ) {
 		$(event.currentTarget).find("p").toggleClass("expanded-note");
@@ -543,7 +543,7 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 			notifications.show( info, url);
 		})
 		.error ( function ( data ) {
-			console.log( "you fucked up d")
+			console.log( "Did not work")
 		})
 	}
 
@@ -657,6 +657,8 @@ function NotesCtrl( $scope, $http ) { //$http variale
 function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
+
+	$scope.predicate = 'title';
 	// onload, show all jobs
 	jobService.getJobs()
 	.success( function( data ) {
@@ -745,6 +747,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
+	$scope.predicate = 'name';
 
 	$scope.setSearchQuery = function(inputQuery) {
 		$scope.query = inputQuery;
@@ -872,7 +875,7 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 			id: '14'
 		},
 		{
-			name: 'Oliva M',
+			name: 'Olga K',
 			id: '15'
 		}
 	];

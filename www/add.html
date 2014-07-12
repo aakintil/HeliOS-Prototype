@@ -53,7 +53,7 @@
 							<div class="right-text">Select Job</div>
 						</div>
 						<ul class="list">
-							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}">
+							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}" ng-if="job._id !== '111111111111111111111111'">
 								<div class="big-title">{{job.title}}</div>
 								<div class="small-regular-text">{{job.members}}</div>
 							</li>
@@ -75,7 +75,7 @@
 			</ion-nav-bar>
 
 			<ion-view class="nav-frame">
-				<ion-content>
+				<ion-content overflow-scroll="true" class="has-header">
 					<div class="section">
 						<div class="item item-divider add">
 							<div class="left-title-button">
@@ -122,9 +122,9 @@
 				<ion-content id="add">
 					<div class="section">
 						<div class="item item-divider add">
-							<div class="left-title-button">&nbsp;</div>
-							<div class="right-text">Add New</div>
-							<div class="right-title-button"></div>
+							<!-- <div class="left-title-button">&nbsp;</div> -->
+							<div class="center-text">Add New</div>
+							<!-- <div class="right-title-button"></div> -->
 						</div>
 					</div>
 

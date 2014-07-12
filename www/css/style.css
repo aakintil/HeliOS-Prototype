@@ -6,7 +6,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8272,6 +8272,15 @@ a.button {
   transition: none !important; }
 
 * {
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: html;
+  -khtml-user-select: html;
+  -moz-user-select: html;
+  -ms-user-select: html;
+  user-select: html; }
+
+* {
   -webkit-transition: all .25s linear;
   -moz-transition: all .25s linear;
   -ms-transition: all .25s linear;
@@ -8380,7 +8389,7 @@ a:active {
   background-color: #C9E7D4; }
 
 .center-text {
-  width: 70%;
+  width: 100%;
   text-align: center; }
 
 .right-text {
@@ -8647,10 +8656,11 @@ textarea {
   #notification div {
     position: relative;
     margin: 0 auto;
+    padding-top: 10px;
     color: white;
     font-size: 18px;
-    line-height: 60px;
-    width: 50%;
+    line-height: 20px;
+    width: 75%;
     text-align: center; }
 
 .success {
@@ -8765,7 +8775,7 @@ textarea {
     position: absolute;
     right: 0;
     top: -10px;
-    margin-right: 47px; }
+    margin-right: 22px; }
 
 .completed {
   opacity: 0.5;

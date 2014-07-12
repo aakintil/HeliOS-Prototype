@@ -66,6 +66,16 @@ $item-subtitle: (23/2)+px;
 
 // Custom
 
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select:html;
+    -khtml-user-select:html;
+    -moz-user-select:html;
+    -ms-user-select:html;
+    user-select:html;
+}
+
 //was gonna use this for transitions but might have to change 
 * {
 	-webkit-transition: all .25s linear; 
@@ -205,7 +215,7 @@ a:active {
 }
 
 .center-text {
-	width: 70%;
+	width: 100%;
 	text-align: center;
 }
 
@@ -602,10 +612,11 @@ textarea {
 	div {
 		position: relative;
 		margin: 0 auto; 
+		padding-top: 10px;
 		color: white; 
 		font-size: $item-title; 
-		line-height: $nav-bar-height; 
-		width: 50%; 
+		line-height: $nav-bar-height/3; 
+		width: 75%; 
 		text-align: center; 
 	}
 }
@@ -768,7 +779,7 @@ textarea {
 		position: absolute; 
 		right: 0; 
 		top: -10px; 
-		margin-right: 47px; 
+		margin-right: 22px; 
 	}
 }
 

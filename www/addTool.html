@@ -33,17 +33,16 @@
 			</div>
 		</ion-nav-bar>
 
-		<!------------------- NOTIFICATIONS BAR ------------------->
 		<div id="notification"> </div>
 
 		<ion-view class="nav-frame">
-			<ion-content>
+			<ion-content overflow-scroll="true" class="has-header">
 				<div id="add-tools" class="section">
 					<div class="item item-divider home">
 						<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
 					</div>
 					<ul class="list">
-						<li class="item item-button-right" ng-repeat="tool in tools | filter: {name: query}">
+						<li class="item item-button-right" ng-repeat="tool in tools | orderBy:predicate | filter: {name: query} ">
 							<div class="big-title">{{tool.name}}</div>
 							<div class="small-regular-text">Current Location: {{tool.current_location}}</div>
 							<button ng-click="check($event)" class="button button-clear checklist-item" id="{{tool._id}}">

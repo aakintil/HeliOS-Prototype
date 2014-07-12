@@ -54,7 +54,7 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/index.html";
 		// }
 
-		document.location.href = "http://localhost:3000/index.html";
+		document.location.href = "http://still-inlet-9779.herokuapp.com/index.html";
 
 	});
 
@@ -70,7 +70,7 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/alerts.html?type=alert";
 		// }
 
-		document.location.href = "http://localhost:3000/alerts.html?type=alert";
+		document.location.href = "http://still-inlet-9779.herokuapp.com/alerts.html?type=alert";
 	});
 
 	$(".add-nav-button").click(function (e) {
@@ -85,7 +85,7 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/add.html";
 		// }
 
-		document.location.href = "http://localhost:3000/add.html";
+		document.location.href = "http://still-inlet-9779.herokuapp.com/add.html";
 	});
 
 	// $("#search").keypress(function(event) {
@@ -170,6 +170,7 @@ $(document).ready(function () {
 		if(e.keyCode == 13)
 		{
 			$(this).trigger("enterKey");
+			Keyboard.close();
 		}
 	});
 
