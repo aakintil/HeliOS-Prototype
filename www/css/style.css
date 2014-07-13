@@ -8545,6 +8545,7 @@ textarea {
 .section .item-divider {
   min-height: 12px; }
   .section .item-divider .section-header {
+    text-transform: uppercase;
     /*line-height: (15)+px;*/ }
 
 #alerts .list-item-title {
@@ -8792,3 +8793,9 @@ textarea {
 
 .home + .list > .small-regular-text {
   margin-left: 27px; }
+
+.create.job {
+  float: right; }
+
+.float-left {
+  float: left; }

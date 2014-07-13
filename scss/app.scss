@@ -438,6 +438,7 @@ textarea {
 		min-height: (24/2)+px;
 
 		.section-header {
+			text-transform: uppercase; 
 			/*line-height: (15)+px;*/
 		}
 	}
@@ -804,4 +805,12 @@ textarea {
 .home + .list > .small-regular-text {
 	margin-left: 27px; 
 }	
+
+.create.job {
+	float: right; 
+}
+
+.float-left {
+	float: left; 
+}
 
