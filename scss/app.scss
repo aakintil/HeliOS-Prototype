@@ -27,12 +27,12 @@ $base-background-color: $gray-light;
 
 //Base
 @font-face {
-	font-family: "Gotham Narrow";
+	font-family: "Gotham Narrow Book";
 	src: url("../fonts/GothamNarrow-Book.otf");
 }
 
 // Fonts
-$font-family-sans-serif: "Gotham Narrow";
+$font-family-sans-serif: "Gotham Narrow Book";
 
 
 // Items
@@ -239,10 +239,8 @@ a:active {
 }
 
 .offset {
-	margin-left: 4.5%;
-	margin: 0 20px; 
+	margin: 0 25px; 
 	margin-top: 20px;
-	width: 95.4%;
 
 	.item-divider {
 		background-color: $gray-lighter;
@@ -421,6 +419,9 @@ textarea {
 .nav-frame {
 	top: 17px;
 }
+.top.section {
+	margin-bottom: 60px; 	
+}
 
 .section {
 	.list {
@@ -436,7 +437,9 @@ textarea {
 
 	.item-divider {
 		min-height: (24/2)+px;
-
+		padding-left: 0; 
+		padding-right: 0; 
+		
 		.section-header {
 			text-transform: uppercase; 
 			/*line-height: (15)+px;*/
@@ -806,7 +809,7 @@ textarea {
 	margin-left: 27px; 
 }	
 
-.create.job {
+.float-right {
 	float: right; 
 }
 
@@ -814,3 +817,17 @@ textarea {
 	float: left; 
 }
 
+
+#complete {
+	margin: 0; 
+	padding: 0; 
+}
+
+#complete .icon {
+	padding: 0;
+	margin: 0 !important; 
+	height: auto; 
+}
+#complete .icon:before {
+	font-size: 55px !important; 
+}

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "Gotham Narrow";
+  font-family: "Gotham Narrow Book";
   src: url("../fonts/GothamNarrow-Book.otf"); }
 
 input {
@@ -2861,7 +2861,7 @@ body,
   color: black;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: "Gotham Narrow";
+  font-family: "Gotham Narrow Book";
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -3159,7 +3159,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: black;
   font-weight: 500;
-  font-family: "Gotham Narrow";
+  font-family: "Gotham Narrow Book";
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
   .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
@@ -5440,7 +5440,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Gotham Narrow"; }
+  font-family: "Gotham Narrow Book"; }
 
 .item-input {
   display: -webkit-box;
@@ -8162,9 +8162,9 @@ a.button {
  * Apply roboto font
  */
 .roboto {
-  font-family: "Roboto", "Gotham Narrow"; }
+  font-family: "Roboto", "Gotham Narrow Book"; }
   .roboto input {
-    font-family: "Roboto", "Gotham Narrow"; }
+    font-family: "Roboto", "Gotham Narrow Book"; }
 
   /*
 .platform-android {
@@ -8288,7 +8288,7 @@ a.button {
   transition: all .25s linear; }
 
 .big-title {
-  font-family: "Gotham Narrow";
+  font-family: "Gotham Narrow Book";
   font-size: 18px;
   font-weight: bold;
   color: black; }
@@ -8407,10 +8407,8 @@ a:active {
   width: 15%; }
 
 .offset {
-  margin-left: 4.5%;
-  margin: 0 20px;
-  margin-top: 20px;
-  width: 95.4%; }
+  margin: 0 25px;
+  margin-top: 20px; }
   .offset .item-divider {
     background-color: #989898; }
 
@@ -8537,13 +8535,18 @@ textarea {
 .nav-frame {
   top: 17px; }
 
+.top.section {
+  margin-bottom: 60px; }
+
 .section .list .item {
   min-height: 62.5px; }
 .section .short {
   height: 6px !important;
   width: 100%; }
 .section .item-divider {
-  min-height: 12px; }
+  min-height: 12px;
+  padding-left: 0;
+  padding-right: 0; }
   .section .item-divider .section-header {
     text-transform: uppercase;
     /*line-height: (15)+px;*/ }
@@ -8794,8 +8797,20 @@ textarea {
 .home + .list > .small-regular-text {
   margin-left: 27px; }
 
-.create.job {
+.float-right {
   float: right; }
 
 .float-left {
   float: left; }
+
+#complete {
+  margin: 0;
+  padding: 0; }
+
+#complete .icon {
+  padding: 0;
+  margin: 0 !important;
+  height: auto; }
+
+#complete .icon:before {
+  font-size: 55px !important; }
