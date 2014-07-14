@@ -61,7 +61,7 @@ $(document).ready(function () {
 		} else {
 			document.location.href = "http://still-inlet-9779.herokuapp.com/index.html";
 		}
-		
+
 
 	});
 
@@ -187,26 +187,12 @@ $(document).ready(function () {
 		if(e.keyCode == 13)
 		{
 			$(this).trigger("enterKey");
-			cordova.plugins.Keyboard.close();
+//			cordova.plugins.Keyboard.close();
 		}
 	});
 
-	$('.addListItemInput').hide();
+	$('#addNoteFromJob').hide();
 
-	$('.addListItemText').click(function() {
-		$(this).nextAll('.addListItemInput');
-		$(this).hide();
-		$(this).nextAll('.addListItemInput').show();
-		setTimeout(function(){
-			$(".addListItemInput").focus();
-		}, 0);
-	});
-
-	$('.addListItemInput').bind("enterKey", function() {
-		$(this).hide();
-		$(this).val("");
-		$(this).prevAll('.addListItemText').show();
-	});
 
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {

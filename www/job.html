@@ -99,16 +99,13 @@
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
-					<div class="float-right create note">
+					<div class="float-right create note addListItemText" ng-click="inlineShowInput( $event )">
 						+ Add Note
 					</div>
 				</div>
 			</div>
 			<ul class="list notes insert">
 				<li class="item" id="addNoteFromJob">
-					<div class="addListItemText action-text list-action-item">
-						+ Add Note
-					</div>
 					<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 				</li>
 				<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote( $event )">

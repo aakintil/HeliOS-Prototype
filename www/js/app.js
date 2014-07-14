@@ -180,12 +180,12 @@ app.directive('detectGestures', function( $ionicGesture ) {
 This directive allows us to pass a function in on an enter key to do what we want.
 From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 */
-.directive('ngEnter', function () {
-	return function (scope, element, attrs) {
-		element.bind("keydown keypress", function (event) {
-			if(event.which === 13) {
-				scope.$apply(function (){
-					scope.$eval(attrs.ngEnter);
+.directive( 'ngEnter', function () {
+	return function ( scope, element, attrs ) {
+		element.bind("keydown keypress", function ( event ) {
+			if( event.which === 13 ) {
+				scope.$apply( function () {
+					scope.$eval( attrs.ngEnter );
 				});
 
 				event.preventDefault();
@@ -477,20 +477,33 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
 
-	$scope.addNote = function(note) {
+	$scope.addNote = function( note ) {
+		console.log('should print')
+		// hide DOM Elements 
+		$( ".addListItemInput" ).parent().hide();
+		$( ".addListItemInput" ).val("");
+
+		// run the rest of the method
 		var form = {}; 
 		form.note = note; 
 		form.id = jobId; 
 		console.log(note.message); 
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
-		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + "</p><button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
+		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + '</p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)"><i class="icon ion-ios7-checkmark-outline medium-icon"></i></button></li>'); 
 		$(".insert").append( domNote ); 
 		$compile( domNote )($scope);
+		$compile( $( "" ) )($scope);
+		$compile( $( "" ) )($scope);
+
 
 		noteService.createNote( form )
 		.success( function( data ) {
-			console.log( "all notes from this job successfully created | ", data )
+			console.log( "all notes from this job successfully created | ", data ); 
+			var info = {}; 
+			info.title = "Note"; 
+			info.msg = "has been successfully created! \n And shared with Olga K."; 
+			notifications.show( info )
 			//			$scope.notes = $scope.job.notes; 
 		})
 		.error( function( data ) {
@@ -579,6 +592,22 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		.error( function( data ) {
 			debug.log( "error chaging note status", data ); 
 		})
+	}
+
+
+	$scope.insertNoteInput = function() {
+		//		var container = $(".insert"); 
+		//		var input = '<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>'; 
+		//		container.prepend( input ); 
+		//		$compile( input )( $scope );
+	}
+
+	// note creation click events 
+
+	$scope.inlineShowInput = function( event ) {
+		console.log( event ); 
+		$( "#addNoteFromJob" ).show(); 
+		$( ".addListItemInput" ).focus();
 	}
 
 }
@@ -1005,8 +1034,8 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
 	console.log("yea");  
-//	$scope.feed = [];
-//	$scope.notes = {}; 
+	//	$scope.feed = [];
+	//	$scope.notes = {}; 
 	jobService.getRecentJobs( "created" ) 
 	.success( function( data ) {
 		notes.push(data); 
@@ -1017,12 +1046,12 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 
 	noteService.getRecentNotes( "created" ) 
 	.success( function( data ) {
-//		$scope.feed.push(data); 
-//		$scope.notes = data; 
+		//		$scope.feed.push(data); 
+		//		$scope.notes = data; 
 	})
 	.error( function( data ) {
 
 	})
-debug( " should not be empty ", notes )
+	debug( " should not be empty ", notes )
 
 }
