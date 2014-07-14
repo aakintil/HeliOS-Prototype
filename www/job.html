@@ -60,7 +60,7 @@
 
 		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content class="job" overflow-scroll="true" class="has-header">
-				<div class="section">
+				<div class="top section">
 					<div class="item item-divider {{headerType}} header-row">
 						<div class="left-title-button">
 							<back>
@@ -74,7 +74,7 @@
 					<div id="job-title" class="{{job.status}}">
 						<div class="big-title offset item-button-right">{{job.title}}</div>
 
-						<button ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
+						<button id="complete" ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
 							<i  class="icon ion-ios7-checkmark-outline medium-icon"></i>
 						</button>
 					</div>
@@ -84,11 +84,12 @@
 				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
 				<div class="section offset {{ complete }}">
-					<div class="item item-button-right item-divider">
-						<div class="section-header small-title"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
+					<div class="item item-divider">
+						<div class="section-header small-title float-left"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
+						<div class="float-right create note">
+						+ Add Note
+<!--							<i class="icon ion-ios7-arrow-down"></i>-->
+						</div>
 					</div>
 					<ul class="list notes insert">
 						<li class="item" id="addNoteFromJob">
@@ -97,7 +98,7 @@
 							</div>
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						<li class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote($event)">
+						<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote( $event, note, job )">
 							<p class="regular-text">{{ note.message }}</p>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)">
 								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>

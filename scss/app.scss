@@ -27,12 +27,12 @@ $base-background-color: $gray-light;
 
 //Base
 @font-face {
-	font-family: "Gotham Narrow";
+	font-family: "Gotham Narrow Book";
 	src: url("../fonts/GothamNarrow-Book.otf");
 }
 
 // Fonts
-$font-family-sans-serif: "Gotham Narrow";
+$font-family-sans-serif: "Gotham Narrow Book";
 
 
 // Items
@@ -67,13 +67,13 @@ $item-subtitle: (23/2)+px;
 // Custom
 
 * {
-    margin: 0;
-    padding: 0;
-    -webkit-user-select:html;
-    -khtml-user-select:html;
-    -moz-user-select:html;
-    -ms-user-select:html;
-    user-select:html;
+	margin: 0;
+	padding: 0;
+	-webkit-user-select:html;
+	-khtml-user-select:html;
+	-moz-user-select:html;
+	-ms-user-select:html;
+	user-select:html;
 }
 
 //was gonna use this for transitions but might have to change 
@@ -124,7 +124,7 @@ $item-subtitle: (23/2)+px;
 }
 
 .small-regular-text {
-	font-size: (29/2)+px;
+	font-size: (26/2)+px;
 	font-weight: normal;
 	color: black;
 	text-transform: none !important;
@@ -166,6 +166,8 @@ $item-subtitle: (23/2)+px;
 	height: (40/2)+px;
 	margin-right: 10px;
 	margin-bottom: -2px;
+	margin-top: 7px; 
+	float: left; 
 }
 
 // Link Styles
@@ -237,10 +239,8 @@ a:active {
 }
 
 .offset {
-	margin-left: 4.5%;
-	margin: 0 20px; 
+	margin: 0 25px; 
 	margin-top: 20px;
-	width: 95.4%;
 
 	.item-divider {
 		background-color: $gray-lighter;
@@ -419,6 +419,9 @@ textarea {
 .nav-frame {
 	top: 17px;
 }
+.top.section {
+	margin-bottom: 60px; 	
+}
 
 .section {
 	.list {
@@ -427,10 +430,18 @@ textarea {
 		}
 	}
 
-	.item-divider {
-		min-height: (56/2)+px;
+	.short {
+		height: 6px !important; 
+		width: 100%; 
+	}
 
+	.item-divider {
+		min-height: (24/2)+px;
+		padding-left: 0; 
+		padding-right: 0; 
+		
 		.section-header {
+			text-transform: uppercase; 
 			/*line-height: (15)+px;*/
 		}
 	}
@@ -785,7 +796,7 @@ textarea {
 
 .completed {
 	opacity: 0.5; 
-	
+
 	-webkit-transition: all 0.5s linear; 
 	-moz-transition:  all 0.5s linear; 
 	-ms-transition: all 0.5s linear; 
@@ -793,3 +804,30 @@ textarea {
 	transition:  all 0.5s linear;
 }
 
+
+.home + .list > .small-regular-text {
+	margin-left: 27px; 
+}	
+
+.float-right {
+	float: right; 
+}
+
+.float-left {
+	float: left; 
+}
+
+
+#complete {
+	margin: 0; 
+	padding: 0; 
+}
+
+#complete .icon {
+	padding: 0;
+	margin: 0 !important; 
+	height: auto; 
+}
+#complete .icon:before {
+	font-size: 55px !important; 
+}

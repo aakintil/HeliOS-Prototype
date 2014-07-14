@@ -15,6 +15,8 @@ var debug = {
 	}	
 }
 
+
+
 //backStack, keeps track of the backstack for each seperate tab
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -75,6 +77,68 @@ var app = angular.module('starter', ['ionic'])
 //		},
 //	];
 //})
+
+
+
+
+
+// Gestures code 
+
+angular.module('ionicApp', ['ionic'])
+
+app.controller('gestureCtrl', function($scope, $timeout) {
+	$scope.myTitle = 'Template';
+
+	$scope.data = {
+		swipe : 0,
+		swiperight: 0,
+		swipeleft: 0,
+		tap : 0,
+		doubletap : 0
+	};
+
+	$scope.reportEvent = function(event)  {
+		console.log('Reporting : ' + event.type);
+
+		$timeout(function() {
+			$scope.data[event.type]++;
+		})
+	}
+
+
+})
+
+app.directive('detectGestures', function( $ionicGesture ) {
+	return {
+		restrict :  'A',
+
+		link : function(scope, elem, attrs) {
+			var gestureType = attrs.gestureType;
+
+			switch(gestureType) {
+				case 'swipe':
+					$ionicGesture.on('swipe', scope.reportEvent, elem);
+					break;
+				case 'swiperight':
+					$ionicGesture.on('swiperight', scope.reportEvent, elem);
+					break;
+				case 'swipeleft':
+					$ionicGesture.on('swipeleft', scope.reportEvent, elem);
+					break;
+				case 'doubletap':
+					$ionicGesture.on('doubletap', scope.reportEvent, elem);
+					break;
+				case 'tap':
+					$ionicGesture.on('tap', scope.reportEvent, elem);
+					break;
+			}
+
+		}
+	}
+})
+
+// end of gestures
+
 
 
 ////////////////////////////////////////////////
@@ -179,6 +243,10 @@ app.service('jobService', ['$http', function ($http) {
 
 	this.changeJobStatus = function( job ) {
 		return $http.put( urlBase + '/' + job.id + '/' + job.status ); 
+	}
+
+	this.deleteNote = function( job_id, note_id  ) {
+		return $http.delete( urlBase + '/' + job_id + '/' + note_id ); 
 	}
 
 
@@ -313,7 +381,34 @@ app.service('notifications', ['$http', function ($http) {
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
+function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout ) {
+
+
+
+	//	$scope.data = {
+	//		swipe : 0,
+	//		swiperight: 0,
+	//		swipeleft: 0,
+	//		tap : 0,
+	//		doubletap : 0
+	//	};
+	//
+	//	$scope.reportEvent = function(event)  {
+	//		console.log('Reporting : ' + event);
+	//
+	//		if ( event.type === "swipe" ) {
+	//			$scope.deleteNote( event ); 
+	//		}
+	//		
+	//		$timeout(function() {
+	//			$scope.data[event.type]++;
+	//		})
+	//	}
+	//	
+	//	$scope.deleteNote = function( event ) {
+	//		console.log( "has been called"); 
+	//	}
+
 
 	debug.log( "hopefully this will change", notifications )
 	var absUrl = $location.$$absUrl;
@@ -321,7 +416,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 
 	$scope.headerType = "home";
 	var paramString = absUrl.substring(absUrl.indexOf('?')+1);
-	
+
 	if (paramString) {
 		var params = paramString.split('&');
 
@@ -388,8 +483,17 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications ) {
 		jobService.addToolToJob(jobId, {name: tool});
 	};
 
-	$scope.expandNote = function( event ) {
-		$(event.currentTarget).find("p").toggleClass("expanded-note");
+	$scope.expandNote = function( event, note, job ) {
+		console.log( note );
+		
+		jobService.deleteNote( job._id, note._id )
+		.success( function( data ) {
+
+		})
+		.error( function( data ) {
+
+		})
+		//		$(event.currentTarget).find("p").toggleClass("expanded-note");
 	}
 
 	$scope.s = "unchecked"; 
@@ -540,7 +644,7 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 		.success( function( data ) {
 			var url = "job.html?id=" + data._id; 
 			console.log( data );
-			
+
 			var info = {}; 
 			info.title = ""; 
 			info.msg = "Job Successfully Created"; 
@@ -577,7 +681,7 @@ function NavCtrl($scope, toolService, $location) {
 	var absUrl = $location.$$absUrl;
 	$scope.headerType = "home";
 	var paramString = absUrl.substring(absUrl.indexOf('?')+1);
-	
+
 	if (paramString) {
 		var params = paramString.split('&');
 		if (params.length >= 2) {
