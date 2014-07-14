@@ -317,5 +317,6 @@ $(document).ready(function () {
 	$( ".expand" ).click( function() {
 		alert(" have been clicked ")
 	})
+	$( ".modal").hide(); 
 
 });
