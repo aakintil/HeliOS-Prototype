@@ -8721,12 +8721,13 @@ textarea {
   -ms-transition: all 0.15s linear;
   -o-transition: all 0.15s linear;
   transition: all 0.15s linear;
-  top: -15px !important;
+  top: -12.5px !important;
   margin-left: -15px; }
   .collapsable i:before {
     font-size: 20px !important; }
 
 .rotate180 {
+  top: -14px !important;
   -webkit-transition: all 0.15s linear;
   -moz-transition: all 0.15s linear;
   -ms-transition: all 0.15s linear;

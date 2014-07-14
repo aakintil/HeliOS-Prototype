@@ -26,7 +26,7 @@
 
 	<body ng-app="starter">
 
-		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
+		<ion-nav-bar id="nav-bar" ng-controller="ActivityFeedCtrl" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
@@ -50,7 +50,8 @@
 					<div class="list">
 
 						<a href="job.html?id=53be081604b37af3d04528db&type=alert">
-							<div class="item item-button-right">
+							{{ feed === undefined }}
+							<div class="item item-button-right" ng-repeat="el in feed track by $index">
 								<div class="alert-extras">
 									<div class="small-light-caps alert-type">
 										<img class="medium-icon" src="img/icons/home-gray.svg">
@@ -59,7 +60,7 @@
 									<div class="small-light-caps alert-time">2 Minutes Ago</div>
 								</div>
 								<div class="regular-text alert-text"> 
-									Olga K. added note to the job Replace Faulty Bolts.
+									{{ el.created }}
 								</div>
 							</div>
 						</a>

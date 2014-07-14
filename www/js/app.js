@@ -220,18 +220,15 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + type + '/' + param );
 	}
 
-	//	this.getNoteWithId = function( id ) {
-	//		return $http.get( urlBase + '/' + id );
-	//	};
+	this.getRecentJobs = function( field ) {
+		return $http.get( urlBase + '/m/d/y/' + field );
+	}
 
 
 	this.addTool = function() {
 		return $http.put( urlBase + '/' + id );
 	}
 
-	//	this.addNote = function( note, id ) {
-	//		return $http.put( noteUrlBase + '/' + id, note )
-	//	}
 
 	this.updateJobWithNote = function( id ) {
 		return $http.post( urlBase + '/' + id )
@@ -290,6 +287,10 @@ app.service('noteService', ['$http', function ($http) {
 
 	this.deleteNote = function( note_id  ) {
 		return $http.delete( urlBase + '/' + note_id ); 
+	}
+
+	this.getRecentNotes = function( field ) {
+		return $http.get( urlBase + '/m/d/y/' + field)
 	}
 
 
@@ -410,7 +411,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		console.log( "has been called"); 
 		console.log( event ); 
 		var el = $( event.currentTarget ); 
-		el.addClass('animated zoomOutRight');
+		el.addClass('animated fadeOutRight');
 		// on animation end display none
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			$( el ).slideToggle( "slow" ); 
@@ -929,6 +930,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	//	];
 }
 
+var notes = []; 
 function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
@@ -1004,3 +1006,26 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	$scope.predicate = 'name';
 }
 
+function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
+	console.log("yea");  
+//	$scope.feed = [];
+//	$scope.notes = {}; 
+	jobService.getRecentJobs( "created" ) 
+	.success( function( data ) {
+		notes.push(data); 
+	})
+	.error( function( data ) {
+
+	})
+
+	noteService.getRecentNotes( "created" ) 
+	.success( function( data ) {
+//		$scope.feed.push(data); 
+//		$scope.notes = data; 
+	})
+	.error( function( data ) {
+
+	})
+debug( " should not be empty ", notes )
+
+}
