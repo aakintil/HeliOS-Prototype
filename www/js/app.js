@@ -378,36 +378,52 @@ app.service('notifications', ['$http', function ($http) {
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout ) {
+function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout, $compile ) {
 
 
 
-	//	$scope.data = {
-	//		swipe : 0,
-	//		swiperight: 0,
-	//		swipeleft: 0,
-	//		tap : 0,
-	//		doubletap : 0
-	//	};
-	//
-	//	$scope.reportEvent = function(event)  {
-	//		console.log('Reporting : ' + event);
-	//
-	//		if ( event.type === "swipe" ) {
-	//			$scope.deleteNote( event ); 
-	//		}
-	//		
-	//		$timeout(function() {
-	//			$scope.data[event.type]++;
-	//		})
-	//	}
-	//	
-	//	$scope.deleteNote = function( event ) {
-	//		console.log( "has been called"); 
-	//	}
+	$scope.data = {
+		swipe : 0,
+		swiperight: 0,
+		swipeleft: 0,
+		tap : 0,
+		doubletap : 0
+	};
+
+	$scope.reportEvent = function(event)  {
+		console.log('Reporting : ' + event);
+
+		if ( event.type === "swipe" ) {
+			$scope.deleteNote( event ); 
+		}
+
+		$timeout(function() {
+			$scope.data[event.type]++;
+		})
+	}
+
+	$scope.deleteNote = function( event ) {
+		console.log( "has been called"); 
+		console.log( event ); 
+		var el = $( event.currentTarget ); 
+		el.addClass('animated zoomOutRight');
+		// on animation end display none
+		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+			$( el ).slideToggle( "slow" ); 
+		});
+
+		// need a way to get the id on swipe
+		//		noteService.deleteNote( note._id )
+		//		.success( function( data ) {
+		//
+		//		})
+		//		.error( function( data ) {
+		//
+		//		})
+	}
 
 
-	debug.log( "hopefully this will change", notifications )
+	//	debug.log( "hopefully this will change", notifications )
 	var absUrl = $location.$$absUrl;
 	var jobId = absUrl.substr( absUrl.indexOf('=') + 1);
 
@@ -436,8 +452,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
 	}
 
-	console.log($scope.headerType);
-	console.log(jobId);
+	//	console.log($scope.headerType);
+	//	console.log(jobId);
 
 	// Show the job with the given id
 	jobService.getJobWithId( jobId )
@@ -463,8 +479,9 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		console.log(note.message); 
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
-		var domNote = $("<li class='item regular-text item-button-right'>" + note.message + "<button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
+		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + "</p><button class='button button-clear checklist-item'><i class='icon ion-ios7-checkmark-outline medium-icon'></i></button></li>"); 
 		$(".insert").append( domNote ); 
+		$compile( domNote )($scope);
 
 		noteService.createNote( form )
 		.success( function( data ) {
@@ -480,17 +497,9 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		jobService.addToolToJob(jobId, {name: tool});
 	};
 
-	$scope.expandNote = function( event, note, job ) {
-		console.log( note );
-
-		noteService.deleteNote( note._id )
-		.success( function( data ) {
-
-		})
-		.error( function( data ) {
-
-		})
-		//		$(event.currentTarget).find("p").toggleClass("expanded-note");
+	$scope.expandNote = function( event ) {
+		console.log(" clicked ")
+		$(event.currentTarget).find("p").toggleClass("expanded-note");
 	}
 
 	$scope.s = "unchecked"; 

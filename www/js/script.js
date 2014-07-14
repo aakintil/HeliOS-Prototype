@@ -262,5 +262,10 @@ $(document).ready(function () {
 		$('#people-modal').hide();
 		$('#add-page').show();
 	});
+	
+	
+	$( ".expand" ).click( function() {
+		alert(" have been clicked ")
+	})
 
 });
