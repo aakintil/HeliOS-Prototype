@@ -53,7 +53,7 @@ app.configure(function() {
 var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
 	status : String,
-//	status : { type: String, default: 'unchecked' }, 
+	//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : String 
 	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
@@ -150,7 +150,7 @@ app.get('/api/notes/:type/:name', function( req, res  ) {
 
 app.put( '/api/notes/:id/:status', function( req, res ) {
 	console.log( "------- SEE MEEE ------- ");
-//	console.log( req.params );
+	//	console.log( req.params );
 	var query = { _id : req.params.id }; 
 	var s = req.params.status; 
 	var status = s === "na" ? "" : s;
@@ -225,7 +225,7 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 // change the status of a job
 app.put( '/api/jobs/:id/:status', function( req, res ) {
 	console.log( "------- SEE MEEE ------- ");
-//	console.log( req.params );
+	//	console.log( req.params );
 	var query = { _id : req.params.id }; 
 	var s = req.params.status; 
 	var status = s === "na" ? "" : s;
@@ -247,25 +247,25 @@ app.get('/api/jobs/:id', function( req, res ) {
 
 	Job.findOne( query ).populate("tools").populate("notes").exec( function( err, job ) {
 		if ( err ) { console.log( "you don goofed ") }; 
-//		console.log( "LOOK AT MEEEEE ", job );
+		//		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
 	});
 });
 
 
-app.post('/api/jobs/:type/:param', function( req, res  ) {
-	console.log( "======== CALLING THE INSERT TOOL INTO JOB METHOD =======")
-	console.log( " the job ", req.params );
-
-	// var n = "^" + req.params.name; 
-	// var name = new RegExp( n ); 
-	// var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
-
-	// Note.find( query, function( err, item ) {
-	// 	console.log( "i am in the find one query function ", item );
-	// 	res.json( item );
-	// });
-});
+//app.post('/api/jobs/:type/:param', function( req, res  ) {
+//	console.log( "======== CALLING THE INSERT TOOL INTO JOB METHOD =======")
+//	console.log( " the job ", req.params );
+//
+//	// var n = "^" + req.params.name; 
+//	// var name = new RegExp( n ); 
+//	// var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
+//
+//	// Note.find( query, function( err, item ) {
+//	// 	console.log( "i am in the find one query function ", item );
+//	// 	res.json( item );
+//	// });
+//});
 
 
 
@@ -342,6 +342,44 @@ app.post( '/api/jobs/:id', function( req, res ) {
 	//	});
 })
 
+
+// delete a note from a job
+app.delete( '/api/jobs/:job_id/:note_id', function( req, res ) {
+	console.log( req.params ); 
+	query = { _id : req.params.job_id }
+	Job.find( query, function( err, job ) {
+		if (err) { console.log( "messed up" )};
+//		console.log( job.notes ); 
+
+		//		job.remove({ 
+		//			_id : req.params.note_id
+		//		}, function( err, note ) {
+		//			if ( err ) { console.log( " efjkl;asdjfals;fd ") }; 
+		//			console.log( "the deleted note! "); 
+		//		})
+	}).populate("notes").exec( function( err, note ) {
+		if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+		var q2 = { "notes._id" : req.params.note_id }
+		console.log( note )
+		Job.find( q2, function( err, note ) { 
+			if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
+				console.log( note )
+			//							res.json( jobs ); 
+		})
+		//						res.json( job )
+	});
+	//	Note.remove({
+	//		_id : req.params.note_id
+	//	}, function( err, note ) {
+	//		if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
+	//
+	//		Note.find( function( err, notes ) {
+	//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
+	//
+	//			res.json( notes ) // return all notes in the JSON format after we create another
+	//		})
+	//	})
+})
 
 
 
