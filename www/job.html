@@ -16,7 +16,7 @@
 
 		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-<!--		<script src="js/jquery-ui.js"></script>-->
+		<!--		<script src="js/jquery-ui.js"></script>-->
 		<!-- ionic/angularjs js -->
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -87,7 +87,13 @@
 
 			<div class="section offset {{ complete }}">
 				<div class="item item-divider">
-					<div class="section-header small-title float-left"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
+					<div class="section-header marginLess30 small-title float-left">
+						<img class="small-icon" src="img/icons/notes-dark.svg">
+						Notes
+						<button class="collapsable button button-clear button-positive">
+							<i class="icon ion-ios7-arrow-down"></i>
+						</button>
+					</div>
 					<div class="float-right create note">
 						+ Add Note
 						<!--							<i class="icon ion-ios7-arrow-down"></i>-->
@@ -111,10 +117,13 @@
 
 			<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
 				<div class="item item-button-right item-divider">
-					<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
-					<button class="collapsable button button-clear button-positive">
-						<i class="icon ion-ios7-arrow-down"></i>
-					</button>
+					<div class="section-header marginLess30 small-title">
+						<img class="small-icon" src="img/icons/tools-dark.svg">
+						Tools
+						<button class="collapsable button button-clear button-positive">
+							<i class="icon ion-ios7-arrow-down"></i>
+						</button>
+					</div>
 				</div>
 				<ul class="list">
 					<li class="item" id="addToolFromJob">
@@ -181,8 +190,12 @@
 				<div class="item item-button-right item-divider">
 					<div class="section-header small-title">
 
-						<div class="detail-header">
-							<img class="small-icon" src="img/icons/jobs-dark.svg">Job Details
+						<div class="detail-header marginLess15">
+							<img class="small-icon" src="img/icons/jobs-dark.svg">
+							Job Details
+							<button class="collapsable button button-clear button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
 						</div>
 
 						<div class="detail">
@@ -199,9 +212,6 @@
 						</div>
 
 					</div>
-					<button class="collapsable button button-clear button-positive">
-						<i class="icon ion-ios7-arrow-down"></i>
-					</button>
 				</div>
 				<ul class="list">
 					<li class="item action-text">

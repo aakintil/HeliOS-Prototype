@@ -108,8 +108,9 @@ $(document).ready(function () {
 
 	//	Collapsable Code
 
-	$(".collapsable").click( function() {
-		var list =  $(this).parent().siblings(".list"); 
+	$( '.collapsable' ).click( function() {
+		var list = $( this ).closest( '.item-divider' ).siblings( '.list' ); 
+		$( this ).toggleClass( 'rotate180' ); 
 		list.slideToggle(); 
 	}); 
 
@@ -181,7 +182,7 @@ $(document).ready(function () {
 		$(this).hide();
 		$(this).nextAll('.addListItemInput').show();
 		setTimeout(function(){
-		    $(".addListItemInput").focus();
+			$(".addListItemInput").focus();
 		}, 0);
 	});
 
@@ -250,20 +251,20 @@ $(document).ready(function () {
 		$('#input-participants').val(participants);
 		$('#input-participants').trigger('input');
 		$('#people-modal').hide();
-	 	$('#add-page').show();
+		$('#add-page').show();
 	});
 
 	$(".back-job").click(function(){
 		$('#job-modal').hide();
 		$('#add-page').show();
 	});
-	
+
 	$(".back-people").click(function(){
 		$('#people-modal').hide();
 		$('#add-page').show();
 	});
-	
-	
+
+
 	$( ".expand" ).click( function() {
 		alert(" have been clicked ")
 	})
