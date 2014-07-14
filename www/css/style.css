@@ -6,7 +6,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8477,7 +8477,10 @@ textarea {
 
 #nav-bar {
   height: 60px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.42); }
+  border-bottom: 2px solid rgba(0, 0, 0, 0.42);
+  /*	#search:focus {
+  		width: $search-bar-expanded;
+  	}*/ }
   #nav-bar .button {
     border: 0px;
     color: #010101;
@@ -8491,13 +8494,26 @@ textarea {
     box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
     color: white; }
   #nav-bar #search {
-    -webkit-transition: width .25s;
-    transition: width .25s;
+    /*-webkit-transition: width .5s;
+    transition: width .5s;*/
     margin: auto;
-    margin-right: 10px;
+    margin: 10px;
     border: 2px solid #989898;
-    width: 30%;
-    height: 33px; }
+    width: 60%;
+    height: 33px;
+    background: url("../img/icons/search.svg") no-repeat;
+    padding-left: 40px; }
+  #nav-bar #search::-webkit-search-cancel-button {
+    position: relative;
+    right: 20px; }
+  #nav-bar #search.expanded {
+    width: 80%; }
+  #nav-bar .clear-button {
+    margin-left: -40px;
+    color: black;
+    line-height: 58px;
+    font-size: 20px;
+    width: 40px; }
   #nav-bar .search-border {
     border: 2px solid #9422af !important; }
   #nav-bar .search-search {
@@ -8506,8 +8522,6 @@ textarea {
     width: 70%;
     border: 2px solid #989898;
     height: 33px; }
-  #nav-bar #search:focus {
-    width: 65%; }
   #nav-bar .icon {
     max-height: 25px;
     max-width: 25px;
@@ -8526,7 +8540,7 @@ textarea {
   top: 60px;
   background-color: #F0F0F0;
   border: 2px solid #989898;
-  width: 65%;
+  width: 80%;
   z-index: 20;
   position: absolute;
   right: 0;
@@ -8760,13 +8774,13 @@ textarea {
   width: 140px;
   padding: 0 20px 0 20px; }
 
-.add-modal {
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  display: none; }
+.modal {
+  left: 10%;
+  top: 10%;
+  border: 3px solid red;
+  overflow: hidden;
+  width: 80%;
+  height: 80%; }
 
 .job-selection {
   /*border: 1px solid red;*/ }

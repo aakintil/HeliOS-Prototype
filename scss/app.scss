@@ -46,8 +46,8 @@ $item-light-border: rgb(185, 185, 185);
 
 
 // Search
-$search-bar: 30%; 
-$search-bar-expanded: 65%; 
+$search-bar: 60%; 
+$search-bar-expanded: 80%; 
 
 //Forms
 input {
@@ -356,13 +356,32 @@ textarea {
 	}
 
 	#search {
-		-webkit-transition: width .25s;
-		transition: width .25s;
+		/*-webkit-transition: width .5s;
+		transition: width .5s;*/
 		margin: auto;
-		margin-right: 10px;
+		margin: 10px;
 		border: 2px solid $gray-lighter;
 		width: $search-bar;
 		height: (66/2)+px;
+		background: url('../img/icons/search.svg') no-repeat;
+		padding-left: 40px;
+	}
+
+	#search::-webkit-search-cancel-button{
+	    position:relative;
+	    right:20px;    
+	}
+
+	#search.expanded {
+		width: $search-bar-expanded;
+	}
+
+	.clear-button {
+		margin-left: -40px;
+		color: black;
+		line-height: 58px;
+		font-size: 20px;
+		width: 40px;
 	}
 
 	.search-border {
@@ -377,9 +396,9 @@ textarea {
 		height: (66/2)+px;
 	}
 
-	#search:focus {
+/*	#search:focus {
 		width: $search-bar-expanded;
-	}
+	}*/
 
 	.icon {
 		max-height: 25px;
@@ -756,13 +775,13 @@ textarea {
 	padding: 0 20px 0 20px;
 }
 
-.add-modal {
-	top: 0px;
-	right: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	display: none;
+.modal {
+	left: 10%;
+	top: 10%;
+	border: 3px solid red;
+	overflow: hidden;
+	width: 80%;
+	height: 80%;
 }
 
 .job-selection {

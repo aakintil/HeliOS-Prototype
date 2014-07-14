@@ -210,11 +210,41 @@ $(document).ready(function () {
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {
 		var query = $( this ).val(); 
-		console.log( query, " should not be null");  
 		$(this).val("");
 		window.location = "search.html?"+query; 		
 	});
 
+	$('#search').keyup(function() {
+		if ($('#search').val().length > 0) {
+			$('.clear-button').fadeIn(50);
+		} else {
+			$('.clear-button').fadeOut(50);
+		}
+	});
+
+	// Code for handling search bar results
+	$('#search').bind("focus", function() {
+		$('.cancel-button').fadeIn(50);
+		$('#nav-buttons').fadeOut(50);
+		console.log("expanded");
+		$('#search').addClass('expanded');
+	});
+
+	$('.cancel-button').hide();
+	$('.clear-button').hide();
+	$('.cancel-button').click(function() {
+		$("#search").val("");
+		$('#search').removeClass('expanded');
+		$('.cancel-button').fadeOut(50);
+		$('.clear-button').fadeOut(50);
+		$('#nav-buttons').fadeIn(50);
+	});
+
+	$('.clear-button').click(function() {
+		$('.clear-button').fadeOut(50);
+		$("#search").val("");
+		$("#search").focus();
+	});
 
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
@@ -277,6 +307,10 @@ $(document).ready(function () {
 	$(".back-people").click(function(){
 		$('#people-modal').hide();
 		$('#add-page').show();
+	});
+
+	$("#add-tools").click(function() {
+		$("#tools-modal").show();
 	});
 
 });
