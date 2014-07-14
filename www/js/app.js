@@ -285,6 +285,10 @@ app.service('noteService', ['$http', function ($http) {
 		return $http.delete( urlBase + '/' + note_id ); 
 	}
 
+	this.getRecentNotes = function( field ) {
+		return $http.get( urlBase + '/m/d/y/' + field)
+	}
+
 
 	// change this to a simple getNote function 
 	this.getNoteWithMsg = function( type, param ) {
@@ -919,6 +923,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	//	];
 }
 
+var notes = []; 
 function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
@@ -995,13 +1000,25 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 }
 
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
-	console.log("yea"); 
+	console.log("yea");  
+//	$scope.feed = [];
+//	$scope.notes = {}; 
 	jobService.getRecentJobs( "created" ) 
 	.success( function( data ) {
-		for ( var i in data )
-		console.log( data[i].created )
+		notes.push(data); 
 	})
 	.error( function( data ) {
-		
+
 	})
+
+	noteService.getRecentNotes( "created" ) 
+	.success( function( data ) {
+//		$scope.feed.push(data); 
+//		$scope.notes = data; 
+	})
+	.error( function( data ) {
+
+	})
+debug( " should not be empty ", notes )
+
 }

@@ -65,6 +65,7 @@ app.configure(function() {
 var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
 	status : String,
+	created: { type: Date, default: Date.now },
 	//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : String 
@@ -84,6 +85,7 @@ var Job = mongoose.model( 'Job', {
 
 
 // Tool Model 
+// might need an added field for tools
 var Tool = mongoose.model( 'Tool', {
 	name : String,
 	current_location : String, 
@@ -142,7 +144,27 @@ app.get( '/api/notes', function ( req, res ) {
 }); 
 
 
+// Get Job With Date Created by with range
+app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
+	//	res.send('jobs should have an id ' + req.params.id);
+	//	var query = { '_id' : req.params.id };
 
+	var field = req.params.field; 
+	var query = {}; 
+	debug.log( "LOOK AT MEEEEE ", "WTFFFFF");
+	////////////////////////////////
+	// CHANGE THIS ON GAME DAY 
+	////////////////////////////////
+	query[ field ] = { 
+		"$gte" : ("2014-07-03T00:00:00Z"), 
+		"$lt" : ("2014-07-15T00:00:00Z") 
+	}
+	debug.log( query ); 
+	Note.find( query, function( err, notes ) {
+		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
+		res.json( notes )
+	});	
+});
 
 app.get('/api/notes/:type/:name', function( req, res  ) {
 	console.log( "======== CALLED THE WROOOOOONG METHOD =======")
@@ -279,11 +301,9 @@ app.get('/api/jobs/:m/:d/:y/:field', function( req, res ) {
 		"$gte" : ("2014-07-03T00:00:00Z"), 
 		"$lt" : ("2014-07-08T00:00:00Z") 
 	}
-	debug.log( query ); 
 	Job.find( query, function( err, jobs ) {
-		if ( err ) { console.log( "you don goofed ") }; 
-		debug.log( "LOOK AT MEEEEE ", jobs );
-		//		res.json( job )
+		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
+		res.json( jobs )
 	});	
 });
 
