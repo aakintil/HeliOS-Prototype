@@ -56,12 +56,9 @@
 				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
 			</div>
 
-<<<<<<< HEAD
-=======
 			</div>
 		<input id="search" type="text" placeholder="Search" class="search-border" ng-if="headerType == 'search'">
 		<input id="search" type="text" placeholder="Search" ng-if="headerType != 'search'">
->>>>>>> e58a752bfcd56aa9d1624bf3f5c2121dff371793
 		</ion-nav-bar>
 
 
@@ -93,27 +90,12 @@
 
 			<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
-<<<<<<< HEAD
 				<div class="section offset {{ complete }}">
 					<div class="item item-divider">
 						<div class="section-header small-title float-left"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
 						<div class="float-right create note">
 							+ Add Note
 						</div>
-=======
-			<div class="section offset {{ complete }}">
-				<div class="item item-divider">
-					<div class="section-header marginLess30 small-title float-left">
-						<img class="small-icon" src="img/icons/notes-dark.svg">
-						Notes
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
-					</div>
-					<div class="float-right create note">
-						+ Add Note
-						<!--							<i class="icon ion-ios7-arrow-down"></i>-->
->>>>>>> e58a752bfcd56aa9d1624bf3f5c2121dff371793
 					</div>
 				</div>
 				<ul class="list notes insert">
@@ -132,7 +114,6 @@
 				</ul>
 			</div>
 
-<<<<<<< HEAD
 				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
 					<div class="item item-button-right item-divider">
 						<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
@@ -140,18 +121,10 @@
 							+ Add Tools
 						</div>
 						<!-- <button class="collapsable button button-clear button-positive">
-=======
-			<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
-				<div class="item item-button-right item-divider">
-					<div class="section-header marginLess30 small-title">
-						<img class="small-icon" src="img/icons/tools-dark.svg">
-						Tools
-						<button class="collapsable button button-clear button-positive">
->>>>>>> e58a752bfcd56aa9d1624bf3f5c2121dff371793
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button> -->
 					</div>
-<<<<<<< HEAD
+
 					<ul class="list">
 						<li class="item" id="addToolFromJob">
 							<div class="addListItemText action-text list-action-item">
@@ -163,20 +136,7 @@
 							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
 							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
 							</div>
-=======
-				</div>
-				<ul class="list">
-					<li class="item" id="addToolFromJob">
-						<a href="addTool.html?{{job._id}}">
-							<div class="addListItemText action-text list-action-item">+ Add Tool</div>
-						</a>
-					</li>
-					<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
-						<div class="big-title">{{ tool.name }}</div>
-						<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
-						<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
-						</div>
->>>>>>> e58a752bfcd56aa9d1624bf3f5c2121dff371793
+
 
 						<div class="tool-submenu">
 							<div class="main-submenu">
@@ -273,7 +233,6 @@
 				</ul>
 			</div>
 
-<<<<<<< HEAD
 
 			<!-- The add tools page overlay -->
 			<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
@@ -304,10 +263,8 @@
 
 			</ion-content>
 		</ion-view>
-=======
 		</ion-content>
 	</ion-view>
->>>>>>> e58a752bfcd56aa9d1624bf3f5c2121dff371793
 
 	</body>
 </html>
