@@ -344,41 +344,19 @@ app.post( '/api/jobs/:id', function( req, res ) {
 
 
 // delete a note from a job
-app.delete( '/api/jobs/:job_id/:note_id', function( req, res ) {
-	console.log( req.params ); 
-	query = { _id : req.params.job_id }
-	Job.find( query, function( err, job ) {
-		if (err) { console.log( "messed up" )};
-//		console.log( job.notes ); 
-
-		//		job.remove({ 
-		//			_id : req.params.note_id
-		//		}, function( err, note ) {
-		//			if ( err ) { console.log( " efjkl;asdjfals;fd ") }; 
-		//			console.log( "the deleted note! "); 
+app.delete( '/api/notes/:note_id', function( req, res ) {
+	//	console.log( req.params ); 
+	var query = { _id : req.params.note_id }
+	Note.remove( query, function( err, note ) {
+		if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
+		console.log( note ); 
+		//
+		//		Note.find( function( err, notes ) {
+		//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
+		//
+		//			res.json( notes ) // return all notes in the JSON format after we create another
 		//		})
-	}).populate("notes").exec( function( err, note ) {
-		if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-		var q2 = { "notes._id" : req.params.note_id }
-		console.log( note )
-		Job.find( q2, function( err, note ) { 
-			if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-				console.log( note )
-			//							res.json( jobs ); 
-		})
-		//						res.json( job )
-	});
-	//	Note.remove({
-	//		_id : req.params.note_id
-	//	}, function( err, note ) {
-	//		if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
-	//
-	//		Note.find( function( err, notes ) {
-	//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
-	//
-	//			res.json( notes ) // return all notes in the JSON format after we create another
-	//		})
-	//	})
+	})
 })
 
 

@@ -284,9 +284,10 @@ app.service('noteService', ['$http', function ($http) {
 		return $http.put( urlBase + '/' + note.id + '/' + note.status ); 
 	}
 
-	//	this.deleteCustomer = function (id) {
-	//		return $http.delete(urlBase + '/' + id);
-	//	};
+	this.deleteNote = function( note_id  ) {
+		return $http.delete( urlBase + '/' + note_id ); 
+	}
+
 
 	// change this to a simple getNote function 
 	this.getNoteWithMsg = function( type, param ) {
@@ -481,8 +482,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 	$scope.expandNote = function( event, note, job ) {
 		console.log( note );
-		
-		jobService.deleteNote( job._id, note._id )
+
+		noteService.deleteNote( note._id )
 		.success( function( data ) {
 
 		})
