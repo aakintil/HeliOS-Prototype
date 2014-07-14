@@ -674,7 +674,7 @@ textarea {
 	-o-transition: all 0.15s linear; 
 	transition:  all 0.15s linear;
 
-	top: -15px !important; 
+	top: -12.5px !important; 
 	margin-left: -15px; 
 
 	i:before {
@@ -682,7 +682,10 @@ textarea {
 	}
 }
 
+
 .rotate180 {
+	top: -14px !important; 
+	
 	-webkit-transition: all 0.15s linear; 
 	-moz-transition:  all 0.15s linear; 
 	-ms-transition: all 0.15s linear; 
