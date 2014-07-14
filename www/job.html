@@ -32,19 +32,24 @@
 	<body ng-app="starter">
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
-			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'home'">
+
+			<input id="search" type="text" placeholder="Tools, Jobs, Notes"  autocomplete="off" ng-model="searchText" ng-change=""/> 
+			<div class="clear-button" type="reset">X</div>
+			<button class="button button-stable cancel-button">Cancel</button>
+
+			<div class="button-bar nav-bar-buttons" id="nav-buttons" ng-if="headerType == 'home'">
 				<!-- place in a.button -->
 				<div class="button home-nav-button"><img class="icon" src="img/icons/home-colored.svg"></div>
 				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
 				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
 			</div>
-			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'alert'">
+			<div class="button-bar nav-bar-buttons" id="nav-buttons" ng-if="headerType == 'alert'">
 				<!-- place in a.button -->
 				<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
 				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-colored.svg"></div>
 				<div class="button add-nav-button"><img class="icon" src="img/icons/add-gray.svg"></div>
 			</div>
-			<div class="button-bar nav-bar-buttons" ng-if="headerType == 'search'">
+			<div class="button-bar nav-bar-buttons" id="nav-buttons" ng-if="headerType == 'search'">
 				<!-- place in a.button -->
 				<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
 				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
@@ -85,18 +90,12 @@
 
 			<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
-			<div class="section offset {{ complete }}">
-				<div class="item item-divider">
-					<div class="section-header marginLess30 small-title float-left">
-						<img class="small-icon" src="img/icons/notes-dark.svg">
-						Notes
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
-					</div>
-					<div class="float-right create note">
-						+ Add Note
-						<!--							<i class="icon ion-ios7-arrow-down"></i>-->
+				<div class="section offset {{ complete }}">
+					<div class="item item-divider">
+						<div class="section-header small-title float-left"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
+						<div class="float-right create note">
+							+ Add Note
+						</div>
 					</div>
 				</div>
 				<ul class="list notes insert">
@@ -115,27 +114,29 @@
 				</ul>
 			</div>
 
-			<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
-				<div class="item item-button-right item-divider">
-					<div class="section-header marginLess30 small-title">
-						<img class="small-icon" src="img/icons/tools-dark.svg">
-						Tools
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
-					</div>
-				</div>
-				<ul class="list">
-					<li class="item" id="addToolFromJob">
-						<a href="addTool.html?{{job._id}}">
-							<div class="addListItemText action-text list-action-item">+ Add Tool</div>
-						</a>
-					</li>
-					<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
-						<div class="big-title">{{ tool.name }}</div>
-						<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
-						<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
+				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
+					<div class="item item-button-right item-divider">
+						<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
+						<div class="float-right create note action-text" id="add-tools">
+							+ Add Tools
 						</div>
+						<!-- <button class="collapsable button button-clear button-positive">
+							<i class="icon ion-ios7-arrow-down"></i>
+						</button> -->
+					</div>
+
+					<ul class="list">
+						<li class="item" id="addToolFromJob">
+							<div class="addListItemText action-text list-action-item">
+								+ Add Note
+							</div>
+						</li>
+						<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
+							<div class="big-title">{{ tool.name }}</div>
+							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
+							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
+							</div>
+
 
 						<div class="tool-submenu">
 							<div class="main-submenu">
@@ -232,6 +233,36 @@
 				</ul>
 			</div>
 
+
+			<!-- The add tools page overlay -->
+			<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
+				<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+					<input ng-model="ToolsCtrl.searchText" id="tools-search-bar" class="search-search" type="text"/>
+					<div class="button-bar nav-bar-buttons">
+						<div class="button done-button done">Done</div>
+					</div>
+				</ion-nav-bar>
+
+				<ion-view class="nav-frame">
+					<ion-content overflow-scroll="true" class="has-header">
+						<div class="section">
+							<ul class="list">
+								<li class="toolsselection item item-button-right" ng-repeat="tool in tools | filter:ToolsCtrl.searchText "> <!-- | orderBy:predicate"> -->
+									<div class="big-title">{{tool.name}}</div>
+									<button class="button button-clear checklist-item" id="{{tool.id}}">
+										<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+
+					</ion-content>
+				</ion-view>
+			</div>
+
+
+			</ion-content>
+		</ion-view>
 		</ion-content>
 	</ion-view>
 

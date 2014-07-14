@@ -41,6 +41,8 @@ $(document).ready(function () {
 		setCurrentBackStack(currentStack);
 	}
 
+	var local = false;
+
 	$(".home-nav-button").click(function (e) {
 		// console.log("home pressed");
 		// saveCurrentPagetoCurrentStack();
@@ -54,7 +56,12 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/index.html";
 		// }
 
-		document.location.href = "http://still-inlet-9779.herokuapp.com/index.html";
+		if (local) {
+			document.location.href = "http://localhost:3000/index.html";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/index.html";
+		}
+		
 
 	});
 
@@ -70,7 +77,12 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/alerts.html?type=alert";
 		// }
 
-		document.location.href = "http://still-inlet-9779.herokuapp.com/alerts.html?type=alert";
+
+		if (local) {
+			document.location.href = "http://localhost:3000/alerts.html?type=alert";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/alerts.html?type=alert";
+		}
 	});
 
 	$(".add-nav-button").click(function (e) {
@@ -85,7 +97,11 @@ $(document).ready(function () {
 		// 	document.location.href = "http://localhost:3000/add.html";
 		// }
 
-		document.location.href = "http://still-inlet-9779.herokuapp.com/add.html";
+		if (local) {
+			document.location.href = "http://localhost:3000/add.html";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/add.html";
+		}
 	});
 
 	// $("#search").keypress(function(event) {
@@ -171,7 +187,7 @@ $(document).ready(function () {
 		if(e.keyCode == 13)
 		{
 			$(this).trigger("enterKey");
-			Keyboard.close();
+			cordova.plugins.Keyboard.close();
 		}
 	});
 
@@ -195,11 +211,41 @@ $(document).ready(function () {
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {
 		var query = $( this ).val(); 
-		console.log( query, " should not be null");  
 		$(this).val("");
 		window.location = "search.html?"+query; 		
 	});
 
+	$('#search').keyup(function() {
+		if ($('#search').val().length > 0) {
+			$('.clear-button').fadeIn(50);
+		} else {
+			$('.clear-button').fadeOut(50);
+		}
+	});
+
+	// Code for handling search bar results
+	$('#search').bind("focus", function() {
+		$('.cancel-button').fadeIn(50);
+		$('#nav-buttons').fadeOut(50);
+		console.log("expanded");
+		$('#search').addClass('expanded');
+	});
+
+	$('.cancel-button').hide();
+	$('.clear-button').hide();
+	$('.cancel-button').click(function() {
+		$("#search").val("");
+		$('#search').removeClass('expanded');
+		$('.cancel-button').fadeOut(50);
+		$('.clear-button').fadeOut(50);
+		$('#nav-buttons').fadeIn(50);
+	});
+
+	$('.clear-button').click(function() {
+		$('.clear-button').fadeOut(50);
+		$("#search").val("");
+		$("#search").focus();
+	});
 
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
@@ -264,6 +310,9 @@ $(document).ready(function () {
 		$('#add-page').show();
 	});
 
+	$("#add-tools").click(function() {
+		$("#tools-modal").show();
+	});
 
 	$( ".expand" ).click( function() {
 		alert(" have been clicked ")
