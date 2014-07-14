@@ -57,15 +57,13 @@
 			</div>
 
 			</div>
-		<input id="search" type="text" placeholder="Search" class="search-border" ng-if="headerType == 'search'">
-		<input id="search" type="text" placeholder="Search" ng-if="headerType != 'search'">
 		</ion-nav-bar>
 
 
 	<div id="notification"> </div>
 
 
-	<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
+	<ion-view hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 		<ion-content class="job" overflow-scroll="true" class="has-header">
 			<div class="top section">
 				<div class="item item-divider {{headerType}} header-row">
@@ -97,22 +95,22 @@
 							+ Add Note
 						</div>
 					</div>
+
+					<ul class="list notes insert">
+						<li class="item" id="addNoteFromJob">
+							<div class="addListItemText action-text list-action-item">
+								+ Add Note
+							</div>
+							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
+						</li>
+						<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote( $event )">
+							<p class="regular-text">{{ note.message }}</p>
+							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)">
+								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+							</button>
+						</li>
+					</ul>
 				</div>
-				<ul class="list notes insert">
-					<li class="item" id="addNoteFromJob">
-						<div class="addListItemText action-text list-action-item">
-							+ Add Note
-						</div>
-						<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
-					</li>
-					<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote( $event )">
-						<p class="regular-text">{{ note.message }}</p>
-						<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)">
-							<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-						</button>
-					</li>
-				</ul>
-			</div>
 
 				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
 					<div class="item item-button-right item-divider">
@@ -126,11 +124,6 @@
 					</div>
 
 					<ul class="list">
-						<li class="item" id="addToolFromJob">
-							<div class="addListItemText action-text list-action-item">
-								+ Add Note
-							</div>
-						</li>
 						<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
 							<div class="big-title">{{ tool.name }}</div>
 							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
@@ -232,39 +225,44 @@
 					</li>
 				</ul>
 			</div>
-
-
-			<!-- The add tools page overlay -->
-			<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
-				<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
-					<input ng-model="ToolsCtrl.searchText" id="tools-search-bar" class="search-search" type="text"/>
-					<div class="button-bar nav-bar-buttons">
-						<div class="button done-button done">Done</div>
-					</div>
-				</ion-nav-bar>
-
-				<ion-view class="nav-frame">
-					<ion-content overflow-scroll="true" class="has-header">
-						<div class="section">
-							<ul class="list">
-								<li class="toolsselection item item-button-right" ng-repeat="tool in tools | filter:ToolsCtrl.searchText "> <!-- | orderBy:predicate"> -->
-									<div class="big-title">{{tool.name}}</div>
-									<button class="button button-clear checklist-item" id="{{tool.id}}">
-										<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-
-					</ion-content>
-				</ion-view>
-			</div>
-
-
-			</ion-content>
-		</ion-view>
 		</ion-content>
 	</ion-view>
 
+
+		<!-- The add tools page overlay -->
+		<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+
+				<input id="search" type="text" placeholder="Search for Tools"  autocomplete="off" ng-model="ToolsCtrl.searchText"> 
+				<div class="clear-button" type="reset">X</div>
+
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done-button done">Cancel</div>
+				</div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content overflow-scroll="true" class="has-header">
+					<div class="section">
+						<ul class="list">
+							<li class="toolsselection item item-button-right" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
+								<div class="big-title">{{tool.name}}</div>
+								<div class="small-light-caps">Current Location: {{tool.current_location}}</div>
+								<button ng-click="check($event)" class="button button-clear checklist-item" id="{{tool._id}}">
+									<i class="icon ion-ios7-plus-outline medium-icon"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</ion-content>
+				<div class="bar bar-footer">
+					  <button class="bar bar-footer bar-balanced" ng-click="getToolList()">
+					  	<div class="title">Add Tools</div>
+					  </button>
+				</div>
+			</ion-view>
+		</div>
+		<div class="modal-background"></div>
 	</body>
+
 </html>

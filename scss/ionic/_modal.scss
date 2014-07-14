@@ -30,7 +30,7 @@
   background-color: $modal-bg-color;
 }
 
-@media (min-width: $modal-inset-mode-break-point) {
+@media (min-width: 0) {
   // inset mode is when the modal doesn't fill the entire
   // display but instead is centered within a large display
   .modal {
