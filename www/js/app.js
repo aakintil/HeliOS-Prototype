@@ -406,7 +406,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		console.log( "has been called"); 
 		console.log( event ); 
 		var el = $( event.currentTarget ); 
-		el.addClass('animated zoomOutRight');
+		el.addClass('animated fadeOutRight');
 		// on animation end display none
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			$( el ).slideToggle( "slow" ); 
