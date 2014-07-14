@@ -216,18 +216,15 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/' + type + '/' + param );
 	}
 
-	//	this.getNoteWithId = function( id ) {
-	//		return $http.get( urlBase + '/' + id );
-	//	};
+	this.getRecentJobs = function( field ) {
+		return $http.get( urlBase + '/m/d/y/' + field );
+	}
 
 
 	this.addTool = function() {
 		return $http.put( urlBase + '/' + id );
 	}
 
-	//	this.addNote = function( note, id ) {
-	//		return $http.put( noteUrlBase + '/' + id, note )
-	//	}
 
 	this.updateJobWithNote = function( id ) {
 		return $http.post( urlBase + '/' + id )
@@ -997,3 +994,14 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	$scope.predicate = 'name';
 }
 
+function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
+	console.log("yea"); 
+	jobService.getRecentJobs( "created" ) 
+	.success( function( data ) {
+		for ( var i in data )
+		console.log( data[i].created )
+	})
+	.error( function( data ) {
+		
+	})
+}

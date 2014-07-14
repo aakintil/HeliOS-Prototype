@@ -14,6 +14,18 @@ var mongoose = require('mongoose'); 					// mongoose for mongodb
 var Schema = mongoose.Schema; 
 
 
+var debug = {
+	log : function( prefix, input ) {
+		console.log( " " ); 
+		console.log( prefix );
+		console.log( "--------------------------" ); 
+		console.log( input );
+		console.log( " " ); 
+	}	
+}
+
+
+
 /////////////////////////////////////////////////////
 ////////////////// CONFIGURATION ////////////////////
 /////////////////////////////////////////////////////
@@ -250,6 +262,29 @@ app.get('/api/jobs/:id', function( req, res ) {
 		//		console.log( "LOOK AT MEEEEE ", job );
 		res.json( job )
 	});
+});
+
+
+// Get Job With Date Created by with range
+app.get('/api/jobs/:m/:d/:y/:field', function( req, res ) {
+	//	res.send('jobs should have an id ' + req.params.id);
+	//	var query = { '_id' : req.params.id };
+
+	var field = req.params.field; 
+	var query = {}; 
+	////////////////////////////////
+	// CHANGE THIS ON GAME DAY 
+	////////////////////////////////
+	query[ field ] = { 
+		"$gte" : ("2014-07-03T00:00:00Z"), 
+		"$lt" : ("2014-07-08T00:00:00Z") 
+	}
+	debug.log( query ); 
+	Job.find( query, function( err, jobs ) {
+		if ( err ) { console.log( "you don goofed ") }; 
+		debug.log( "LOOK AT MEEEEE ", jobs );
+		//		res.json( job )
+	});	
 });
 
 
