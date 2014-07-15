@@ -31,8 +31,14 @@ $base-background-color: $gray-light;
 	src: url("../fonts/GothamNarrow-Book.otf");
 }
 
+@font-face {
+	font-family: "Gotham Narrow Medium";
+	src: url("../fonts/GothamNarrow-Medium.otf");
+}
+
 // Fonts
 $font-family-sans-serif: "Gotham Narrow Book";
+$gotham-medium: "Gotham Narrow Medium";
 
 
 // Items
@@ -250,33 +256,7 @@ a:active {
 	margin-top: 8px;
 }
 
-.alert-extras {
 
-	position: relative;
-	margin-top: 10px;
-	padding-bottom: 10px;
-	margin-bottom: 5px;
-
-	.alert-type {
-		left: 0px;
-		bottom: 0;
-		position: absolute;
-	}
-
-	.alert-time {
-		right: -50px;
-		position: absolute;
-		bottom: 0;
-	}
-
-}
-
-.alert-text {
-	display: block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	border: 1px solid red-alert;
-}
 
 .detail {
 	margin-bottom: (21/2)+px
@@ -369,8 +349,8 @@ textarea {
 	}
 
 	#search::-webkit-search-cancel-button{
-	    position:relative;
-	    right:20px;    
+		position:relative;
+		right:20px;    
 	}
 
 	#search.expanded {
@@ -397,9 +377,9 @@ textarea {
 		height: (66/2)+px;
 	}
 
-/*	#search:focus {
-		width: $search-bar-expanded;
-	}*/
+	/*	#search:focus {
+	width: $search-bar-expanded;
+}*/
 
 	.icon {
 		max-height: 25px;
@@ -467,41 +447,59 @@ textarea {
 	}
 }
 
-//	Alerts Page
+//	Activity Feed Page
+#activity-feed {
 
-#alerts {
+	.list {
 
-	.list-item-title {
-		font-weight: normal; 
+		.item {
+			padding: 20px;
+
+			p {
+				font-family: $gotham-medium; 
+				color: black; 
+			}
+			
+			p, .alert-time {
+				font-size: 14.5px; 
+			}
+
+			.regular-text {
+				margin-bottom: 11px; 
+			}
+
+			.alert-extras {
+				position: relative;
+				background-color: grey !important; 
+
+				.alert-type {
+					float: left; 
+
+					.medium-icon {
+						//						height: (40/2)+px; // might be 30px
+						height: (32/2) + px; 
+						margin-right: 10px;
+						float: left; 
+					}
+				}
+
+				.alert-time {
+					float: right; 
+				}
+
+			}
+
+			.alert-text {
+				//				display: block;
+				//				overflow: hidden;
+				//				text-overflow: ellipsis;
+				//				border: 1px solid red-alert;
+			}
+		}
+
 	}
-
-	.list-item-subtitle {
-		font-size: 11px;
-	}
-
-	a {
-		text-decoration: none; 
-		color: #000;
-		font-weight: bold; 
-	}
-
-	.indicator {
-		height: 92px; 
-		position: absolute; 
-		width: 10px; 
-		left: 0; 
-		top: 0; 
-	}
-
-	.note {
-		background-color: #f0aa09;
-	}
-
-	.job {
-		background-color: #2d9db4;
-	}
-
 }
+
 
 // Job Page
 .offset {
@@ -705,7 +703,7 @@ textarea {
 
 .rotate180 {
 	top: -14px !important; 
-	
+
 	-webkit-transition: all 0.15s linear; 
 	-moz-transition:  all 0.15s linear; 
 	-ms-transition: all 0.15s linear; 
@@ -920,5 +918,5 @@ $bar-height: 75px;
 
 // Job Creation input element on index.html
 #addJobInput {
-	
+
 }

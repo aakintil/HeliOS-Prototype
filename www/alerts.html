@@ -42,38 +42,47 @@
 
 		<ion-view title="Alerts" class="nav-frame" ng-controller="ActivityFeedCtrl">
 			<ion-content overflow-scroll="true" class="has-header">
-				<div id="alerts" class="section">
+				<div id="activity-feed" class="section">
 					<div class="item item-divider alert">
-						<!-- <div class="left-title-button">&nbsp;</div> -->
 						<div class="center-text">Notifications</div>
-						<!-- <div class="right-title-button"></div> -->
 					</div>
-					<div class="list">
 
+
+					<div class="list">
 						<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 							<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
 							<a href="job.html?id={{ el.job_id || el._id }}">
-								<div class="alert-extras">
-									<div class="small-light-caps alert-type">
-										<img class="medium-icon" src="img/icons/home-gray.svg">
-										<p ng-if="el.title !== undefined"> Job </p>
-										<p ng-if="el.message !== undefined"> Note </p>
-									</div>
-									<div class="small-light-caps alert-time"> {{ el.created | fromNow }} </div>
-								</div>
 								<div class="regular-text alert-text"> 
 									{{ el.title || el.message }}									
 								</div>
+
+								<div class="alert-extras">
+
+									<div class="small-light-caps alert-type">
+										<img class="medium-icon" src="img/icons/notes-dark.svg">
+										<p ng-if="el.title !== undefined"> Job </p>
+										<p ng-if="el.message !== undefined"> Note </p>
+									</div>
+
+									<div class="alert-time"> 
+										{{ el.created | fromNow }} 
+									</div>
+									
+								</div>
+
 								</div>
 							</a>
+
 					</div>
 
-					</ion-content>
-				</ion-view>   
+				</div>
 
-			<!-- Transparent Screen that will allow us to dismiss the dialog -->
-			<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-			<!-- 			<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
+			</ion-content>
+		</ion-view>   
+
+		<!-- Transparent Screen that will allow us to dismiss the dialog -->
+		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
+		<!-- 			<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
 
 <div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
 <form ng-submit="createTask(task)">
@@ -85,8 +94,8 @@
 </form>
 </div> -->
 
-			<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-			<!-- 			<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
+		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
+		<!-- 			<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
 <form ng-submit="createTask(task)">
 <div class="list">
 <p class="input-header"> Add New Note </p>
@@ -108,7 +117,7 @@
 </form>
 </div>
 -->
-			<!-- 			<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
+		<!-- 			<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
 <form ng-submit="createTask(task)">
 <div class="list">
 <p class="input-header"> Add New Job </p>
@@ -130,5 +139,5 @@
 </form>
 </div>  --> 
 
-			</body>
-		</html>
+	</body>
+</html>

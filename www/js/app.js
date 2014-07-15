@@ -865,13 +865,13 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 			console.log( "the new job ", data ); 
 			$scope.insertJob( data ); 
 			$scope.toggleInlineInput(); 
-			
+
 			// add notification
 			var info = {}; 
 			info.title = data.title; 
 			info.msg = "Job was successfully created"
 			var url = "job.html?id=" + data._id; 
-			
+
 			notifications.show( info, url ); 
 		}) 
 		.error( function( data ) {
@@ -893,7 +893,7 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 }
 
 
-//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+//////////////// Search Controller For Node.js & MondoDB Test ////////////////
 function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobService, $location ) {
 	var absUrl = $location.$$absUrl;
 	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
@@ -944,7 +944,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 
 }
 
-
+//////////////// Tools Controller For Node.js & MondoDB Test ////////////////
 function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $location ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
@@ -1013,7 +1013,7 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	//	];
 }
 
-var notes = []; 
+//////////////// Collaborators Controller For Node.js & MondoDB Test ////////////////
 function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
@@ -1089,9 +1089,11 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	$scope.predicate = 'name';
 }
 
+//////////////// News Feed Controller For Node.js & MondoDB Test ////////////////
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
 	// NOTE can't use track by $index with orderBy and possibly filter
 	$scope.predicate = '-created';
+
 
 	$scope.feed = [];
 	var insert = function( obj, data ) {
@@ -1101,6 +1103,7 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 		}
 	}; 
 
+	// recently created jobs
 	jobService.getRecentJobs( "created" ) 
 	.success( function( data ) {
 		console.log( "successfully collected recent jobs" ); 
@@ -1112,6 +1115,7 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 		insert( $scope.feed, data.data ); 
 	})
 
+	// recently created notes
 	noteService.getRecentNotes( "created" ) 
 	.success( function( data ) {
 		console.log( "successfully collected recent notes" ); 
@@ -1122,8 +1126,11 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 	.then( function( data ) {
 		insert( $scope.feed, data.data ); 
 	})
-	//	debug( " should not be empty ", notes )
 
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////// DON'T FORGET TO DO CALLS FOR RECENTLY COMPLETED AND PERSONAL NOTES ////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 
