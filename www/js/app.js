@@ -478,6 +478,9 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	})
 
 	$scope.addNote = function( note ) {
+		// BIG BUG!!!! ///////
+		// HAVE TO DO SOMETHING ABOUT THE FIRST NOTE WITHIN A JOB! 
+		// IT DOESN'T INSERT BECAUSE LI:NTH-CHILD(2) DOESN'T EXIST
 
 		// hide DOM Elements 
 		$( ".addListItemInput" ).parent().hide();
@@ -491,8 +494,12 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + '</p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)"><i class="icon ion-ios7-checkmark-outline medium-icon"></i></button></li>'); 
+		
+		if ( $(".insert li:nth-child(2)") )
+			$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
+		else
+			$( ".insert" ).append( $( domNote ) ); 
 
-		$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
 		$compile( domNote )($scope);
 
 		// send data to db
@@ -1037,7 +1044,7 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
 	// NOTE can't use track by $index with orderBy and possibly filter
 	$scope.predicate = '-created';
-	
+
 	$scope.feed = [];
 	var insert = function( obj, data ) {
 		var i = 0; 

@@ -152,12 +152,13 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 	var field = req.params.field; 
 	var query = {}; 
 	debug.log( "LOOK AT MEEEEE ", "WTFFFFF");
+	
 	////////////////////////////////
 	// CHANGE THIS ON GAME DAY 
 	////////////////////////////////
 	query[ field ] = { 
-		"$gte" : ("2014-07-03T00:00:00Z"), 
-		"$lt" : ("2014-07-15T00:00:00Z") 
+		"$gte" : ("2014-07-10T00:00:00Z"), 
+		"$lt" : ("2014-07-16T00:00:00Z") 
 	}
 	debug.log( query ); 
 	Note.find( query, function( err, notes ) {
@@ -298,8 +299,8 @@ app.get('/api/jobs/:m/:d/:y/:field', function( req, res ) {
 	// CHANGE THIS ON GAME DAY 
 	////////////////////////////////
 	query[ field ] = { 
-		"$gte" : ("2014-07-03T00:00:00Z"), 
-		"$lt" : ("2014-07-08T00:00:00Z") 
+		"$gte" : ("2014-07-10T00:00:00Z"), 
+		"$lt" : ("2014-07-16T00:00:00Z") 
 	}
 	Job.find( query, function( err, jobs ) {
 		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
