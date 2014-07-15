@@ -144,15 +144,14 @@ app.get( '/api/notes', function ( req, res ) {
 }); 
 
 
-// Get Job With Date Created by with range
+// Get Note With Date Created by with range
 app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 	//	res.send('jobs should have an id ' + req.params.id);
 	//	var query = { '_id' : req.params.id };
 
 	var field = req.params.field; 
 	var query = {}; 
-	debug.log( "LOOK AT MEEEEE ", "WTFFFFF");
-	
+
 	////////////////////////////////
 	// CHANGE THIS ON GAME DAY 
 	////////////////////////////////
@@ -160,7 +159,7 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 		"$gte" : ("2014-07-10T00:00:00Z"), 
 		"$lt" : ("2014-07-16T00:00:00Z") 
 	}
-	debug.log( query ); 
+
 	Note.find( query, function( err, notes ) {
 		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
 		res.json( notes )
@@ -309,6 +308,31 @@ app.get('/api/jobs/:m/:d/:y/:field', function( req, res ) {
 });
 
 
+// Get Job Completed within date range
+app.put('/api/jobs/:completed', function( req, res ) {
+	//	res.send('jobs should have an id ' + req.params.id);
+	//	var query = { '_id' : req.params.id };
+
+	var field = req.params.field; 
+	var query = {}; 
+	////////////////////////////////
+	// CHANGE THIS ON GAME DAY 
+	////////////////////////////////
+	query = { 
+		"created" : {
+			"$gte" : ("2014-07-10T00:00:00Z"), 
+			"$lt" : ("2014-07-16T00:00:00Z")
+		}, 
+		"status" : "completed"
+	}
+	debug.log( " i have been called ", query ); 
+	Job.find( query, function( err, jobs ) {
+		if ( err ) { debug.log( " can't get completed jobs with " + field + " date within a data range ") }; 
+		res.json( jobs )
+	});	
+});
+
+
 //app.post('/api/jobs/:type/:param', function( req, res  ) {
 //	console.log( "======== CALLING THE INSERT TOOL INTO JOB METHOD =======")
 //	console.log( " the job ", req.params );
@@ -357,7 +381,7 @@ app.get('/api/jobs/:type/:title', function( req, res  ) {
 
 app.get( '/api/jobs/:type/:title/:id', function( req, res ) {
 	console.log( "======== CALLED THE METHOD TO UPDATE JOBS WITH TOOLS =======")
-	 console.log( " the job ", req.params );
+	console.log( " the job ", req.params );
 	var query = { '_id' : req.params.id }; 
 	var new_tools = req.params.title; 
 	var new_tools_array = new_tools.split(",");

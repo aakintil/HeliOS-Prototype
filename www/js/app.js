@@ -224,6 +224,9 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/m/d/y/' + field );
 	}
 
+	this.getRecentlyCompletedJobs = function() {
+		return $http.put( urlBase + "/completed" ); 
+	}
 
 	this.addTool = function() {
 		return $http.put( urlBase + '/' + id );
@@ -1151,6 +1154,14 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 		insert( $scope.feed, data.data ); 
 	})
 
+	// recently complete jobs 
+	jobService.getRecentlyCompletedJobs()
+	.success( function( data ) {
+		console.log( "successfully collected recently completed" ); 
+	})
+	.error( function( data ) {
+		console.log( "error receiving recently completed jobs"); 
+	})
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////// DON'T FORGET TO DO CALLS FOR RECENTLY COMPLETED AND PERSONAL NOTES ////////////////
