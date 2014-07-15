@@ -39,7 +39,7 @@
 				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
 				<!-- <a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a> -->
 			</div>
-			
+
 			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
 		</ion-nav-bar>
 
@@ -134,10 +134,14 @@
 				<div class="section">
 					<div class="item item-divider">
 						<div class="section-header float-left">My Jobs</div>
-						<div class="create job float-right"> Add Job </div>
+						<div class="create job float-right" ng-click="toggleInlineInput()">Add Job</div>
 					</div>
 					<div class="list">
 						<ul class="list">
+							<li class="item item-button-right" id="addJob">
+								<input id="addJobInput" type="text" placeholder="Name of Job" ng-model="newJob.title" ng-enter="createJob( newJob )">
+							</li>
+
 							<li class="item item-button-right" ng-repeat="job in jobs | orderBy:predicate" ng-if="job._id !== '111111111111111111111111' && job.members.indexOf('You') !== -1">
 								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
 									<div class="big-title">{{job.title}}</div>

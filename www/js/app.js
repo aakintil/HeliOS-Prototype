@@ -494,8 +494,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + '</p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)"><i class="icon ion-ios7-checkmark-outline medium-icon"></i></button></li>'); 
-		
-		if ( $(".insert li:nth-child(2)") )
+
+		if ( $(".insert li:nth-child(2)").length !== 0 )
 			$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
 		else
 			$( ".insert" ).append( $( domNote ) ); 
@@ -601,15 +601,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	}
 
 
-	$scope.insertNoteInput = function() {
-		//		var container = $(".insert"); 
-		//		var input = '<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>'; 
-		//		container.prepend( input ); 
-		//		$compile( input )( $scope );
-	}
-
 	// note creation click events 
-
 	$scope.inlineShowInput = function( event ) {
 		console.log( event ); 
 		$( "#addNoteFromJob" ).show(); 
@@ -808,7 +800,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function JobsCtrl( $scope, $rootScope, $http, jobService ) {
+function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
 
@@ -841,6 +833,62 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	//			console.log( " " )
 	//		})
 	//	}
+
+	// job creation click events 
+
+	// toggle the new job input
+	$scope.toggleInlineInput = function() {
+
+		var text = {
+			"Add Job" : "Cancel", 
+			"Cancel" : "Add Job"
+		}
+		var currText = $( ".create.job" ).html(); 
+		var newText = text[ currText ]; 
+		$( ".create.job" ).html( newText ); 
+
+		if ( currText === "Cancel" ) 
+			$( "#addJobInput" ).val( "" ); 
+
+
+		$( "#addJob" ).toggle(); 
+		setTimeout( function() { 
+			$( "#addJobInput" ).focus(); 
+		}, 0);
+	}
+
+
+	$scope.createJob = function( job ) {
+		console.log( "got the job ", job ); 
+		jobService.createJob( job ) 
+		.success( function( data ) {
+			console.log( "the new job ", data ); 
+			$scope.insertJob( data ); 
+			$scope.toggleInlineInput(); 
+			
+			// add notification
+			var info = {}; 
+			info.title = data.title; 
+			info.msg = "Job was successfully created"
+			var url = "job.html?id=" + data._id; 
+			
+			notifications.show( info, url ); 
+		}) 
+		.error( function( data ) {
+			console.log( "error creating new inline job" ); 
+		})
+	}
+
+	$scope.insertJob = function( job ) {
+		var title = job.title; 
+		var members = job.members;
+		var el = $( '<li class="item item-button-right"><a href="job.html?id=' + job._id + '" ng-click="broadcastJob(job._id)"><div class="big-title"> ' + title + '</div><div class="small-regular-text"> ' + members + ' </div></a></li>' ); 
+
+		if ( $( "ul.list li:nth-child(2)" ).length !== 0  )
+			$( el ).insertBefore( $( "ul.list li:nth-child(2)" ) );   
+		else
+			$( "ul.list" ).append( $( el ) ); 
+	}
 
 }
 
