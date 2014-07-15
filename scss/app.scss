@@ -926,6 +926,15 @@ $bar-height: 75px;
 	font-size: 55px !important; 
 }
 
+<<<<<<< HEAD
 .hidden {
 	display: none;
 }
+=======
+
+
+// Bottom Margin for list elements
+.list:last-child {
+	margin-bottom: 15px; 
+}
+>>>>>>> f9b391d8ef19ebff52f5ef563f37b69f9448c7b9
