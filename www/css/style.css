@@ -3130,7 +3130,7 @@ ion-infinite-scroll.active .scroll-infinite {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ededed;
+  background-color: #f3f3f3;
   overflow: hidden; }
 
 /**
@@ -8287,6 +8287,9 @@ a.button {
   -o-transition: all .25s linear;
   transition: all .25s linear; }
 
+p {
+  line-height: 24px; }
+
 .big-title {
   font-family: "Gotham Narrow Book";
   font-size: 18px;
@@ -8316,9 +8319,9 @@ a.button {
   color: black !important; }
 
 .small-regular-text {
-  font-size: 13px;
-  font-weight: normal;
-  color: black;
+  font-size: 14.5px !important;
+  font-weight: normal !important;
+  color: black !important;
   text-transform: none !important; }
 
 .detail-text {
@@ -8726,21 +8729,21 @@ textarea {
   .collapsable i:before {
     font-size: 20px !important; }
 
-.rotate180 {
+.rotate90 {
   top: -14px !important;
   -webkit-transition: all 0.15s linear;
   -moz-transition: all 0.15s linear;
   -ms-transition: all 0.15s linear;
   -o-transition: all 0.15s linear;
   transition: all 0.15s linear;
-  transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
   /* IE 9 */
-  -webkit-transform: rotate(180deg);
+  -webkit-transform: rotate(-90deg);
   /* Safari and Chrome */
-  -o-transform: rotate(180deg);
+  -o-transform: rotate(-90deg);
   /* Opera */
-  -moz-transform: rotate(180deg);
+  -moz-transform: rotate(-90deg);
   /* Firefox */ }
 
 .job .marginLess30 {
@@ -8762,6 +8765,13 @@ textarea {
 .expandable .tool-submenu-replacement {
   background-color: #F0F0C7;
   padding: 10px 20px; }
+
+.empty-item {
+  height: 43px !important;
+  background-color: #e4e6e6;
+  color: #888888;
+  padding-left: 20px;
+  line-height: 43px; }
 
 #add .first {
   border: 0px; }
@@ -8874,3 +8884,6 @@ textarea {
 
 #complete .icon:before {
   font-size: 55px !important; }
+
+.hidden {
+  display: none; }

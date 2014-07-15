@@ -14,6 +14,11 @@ $red-alert: #f05a24;
 $green-add: #22b473;
 $magenta-search: #9422af;
 
+// New Colors to Use
+$gray-background: #f3f3f3;
+$gray-header: #e4e6e6;
+$light-gray-text: #888888;
+
 $success: rgba( 143, 203, 33, 1 ); 
 $warning: rgba( 234, 173, 22, 1 ); 
 $error: rgba( 239, 78, 58, 1 ); 
@@ -23,7 +28,7 @@ $positive: #f0f0f0;
 $positive-active: rgba(124, 124, 124, .2);
 $button-positive-active-bg: $positive-active; 
 $dark: $gray-dark;
-$base-background-color: $gray-light;
+$base-background-color: $gray-background;
 
 //Base
 @font-face {
@@ -85,8 +90,9 @@ $item-subtitle: (23/2)+px;
 	transition:  all .25s linear;
 }
 
-// remove later after testing
-
+p {
+	line-height: 24px;
+}
 
 // Text Styles
 
@@ -124,9 +130,9 @@ $item-subtitle: (23/2)+px;
 }
 
 .small-regular-text {
-	font-size: (26/2)+px;
-	font-weight: normal;
-	color: black;
+	font-size: (29/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
 	text-transform: none !important;
 }
 
@@ -704,7 +710,7 @@ textarea {
 }
 
 
-.rotate180 {
+.rotate90 {
 	top: -14px !important; 
 	
 	-webkit-transition: all 0.15s linear; 
@@ -713,11 +719,11 @@ textarea {
 	-o-transition: all 0.15s linear; 
 	transition:  all 0.15s linear;
 
-	transform: rotate(180deg);
-	-ms-transform: rotate(180deg); /* IE 9 */
-	-webkit-transform: rotate(180deg); /* Safari and Chrome */
-	-o-transform: rotate(180deg); /* Opera */
-	-moz-transform: rotate(180deg); /* Firefox */
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg); /* IE 9 */
+	-webkit-transform: rotate(-90deg); /* Safari and Chrome */
+	-o-transform: rotate(-90deg); /* Opera */
+	-moz-transform: rotate(-90deg); /* Firefox */
 }
 
 .job {
@@ -752,6 +758,14 @@ textarea {
 		background-color: #F0F0C7;
 		padding: 10px 20px;
 	}
+}
+
+.empty-item {
+	height: 43px !important;
+	background-color: $gray-header;
+	color: $light-gray-text;
+	padding-left: 20px;
+	line-height: 43px;
 }
 
 // Code for Add page
@@ -910,4 +924,8 @@ $bar-height: 75px;
 }
 #complete .icon:before {
 	font-size: 55px !important; 
+}
+
+.hidden {
+	display: none;
 }

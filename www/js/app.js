@@ -478,6 +478,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	})
 
 	$scope.addNote = function(note) {
+		console.log("add note");
 		var form = {}; 
 		form.note = note; 
 		form.id = jobId; 
@@ -504,7 +505,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 	$scope.expandNote = function( event ) {
 		console.log(" clicked ")
-		$(event.currentTarget).find("p").toggleClass("expanded-note");
+		$(event.currentTarget).find("p.regular-text").toggleClass("expanded-note");
+		$(event.currentTarget).find("p.detail-info").toggleClass("hidden");
 	}
 
 	$scope.s = "unchecked"; 
