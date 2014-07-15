@@ -224,6 +224,9 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.get( urlBase + '/m/d/y/' + field );
 	}
 
+	this.getRecentlyCompletedJobs = function() {
+		return $http.put( urlBase + "/completed" ); 
+	}
 
 	this.addTool = function() {
 		return $http.put( urlBase + '/' + id );
@@ -485,6 +488,9 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 
 	$scope.addNote = function( note ) {
+		// BIG BUG!!!! ///////
+		// HAVE TO DO SOMETHING ABOUT THE FIRST NOTE WITHIN A JOB! 
+		// IT DOESN'T INSERT BECAUSE LI:NTH-CHILD(2) DOESN'T EXIST
 
 		// hide DOM Elements 
 		$( ".addListItemInput" ).parent().hide();
@@ -499,7 +505,11 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + '</p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)"><i class="icon ion-ios7-checkmark-outline medium-icon"></i></button></li>'); 
 
-		$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
+		if ( $(".insert li:nth-child(2)").length !== 0 )
+			$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
+		else
+			$( ".insert" ).append( $( domNote ) ); 
+
 		$compile( domNote )($scope);
 
 		// send data to db
@@ -605,15 +615,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	}
 
 
-	$scope.insertNoteInput = function() {
-		//		var container = $(".insert"); 
-		//		var input = '<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>'; 
-		//		container.prepend( input ); 
-		//		$compile( input )( $scope );
-	}
-
 	// note creation click events 
-
 	$scope.inlineShowInput = function( event ) {
 		$( "#addNoteFromJob" ).show(); 
 		setTimeout(function(){$( ".addListItemInput" ).focus();}, 0);
@@ -836,7 +838,7 @@ function NotesCtrl( $scope, $http ) { //$http variale
 
 
 //////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
-function JobsCtrl( $scope, $rootScope, $http, jobService ) {
+function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.mpn = personalNoteId; 
 	$scope.jobs = ""; 
 
@@ -870,10 +872,66 @@ function JobsCtrl( $scope, $rootScope, $http, jobService ) {
 	//		})
 	//	}
 
+	// job creation click events 
+
+	// toggle the new job input
+	$scope.toggleInlineInput = function() {
+
+		var text = {
+			"Add Job" : "Cancel", 
+			"Cancel" : "Add Job"
+		}
+		var currText = $( ".create.job" ).html(); 
+		var newText = text[ currText ]; 
+		$( ".create.job" ).html( newText ); 
+
+		if ( currText === "Cancel" ) 
+			$( "#addJobInput" ).val( "" ); 
+
+
+		$( "#addJob" ).toggle(); 
+		setTimeout( function() { 
+			$( "#addJobInput" ).focus(); 
+		}, 0);
+	}
+
+
+	$scope.createJob = function( job ) {
+		console.log( "got the job ", job ); 
+		jobService.createJob( job ) 
+		.success( function( data ) {
+			console.log( "the new job ", data ); 
+			$scope.insertJob( data ); 
+			$scope.toggleInlineInput(); 
+
+			// add notification
+			var info = {}; 
+			info.title = data.title; 
+			info.msg = "Job was successfully created"
+			var url = "job.html?id=" + data._id; 
+
+			notifications.show( info, url ); 
+		}) 
+		.error( function( data ) {
+			console.log( "error creating new inline job" ); 
+		})
+	}
+
+	$scope.insertJob = function( job ) {
+		var title = job.title; 
+		var members = job.members;
+		var el = $( '<li class="item item-button-right"><a href="job.html?id=' + job._id + '" ng-click="broadcastJob(job._id)"><div class="big-title"> ' + title + '</div><div class="small-regular-text"> ' + members + ' </div></a></li>' ); 
+
+		if ( $( "ul.list li:nth-child(2)" ).length !== 0  )
+			$( el ).insertBefore( $( "ul.list li:nth-child(2)" ) );   
+		else
+			$( "ul.list" ).append( $( el ) ); 
+	}
+
 }
 
 
-//////////////// Jobs Controller For Node.js & MondoDB Test ////////////////
+//////////////// Search Controller For Node.js & MondoDB Test ////////////////
 function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobService, $location ) {
 	var absUrl = $location.$$absUrl;
 	var query = absUrl.substr( absUrl.indexOf('?') + 1 );
@@ -925,6 +983,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 }
 
 
+//////////////// Tools Controller For Node.js & MondoDB Test ////////////////
 function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $location, jobPageService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
@@ -1083,10 +1142,12 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 	}
 }
 
+//////////////// News Feed Controller For Node.js & MondoDB Test ////////////////
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
 	// NOTE can't use track by $index with orderBy and possibly filter
 	$scope.predicate = '-created';
-	
+
+
 	$scope.feed = [];
 	var insert = function( obj, data ) {
 		var i = 0; 
@@ -1095,6 +1156,7 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 		}
 	}; 
 
+	// recently created jobs
 	jobService.getRecentJobs( "created" ) 
 	.success( function( data ) {
 		console.log( "successfully collected recent jobs" ); 
@@ -1106,6 +1168,7 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 		insert( $scope.feed, data.data ); 
 	})
 
+	// recently created notes
 	noteService.getRecentNotes( "created" ) 
 	.success( function( data ) {
 		console.log( "successfully collected recent notes" ); 
@@ -1116,8 +1179,19 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 	.then( function( data ) {
 		insert( $scope.feed, data.data ); 
 	})
-	//	debug( " should not be empty ", notes )
 
+	// recently complete jobs 
+	jobService.getRecentlyCompletedJobs()
+	.success( function( data ) {
+		console.log( "successfully collected recently completed" ); 
+	})
+	.error( function( data ) {
+		console.log( "error receiving recently completed jobs"); 
+	})
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////// DON'T FORGET TO DO CALLS FOR RECENTLY COMPLETED AND PERSONAL NOTES ////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

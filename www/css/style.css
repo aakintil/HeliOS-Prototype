@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8372,7 +8372,6 @@ p {
   height: 24px;
   margin-right: 10px;
   margin-bottom: -2px;
-  margin-top: 7px;
   float: left; }
 
 /* unvisited link */
@@ -8435,26 +8434,6 @@ a:active {
 .list-action-item {
   margin-top: 8px; }
 
-.alert-extras {
-  position: relative;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 5px; }
-  .alert-extras .alert-type {
-    left: 0px;
-    bottom: 0;
-    position: absolute; }
-  .alert-extras .alert-time {
-    right: -50px;
-    position: absolute;
-    bottom: 0; }
-
-.alert-text {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border: 1px solid red-alert; }
-
 .detail {
   margin-bottom: 10.5px; }
 
@@ -8501,9 +8480,9 @@ textarea {
 #nav-bar {
   height: 55px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.42);
-  /*	#search:focus {
-  		width: $search-bar-expanded;
-  	}*/ }
+  	/*	#search:focus {
+  	width: $search-bar-expanded;
+  }*/ }
   #nav-bar .button {
     border: 0px;
     color: #010101;
@@ -8591,24 +8570,26 @@ textarea {
     text-transform: uppercase;
     /*line-height: (15)+px;*/ }
 
-#alerts .list-item-title {
-  font-weight: normal; }
-#alerts .list-item-subtitle {
-  font-size: 11px; }
-#alerts a {
-  text-decoration: none;
-  color: #000;
-  font-weight: bold; }
-#alerts .indicator {
-  height: 92px;
-  position: absolute;
-  width: 10px;
-  left: 0;
-  top: 0; }
-#alerts .note {
-  background-color: #f0aa09; }
-#alerts .job {
-  background-color: #2d9db4; }
+#activity-feed .list .item {
+  padding: 20px; }
+  #activity-feed .list .item p {
+    font-family: "Gotham Narrow Medium";
+    color: black; }
+  #activity-feed .list .item p, #activity-feed .list .item .alert-time {
+    font-size: 14.5px; }
+  #activity-feed .list .item .regular-text {
+    margin-bottom: 11px; }
+  #activity-feed .list .item .alert-extras {
+    position: relative;
+    background-color: grey !important; }
+    #activity-feed .list .item .alert-extras .alert-type {
+      float: left; }
+      #activity-feed .list .item .alert-extras .alert-type .medium-icon {
+        height: 16px;
+        margin-right: 10px;
+        float: left; }
+    #activity-feed .list .item .alert-extras .alert-time {
+      float: right; }
 
 .offset .item-divider {
   background-color: transparent;

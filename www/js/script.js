@@ -189,11 +189,13 @@ $(document).ready(function () {
 		if(e.keyCode == 13)
 		{
 			$(this).trigger("enterKey");
-//			cordova.plugins.Keyboard.close();
+			//			cordova.plugins.Keyboard.close();
 		}
 	});
 
+	// Hide job and note creation inputs
 	$('#addNoteFromJob').hide();
+	$('#addJob').hide();
 
 
 	// Code for handling search bar results
