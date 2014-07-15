@@ -1,6 +1,6 @@
 // your variable changes can go here
 
-$nav-bar-height: 60px;
+$nav-bar-height: 55px;
 
 // Colors
 $gray-dark: rgba(0, 0, 0, .42);
@@ -36,8 +36,20 @@ $base-background-color: $gray-background;
 	src: url("../fonts/GothamNarrow-Book.otf");
 }
 
+@font-face {
+	font-family: "Gotham Narrow Bold";
+	src: url("../fonts/GothamNarrow-Bold.otf");
+}
+
+@font-face {
+	font-family: "Gotham Narrow Medium";
+	src: url("../fonts/GothamNarrow-Medium.otf");
+}
+
 // Fonts
 $font-family-sans-serif: "Gotham Narrow Book";
+$font-family-sans-serif-bold: "Gotham Narrow Bold";
+$font-family-sans-serif-medium: "Gotham Narrow Medium";
 
 
 // Items
@@ -52,7 +64,7 @@ $item-light-border: rgb(185, 185, 185);
 
 // Search
 $search-bar: 60%; 
-$search-bar-expanded: 80%; 
+$search-bar-expanded: 75%; 
 
 //Forms
 input {
@@ -130,10 +142,16 @@ p {
 }
 
 .small-regular-text {
-	font-size: (29/2)+px !important;
+	font-size: (23/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
 	text-transform: none !important;
+}
+
+.medium-regular-text {
+	font-size: (29/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
 }
 
 .detail-text {
@@ -162,6 +180,11 @@ p {
 	color: black;
 }
 
+.header-text {
+	font-size: 18px;
+	font-family: $font-family-sans-serif-bold;
+}
+
 .small-icon {
 	height: 13px;
 	margin-right: 10px;
@@ -169,7 +192,7 @@ p {
 }
 
 .medium-icon {
-	height: (40/2)+px;
+	height: 24px;
 	margin-right: 10px;
 	margin-bottom: -2px;
 	margin-top: 7px; 
@@ -245,7 +268,7 @@ a:active {
 }
 
 .offset {
-	margin: 0 25px; 
+	margin: 0 20px; 
 	margin-top: 20px;
 
 	.item-divider {
@@ -331,11 +354,14 @@ textarea {
 }
 
 .done-button {
-	font-size: (36/2)+px !important;
-	font-weight: normal !important;
+	font-size: (23/2)+px !important;
+	font-family: $font-family-sans-serif;
 	color: black !important;
+	font-weight: normal !important;
 	text-align: vertical;
-	line-height: 60px !important;
+	line-height: 55px !important;
+	padding: 0px !important;
+	padding-right: 20px;
 }
 
 #nav-bar {
@@ -366,6 +392,8 @@ textarea {
 		transition: width .5s;*/
 		margin: auto;
 		margin: 10px;
+		margin-left: 20px;
+		margin-right: 0px;
 		border: 2px solid $gray-lighter;
 		width: $search-bar;
 		height: (66/2)+px;
@@ -377,7 +405,7 @@ textarea {
 
 	#search::-webkit-search-cancel-button{
 	    position:relative;
-	    right:20px;    
+	    right:20px;
 	}
 
 	#search.expanded {
@@ -444,10 +472,10 @@ textarea {
 
 
 .nav-frame {
-	top: 17px;
+	top: 10px;
 }
 .top.section {
-	margin-bottom: 60px; 	
+	margin-bottom: 55px; 	
 }
 
 .section {
@@ -926,15 +954,24 @@ $bar-height: 75px;
 	font-size: 55px !important; 
 }
 
-<<<<<<< HEAD
 .hidden {
 	display: none;
 }
-=======
-
 
 // Bottom Margin for list elements
 .list:last-child {
 	margin-bottom: 15px; 
 }
->>>>>>> f9b391d8ef19ebff52f5ef563f37b69f9448c7b9
+
+.two-row-list-item {
+
+	padding: 20px;
+
+	.title-row {
+		padding-bottom: 6px;
+	}
+
+	.detail-row {
+	}
+
+}

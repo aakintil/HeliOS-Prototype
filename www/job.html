@@ -94,11 +94,12 @@
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
-					<div class="float-right create note addListItemText" ng-click="inlineShowInput( $event )">
+					<div class="float-right create note addListItemText small-regular-text" ng-click="toggleInlineInput( $event )">
 						+ Add Note
 					</div>
 				</div>
 				<ul class="list notes insert">
+					<li class="empty-item small-title" ng-if="job.notes.length === 0">No Notes</li>
 					<li class="item" id="addNoteFromJob">
 						<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 					</li>
@@ -107,6 +108,7 @@
 						<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)">
 							<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
 						</button>
+						<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
 					</li>
 				</ul>
 			</div>
@@ -119,11 +121,12 @@
 							<i class="icon ion-ios7-arrow-down"></i>
 						</button>
 					</div>
-					<div class="float-right create note addListItemText" ng-click="">
-						+ Add Tool
+					<div class="float-right create note addListItemText small-regular-text" id="add-tools">
+						+ Add Tools
 					</div>
 				</div>
 				<ul class="list">
+					<li class="empty-item small-title" ng-if="job.tools.length === 0">No Tools</li>
 					<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools">
 						<div class="big-title">{{ tool.name }}</div>
 						<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
@@ -221,40 +224,39 @@
 	</ion-view>
 
 
-	<!-- The add tools page overlay -->
-	<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
-		<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+		<!-- The add tools page overlay -->
+		<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl" ng-init="">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input id="search" class="expanded" type="text" placeholder="Search for Tools"  autocomplete="off" ng-model="ToolsCtrl.searchText"> 
+				<div class="clear-button" type="reset">X</div>
 
-			<input id="search" type="text" placeholder="Search for Tools"  autocomplete="off" ng-model="ToolsCtrl.searchText"> 
-			<div class="clear-button" type="reset">X</div>
-
-			<div class="button-bar nav-bar-buttons">
-				<div class="button done-button done">Cancel</div>
-			</div>
-		</ion-nav-bar>
-
-		<ion-view class="nav-frame">
-			<ion-content overflow-scroll="true" class="has-header">
-				<div class="section">
-					<ul class="list">
-						<li class="toolsselection item item-button-right" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
-							<div class="big-title">{{tool.name}}</div>
-							<div class="small-light-caps">Current Location: {{tool.current_location}}</div>
-							<button ng-click="check($event)" class="button button-clear checklist-item" id="{{tool._id}}">
-								<i class="icon ion-ios7-plus-outline medium-icon"></i>
-							</button>
-						</li>
-					</ul>
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done-button">Cancel{{toolList}}</div>
 				</div>
-			</ion-content>
-			<div class="bar bar-footer">
-				<button class="bar bar-footer bar-balanced" ng-click="getToolList()">
-					<div class="title">Add Tools</div>
-				</button>
-			</div>
-		</ion-view>
-	</div>
-	<div class="modal-background"></div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content overflow-scroll="true" class="has-header">
+					<div class="section">
+						<ul class="list">
+							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
+								<div class="title-row header-text">{{tool.name}}</div>
+								<div class="detail-row">Current Location: {{tool.current_location}}</div>
+								<button class="button button-clear checklist-item" id="{{tool._id}}">
+									<i class="icon ion-ios7-plus-outline medium-icon"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</ion-content>
+				<div class="bar bar-footer">
+					<button class="bar bar-footer bar-balanced" ng-click="getToolList()">
+						<div class="title">Add Tools</div>
+					</button>
+				</div>
+			</ion-view>
+		</div>
+
 	</body>
 
 </html>
