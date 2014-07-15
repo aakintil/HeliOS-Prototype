@@ -229,7 +229,6 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.put( urlBase + '/' + id );
 	}
 
-
 	this.updateJobWithNote = function( id ) {
 		return $http.post( urlBase + '/' + id )
 	}
@@ -376,14 +375,16 @@ app.service('notifications', ['$http', function ($http) {
 }]);
 
 
-
+app.service('jobPageService', function() {
+	var toolList = [];
+});
 
 ////////////////////////////////////////////////
 ///////////////// CONTROLLERS //////////////////
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout, $compile ) {
+function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout, $compile, jobPageService ) {
 
 	$scope.predicate = '-created';
 
@@ -469,6 +470,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		dateString += (date.getMonth() + 1) + "/" + date.getDay() + "/" + date.getFullYear().toString().substring(2);
 		$scope.job.created = dateString;
 		$scope.job_tool_ids = $scope.job.tools;
+		jobPageService.toolList = $scope.job.tools;
+		console.log("Set it to ", jobPageService.toolList);
 		$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
 		$scope.complete = $scope.job.status; 
@@ -476,6 +479,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
 	})
+
 
 	$scope.addNote = function( note ) {
 		// BIG BUG!!!! ///////
@@ -522,8 +526,12 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	};
 
 	$scope.expandNote = function( event ) {
-		console.log(" clicked ")
-		$(event.currentTarget).find("p").toggleClass("expanded-note");
+		console.log(" clicked : ", event);
+		console.log($(event.target).hasClass("checklist-item"));
+		if(!$(event.target).hasClass("checklist-item")) {
+			$(event.currentTarget).find("p.regular-text").toggleClass("expanded-note");
+			$(event.currentTarget).find("p.detail-info").toggleClass("hidden");
+		}
 	}
 
 	$scope.s = "unchecked"; 
@@ -537,12 +545,12 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 		if ( el.hasClass("checked") ) {
 			el.removeClass("checked");
-			check.attr("class", "icon ion-ios7-checkmark-outline")
+			check.attr("class", "icon ion-ios7-checkmark-outline medium-icon")
 			status = "na"; 
 		}
 		else {
 			el.addClass("checked"); 
-			check.attr("class", "icon ion-ios7-checkmark")
+			check.attr("class", "icon ion-ios7-checkmark medium-icon")
 			status = "checked"; 
 		}
 
@@ -550,7 +558,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 			id: note._id, 
 			status: status
 		}
-		console.log( " should not throw bloody errors ", data )
+
 		noteService.changeStatus( data )
 		.success( function( data ) {
 			debug.log( " a changed status ", data.status ); 
@@ -603,9 +611,33 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 	// note creation click events 
 	$scope.inlineShowInput = function( event ) {
-		console.log( event ); 
 		$( "#addNoteFromJob" ).show(); 
-		$( ".addListItemInput" ).focus();
+		setTimeout(function(){$( ".addListItemInput" ).focus();}, 0);
+		
+	}
+
+	$scope.toggleInlineInput = function( event ) {
+
+		$(".notes .empty-item").hide();
+
+		var text = {
+			"+ Add Note" : "Cancel", 
+			"Cancel" : "+ Add Note"
+		}
+
+		var currText = $( event.currentTarget ).html().trim(); 
+		console.log(currText);
+		var newText = text[ currText ]; 
+		console.log(newText);
+		$( event.currentTarget ).html( newText ); 
+
+		if ( currText === "Cancel" ) {
+			$( ".addListItemInput" ).val( "" ); 
+		}
+
+
+		$( "#addNoteFromJob" ).toggle(); 
+		setTimeout(function(){$( ".addListItemInput" ).focus();}, 0);
 	}
 
 }
@@ -944,13 +976,18 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 
 }
 
+
 //////////////// Tools Controller For Node.js & MondoDB Test ////////////////
-function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $location ) {
+function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $location, jobPageService ) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
 	$scope.predicate = 'name';
-
+	setTimeout( function(){
+		$scope.prevToolList = jobPageService.toolList;
+		console.log("tools ctrol got it", $scope.prevToolList[0].name);
+		}, 250);
+	
 	$scope.setSearchQuery = function(inputQuery) {
 		$scope.query = inputQuery;
 	}
@@ -969,15 +1006,17 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	}
 
 	$scope.getToolList = function() {
+		console.log("tool list function");
 		var toolList = [];
 		var absUrl = $location.$$absUrl;
-		var job_id = absUrl.substr( absUrl.indexOf('?') + 1 );
+		var job_id = absUrl.substr( absUrl.indexOf('?') + 4 );
 		$(".ion-ios7-plus").each(function(){
 			toolList.push($(this).parent().attr('id'));
 		});
 		console.log(toolList);
 		var x = {}; 
-		x.type = "update tools"; 
+		x.type = "update tools";
+		console.log(job_id); 
 		x.id = job_id; 
 		x.param = toolList; 
 		// var tools = toolList.join("+");  
@@ -996,21 +1035,6 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		$(".modal-background").hide();
 	}
 
-
-	//	$scope.tools = [
-	//		{
-	//			name: 'Tool 1',
-	//			current_location: 'Current Location_1'
-	//		},
-	//		{
-	//			name: 'Tool 2',
-	//			current_location: 'Current Location_2'
-	//		},
-	//		{
-	//			name: 'Tool 3',
-	//			current_location: 'Current Location_3'
-	//		},
-	//	];
 }
 
 //////////////// Collaborators Controller For Node.js & MondoDB Test ////////////////

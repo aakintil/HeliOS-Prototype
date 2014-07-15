@@ -357,18 +357,21 @@ app.get('/api/jobs/:type/:title', function( req, res  ) {
 
 app.get( '/api/jobs/:type/:title/:id', function( req, res ) {
 	console.log( "======== CALLED THE METHOD TO UPDATE JOBS WITH TOOLS =======")
-	// console.log( " the job ", req.params );
+	 console.log( " the job ", req.params );
 	var query = { '_id' : req.params.id }; 
 	var new_tools = req.params.title; 
 	var new_tools_array = new_tools.split(",");
-	// console.log( query, " , please be in here")
+	console.log( query, " , please be in here")
+	console.log(new_tools_array);
 
 	Job.findOne( query, function( err, job ) {
+		console.log("The job is " + job);
 		console.log( "the tools ", typeof job.tools );
 		// job.tools.push( tools ); 
 		console.log(new_tools_array);
 		//		job.update( { tools : new_tools_array }, function() { console.log("updated job") } ); 
 		var i = 0; 
+		job.tools = [];
 		for ( var i in new_tools_array ) {
 			var id = mongoose.Types.ObjectId( new_tools_array[ i ] ); 
 			job.tools.push( id ); 

@@ -1,6 +1,6 @@
 // your variable changes can go here
 
-$nav-bar-height: 60px;
+$nav-bar-height: 55px;
 
 // Colors
 $gray-dark: rgba(0, 0, 0, .42);
@@ -14,6 +14,11 @@ $red-alert: #f05a24;
 $green-add: #22b473;
 $magenta-search: #9422af;
 
+// New Colors to Use
+$gray-background: #f3f3f3;
+$gray-header: #e4e6e6;
+$light-gray-text: #888888;
+
 $success: rgba( 143, 203, 33, 1 ); 
 $warning: rgba( 234, 173, 22, 1 ); 
 $error: rgba( 239, 78, 58, 1 ); 
@@ -23,7 +28,7 @@ $positive: #f0f0f0;
 $positive-active: rgba(124, 124, 124, .2);
 $button-positive-active-bg: $positive-active; 
 $dark: $gray-dark;
-$base-background-color: $gray-light;
+$base-background-color: $gray-background;
 
 //Base
 @font-face {
@@ -32,13 +37,26 @@ $base-background-color: $gray-light;
 }
 
 @font-face {
+<<<<<<< HEAD
+=======
+	font-family: "Gotham Narrow Bold";
+	src: url("../fonts/GothamNarrow-Bold.otf");
+}
+
+@font-face {
+>>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
 	font-family: "Gotham Narrow Medium";
 	src: url("../fonts/GothamNarrow-Medium.otf");
 }
 
 // Fonts
 $font-family-sans-serif: "Gotham Narrow Book";
+<<<<<<< HEAD
 $gotham-medium: "Gotham Narrow Medium";
+=======
+$font-family-sans-serif-bold: "Gotham Narrow Bold";
+$font-family-sans-serif-medium: "Gotham Narrow Medium";
+>>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
 
 
 // Items
@@ -53,7 +71,7 @@ $item-light-border: rgb(185, 185, 185);
 
 // Search
 $search-bar: 60%; 
-$search-bar-expanded: 80%; 
+$search-bar-expanded: 75%; 
 
 //Forms
 input {
@@ -91,8 +109,9 @@ $item-subtitle: (23/2)+px;
 	transition:  all .25s linear;
 }
 
-// remove later after testing
-
+p {
+	line-height: 24px;
+}
 
 // Text Styles
 
@@ -130,10 +149,16 @@ $item-subtitle: (23/2)+px;
 }
 
 .small-regular-text {
-	font-size: (26/2)+px;
-	font-weight: normal;
-	color: black;
+	font-size: (23/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
 	text-transform: none !important;
+}
+
+.medium-regular-text {
+	font-size: (29/2)+px !important;
+	font-weight: normal !important;
+	color: black !important;
 }
 
 .detail-text {
@@ -162,6 +187,11 @@ $item-subtitle: (23/2)+px;
 	color: black;
 }
 
+.header-text {
+	font-size: 18px;
+	font-family: $font-family-sans-serif-bold;
+}
+
 .small-icon {
 	height: 13px;
 	margin-right: 10px;
@@ -169,7 +199,7 @@ $item-subtitle: (23/2)+px;
 }
 
 .medium-icon {
-	height: (40/2)+px;
+	height: 24px;
 	margin-right: 10px;
 	margin-bottom: -2px;
 	float: left; 
@@ -244,7 +274,7 @@ a:active {
 }
 
 .offset {
-	margin: 0 25px; 
+	margin: 0 20px; 
 	margin-top: 20px;
 
 	.item-divider {
@@ -304,11 +334,14 @@ textarea {
 }
 
 .done-button {
-	font-size: (36/2)+px !important;
-	font-weight: normal !important;
+	font-size: (23/2)+px !important;
+	font-family: $font-family-sans-serif;
 	color: black !important;
+	font-weight: normal !important;
 	text-align: vertical;
-	line-height: 60px !important;
+	line-height: 55px !important;
+	padding: 0px !important;
+	padding-right: 20px;
 }
 
 #nav-bar {
@@ -339,6 +372,8 @@ textarea {
 		transition: width .5s;*/
 		margin: auto;
 		margin: 10px;
+		margin-left: 20px;
+		margin-right: 0px;
 		border: 2px solid $gray-lighter;
 		width: $search-bar;
 		height: (66/2)+px;
@@ -349,8 +384,13 @@ textarea {
 	}
 
 	#search::-webkit-search-cancel-button{
+<<<<<<< HEAD
 		position:relative;
 		right:20px;    
+=======
+	    position:relative;
+	    right:20px;
+>>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
 	}
 
 	#search.expanded {
@@ -417,10 +457,10 @@ textarea {
 
 
 .nav-frame {
-	top: 17px;
+	top: 10px;
 }
 .top.section {
-	margin-bottom: 60px; 	
+	margin-bottom: 55px; 	
 }
 
 .section {
@@ -701,7 +741,7 @@ textarea {
 }
 
 
-.rotate180 {
+.rotate90 {
 	top: -14px !important; 
 
 	-webkit-transition: all 0.15s linear; 
@@ -710,11 +750,11 @@ textarea {
 	-o-transition: all 0.15s linear; 
 	transition:  all 0.15s linear;
 
-	transform: rotate(180deg);
-	-ms-transform: rotate(180deg); /* IE 9 */
-	-webkit-transform: rotate(180deg); /* Safari and Chrome */
-	-o-transform: rotate(180deg); /* Opera */
-	-moz-transform: rotate(180deg); /* Firefox */
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg); /* IE 9 */
+	-webkit-transform: rotate(-90deg); /* Safari and Chrome */
+	-o-transform: rotate(-90deg); /* Opera */
+	-moz-transform: rotate(-90deg); /* Firefox */
 }
 
 .job {
@@ -749,6 +789,14 @@ textarea {
 		background-color: #F0F0C7;
 		padding: 10px 20px;
 	}
+}
+
+.empty-item {
+	height: 43px !important;
+	background-color: $gray-header;
+	color: $light-gray-text;
+	padding-left: 20px;
+	line-height: 43px;
 }
 
 // Code for Add page
@@ -909,14 +957,31 @@ $bar-height: 75px;
 	font-size: 55px !important; 
 }
 
-
+.hidden {
+	display: none;
+}
 
 // Bottom Margin for list elements
 .list:last-child {
 	margin-bottom: 15px; 
 }
 
+<<<<<<< HEAD
 // Job Creation input element on index.html
 #addJobInput {
 
 }
+=======
+.two-row-list-item {
+
+	padding: 20px;
+
+	.title-row {
+		padding-bottom: 6px;
+	}
+
+	.detail-row {
+	}
+
+}
+>>>>>>> 9b8b92190529c98ef440e4a876643222069456d3

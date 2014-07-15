@@ -126,7 +126,7 @@ $(document).ready(function () {
 
 	$( '.collapsable' ).click( function() {
 		var list = $( this ).closest( '.item-divider' ).siblings( '.list' ); 
-		$( this ).toggleClass( 'rotate180' ); 
+		$( this ).toggleClass( 'rotate90' ); 
 		list.slideToggle(); 
 	}); 
 
@@ -235,6 +235,19 @@ $(document).ready(function () {
 		$('.clear-button').fadeOut(50);
 		$("#search").val("");
 		$("#search").focus();
+	});
+
+	$('#add-note').click(function(){
+		console.log('clicked');
+		var element = $('<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>');
+		$("#notes-list").prepend(element);
+		$("#notes-list .empty-item").hide();
+		$compile( element )($scope);
+
+		setTimeout(function(){
+		    $("#notes-list .addListItemInput").focus();
+		}, 0);
+
 	});
 
 	// Code for adding note/jobs from the page
