@@ -909,15 +909,15 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	})
 
 	$scope.check = function( event ) {
-		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-checkmark-outline" ); 
-		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-checkmark" ); 
+		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus-outline" ); 
+		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus" ); 
 	}
 
 	$scope.getToolList = function() {
 		var toolList = [];
 		var absUrl = $location.$$absUrl;
 		var job_id = absUrl.substr( absUrl.indexOf('?') + 1 );
-		$(".ion-ios7-checkmark").each(function(){
+		$(".ion-ios7-plus").each(function(){
 			toolList.push($(this).parent().attr('id'));
 		});
 		console.log(toolList);
@@ -936,6 +936,9 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		.error( function( data ) {
 			console.log( "we done goofed up"); 
 		})
+
+		$("#tools-modal").hide();
+		$(".modal-background").hide();
 	}
 
 

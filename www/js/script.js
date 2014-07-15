@@ -182,6 +182,8 @@ $(document).ready(function () {
 
 	});
 
+
+
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
 		if(e.keyCode == 13)
@@ -298,11 +300,25 @@ $(document).ready(function () {
 
 	$("#add-tools").click(function() {
 		$("#tools-modal").show();
+		$('.modal-background').show();
 	});
 
 	$( ".expand" ).click( function() {
 		alert(" have been clicked ")
-	})
-	$( ".modal").hide(); 
+	});
+
+	// Modal Logic
+	// Hide a modal when it is closed
+	$(".modal #nav-bar").on('click', '.done-button', function() {
+
+		// Hide the modal
+		$($(this)[0].parentNode.parentNode.parentNode).hide();
+		$('.modal-background').hide();
+	});
+
+	// Modify a check/plus button on click
+	$(".modal .list li").on('click', '.icon', function() {
+		console.log($(this));
+	});
 
 });
