@@ -519,33 +519,6 @@ app.post( '/api/jobs', function( req, res ) {
 
 
 
-//		else {
-// create the note
-//			Note.create({ 
-//				message : msg,
-//				creator : "You",
-//				done : false
-//			}, function( err, note ) {
-//				if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate note  |  line 162 : server.js") }; 
-//
-//				var query = { _id : job._id }; 
-//				Job.findOne( query, function( err, job ) {
-//					if ( err ) { console.log( " couldn't find the job ") }; 
-//					job.notes.push( note._id );
-//					job.save(); 
-//				}).populate("notes").exec( function( err, job ) {
-//					if ( err ) { console.log( "you don goofed : couldn't populate notes ") }; 
-//					console.log( " the new note ", job ); 
-//					//			console.log( " the old note ", job.notes )
-////					res.json( job )
-//				});
-//			})
-
-
-
-
-//		}
-
 
 // Delete a Job 
 // think about making this "HIDE" ... which if we do, an api call won't be necessary 

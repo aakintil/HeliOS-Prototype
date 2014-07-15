@@ -108,7 +108,7 @@
 				<li class="item" id="addNoteFromJob">
 					<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 				</li>
-				<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes track by $index" ng-click="expandNote( $event )">
+				<li detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
 					<p class="regular-text">{{ note.message }}</p>
 					<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)">
 						<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
