@@ -164,6 +164,11 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
 		res.json( notes )
 	});	
+//	.populate("job_id").exec( function( err, notes ) {
+//		if( err ) console.log( "HUGE MISTAKE"); 
+//		
+//		debug.log( "list of notes", notes ); 
+//	});	
 });
 
 app.get('/api/notes/:type/:name', function( req, res  ) {
@@ -252,8 +257,10 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 })
 
 //////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
-
-
+//////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
+//////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
+//////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
+//////////////////////////////// END OF NOTE ROUTES ////////////////////////////////
 
 
 // change the status of a job
@@ -271,7 +278,6 @@ app.put( '/api/jobs/:id/:status', function( req, res ) {
 		res.json( job ); 
 	})
 })
-
 
 
 // Get Job With Id 
@@ -333,22 +339,6 @@ app.put('/api/jobs/:completed', function( req, res ) {
 });
 
 
-//app.post('/api/jobs/:type/:param', function( req, res  ) {
-//	console.log( "======== CALLING THE INSERT TOOL INTO JOB METHOD =======")
-//	console.log( " the job ", req.params );
-//
-//	// var n = "^" + req.params.name; 
-//	// var name = new RegExp( n ); 
-//	// var query = req.params.type === "name" ? { 'message' : name } : { '_id' : name };
-//
-//	// Note.find( query, function( err, item ) {
-//	// 	console.log( "i am in the find one query function ", item );
-//	// 	res.json( item );
-//	// });
-//});
-
-
-
 // Get ALL Jobs
 app.get( '/api/jobs', function ( req, res ) {
 
@@ -405,8 +395,6 @@ app.get( '/api/jobs/:type/:title/:id', function( req, res ) {
 		res.json( job );
 	});
 }); 
-
-
 
 
 // Add a note to a job // UPDATE
