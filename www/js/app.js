@@ -386,7 +386,7 @@ app.service('notifications', ['$http', function ($http) {
 function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout, $compile ) {
 
 	$scope.predicate = '-created';
-	
+
 	$scope.data = {
 		swipe : 0,
 		swiperight: 0,
@@ -1035,25 +1035,45 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 }
 
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
-	console.log("yea");  
-	//	$scope.feed = [];
-	//	$scope.notes = {}; 
+	// NOTE can't use track by $index with orderBy and possibly filter
+	$scope.predicate = '-created';
+	
+	$scope.feed = [];
+	var insert = function( obj, data ) {
+		var i = 0; 
+		for ( i in data ) {
+			obj.push( data[ i ] ); 
+		}
+	}; 
+
 	jobService.getRecentJobs( "created" ) 
 	.success( function( data ) {
-		notes.push(data); 
+		console.log( "successfully collected recent jobs" ); 
 	})
 	.error( function( data ) {
-
+		console.log("error receiving recent job objects");
+	})
+	.then( function( data ) {
+		insert( $scope.feed, data.data ); 
 	})
 
 	noteService.getRecentNotes( "created" ) 
 	.success( function( data ) {
-		//		$scope.feed.push(data); 
-		//		$scope.notes = data; 
+		console.log( "successfully collected recent notes" ); 
 	})
 	.error( function( data ) {
-
+		console.log( "error receiving recent note objects" ); 
 	})
-	debug( " should not be empty ", notes )
+	.then( function( data ) {
+		insert( $scope.feed, data.data ); 
+	})
+	//	debug( " should not be empty ", notes )
 
 }
+
+
+app.filter('fromNow', function() {
+	return function(date) {
+		return moment(date).fromNow();
+	}
+});

@@ -911,3 +911,10 @@ $bar-height: 75px;
 #complete .icon:before {
 	font-size: 55px !important; 
 }
+
+
+
+// Bottom Margin for list elements
+.list:last-child {
+	margin-bottom: 15px; 
+}

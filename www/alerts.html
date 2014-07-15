@@ -22,11 +22,12 @@
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
 		<script src="js/script.js"></script>
+		<script src="js/moment.js"></script>
 	</head>
 
 	<body ng-app="starter">
 
-		<ion-nav-bar id="nav-bar" ng-controller="ActivityFeedCtrl" class="bar-positive my-nav-bar" align-title="center">
+		<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 			<div class="button-bar nav-bar-buttons">
 				<!-- place in a.button -->
 
@@ -39,7 +40,7 @@
 
 		<div id="notification"> </div>
 
-		<ion-view title="Alerts" class="nav-frame">
+		<ion-view title="Alerts" class="nav-frame" ng-controller="ActivityFeedCtrl">
 			<ion-content overflow-scroll="true" class="has-header">
 				<div id="alerts" class="section">
 					<div class="item item-divider alert">
@@ -50,17 +51,17 @@
 					<div class="list">
 
 						<a href="job.html?id=53be081604b37af3d04528db&type=alert">
-							{{ feed === undefined }}
-							<div class="item item-button-right" ng-repeat="el in feed track by $index">
+							<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 								<div class="alert-extras">
 									<div class="small-light-caps alert-type">
 										<img class="medium-icon" src="img/icons/home-gray.svg">
-										Note
+										{{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
 									</div>
-									<div class="small-light-caps alert-time">2 Minutes Ago</div>
+									<div class="small-light-caps alert-time"> {{ el.created | fromNow }} </div>
 								</div>
 								<div class="regular-text alert-text"> 
-									{{ el.created }}
+<!--									{{ moment( el.created ).fromNow() }}-->
+									
 								</div>
 							</div>
 						</a>
