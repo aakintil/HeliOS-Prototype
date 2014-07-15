@@ -187,7 +187,7 @@ p {
 
 .small-icon {
 	height: 13px;
-	margin-right: 10px;
+	margin-right: 5px;
 	margin-bottom: -2px;
 }
 
@@ -268,7 +268,7 @@ a:active {
 }
 
 .offset {
-	margin: 0 20px; 
+	margin: 0 18px;
 	margin-top: 20px;
 
 	.item-divider {
@@ -474,15 +474,18 @@ textarea {
 .nav-frame {
 	top: 10px;
 }
-.top.section {
-	margin-bottom: 55px; 	
-}
 
 .section {
 	.list {
+		
 		.item {
 			min-height: (125/2)+px;
 		}
+
+		.small-item {
+			max-height: 46px !important;
+		}
+
 	}
 
 	.short {
@@ -492,8 +495,8 @@ textarea {
 
 	.item-divider {
 		min-height: (24/2)+px;
-		padding-left: 15px; 
-		padding-right: 15px; 
+		padding-left: 4px; 
+		padding-right: 4px; 
 
 		.section-header {
 			text-transform: uppercase; 
@@ -772,7 +775,7 @@ textarea {
 		margin-bottom: -15px !important;
 		margin-top: 10px;
 		display: none; 
-		background-color: #e0e0e0; 
+		background-color: $gray-background; 
 		width: 1000px !important;
 		position: relative;
 		border: 1px solid $gray-light;
@@ -785,6 +788,10 @@ textarea {
 	.tool-submenu-replacement {
 		background-color: #F0F0C7;
 		padding: 10px 20px;
+	}
+
+	p {
+		margin-bottom: 0px;
 	}
 }
 
@@ -858,7 +865,7 @@ textarea {
 	padding: 0 20px 0 20px;
 }
 
-$bar-height: 75px;
+$bar-height: 55px;
 .modal {
 
 	position: absolute;
@@ -875,6 +882,18 @@ $bar-height: 75px;
 		line-height: $bar-height;
 	}
 
+}
+
+#tools-modal, #people-modal {
+
+	.list {
+		margin-bottom: $bar-height;
+	}
+
+	.bar-footer {
+		background-color: $blue-home !important;
+	}
+	
 }
 
 .modal-background {
@@ -907,12 +926,20 @@ $bar-height: 75px;
 
 #job-title {
 	position: relative;
+	margin: 20px;
+	margin-bottom: 0px;
 
 	.button {
 		position: absolute; 
 		right: 0; 
-		top: -10px; 
-		margin-right: 22px; 
+		top: -6px; 
+	}
+
+	.title-row {
+		padding-bottom: 6px;
+	}
+
+	.detail-row {
 	}
 }
 
@@ -960,7 +987,7 @@ $bar-height: 75px;
 
 // Bottom Margin for list elements
 .list:last-child {
-	margin-bottom: 15px; 
+	/*margin-bottom: 15px; */
 }
 
 .two-row-list-item {

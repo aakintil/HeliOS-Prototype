@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="24px"
-	 viewBox="0 0 36 24" enable-background="new 0 0 36 24" xml:space="preserve">
-<title>Untitled</title>
-<desc>Created with Sketch.</desc>
-<g id="Page-1" sketch:type="MSPage">
-	<g id="jobs" transform="translate(-26.000000, -132.000000)" sketch:type="MSLayerGroup">
-	</g>
-</g>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="56px" height="36px" viewBox="0 0 56 36" enable-background="new 0 0 56 36" xml:space="preserve">
 <g>
 	<g>
-		<polygon fill="#414142" points="27,12 27,14 24,14 24,12 13,12 13,14 10,14 10,12 1,12 1,24 35,24 35,12 		"/>
-		<path fill="#414142" d="M31,4V3h-4.422l-2.512-3H13.499l-2.728,3H6v1H0v6h10V8h3v2h11V8h3v2h9V4H31z M14.422,2h8.661l0.744,1
-			H13.633L14.422,2z"/>
+		<path d="M54.894,18.888H0V6.69h8.131V4.655h7.616l3.465-4.064h16.77l3.222,4.064h8.573V6.69h7.117V18.888z M40.66,14.82h10.167
+			v-4.063h-7.116V8.723H32.745H21.926h-9.728v2.034H4.065v4.063h11.182v-3.05h5.083v3.05h15.249v-3.05h5.081V14.82z"/>
+	</g>
+	<g>
+		<path d="M52.86,35.152H1.016V14.82h17.281v3.05v-3.05h19.316v3.05v-3.05H52.86V35.152z M5.082,31.086h43.713V18.888H40.66v3.05
+			h-5.081v-3.05H20.33v3.05h-5.083v-3.05H5.082V31.086z"/>
 	</g>
 </g>
 </svg>

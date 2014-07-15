@@ -273,6 +273,21 @@ app.put( '/api/jobs/:id/:status', function( req, res ) {
 })
 
 
+// change the members of a job
+app.put( '/api/jobs/members/:id/:members', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+	//	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var s = req.params.members; 
+	var status = s === "na" ? "" : s;
+	Job.findOne( query, function( err, job ) {
+		if ( err ) { console.log( " couldn't find the job ") }; 
+		job.members = s; 
+		job.save(); 
+		res.json( job ); 
+	});
+})
+
 
 // Get Job With Id 
 app.get('/api/jobs/:id', function( req, res ) {

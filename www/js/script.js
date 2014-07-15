@@ -285,22 +285,6 @@ $(document).ready(function () {
 		$('#input-job-hidden').trigger('input');
 	});
 
-	$("#people-modal .done").click(function(){
-		var participants = "";
-		$("#people-search-bar").val("");
-		$("#people-modal li").each(function() {
-			if( $(this).find('button i.ion-ios7-checkmark').length !=0 ) {
-				participants += $(this).find('.big-title').first()[0].innerText;
-				participants += ", ";
-			}
-		});
-		participants = participants.substring(0, participants.length-2);
-		$('#input-participants').val(participants);
-		$('#input-participants').trigger('input');
-		$('#people-modal').hide();
-		$('#add-page').show();
-	});
-
 	$(".back-job").click(function(){
 		$('#job-modal').hide();
 		$('#add-page').show();
@@ -313,7 +297,10 @@ $(document).ready(function () {
 
 	$("#add-tools").click(function() {
 		$("#tools-modal").show();
-		$('.modal-background').show();
+	});
+
+	$("#add-people").click(function() {
+		$("#people-modal").show();
 	});
 
 	$( ".expand" ).click( function() {

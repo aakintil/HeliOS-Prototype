@@ -74,8 +74,8 @@
 					<!-- <div class="right-title-button">Right Side</div> -->
 				</div>
 				<div id="job-title" class="{{job.status}}">
-					<div class="big-title offset item-button-right">{{job.title}}</div>
-
+					<div class="big-title title-row item-button-right">{{job.title}}</div>
+					<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
 					<button id="complete" ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
 						<i  class="icon ion-ios7-checkmark-outline medium-icon"></i>
 					</button>
@@ -132,28 +132,30 @@
 						<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
 						<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>
 						</div>
+						<button class="button button-clear checklist-item" ng-click="changeStatus(tool, $event)">
+							<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+						</button>
 
 							<div class="tool-submenu">
 								<div class="main-submenu">
 									<p>
 										<span class="small-light-caps">
-											Home Location: Venus 2
+											Home: Venus 2
 										</span>
 									</p>
 									<p>
 										<span class="small-light-caps">
-											Last Used: 5/3/14 by
-										</span>
-										<span class="small-regular-text">
-											Olga L
+											Calibration status: Calibrated
 										</span>
 									</p>
 									<p>
 										<span class="small-light-caps">
-											Last Calibrated: 6/16/13 by
+											Last calibration: Nick L. on Jun 2, 2013
 										</span>
-										<span class="small-regular-text">
-											Nick R
+									</p>
+									<p>
+										<span class="small-light-caps">
+											Last used: Olga L. on Nov 3, 2013
 										</span>
 									</p>
 								</div>
@@ -197,23 +199,22 @@
 						<div class="detail">
 							<span class="small-light-caps">Collaborators:</span> 
 							<span class="action-text">{{job.members}}</span> 
-
 						</div>
 
 					</div>
 				</div>
 				<ul class="list">
-					<li class="item action-text">
+					<li class="item action-text small-item" id="add-people">
 						<div class="list-action-item">
 							Edit Collaborators
 						</div>
 					</li>
-					<li class="item action-text">
+					<li class="item action-text small-item">
 						<div class="list-action-item">
 							Update Job Template
 						</div>
 					</li>
-					<li class="item action-text">
+					<li class="item action-text small-item">
 						<div class="list-action-item">
 							Save as New Job Template
 						</div>
@@ -225,13 +226,13 @@
 
 
 		<!-- The add tools page overlay -->
-		<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl" ng-init="">
+		<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
 			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 				<input id="search" class="expanded" type="text" placeholder="Search for Tools"  autocomplete="off" ng-model="ToolsCtrl.searchText"> 
 				<div class="clear-button" type="reset">X</div>
 
 				<div class="button-bar nav-bar-buttons">
-					<div class="button done-button">Cancel{{toolList}}</div>
+					<div class="button done-button">Cancel</div>
 				</div>
 			</ion-nav-bar>
 
@@ -252,6 +253,39 @@
 				<div class="bar bar-footer">
 					<button class="bar bar-footer bar-balanced" ng-click="getToolList()">
 						<div class="title">Add Tools</div>
+					</button>
+				</div>
+			</ion-view>
+		</div>
+
+
+		<!-- The add collabs page overlay -->
+		<div id="people-modal" class="modal" ng-controller="ParticipantsCtrl as PartCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input ng-model="PartCtrl.searchText" id="search" class="expanded" type="text" placeholder="Search for People"  autocomplete="off"> 
+				<div class="clear-button" type="reset">X</div>
+
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done-button">Cancel</div>
+				</div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content overflow-scroll="true" class="has-header">
+					<div class="section">
+						<ul class="list">
+							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="person in people | filter:PartCtrl.searchText | orderBy:predicate">
+								<div class="title-row header-text">{{person.name}}</div>
+								<button class="button button-clear checklist-item">
+									<i class="icon ion-ios7-plus-outline medium-icon"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</ion-content>
+				<div class="bar bar-footer">
+					<button id="addpeoplebutton" class="bar bar-footer bar-balanced" ng-click="saveParticipants()">
+						<div class="title">Add People</div>
 					</button>
 				</div>
 			</ion-view>

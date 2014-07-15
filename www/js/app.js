@@ -245,6 +245,9 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.delete( urlBase + '/' + job_id + '/' + note_id ); 
 	}
 
+	this.updateJobMembers = function(members, id) {
+		return $http.put( urlBase + '/members/' + id + '/' + members ); 
+	}
 
 	//		this.getNotesWithId = function( note, id ) {
 	//		return $http.put( noteUrlBase + '/' + id, note )
@@ -982,14 +985,12 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 }
 
 var notes = []; 
-function ParticipantsCtrl( $scope, $rootScope, $http ) {
+function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 	//	console.log ( " scope.Jobs ", Jobs )
 
 	$scope.query = "";
-
-	$scope.setSearchQuery = function(inputQuery) {
-		$scope.query = inputQuery;
-	}
+	var absUrl = $location.$$absUrl;
+	var job_id = absUrl.substr( absUrl.indexOf('?') + 4 );
 
 	$scope.people = [
 		{
@@ -1055,6 +1056,31 @@ function ParticipantsCtrl( $scope, $rootScope, $http ) {
 	];
 
 	$scope.predicate = 'name';
+
+
+	$scope.saveParticipants = function() {
+		console.log("Hi");
+		var participants = "";
+		$("#people-modal li").each(function() {
+			if( $(this).find('button i.ion-ios7-plus').length !=0 ) {
+				participants += $(this).find('.title-row').first()[0].innerText;
+				participants += ", ";
+			}
+		});
+		participants = participants.substring(0, participants.length-2);
+		$('#input-participants').val(participants);
+		$('#input-participants').trigger('input');
+		$('#people-modal').hide();
+		jobService.updateJobMembers(participants, job_id)
+		.success(function(){
+			console.log("Success");
+			var url = "job.html?id=" + job_id; 
+			window.location = url; 
+		})
+		.error(function(){
+			console.log("Error");
+		});
+	}
 }
 
 function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $location ) {
