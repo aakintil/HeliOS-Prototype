@@ -37,26 +37,21 @@ $base-background-color: $gray-background;
 }
 
 @font-face {
-<<<<<<< HEAD
-=======
 	font-family: "Gotham Narrow Bold";
 	src: url("../fonts/GothamNarrow-Bold.otf");
 }
 
 @font-face {
->>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
 	font-family: "Gotham Narrow Medium";
 	src: url("../fonts/GothamNarrow-Medium.otf");
 }
 
 // Fonts
 $font-family-sans-serif: "Gotham Narrow Book";
-<<<<<<< HEAD
 $gotham-medium: "Gotham Narrow Medium";
-=======
 $font-family-sans-serif-bold: "Gotham Narrow Bold";
 $font-family-sans-serif-medium: "Gotham Narrow Medium";
->>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
+
 
 
 // Items
@@ -384,13 +379,8 @@ textarea {
 	}
 
 	#search::-webkit-search-cancel-button{
-<<<<<<< HEAD
 		position:relative;
 		right:20px;    
-=======
-	    position:relative;
-	    right:20px;
->>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
 	}
 
 	#search.expanded {
@@ -499,7 +489,7 @@ textarea {
 				font-family: $gotham-medium; 
 				color: black; 
 			}
-			
+
 			p, .alert-time {
 				font-size: 14.5px; 
 			}
@@ -966,12 +956,12 @@ $bar-height: 75px;
 	margin-bottom: 15px; 
 }
 
-<<<<<<< HEAD
+
 // Job Creation input element on index.html
 #addJobInput {
 
 }
-=======
+
 .two-row-list-item {
 
 	padding: 20px;
@@ -984,4 +974,3 @@ $bar-height: 75px;
 	}
 
 }
->>>>>>> 9b8b92190529c98ef440e4a876643222069456d3
