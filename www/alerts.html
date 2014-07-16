@@ -71,7 +71,7 @@
 
 									<div class="small-light-caps alert-type">
 										<!-- show notes icon -->
-										<span ng-if="el.status !== 'completed' && el.message !== undefined">
+										<span ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id !== '111111111111111111111111'">
 											<img class="medium-icon" src="img/icons/notes-dark.svg"> 
 										</span>
 
@@ -80,11 +80,16 @@
 											<img class="medium-icon" src="img/icons/jobs-dark.svg"> 
 										</span>
 
-										<!-- show tools icon -->
-<!--
-										<span ng-if="el.status !== 'completed' && el.message !== undefined">
-											<img class="medium-icon" src="img/icons/notes-dark.svg"> 
+										<!-- show personal notes icon -->
+										<span ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id === '111111111111111111111111'">
+											<img class="medium-icon" src="img/icons/notebook-dark.svg"> 
 										</span>
+
+										<!-- show tools icon -->
+										<!--
+<span ng-if="el.status !== 'completed' && el.message !== undefined">
+<img class="medium-icon" src="img/icons/notes-dark.svg"> 
+</span>
 -->
 
 										<p ng-if="el.title !== undefined"> {{ el.title }} </p>
