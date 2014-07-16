@@ -66,10 +66,8 @@ var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
 	status : String,
 	created: { type: Date, default: Date.now },
-	//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
 	job_id : { type: Schema.ObjectId, ref: 'Job' }
-	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
 })
 
 // Job Model 
@@ -91,7 +89,8 @@ var Tool = mongoose.model( 'Tool', {
 	current_location : String, 
 	home_location : String, 
 	replacement_for : String, 
-	status : String
+	status : String, 
+	added: { type: Date, default: Date.now }
 })
 
 
