@@ -279,7 +279,7 @@
 				<ion-content overflow-scroll="true" class="has-header">
 					<div class="section">
 						<ul class="list">
-							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="person in people | filter:PartCtrl.searchText | orderBy:predicate">
+							<li ng-click="updatePerson($event)" class="item item-button-right two-row-list-item" ng-repeat="person in people | filter:PartCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{person.name}}</div>
 								<button class="button button-clear checklist-item" ng-click="updatePerson($event)">
 									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">

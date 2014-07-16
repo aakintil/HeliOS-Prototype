@@ -308,8 +308,9 @@ app.put( '/api/jobs/members/:id/:members', function( req, res ) {
 	console.log( "------- SEE MEEE ------- ");
 	//	console.log( req.params );
 	var query = { _id : req.params.id }; 
+	console.log("The Id is ", req.params.id);
 	var s = req.params.members; 
-	var status = s === "na" ? "" : s;
+	// var status = s === "na" ? "" : s;
 	Job.findOne( query, function( err, job ) {
 		if ( err ) { console.log( " couldn't find the job ") }; 
 		job.members = s; 
