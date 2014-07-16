@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8440,6 +8440,12 @@ a:active {
   margin-top: 20px; }
   .offset .item-divider {
     background-color: #989898; }
+
+.medium-icon.home {
+  height: 20px;
+  width: 20px;
+  float: left;
+  margin-top: 8px; }
 
 #tools-modal .add-icon {
   width: 24px;
