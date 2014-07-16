@@ -197,6 +197,8 @@ $(document).ready(function () {
 	$('#addNoteFromJob').hide();
 	$('#addJob').hide();
 
+	$('.cancel-button').hide();
+	$('.clear-button').hide();
 
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {
@@ -221,8 +223,7 @@ $(document).ready(function () {
 		$('#search').addClass('expanded');
 	});
 
-	$('.cancel-button').hide();
-	$('.clear-button').hide();
+
 	$('.cancel-button').click(function() {
 		$("#search").val("");
 		$('#search').removeClass('expanded');
@@ -230,6 +231,13 @@ $(document).ready(function () {
 		$('.clear-button').fadeOut(50);
 		$('#nav-buttons').fadeIn(50);
 	});
+
+	// redirect cancel button on search page
+	$('#search-page .cancel-button').click(function() {
+		window.location = "/"; 
+	});
+
+
 
 	$('.clear-button').click(function() {
 		$('.clear-button').fadeOut(50);
@@ -245,7 +253,7 @@ $(document).ready(function () {
 		$compile( element )($scope);
 
 		setTimeout(function(){
-		    $("#notes-list .addListItemInput").focus();
+			$("#notes-list .addListItemInput").focus();
 		}, 0);
 
 	});

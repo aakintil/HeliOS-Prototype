@@ -23,13 +23,13 @@
 		<script src="js/script.js"></script>
 	</head>
 
-	<body ng-app="starter" class="home">
+	<body ng-app="starter" class="search" id="search-page">
 
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 
 			<input id="search" type="text" placeholder="Tools, Jobs, Notes"  autocomplete="off" ng-model="searchText" ng-change=""/> 
-			<div class="clear-button" type="reset">X</div>
+			<div class="clear-button" type="reset" ng-click="clearSearchInput()">X</div>
 			<button class="button button-stable cancel-button">Cancel</button>
 
 			<div class="button-bar nav-bar-buttons" id="nav-buttons">
@@ -49,11 +49,16 @@
 			<ion-content overflow-scroll="true" class="has-header">
 				<!------------ Tools ------------>
 				<div class="section" id="uli" >
+					<!-- Navigation Indicator Bar -->
+					<div class="short search-pg"> </div>
+
 					<div class="item item-divider search">
-						<div class="left-title-button">
-							&nbsp;
+						<div class="section-header float-left small-title">
+							Tools
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
 						</div>
-						<div class="section-header center-text">Tools</div>
 					</div>
 					<ul class="list first"  ng-if="tools.length !== 0" >
 						<!-- ng-click="expandTool()" -->
@@ -114,8 +119,12 @@
 				<!------------ Notes ------------>
 				<div class="section" >
 					<div class="item item-divider search">
-						<div class="left-title-button">&nbsp;</div>
-						<div class="section-header center-text">Notes</div>
+						<div class="section-header float-left small-title">
+							Notes
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
 					</div>
 					<!-- if there are notes -->
 					<ul class="list"  ng-if="notes.length !== 0">
@@ -136,8 +145,12 @@
 				<!------------ Jobs ------------>
 				<div class="section" >
 					<div class="item item-divider search">
-						<div class="left-title-button">&nbsp;</div>
-						<div class="section-header center-text">Jobs</div>
+						<div class="section-header float-left small-title">
+							Jobs
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
 					</div>
 					<ul class="list" ng-if="jobs.length !== 0">
 						<li class="item regular-text item-button-right" ng-click="goToJobPage( job )" ng-repeat="job in jobs track by $index">

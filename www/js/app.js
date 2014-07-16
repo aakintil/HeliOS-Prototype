@@ -921,6 +921,19 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	$('#search').val(query);
 	$('#search').trigger('input');
 
+	// search preferences 
+	setInterval( function(){ 
+		$('.cancel-button').fadeIn( 50 );
+		$('.clear-button').fadeIn( 50 );
+		$('#nav-buttons').fadeOut( 50 );
+		$('#search').addClass('expanded');
+	}, 10 );
+	
+
+	$scope.clearSearchInput = function() {
+		$('#search').val('');
+		$('.clear-button').fadeOut( 50 );
+	}
 
 	toolService.getToolWithName( query )
 	.success( function( data ) {
