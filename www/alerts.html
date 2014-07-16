@@ -51,7 +51,7 @@
 					<div class="list">
 						<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 							<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
-							<a href="job.html?id={{ el.job_id || el._id }}">
+							<a href="job.html?id={{ el.job_id._id || el._id }}">
 								<div class="regular-text alert-text" ng-if="el.status !== 'completed'"> 
 									{{ el.title || el.message }}									
 								</div>
@@ -64,7 +64,8 @@
 									<div class="small-light-caps alert-type">
 										<img class="medium-icon" src="img/icons/notes-dark.svg">
 										<p ng-if="el.title !== undefined"> {{ el.title }} </p>
-										<p ng-if="el.message !== undefined"> {{ el.job_id }} </p>
+										<p ng-if="el.title === undefined"> {{ el.job_id.title }} </p>
+<!--										<p ng-if="el.message !== undefined"> {{ el.job_id }} </p>-->
 									</div>
 
 									<div class="alert-time"> 

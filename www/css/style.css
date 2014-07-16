@@ -8585,6 +8585,7 @@ textarea {
     #activity-feed .list .item .alert-extras .alert-type {
       float: left; }
       #activity-feed .list .item .alert-extras .alert-type .medium-icon {
+        margin-top: 3px;
         height: 16px;
         margin-right: 10px;
         float: left; }
