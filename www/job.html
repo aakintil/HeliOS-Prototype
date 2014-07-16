@@ -90,15 +90,15 @@
 						<li class="item" id="addNoteFromJob">
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						<li ng-if='note.status == ""' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
+						<li ng-if='note.status === "" || note.status === undefined' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
 							<p class="regular-text note-text">{{ note.message }}</p>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
 								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
-								<img ng-if='note.status == ""' src="img/icons/check-unchecked.svg" class="list-item-button">
+								<img ng-if='note.status == "" || note.status === undefined' src="img/icons/check-unchecked.svg" class="list-item-button">
 							</button>
 							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
 						</li>
-						<li ng-if='note.status == "checked"' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
+						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
 							<p class="regular-text note-text">{{ note.message }}</p>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
 								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
@@ -244,10 +244,10 @@
 				<ion-content overflow-scroll="true" class="has-header">
 					<div class="section">
 						<ul class="list">
-							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
+							<li ng-click="updateTool($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{tool.name}}</div>
 								<div class="detail-row">Current Location: {{tool.current_location}}</div>
-								<button class="button button-clear checklist-item" id="{{tool._id}}" ng-click="updateTool($event)">
+								<button class="button button-clear checklist-item" id="{{tool._id}}">
 									<!-- <i class="icon ion-ios7-plus-outline medium-icon"></i> -->
 									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
 								</button>

@@ -468,6 +468,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		console.log("Set it to ", jobPageService.toolList);
 		$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
+		console.log("THE NOTES ARE ", $scope.notes);
 		$scope.complete = $scope.job.status; 
 	})
 	.error( function( data ) {
@@ -1024,13 +1025,24 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		console.log( "error gathering tools from db " );
 	})
 
-	$scope.check = function( event ) {
-		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus-outline" ); 
-		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus" ); 
-	}
+	// $scope.check = function( event ) {
+	// 	var img = $(event.target).find('img');
+	// 	console.log("THE IMAGE IS", img);
+	// 	if (img.hasClass("unplused")) {
+	// 		console.log("top");
+	// 		img.removeClass("unplused");
+	// 		img.addClass("plused");
+	// 		img.attr('src', "img/icons/plus-plused.svg"); 
+	// 	} else {
+	// 		console.log("bottom");
+	// 		img.removeClass("plused");
+	// 		img.addClass("unplused");
+	// 		img.attr('src', "img/icons/plus-unplused.svg"); 
+	// 	}
+	// }
 
 	$scope.updateTool = function( event ) {
-		var img = $(event.target).find('img');
+		var img = $(event.target).find('.add-icon');
 		console.log("THE IMAGE IS", img);
 		if (img.hasClass("unplused")) {
 			console.log("top");
@@ -1150,7 +1162,7 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 
 	$scope.predicate = 'name';
 
-	$scope.updateTool = function( event ) {
+	$scope.updatePerson = function( event ) {
 		var img = $(event.target).find('img');
 		console.log("THE IMAGE IS", img);
 		if (img.hasClass("unplused")) {
