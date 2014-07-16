@@ -182,7 +182,9 @@ $(document).ready(function () {
 
 	});
 
-
+	$(".modal button").click(function(e) {
+		console.log("it was pressed");
+	});
 
 	// Code for handling adding element inline
 	$('input').keyup(function(e){

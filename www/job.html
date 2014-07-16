@@ -261,8 +261,9 @@
 							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{tool.name}}</div>
 								<div class="detail-row">Current Location: {{tool.current_location}}</div>
-								<button class="button button-clear checklist-item" id="{{tool._id}}">
-									<i class="icon ion-ios7-plus-outline medium-icon"></i>
+								<button class="button button-clear checklist-item" id="{{tool._id}}" ng-click="updateTool($event)">
+									<!-- <i class="icon ion-ios7-plus-outline medium-icon"></i> -->
+									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
 								</button>
 							</li>
 						</ul>
@@ -294,8 +295,8 @@
 						<ul class="list">
 							<li ng-click="check($event)" class="item item-button-right two-row-list-item" ng-repeat="person in people | filter:PartCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{person.name}}</div>
-								<button class="button button-clear checklist-item">
-									<i class="icon ion-ios7-plus-outline medium-icon"></i>
+								<button class="button button-clear checklist-item" ng-click="updatePerson($event)">
+									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
 								</button>
 							</li>
 						</ul>

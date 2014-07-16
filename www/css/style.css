@@ -8381,7 +8381,7 @@ p {
   margin-bottom: -2px;
   float: left; }
 
-.checklist
+/* unvisited link */
 a:link {
   color: #010101;
   text-decoration: none; }
@@ -8437,6 +8437,20 @@ a:active {
   margin-top: 20px; }
   .offset .item-divider {
     background-color: #989898; }
+
+#tools-modal .add-icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 22px;
+  z-index: 12; }
+
+#people-modal .add-icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 20px;
+  z-index: 12; }
+#people-modal .header-text {
+  margin-top: 12px; }
 
 .job-check-icon {
   height: 40px; }

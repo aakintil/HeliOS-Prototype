@@ -1029,12 +1029,28 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus" ); 
 	}
 
+	$scope.updateTool = function( event ) {
+		var img = $(event.target).find('img');
+		console.log("THE IMAGE IS", img);
+		if (img.hasClass("unplused")) {
+			console.log("top");
+			img.removeClass("unplused");
+			img.addClass("plused");
+			img.attr('src', "img/icons/plus-plused.svg"); 
+		} else {
+			console.log("bottom");
+			img.removeClass("plused");
+			img.addClass("unplused");
+			img.attr('src', "img/icons/plus-unplused.svg"); 
+		}
+	}
+
 	$scope.getToolList = function() {
 		console.log("tool list function");
 		var toolList = [];
 		var absUrl = $location.$$absUrl;
 		var job_id = absUrl.substr( absUrl.indexOf('?') + 4 );
-		$(".ion-ios7-plus").each(function(){
+		$(".plused").each(function(){
 			toolList.push($(this).parent().attr('id'));
 		});
 		console.log(toolList);
@@ -1134,12 +1150,27 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 
 	$scope.predicate = 'name';
 
+	$scope.updateTool = function( event ) {
+		var img = $(event.target).find('img');
+		console.log("THE IMAGE IS", img);
+		if (img.hasClass("unplused")) {
+			console.log("top");
+			img.removeClass("unplused");
+			img.addClass("plused");
+			img.attr('src', "img/icons/plus-plused.svg"); 
+		} else {
+			console.log("bottom");
+			img.removeClass("plused");
+			img.addClass("unplused");
+			img.attr('src', "img/icons/plus-unplused.svg"); 
+		}
+	}
 
 	$scope.saveParticipants = function() {
 		console.log("Hi");
 		var participants = "";
 		$("#people-modal li").each(function() {
-			if( $(this).find('button i.ion-ios7-plus').length !=0 ) {
+			if( $(this).find('button plused').length !=0 ) {
 				participants += $(this).find('.title-row').first()[0].innerText;
 				participants += ", ";
 			}

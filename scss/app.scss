@@ -209,7 +209,6 @@ p {
 	float: left; 
 }
 
-.checklist
 
 // Link Styles
 
@@ -277,8 +276,6 @@ a:active {
 	float: right;
 	width: 15%;
 }
-.back-icon {
-}
 
 .offset {
 	margin: 0 18px;
@@ -286,6 +283,28 @@ a:active {
 
 	.item-divider {
 		background-color: $gray-lighter;
+	}
+}
+
+#tools-modal {
+	.add-icon {
+		width: 24px;
+		height: 24px;
+		margin-top: 22px;
+		z-index: 12;
+	}
+}
+
+#people-modal {
+	.add-icon {
+		width: 24px;
+		height: 24px;
+		margin-top: 20px;
+		z-index: 12;
+	}
+
+	.header-text {
+		margin-top: 12px;
 	}
 }
 
