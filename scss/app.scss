@@ -346,9 +346,11 @@ textarea {
 
 	.button {
 		border: 0px;
+		width: 25%; 
 		color: $text-normal;
-		font-size: (23/2)+px;
-		font-weight: bold;
+		opacity: 0.6; 
+		font-size: (25/2)+px;
+//		font-weight: bold;
 	}
 
 	.button.active {

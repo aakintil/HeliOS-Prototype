@@ -8485,9 +8485,10 @@ textarea {
   }*/ }
   #nav-bar .button {
     border: 0px;
+    width: 25%;
     color: #010101;
-    font-size: 11.5px;
-    font-weight: bold; }
+    opacity: 0.6;
+    font-size: 12.5px; }
   #nav-bar .button.active {
     box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
     color: white;
