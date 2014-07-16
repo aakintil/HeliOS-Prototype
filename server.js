@@ -79,6 +79,7 @@ var Job = mongoose.model( 'Job', {
 	created : { type: Date, default: Date.now }, 
 	creator : String, 
 	tools : [{ type: Schema.ObjectId, ref: 'Tool' }], 
+	tools_checked : [{ type: Schema.ObjectId, ref: 'Tool' }], 
 	notes : [{ type: Schema.ObjectId, ref: 'Note' }], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
 	status : String
 })
@@ -128,6 +129,30 @@ app.get( '/api/tools/:name', function ( req, res ) {
 		res.json( item );
 	});
 }); 
+
+// Change tool status
+app.put( '/api/tools/:id/:status/:id', function( req, res ) {
+	console.log( "------- SEE MEEE ------- ");
+	//	console.log( req.params );
+	var query = { _id : req.params.id }; 
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
+	Tool.findOne( query, function( err, tool ) {
+		if ( err ) { console.log( " couldn't find the tool ") }; 
+
+		if (s === "checked") {
+			// Add to array
+		} else {
+			// remove from array
+
+		}
+
+		tool.status = status; 
+		tool.save(); 
+		res.json( tool ); 
+	})
+})
 
 
 
@@ -568,6 +593,41 @@ app.delete( '/api/notes/:job_id', function( req, res ) {
 	})
 })
 
+
+// Change tool status in a job
+app.put( '/api/jobs/:id/:status/:jobid', function( req, res ) {
+	console.log( "------- IN JOB TOOL STUFF ------- ");
+	//	console.log( req.params );
+	var query = { _id : req.params.jobid }; 
+	var toolId = req.params.id;
+	console.log("THe queyr is ", query);
+	var s = req.params.status; 
+	var status = s === "na" ? "" : s;
+	console.log( status , " hopefully will be null ")
+	Job.findOne( query, function( err, job ) {
+		if ( err ) { console.log( " couldn't find the tool ") }; 
+
+		if (s === "checked") {
+			if (job.tools_checked.indexOf(toolId) != -1) {
+				job.tools_checked.push(toolId);
+			}
+		} else {
+			// remove from array
+			var index = job.tools_checked.indexOf(toolId);
+			if (index > -1) {
+			    job.tools_checked.splice(index, 1);
+			}
+		}
+
+		console.log("The updated job is ", job);
+
+		job.save();
+		res.json(job);
+		// tool.status = status; 
+		// tool.save(); 
+		// res.json( tool ); 
+	})
+})
 
 
 //////////////////////////////// END OF JOB ROUTES ////////////////////////////////
