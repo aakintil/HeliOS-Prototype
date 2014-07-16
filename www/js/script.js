@@ -219,7 +219,10 @@ $(document).ready(function () {
 
 	// Code for handling search bar results
 	$('#search').bind("focus", function() {
-		$('.cancel-button').fadeIn(50);
+		$( '#people-modal .clear-button' )
+		.add( $( '#tools-modal .clear-button' ) )
+		.add( $('.cancel-button') ).fadeIn(50);
+		
 		$('#nav-buttons').fadeOut(50);
 		console.log("expanded");
 		$('#search').addClass('expanded');
@@ -240,11 +243,14 @@ $(document).ready(function () {
 	});
 
 	$('.clear-button').bind("click", function() {
-		console.log( $( this ) ); 
 		$( '.clear-button img' ).fadeOut(50);
-		$("#search").val("");
+		$("#tools-modal #search").add( $("#people-modal #search") ).add( $("#search") ).val(""); 
 		$("#search").focus();
 	});
+
+	//	$( '#people-modal .clear-button, #tools-modal .clear-button' ).bind( "click", function() {
+	//		//		$( '#search' ).val( "" ); 
+	//	})
 
 	$('#add-note').click(function(){
 		console.log('clicked');
@@ -308,10 +314,12 @@ $(document).ready(function () {
 
 	$("#add-tools").click(function() {
 		$("#tools-modal").show();
+		$('#tools-modal .clear-button img').fadeIn( 50 );	
 	});
 
 	$("#add-people").click(function() {
 		$("#people-modal").show();
+		$('#people-modal .clear-button img').fadeIn( 50 );
 	});
 
 	$( ".expand" ).click( function() {
