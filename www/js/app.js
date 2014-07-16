@@ -494,7 +494,15 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
-		var domNote = $("<li class='expand item regular-text item-button-right' ng-click='expandNote( $event )'><p class='regular-text'>" + note.message + '</p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event)"><i class="icon ion-ios7-checkmark-outline medium-icon"></i></button></li>'); 
+		var domNote = $('<li ng-if=\'note.status === "" || note.status === undefined\' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-click="expandNote( $event )">' +
+							'<p class="regular-text note-text">' + note.message + '</p>' +
+							'<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">' +
+								'<img ng-if=\'note.status == "checked"\' src="img/icons/check-checked.svg" class="list-item-button">' +
+								'<img ng-if=\'note.status == "" || note.status === undefined\' src="img/icons/check-unchecked.svg" class="list-item-button">' +
+							'</button>' +
+							'<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by You on July 17, 2014</p>' +
+						"</li>");
+
 
 		if ( $(".insert li:nth-child(2)").length !== 0 )
 			$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
