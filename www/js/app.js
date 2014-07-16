@@ -896,8 +896,8 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.toggleInlineInput = function() {
 
 		var text = {
-			"Add Job" : "Cancel", 
-			"Cancel" : "Add Job"
+			"+ Add Job" : "Cancel", 
+			"Cancel" : "+ Add Job"
 		}
 		var currText = $( ".create.job" ).html(); 
 		var newText = text[ currText ]; 
