@@ -156,7 +156,7 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 	////////////////////////////////
 	query[ field ] = { 
 		"$gte" : ("2014-07-14T00:00:00Z"), 
-		"$lt" : ("2014-07-16T00:00:00Z") 
+		"$lt" : ("2014-07-17T00:00:00Z") 
 	}
 
 	Note.find( query, function( err, notes ) {
@@ -164,7 +164,8 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 		//		res.json( notes )
 	})
 	.populate("job_id").exec( function( err, notes ) {
-		if( err ) console.log( "HUGE MISTAKE"); 
+		if( err ) console.log( "HUGE MISTAKE IN GETTING NOTES CREATED WITHIN A DATE RANGE"); 
+		//		debug.log("the notes",  notes )
 		res.json( notes ); 
 	});	
 });
@@ -343,7 +344,7 @@ app.put('/api/jobs/:completed', function( req, res ) {
 		}, 
 		"status" : "completed"
 	}
-	debug.log( " i have been called ", query ); 
+	debug.log( " i have been called in the jobs completed request ", query ); 
 	Job.find( query, function( err, jobs ) {
 		if ( err ) { debug.log( " can't get completed jobs with " + field + " date within a data range ") }; 
 		res.json( jobs )

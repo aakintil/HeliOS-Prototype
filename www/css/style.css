@@ -8583,7 +8583,8 @@ textarea {
     position: relative;
     background-color: grey !important; }
     #activity-feed .list .item .alert-extras .alert-type {
-      float: left; }
+      float: left;
+      width: 250px; }
       #activity-feed .list .item .alert-extras .alert-type .medium-icon {
         margin-top: 3px;
         height: 16px;

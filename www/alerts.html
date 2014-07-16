@@ -52,9 +52,14 @@
 						<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 							<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
 							<a href="job.html?id={{ el.job_id._id || el._id }}">
-								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message !== undefined"> 
-									You: "{{ el.message }}"								
+								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id !== '111111111111111111111111'"> 
+									You: "{{ el.message }}"							
 								</div>
+
+								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id === '111111111111111111111111'"> 
+									"{{ el.message }}"							
+								</div>
+
 								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message === undefined"> 
 									You created a job							
 								</div>
@@ -65,10 +70,25 @@
 								<div class="alert-extras">
 
 									<div class="small-light-caps alert-type">
-										<img class="medium-icon" src="img/icons/notes-dark.svg">
+										<!-- show notes icon -->
+										<span ng-if="el.status !== 'completed' && el.message !== undefined">
+											<img class="medium-icon" src="img/icons/notes-dark.svg"> 
+										</span>
+
+										<!-- show jobs icon -->
+										<span ng-if="el.status !== 'completed' && el.message === undefined">
+											<img class="medium-icon" src="img/icons/jobs-dark.svg"> 
+										</span>
+
+										<!-- show tools icon -->
+<!--
+										<span ng-if="el.status !== 'completed' && el.message !== undefined">
+											<img class="medium-icon" src="img/icons/notes-dark.svg"> 
+										</span>
+-->
+
 										<p ng-if="el.title !== undefined"> {{ el.title }} </p>
 										<p ng-if="el.title === undefined"> {{ el.job_id.title }} </p>
-									<p> {{ el._id }} </p>
 									</div>
 
 									<div class="alert-time"> 
