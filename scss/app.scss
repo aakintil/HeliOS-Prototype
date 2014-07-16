@@ -235,6 +235,10 @@ a:active {
 	background-color: black;
 }
 
+.short.alert-pg {
+	background-color: #22b473;
+}
+
 .alert {
 	background-color: $red-alert;
 }
@@ -302,6 +306,22 @@ a:active {
 	padding: 0px;
 }
 
+
+#nav-bar {
+	
+	back {
+		width: 10px; 
+		position: relative; 
+		margin-left: 20px; 
+		
+		i:before {
+			color: black; 
+			font-size: 20px; 
+			margin-top: 3px; 
+		}
+	}
+}
+
 .job-header {
 	border: 0px;
 
@@ -344,7 +364,7 @@ textarea {
 #nav-bar {
 
 	height: $nav-bar-height;
-	border-bottom: 2px solid $gray-dark;
+//	border-bottom: 2px solid $gray-dark;
 
 	.button {
 		border: 0px;
@@ -374,7 +394,7 @@ textarea {
 		margin: 10px;
 		margin-left: 20px;
 		margin-right: 0px;
-		border: 2px solid $gray-lighter;
+		border: 2px solid #c4c4c4;
 		width: $search-bar;
 		height: (66/2)+px;
 		background: url('../img/icons/search.svg') no-repeat;
@@ -387,7 +407,11 @@ textarea {
 		position:relative;
 		right:20px;    
 	}
-	
+
+	.cancel-button {
+		font-fize: 14.5px; 
+	}
+
 	#search {
 		font-size: (29/2) + px; 
 	}
@@ -403,7 +427,7 @@ textarea {
 		font-size: 20px;
 		width: 40px;
 		z-index: 100; 
-		
+
 		img {
 			height: 16px; 
 		}
@@ -478,7 +502,7 @@ textarea {
 	}
 
 	.short {
-		height: 5px !important; 
+		height: 7px !important; 
 		width: 100%; 
 	}
 
@@ -958,12 +982,12 @@ $bar-height: 55px;
 			li {
 				height: 75px; 
 				padding: 20px;
-				
+
 				.big-title {
 					margin-bottom: 4px; 
 					margin-top: -2px; 
 				}
-				
+
 				.small-regular-text {
 					opacity: 0.75; 
 					font-size: 13px !important; 

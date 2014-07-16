@@ -8400,6 +8400,9 @@ a:active {
 .short.search-pg {
   background-color: black; }
 
+.short.alert-pg {
+  background-color: #22b473; }
+
 .alert {
   background-color: #f05a24; }
 
@@ -8447,6 +8450,15 @@ a:active {
 #nav-bar.bar {
   padding: 0px; }
 
+#nav-bar back {
+  width: 10px;
+  position: relative;
+  margin-left: 20px; }
+  #nav-bar back i:before {
+    color: black;
+    font-size: 20px;
+    margin-top: 3px; }
+
 .job-header {
   border: 0px; }
   .job-header .list-item-title {
@@ -8479,7 +8491,6 @@ textarea {
 
 #nav-bar {
   height: 55px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.42);
   	/*	#search:focus {
   	width: $search-bar-expanded;
   }*/ }
@@ -8504,7 +8515,7 @@ textarea {
     margin: 10px;
     margin-left: 20px;
     margin-right: 0px;
-    border: 2px solid #989898;
+    border: 2px solid #c4c4c4;
     width: 60%;
     height: 33px;
     background: url("../img/icons/search.svg") no-repeat;
@@ -8514,6 +8525,8 @@ textarea {
   #nav-bar #search::-webkit-search-cancel-button {
     position: relative;
     right: 20px; }
+  #nav-bar .cancel-button {
+    font-fize: 14.5px; }
   #nav-bar #search {
     font-size: 14.5px; }
   #nav-bar #search.expanded {
@@ -8567,7 +8580,7 @@ textarea {
 .section .list .small-item {
   max-height: 46px !important; }
 .section .short {
-  height: 5px !important;
+  height: 7px !important;
   width: 100%; }
 .section .item-divider {
   min-height: 12px;
