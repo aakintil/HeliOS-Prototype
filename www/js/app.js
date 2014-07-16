@@ -218,6 +218,12 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.put( urlBase + '/members/' + id + '/' + members ); 
 	}
 
+
+	this.changeToolStatus = function( tool, jobid ) {
+		//		console.log( "see meee here ", note )
+		return $http.put( urlBase + '/' + tool.id + '/' + tool.status + '/' +jobid); 
+	}
+
 	//		this.getNotesWithId = function( note, id ) {
 	//		return $http.put( noteUrlBase + '/' + id, note )
 	//	}
@@ -370,7 +376,7 @@ app.filter('fromNow', function() {
 ////////////////////////////////////////////////
 
 //////////////// Job Controller ////////////////
-function JobCtrl( $scope, jobService, noteService, $location, notifications, $timeout, $compile, jobPageService ) {
+function JobCtrl( $scope, jobService, noteService, toolService, $location, notifications, $timeout, $compile, jobPageService ) {
 
 	$scope.predicate = '-created';
 
@@ -441,7 +447,9 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	}
 
 	$scope.expand = function( event ) {
-		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
+		if(!$(event.target).hasClass("list-item-button")) {
+			$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
+		}
 	}
 
 	//	console.log($scope.headerType);
@@ -515,8 +523,8 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 	$scope.expandNote = function( event ) {
 		console.log(" clicked : ", event);
-		console.log($(event.target).hasClass("checklist-item"));
-		if(!$(event.target).hasClass("checklist-item")) {
+		console.log($(event.target).hasClass("list-item-button"));
+		if(!$(event.target).hasClass("list-item-button")) {
 			$(event.currentTarget).find("p.regular-text").toggleClass("expanded-note");
 			$(event.currentTarget).find("p.detail-info").toggleClass("hidden");
 		}
@@ -524,42 +532,59 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 	$scope.s = "unchecked"; 
 	$scope.status = ""; 
-	$scope.changeStatus = function( note, event ) {
+	$scope.changeStatus = function( obj, event, jobid ) {
+
+		console.log("THE JOB ID IS " + jobid);
 
 		var el = $(event.currentTarget).parent(); 
-		var check = $(event.currentTarget).find("i"); 
+		var check = $(event.currentTarget).find("img"); 
 		var status = ""; 
 		debug.log( "shoudl have class", el); 
 
 		if ( el.hasClass("checked") ) {
 			el.removeClass("checked");
-			check.attr("class", "icon ion-ios7-checkmark-outline medium-icon")
+			check.attr("src", "img/icons/check-unchecked.svg");
+			// check.attr("class", "icon ion-ios7-checkmark-outline list-item-button")
 			status = "na"; 
 		}
 		else {
 			el.addClass("checked"); 
-			check.attr("class", "icon ion-ios7-checkmark medium-icon")
+			check.attr("src", "img/icons/check-checked.svg");
+			// check.attr("class", "icon ion-ios7-checkmark list-item-button")
 			status = "checked"; 
 		}
 
+
+		console.log("THE OBJ IS ",obj)
 		var data = {
-			id: note._id, 
+			id: obj._id, 
 			status: status
 		}
+		if (obj.message) {
+			noteService.changeStatus( data )
+			.success( function( data ) {
+				debug.log( " a changed status ", data.status ); 
+			})
+			.error( function( data ) {
+				debug.log( "error chaging note status", data ); 
+			})
+		} else {
 
-		noteService.changeStatus( data )
-		.success( function( data ) {
-			debug.log( " a changed status ", data.status ); 
-		})
-		.error( function( data ) {
-			debug.log( "error chaging note status", data ); 
-		})
+			jobService.changeToolStatus(data, jobid)
+			// toolService.changeStatus( data )
+			.success( function( data ) {
+				debug.log( " a changed status ", data.status ); 
+			})
+			.error( function( data ) {
+				debug.log( "error chaging note status", data ); 
+			})
+		}
 	}
 
 	$scope.changeJobStatus = function( job, event ) {
 		var el = $(event.currentTarget).parent(); 
 		var opaque = el.parent().siblings(); 
-		var check = $(event.currentTarget).find("i"); 
+		var check = $(event.currentTarget).find("img"); 
 		var status = ""; 
 
 		// also have to send a notification when job is clicked
@@ -569,12 +594,14 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 		//		opaque.addClass("completed"); 
 		if ( opaque.hasClass("completed") ) {
 			opaque.removeClass("completed");
-			check.attr("class", "icon ion-ios7-checkmark-outline")
+			check.attr("src", "img/icons/check-unchecked.svg")
 			status = "na"; 
+			console.log("TOP");
 		}
 		else {
+			console.log("BOTTOM");
 			opaque.addClass("completed"); 
-			check.attr("class", "icon ion-ios7-checkmark")
+			check.attr("src", "img/icons/check-checked.svg")
 			status = "completed"; 
 		}
 		//		
@@ -968,6 +995,7 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 
 	$scope.expand = function( event ) {
 		$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
+
 	}
 
 }
@@ -1001,12 +1029,28 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 		$( event.currentTarget ).find( "i" ).toggleClass( "ion-ios7-plus" ); 
 	}
 
+	$scope.updateTool = function( event ) {
+		var img = $(event.target).find('img');
+		console.log("THE IMAGE IS", img);
+		if (img.hasClass("unplused")) {
+			console.log("top");
+			img.removeClass("unplused");
+			img.addClass("plused");
+			img.attr('src', "img/icons/plus-plused.svg"); 
+		} else {
+			console.log("bottom");
+			img.removeClass("plused");
+			img.addClass("unplused");
+			img.attr('src', "img/icons/plus-unplused.svg"); 
+		}
+	}
+
 	$scope.getToolList = function() {
 		console.log("tool list function");
 		var toolList = [];
 		var absUrl = $location.$$absUrl;
 		var job_id = absUrl.substr( absUrl.indexOf('?') + 4 );
-		$(".ion-ios7-plus").each(function(){
+		$(".plused").each(function(){
 			toolList.push($(this).parent().attr('id'));
 		});
 		console.log(toolList);
@@ -1106,12 +1150,27 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 
 	$scope.predicate = 'name';
 
+	$scope.updateTool = function( event ) {
+		var img = $(event.target).find('img');
+		console.log("THE IMAGE IS", img);
+		if (img.hasClass("unplused")) {
+			console.log("top");
+			img.removeClass("unplused");
+			img.addClass("plused");
+			img.attr('src', "img/icons/plus-plused.svg"); 
+		} else {
+			console.log("bottom");
+			img.removeClass("plused");
+			img.addClass("unplused");
+			img.attr('src', "img/icons/plus-unplused.svg"); 
+		}
+	}
 
 	$scope.saveParticipants = function() {
 		console.log("Hi");
 		var participants = "";
 		$("#people-modal li").each(function() {
-			if( $(this).find('button i.ion-ios7-plus').length !=0 ) {
+			if( $(this).find('button plused').length !=0 ) {
 				participants += $(this).find('.title-row').first()[0].innerText;
 				participants += ", ";
 			}
