@@ -8524,6 +8524,8 @@ textarea {
     line-height: 58px;
     font-size: 20px;
     width: 40px; }
+    #nav-bar .clear-button img {
+      height: 16px; }
   #nav-bar .search-border {
     border: 2px solid #9422af !important; }
   #nav-bar .search-search {
