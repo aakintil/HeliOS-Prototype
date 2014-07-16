@@ -1187,10 +1187,10 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 	}
 
 	$scope.saveParticipants = function() {
-		console.log("Hi");
+		console.log("Saving Paricipants");
 		var participants = "";
 		$("#people-modal li").each(function() {
-			if( $(this).find('button plused').length !=0 ) {
+			if( $(this).find('button .plused').length !=0 ) {
 				participants += $(this).find('.title-row').first()[0].innerText;
 				participants += ", ";
 			}
@@ -1199,6 +1199,7 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 		$('#input-participants').val(participants);
 		$('#input-participants').trigger('input');
 		$('#people-modal').hide();
+		console.log("Updating " + job_id + " with " + participants);
 		jobService.updateJobMembers(participants, job_id)
 		.success(function(){
 			console.log("Success");
