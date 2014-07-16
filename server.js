@@ -66,10 +66,8 @@ var Note = mongoose.model( 'Note', {
 	message : { type: String }, 
 	status : String,
 	created: { type: Date, default: Date.now },
-	//	status : { type: String, default: 'unchecked' }, 
 	creator : String, 
-	job_id : String 
-	//	{ type: Schema.Types.ObjectId, ref: 'Job' }
+	job_id : { type: Schema.ObjectId, ref: 'Job' }
 })
 
 // Job Model 
@@ -92,7 +90,8 @@ var Tool = mongoose.model( 'Tool', {
 	current_location : String, 
 	home_location : String, 
 	replacement_for : String, 
-	status : String
+	status : String, 
+	added: { type: Date, default: Date.now }
 })
 
 
@@ -181,19 +180,19 @@ app.get('/api/notes/:m/:d/:y/:field', function( req, res ) {
 	// CHANGE THIS ON GAME DAY 
 	////////////////////////////////
 	query[ field ] = { 
-		"$gte" : ("2014-07-10T00:00:00Z"), 
-		"$lt" : ("2014-07-16T00:00:00Z") 
+		"$gte" : ("2014-07-14T00:00:00Z"), 
+		"$lt" : ("2014-07-17T00:00:00Z") 
 	}
 
 	Note.find( query, function( err, notes ) {
 		if ( err ) { debug.log( " can't get jobs with " + field + " date within a data range ") }; 
-		res.json( notes )
+		//		res.json( notes )
+	})
+	.populate("job_id").exec( function( err, notes ) {
+		if( err ) console.log( "HUGE MISTAKE IN GETTING NOTES CREATED WITHIN A DATE RANGE"); 
+		//		debug.log("the notes",  notes )
+		res.json( notes ); 
 	});	
-//	.populate("job_id").exec( function( err, notes ) {
-//		if( err ) console.log( "HUGE MISTAKE"); 
-//		
-//		debug.log( "list of notes", notes ); 
-//	});	
 });
 
 app.get('/api/notes/:type/:name', function( req, res  ) {
@@ -370,7 +369,7 @@ app.put('/api/jobs/:completed', function( req, res ) {
 		}, 
 		"status" : "completed"
 	}
-	debug.log( " i have been called ", query ); 
+	debug.log( " i have been called in the jobs completed request ", query ); 
 	Job.find( query, function( err, jobs ) {
 		if ( err ) { debug.log( " can't get completed jobs with " + field + " date within a data range ") }; 
 		res.json( jobs )
@@ -471,29 +470,6 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 
 
 
-// Create a Job
-// old create job
-//app.post( '/api/jobs', function( req, res ) {
-//	////////////////// SET THIS UP ////////////////// 
-//	console.log( " ===== MADE APPROPRIATE SERVER CALL ===== ")
-//	console.log( " ")
-//	console.log( req.body )
-//	Job.create({ 
-//		title: req.body.title,
-//		members: req.body.members || "",
-//		creator: "You", // have to change this to member_id or something like that, 
-//		notes: req.body.note || "",
-//		done : false
-//	}, function( err, job ) {
-//		if ( err ) { res.send( err ); console.log("Error creating / inserting appropriate job  |  line 133 : server.js ", err) }; 
-//
-//		Job.find( function( err, jobs ) {
-//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate job AFTER CREATING one |  line 136 : server.js") };
-//			res.json( jobs ) // return all notes in the JSON format after we create another
-//		})
-//	})
-//}); 
-
 app.post( '/api/jobs', function( req, res ) {
 	var msg = req.body.note || "" ;
 	var m = req.body.members || ""; 
@@ -545,9 +521,10 @@ app.post( '/api/jobs', function( req, res ) {
 				else
 					job.notes.push( note._id ); 
 
+				note.job_id = job._id; 
+				note.save; 
 				job.save( function( err, i ) {
 					if ( err ) { console.log (" common ")}
-					//					console.log( " after save ", i._id , " |  ", job._id, " |  ", "53bca47cffd0360000000002" ); 
 
 					query = { "notes" : note._id }; 
 					Job.findOne( query, function( err, job ) {

@@ -8401,17 +8401,17 @@ a:active {
   color: #010101;
   text-decoration: none; }
 
-.home {
+.short.home {
   background-color: #2a9acd; }
+
+.short.search-pg {
+  background-color: black; }
 
 .alert {
   background-color: #f05a24; }
 
 .add {
   background-color: #22b473; }
-
-.search {
-  background-color: #9422af; }
 
 .add-sub {
   background-color: #C9E7D4; }
@@ -8505,9 +8505,11 @@ textarea {
   }*/ }
   #nav-bar .button {
     border: 0px;
+    width: 25%;
+    background-color: #f0f0f0;
     color: #010101;
-    font-size: 11.5px;
-    font-weight: bold; }
+    opacity: 0.6;
+    font-size: 12.5px; }
   #nav-bar .button.active {
     box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
     color: white;
@@ -8532,6 +8534,8 @@ textarea {
   #nav-bar #search::-webkit-search-cancel-button {
     position: relative;
     right: 20px; }
+  #nav-bar #search {
+    font-size: 14.5px; }
   #nav-bar #search.expanded {
     width: 75%; }
   #nav-bar .clear-button {
@@ -8539,7 +8543,10 @@ textarea {
     color: black;
     line-height: 58px;
     font-size: 20px;
-    width: 40px; }
+    width: 40px;
+    z-index: 100; }
+    #nav-bar .clear-button img {
+      height: 16px; }
   #nav-bar .search-border {
     border: 2px solid #9422af !important; }
   #nav-bar .search-search {
@@ -8586,7 +8593,7 @@ textarea {
 .section .list .small-item {
   max-height: 46px !important; }
 .section .short {
-  height: 6px !important;
+  height: 5px !important;
   width: 100%; }
 .section .item-divider {
   min-height: 12px;
@@ -8609,13 +8616,16 @@ textarea {
     position: relative;
     background-color: grey !important; }
     #activity-feed .list .item .alert-extras .alert-type {
-      float: left; }
+      float: left;
+      width: 250px; }
       #activity-feed .list .item .alert-extras .alert-type .medium-icon {
+        margin-top: 3px;
         height: 16px;
         margin-right: 10px;
         float: left; }
     #activity-feed .list .item .alert-extras .alert-time {
-      float: right; }
+      float: right;
+      opacity: 0.65; }
 
 .offset .item-divider {
   background-color: transparent;
@@ -8907,9 +8917,32 @@ list-item-button {
 .input-job-hidden {
   /*display: noneΩ;*/ }
 
+#search-page .scroll {
+  margin-top: 2px; }
 #search-page .small-regular-text {
   font-size: 12.5px;
   text-transform: uppercase; }
+#search-page .section-header {
+  margin-top: 3px;
+  height: 20px; }
+#search-page .search {
+  background-color: #e3e5e5;
+  height: 28px;
+  text-align: left;
+  padding: 0 20px; }
+#search-page .button.button-positive {
+  border: 0;
+  color: black;
+  background-color: transparent; }
+#search-page .section .list li {
+  height: 75px;
+  padding: 20px; }
+  #search-page .section .list li .big-title {
+    margin-bottom: 4px;
+    margin-top: -2px; }
+  #search-page .section .list li .small-regular-text {
+    opacity: 0.75;
+    font-size: 13px !important; }
 
 #job-title {
   position: relative;

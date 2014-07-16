@@ -18,6 +18,7 @@ $magenta-search: #9422af;
 $gray-background: #f3f3f3;
 $gray-header: #e4e6e6;
 $light-gray-text: #888888;
+$grey-search: #e3e5e5; 
 
 $success: rgba( 143, 203, 33, 1 ); 
 $warning: rgba( 234, 173, 22, 1 ); 
@@ -236,8 +237,12 @@ a:active {
 	text-decoration: none;
 }
 
-.home {
+.short.home {
 	background-color: $blue-home;
+}
+
+.short.search-pg {
+	background-color: black;
 }
 
 .alert {
@@ -248,9 +253,6 @@ a:active {
 	background-color: $green-add;
 }
 
-.search {
-	background-color: $magenta-search;
-}
 
 .add-sub {
 	background-color: #C9E7D4;
@@ -371,9 +373,12 @@ textarea {
 
 	.button {
 		border: 0px;
+		width: 25%; 
+		background-color: $positive; 
 		color: $text-normal;
-		font-size: (23/2)+px;
-		font-weight: bold;
+		opacity: 0.6; 
+		font-size: (25/2)+px;
+		//		font-weight: bold;
 	}
 
 	.button.active {
@@ -407,6 +412,10 @@ textarea {
 		position:relative;
 		right:20px;    
 	}
+	
+	#search {
+		font-size: (29/2) + px; 
+	}
 
 	#search.expanded {
 		width: $search-bar-expanded;
@@ -418,6 +427,11 @@ textarea {
 		line-height: 58px;
 		font-size: 20px;
 		width: 40px;
+		z-index: 100; 
+		
+		img {
+			height: 16px; 
+		}
 	}
 
 	.search-border {
@@ -483,7 +497,7 @@ textarea {
 
 .section {
 	.list {
-		
+
 		.item {
 			min-height: (125/2)+px;
 		}
@@ -495,7 +509,7 @@ textarea {
 	}
 
 	.short {
-		height: 6px !important; 
+		height: 5px !important; 
 		width: 100%; 
 	}
 
@@ -538,9 +552,11 @@ textarea {
 
 				.alert-type {
 					float: left; 
+					width: 250px; 
 
 					.medium-icon {
 						//						height: (40/2)+px; // might be 30px
+						margin-top: 3px;
 						height: (32/2) + px; 
 						margin-right: 10px;
 						float: left; 
@@ -549,15 +565,12 @@ textarea {
 
 				.alert-time {
 					float: right; 
+					opacity: 0.65;
 				}
 
 			}
 
 			.alert-text {
-				//				display: block;
-				//				overflow: hidden;
-				//				text-overflow: ellipsis;
-				//				border: 1px solid red-alert;
 			}
 		}
 
@@ -953,7 +966,7 @@ $bar-height: 55px;
 	.bar-footer {
 		background-color: $blue-home !important;
 	}
-	
+
 }
 
 .modal-background {
@@ -977,10 +990,54 @@ $bar-height: 55px;
 
 // Search Page
 #search-page {
+
+	.scroll {
+		margin-top: 2px; 
+	}
+
 	.small-regular-text {
 		font-size: (25/2)+px; 
 		text-transform: uppercase; 
 	}	
+
+	.section-header {
+		margin-top: 3px; 
+		height: 20px; 
+	}
+
+	.search {
+		background-color: $grey-search;
+		height: 28px; 
+		text-align: left; 
+		padding: 0 20px; 
+	}
+
+	.button.button-positive {
+		border: 0; 
+		color: black; 
+		background-color: transparent; 
+	}
+
+	.section {
+
+		.list {
+
+			li {
+				height: 75px; 
+				padding: 20px;
+				
+				.big-title {
+					margin-bottom: 4px; 
+					margin-top: -2px; 
+				}
+				
+				.small-regular-text {
+					opacity: 0.75; 
+					font-size: 13px !important; 
+				}
+			}
+		}	
+	}
 }
 
 

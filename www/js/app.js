@@ -41,51 +41,15 @@ var app = angular.module('starter', ['ionic'])
 	});
 })
 
-//.config(function($stateProvider, $urlRouterProvider) {
-//		$stateProvider
-//		.state('jobs_page', {
-//			url: '/Jobs',
-//			templateUrl: 'jobs_page.html',
-//			controller : "JobsCtrl"
-//		})
-//		.state('notes_page', {
-//			url: '/Notes',
-//			templateUrl: 'notes_page.html',
-//			controller : "NotesCtrl"
-//		})
-//		.state('alerts_page', {
-//			url: '/Alerts',
-//			templateUrl: 'alerts_page.html',
-//			controller : "AlertsCtrl"
-//		})
-//		$urlRouterProvider.otherwise("/Jobs");
-//})
-
-//.controller('JobsCtrl', function($scope) {
-//	$scope.myJobs = [
-//		{
-//			title: "Replace Faulty Bolts",
-//			members: "You"
-//		},
-//		{
-//			title: "Install Arcjet Manifolds",
-//			members: "You, Derin"
-//		},
-//		{
-//			title: "Clean you Workplace",
-//			members: "You"
-//		},
-//	];
-//})
-
-
-
 
 
 // Gestures code 
 
 angular.module('ionicApp', ['ionic'])
 
+////////////////////////////////////////////////
+//////////////////// MISC //////////////////////
+////////////////////////////////////////////////
 app.controller('gestureCtrl', function($scope, $timeout) {
 	$scope.myTitle = 'Template';
 
@@ -193,6 +157,8 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 		});
 	};
 });
+
+
 
 ////////////////////////////////////////////////
 ////////////////// SERVICES ////////////////////
@@ -391,6 +357,20 @@ app.service('jobPageService', function() {
 	var toolList = [];
 });
 
+
+
+////////////////////////////////////////////////
+///////////// Time From Now Filter /////////////
+////////////////////////////////////////////////
+app.filter('fromNow', function() {
+	return function(date) {
+		return moment(date).fromNow();
+	}
+});
+
+
+
+
 ////////////////////////////////////////////////
 ///////////////// CONTROLLERS //////////////////
 ////////////////////////////////////////////////
@@ -496,9 +476,11 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 
 	$scope.addNote = function( note ) {
-		// BIG BUG!!!! ///////
-		// HAVE TO DO SOMETHING ABOUT THE FIRST NOTE WITHIN A JOB! 
-		// IT DOESN'T INSERT BECAUSE LI:NTH-CHILD(2) DOESN'T EXIST
+		///////////////////////////////////////////////////////////
+		// FOUND BUG //////////////////////////////////////////////
+		// ON ENTER THE TEXT DOESN'T CHANGE FROM CANCEL TO ADD NOTE
+		// CAUSES DISREPANCY //////////////////////////////////////
+		///////////////////////////////////////////////////////////
 
 		// hide DOM Elements 
 		$( ".addListItemInput" ).parent().hide();
@@ -646,7 +628,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	$scope.inlineShowInput = function( event ) {
 		$( "#addNoteFromJob" ).show(); 
 		setTimeout(function(){$( ".addListItemInput" ).focus();}, 0);
-		
+
 	}
 
 	$scope.toggleInlineInput = function( event ) {
@@ -966,6 +948,14 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	$('#search').val(query);
 	$('#search').trigger('input');
 
+	// search preferences 
+	setInterval( function(){ 
+		$('.cancel-button').fadeIn( 50 );
+		$('.clear-button').fadeIn( 50 );
+		$('#nav-buttons').fadeOut( 50 );
+		$('#search').addClass('expanded');
+	}, 10 );
+	
 
 	toolService.getToolWithName( query )
 	.success( function( data ) {
@@ -1020,8 +1010,8 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	setTimeout( function(){
 		$scope.prevToolList = jobPageService.toolList;
 		console.log("tools ctrol got it", $scope.prevToolList[0].name);
-		}, 250);
-	
+	}, 250);
+
 	$scope.setSearchQuery = function(inputQuery) {
 		$scope.query = inputQuery;
 	}
@@ -1223,8 +1213,41 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 }
 
 
-app.filter('fromNow', function() {
-	return function(date) {
-		return moment(date).fromNow();
-	}
-});
+
+
+//.config(function($stateProvider, $urlRouterProvider) {
+//		$stateProvider
+//		.state('jobs_page', {
+//			url: '/Jobs',
+//			templateUrl: 'jobs_page.html',
+//			controller : "JobsCtrl"
+//		})
+//		.state('notes_page', {
+//			url: '/Notes',
+//			templateUrl: 'notes_page.html',
+//			controller : "NotesCtrl"
+//		})
+//		.state('alerts_page', {
+//			url: '/Alerts',
+//			templateUrl: 'alerts_page.html',
+//			controller : "AlertsCtrl"
+//		})
+//		$urlRouterProvider.otherwise("/Jobs");
+//})
+
+//.controller('JobsCtrl', function($scope) {
+//	$scope.myJobs = [
+//		{
+//			title: "Replace Faulty Bolts",
+//			members: "You"
+//		},
+//		{
+//			title: "Install Arcjet Manifolds",
+//			members: "You, Derin"
+//		},
+//		{
+//			title: "Clean you Workplace",
+//			members: "You"
+//		},
+//	];
+//})

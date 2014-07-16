@@ -197,6 +197,8 @@ $(document).ready(function () {
 	$('#addNoteFromJob').hide();
 	$('#addJob').hide();
 
+	$('.cancel-button').hide();
+	$('.clear-button img').hide();
 
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {
@@ -207,9 +209,9 @@ $(document).ready(function () {
 
 	$('#search').keyup(function() {
 		if ($('#search').val().length > 0) {
-			$('.clear-button').fadeIn(50);
+			$( '.clear-button img' ).fadeIn(50);
 		} else {
-			$('.clear-button').fadeOut(50);
+			$('.clear-button img').fadeOut(50);
 		}
 	});
 
@@ -221,8 +223,7 @@ $(document).ready(function () {
 		$('#search').addClass('expanded');
 	});
 
-	$('.cancel-button').hide();
-	$('.clear-button').hide();
+
 	$('.cancel-button').click(function() {
 		$("#search").val("");
 		$('#search').removeClass('expanded');
@@ -231,8 +232,14 @@ $(document).ready(function () {
 		$('#nav-buttons').fadeIn(50);
 	});
 
-	$('.clear-button').click(function() {
-		$('.clear-button').fadeOut(50);
+	// redirect cancel button on search page
+	$('#search-page .cancel-button').click(function() {
+		window.location = "/"; 
+	});
+
+	$('.clear-button').bind("click", function() {
+		console.log( $( this ) ); 
+		$( '.clear-button img' ).fadeOut(50);
 		$("#search").val("");
 		$("#search").focus();
 	});
@@ -245,7 +252,7 @@ $(document).ready(function () {
 		$compile( element )($scope);
 
 		setTimeout(function(){
-		    $("#notes-list .addListItemInput").focus();
+			$("#notes-list .addListItemInput").focus();
 		}, 0);
 
 	});
