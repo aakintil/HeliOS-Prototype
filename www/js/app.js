@@ -507,9 +507,11 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 
 
 	$scope.addNote = function( note ) {
-		// BIG BUG!!!! ///////
-		// HAVE TO DO SOMETHING ABOUT THE FIRST NOTE WITHIN A JOB! 
-		// IT DOESN'T INSERT BECAUSE LI:NTH-CHILD(2) DOESN'T EXIST
+		///////////////////////////////////////////////////////////
+		// FOUND BUG //////////////////////////////////////////////
+		// ON ENTER THE TEXT DOESN'T CHANGE FROM CANCEL TO ADD NOTE
+		// CAUSES DISREPANCY //////////////////////////////////////
+		///////////////////////////////////////////////////////////
 
 		// hide DOM Elements 
 		$( ".addListItemInput" ).parent().hide();
