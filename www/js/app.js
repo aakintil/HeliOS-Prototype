@@ -86,6 +86,9 @@ var app = angular.module('starter', ['ionic'])
 
 angular.module('ionicApp', ['ionic'])
 
+////////////////////////////////////////////////
+//////////////////// MISC //////////////////////
+////////////////////////////////////////////////
 app.controller('gestureCtrl', function($scope, $timeout) {
 	$scope.myTitle = 'Template';
 
@@ -193,6 +196,8 @@ From: http://ericsaupe.com/angularjs-detect-enter-key-ngenter/
 		});
 	};
 });
+
+
 
 ////////////////////////////////////////////////
 ////////////////// SERVICES ////////////////////
@@ -384,6 +389,20 @@ app.service('notifications', ['$http', function ($http) {
 app.service('jobPageService', function() {
 	var toolList = [];
 });
+
+
+
+////////////////////////////////////////////////
+///////////// Time From Now Filter /////////////
+////////////////////////////////////////////////
+app.filter('fromNow', function() {
+	return function(date) {
+		return moment(date).fromNow();
+	}
+});
+
+
+
 
 ////////////////////////////////////////////////
 ///////////////// CONTROLLERS //////////////////
@@ -619,7 +638,7 @@ function JobCtrl( $scope, jobService, noteService, $location, notifications, $ti
 	$scope.inlineShowInput = function( event ) {
 		$( "#addNoteFromJob" ).show(); 
 		setTimeout(function(){$( ".addListItemInput" ).focus();}, 0);
-		
+
 	}
 
 	$scope.toggleInlineInput = function( event ) {
@@ -992,8 +1011,8 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	setTimeout( function(){
 		$scope.prevToolList = jobPageService.toolList;
 		console.log("tools ctrol got it", $scope.prevToolList[0].name);
-		}, 250);
-	
+	}, 250);
+
 	$scope.setSearchQuery = function(inputQuery) {
 		$scope.query = inputQuery;
 	}
@@ -1194,9 +1213,3 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
-
-app.filter('fromNow', function() {
-	return function(date) {
-		return moment(date).fromNow();
-	}
-});

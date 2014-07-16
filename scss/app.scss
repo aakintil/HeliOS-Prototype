@@ -452,7 +452,7 @@ textarea {
 
 .section {
 	.list {
-		
+
 		.item {
 			min-height: (125/2)+px;
 		}
@@ -519,15 +519,12 @@ textarea {
 
 				.alert-time {
 					float: right; 
+					opacity: 0.65;
 				}
 
 			}
 
 			.alert-text {
-				//				display: block;
-				//				overflow: hidden;
-				//				text-overflow: ellipsis;
-				//				border: 1px solid red-alert;
 			}
 		}
 
@@ -887,7 +884,7 @@ $bar-height: 55px;
 	.bar-footer {
 		background-color: $blue-home !important;
 	}
-	
+
 }
 
 .modal-background {
