@@ -930,11 +930,6 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 	}, 10 );
 	
 
-	$scope.clearSearchInput = function() {
-		$('#search').val('');
-		$('.clear-button').fadeOut( 50 );
-	}
-
 	toolService.getToolWithName( query )
 	.success( function( data ) {
 		$scope.tools = data; 
