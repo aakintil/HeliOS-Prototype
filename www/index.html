@@ -112,7 +112,7 @@
 
 
 		<ion-view hide-back-button="true" ng-controller="JobsCtrl" class="nav-frame">
-			<ion-content overflow-scroll="true" class="has-header">
+			<ion-content id="home-content" overflow-scroll="true" class="has-header">
 				<div class="section" >
 					<div class="short home">
 					</div>
@@ -133,9 +133,15 @@
 
 				<div class="section">
 					<div class="item item-divider">
-						<div class="section-header float-left">My Jobs</div>
-						<div class="create job float-right" ng-click="toggleInlineInput()">Add Job</div>
+						<div class="section-header float-left small-title">
+							My Jobs
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+							<div class="create job float-right" ng-click="toggleInlineInput()">Add Job</div>
+						</div>
 					</div>
+
 					<div class="list">
 						<ul class="list">
 							<li class="item item-button-right" id="addJob">
