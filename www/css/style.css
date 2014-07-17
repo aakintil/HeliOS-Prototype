@@ -8441,6 +8441,8 @@ a:active {
   .offset .item-divider {
     background-color: #989898; }
 
+#home-content .item.personal {
+  background-color: white !important; }
 #home-content .medium-icon.home {
   height: 20px;
   width: 20px;
@@ -8453,7 +8455,8 @@ a:active {
   height: 30px;
   padding: 0 20px;
   background-color: #e4e6e6;
-  border: 0; }
+  border: 1px solid #b2b2b2;
+  border-bottom: none; }
   #home-content .item-divider .small-lowercase-title {
     margin-top: 3.5px;
     font-size: 12px;
@@ -8465,7 +8468,8 @@ a:active {
     background-color: transparent; }
 #home-content .list .item {
   padding: 20px;
-  height: 75px; }
+  height: 75px;
+  background-color: #f3f3f3; }
 
 #tools-modal .add-icon {
   width: 24px;
