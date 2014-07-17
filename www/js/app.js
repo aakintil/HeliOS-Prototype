@@ -425,28 +425,27 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		var el = $( n ); 
 		console.log( "the element ", el );
 
-		el.removeClass( 'animated fadeInLeft', function() {
+		el.removeClass( 'animated fadeInLeft' ); 
+		setTimeout( function() {
 			el.addClass( 'animated zoomOut' ); 
 			el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-				el.slideToggle( function() {
+				el.slideToggle("slow", function() {
 					el.remove(); 
+					// actually delete the element
+					noteService.deleteNote( note_id )
+					.success( function( data ) {
+						var info = {}; 
+						info.msg = "Note successfully deleted. Collaborators notified."; 
+						info.title = ""; 
+						notifications.show( info ); 
+					})
+					.error( function( data ) {
+
+					})
 				})
 			}); 
-		} )
+		}, 100 )
 
-
-
-		// actually delete the element
-		//		noteService.deleteNote( note_id )
-		//		.success( function( data ) {
-		//			var info = {}; 
-		//			info.msg = "Note successfully deleted. Collaborators notified.; 
-		//			info.title = ""; 
-		//			notifications.show( info ); 
-		//		})
-		//		.error( function( data ) {
-		//
-		//		})
 	}
 
 	var old = []; 
