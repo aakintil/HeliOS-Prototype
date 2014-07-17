@@ -434,8 +434,17 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 	var old = []; 
 	$scope.undoDeletion = function( event ) {
-		console.log( "called it and got it ", $( event.currentTarget ).attr("id") ); 
-		console.log( "got the old element ", old )
+		console.log( "called it and got it ", $( event.currentTarget ).parent() );
+		var feedback = $( event.currentTarget ).parent(); 
+		var el = $( old[ 0 ] ); 
+		feedback.addClass( 'animated fadeOutLeft' );
+		//		el.addClass('animated fadeInLeft'); 
+		feedback.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+			feedback.replaceWith( el ).removeClass('fadeOutLeft').addClass( 'fadeInLeft' ); 
+		}); 
+		//		console.log( "got the old element ", old[0] ); 
+		//		var el = $( old[0] ); 
+		//		var feedback = $( '' ); 
 	}
 
 	$scope.deleteNote = function( event  ) {
@@ -457,7 +466,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			console.log( "should show feedback for x amount of seconds"); 
 			el.replaceWith( feedback ).removeClass("fadeOutRight"); 
 			$compile( feedback )($scope);
-			
+
 			// do a timeout to hide the deletion call completeDeletion
 		});
 	}
@@ -589,7 +598,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 						'<div class="medium-regular-text-bold edit-note hidden" ng-click="editNote($event)"><img class="small-icon" src="img/icons/edit.svg">Edit Note</div>' +
 						"</li>");
 
-	
+
 		$compile( domNote )($scope);
 
 		if ( $(".insert li:nth-child(2)").attr("id") === "addNoteFromJob" )
