@@ -314,7 +314,7 @@ a:active {
 }
 
 .edit-note {
-	
+
 	margin-top: -4px !important;
 	/*padding: 10px;*/
 }
@@ -685,17 +685,20 @@ textarea {
 		.item {
 			padding: 20px;
 			height: 75px !important; 
-			
+
 			.header-text-secondary {
 				overflow: hidden; 
 				text-overflow: ellipsis; 
-				with: 70%; 
+				width: 70%; 
 			}
 
 			p {
 				font-family: $gotham-medium; 
 				color: black; 
-				overflow: none !important; 
+			}
+			
+			.no-overflow {
+				overflow: visible !important; 
 			}
 
 			p, .alert-time {

@@ -8718,11 +8718,12 @@ textarea {
   #activity-feed .list .item .header-text-secondary {
     overflow: hidden;
     text-overflow: ellipsis;
-    with: 70%; }
+    width: 70%; }
   #activity-feed .list .item p {
     font-family: "Gotham Narrow Medium";
-    color: black;
-    overflow: none !important; }
+    color: black; }
+  #activity-feed .list .item .no-overflow {
+    overflow: visible !important; }
   #activity-feed .list .item p, #activity-feed .list .item .alert-time {
     font-size: 14.5px; }
   #activity-feed .list .item .alert-extras {
