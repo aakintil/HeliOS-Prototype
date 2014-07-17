@@ -9074,7 +9074,7 @@ list-item-button {
   font-size: 55px !important; }
 
 .hidden {
-  display: none; }
+  display: none !important; }
 
 .list:last-child {
   /*margin-bottom: 15px; */ }
