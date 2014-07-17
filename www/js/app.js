@@ -560,8 +560,11 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 						'<img ng-if=\'note.status == "" || note.status === undefined\' src="img/icons/check-unchecked.svg" class="list-item-button">' +
 						'</button>' +
 						'<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by You on July 17, 2014</p>' +
-						'<span class="medium-regular-text-bold detail-info  edit-note hidden" ng-click="editNote($event)">Edit Note</span>' +
+						'<div class="medium-regular-text-bold edit-note hidden" ng-click="editNote($event)"><img class="small-icon" src="img/icons/edit.svg">Edit Note</div>' +
 						"</li>");
+
+	
+		$compile( domNote )($scope);
 
 		if ( $(".insert li:nth-child(2)").attr("id") === "addNoteFromJob" )
 			$( domNote ).insertAfter( "#addNoteFromJob" );
@@ -570,7 +573,6 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 		//			$( ".insert" ).appendAfter( $( domNote ) ); 
 
-		$compile( domNote )($scope);
 
 		// send data to db
 		noteService.createNote( form )
