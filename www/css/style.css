@@ -9086,7 +9086,6 @@ list-item-button {
 #toggleWarning {
   width: 20px;
   height: 30px;
-  background-color: red;
   position: absolute;
   z-index: 15;
   top: 75px; }
