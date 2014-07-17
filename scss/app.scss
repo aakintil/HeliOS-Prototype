@@ -634,10 +634,10 @@ textarea {
 
 	}
 
-/*	.short {
-		height: 7px !important; 
-		width: 100%; 
-	}*/
+	/*	.short {
+	height: 7px !important; 
+	width: 100%; 
+}*/
 
 	.item-divider {
 		min-height: (24/2)+px;
@@ -683,7 +683,7 @@ textarea {
 					float: left; 
 					width: 250px; 
 					margin-left: -10px; 
-					
+
 					.medium-icon {
 						//						height: (40/2)+px; // might be 30px
 						margin-top: 3px;
@@ -1146,7 +1146,7 @@ $bar-height: 62px;
 		color: black; 
 		background-color: transparent; 
 	}
-	
+
 	.marginMore7 {
 		margin-top: 7px !important; 
 	}
@@ -1258,3 +1258,87 @@ $bar-height: 62px;
 	}
 
 }
+
+
+// the arcjet warning
+
+#toggleWarning {
+	width: 20px; 
+	height: 30px; 
+	position: absolute; 
+	z-index: 15; 
+	top: 75px; 
+}
+
+
+#warning {
+	width: 80%; 
+	height: 70%; 
+	left: 0; 
+	right: 0; 
+	position: absolute;
+	z-index: 12; 
+	background-color: #d90e0e; 
+	padding: 20px; 
+	margin: 0 auto; 
+	margin-top: 100px; 
+	text-align: center; 
+	text-transform: uppercase; 
+
+	.close {
+		position: absolute; 
+		right: 0; 
+		top: 0; 
+		color: white; 
+		opacity: 0.5; 
+	}
+	
+	.title, 
+	.sub {
+		color: white; 
+	}
+	.title {
+		font-family: $font-family-sans-serif-bold; 
+		margin-top: 25px; 
+		margin-bottom: 50px; 
+		font-size: 36px; 
+	}
+
+	.sub {
+		font-family: $font-family-sans-serif; 
+		line-height: 50px; 
+		font-size: 30px; 
+		letter-spacing: 4px; 
+	}
+}
+
+#warning-overlay {
+	position: absolute; 
+	width: 100%; 
+	height: 100%;  
+	background-color: #000000; 
+	opacity: 0.6;
+	z-index: 11;
+}
+
+
+// job badge
+.job-badge {
+	height: 73px; 
+	width: 30px;
+	right: 0; 
+	background-color: #f05a24; 
+	z-index: 10; 
+	position: absolute; 
+	margin-top: 2px; 
+	text-align: center; 
+	
+	.num {
+		font-size: 18px;
+		color: white; 
+		font-family: $gotham-medium; 
+		line-height: 75px; 
+	}
+}
+
+// home icon badge

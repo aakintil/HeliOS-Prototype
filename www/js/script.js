@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+	$( '#warning, #warning-overlay' ).hide(); 
+	
+	
 	function switchToStack(stack) {
 		localStorage.setItem('currentBackStackName', stack);
 	}

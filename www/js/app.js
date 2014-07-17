@@ -900,6 +900,16 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.jobs = ""; 
 
 	$scope.predicate = '-created';
+	
+	
+	$scope.toggleWarning = function() {
+		console.log( "toggle toggle toggle" ); 
+		
+		var warning = $( '#warning, #warning-overlay' ); 
+		warning.toggle(); 
+	}
+	
+	
 	// onload, show all jobs
 	jobService.getJobs()
 	.success( function( data ) {
