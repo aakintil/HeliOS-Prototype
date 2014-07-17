@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8441,6 +8441,8 @@ a:active {
   .offset .item-divider {
     background-color: #989898; }
 
+#home-content .item.personal {
+  background-color: white !important; }
 #home-content .medium-icon.home {
   height: 20px;
   width: 20px;
@@ -8451,25 +8453,34 @@ a:active {
   height: 20px; }
 #home-content .item-divider {
   height: 30px;
-  padding: 0 20px; }
+  padding: 0 20px;
+  background-color: #e4e6e6;
+  border: 1px solid #b2b2b2;
+  border-bottom: none; }
+  #home-content .item-divider .small-lowercase-title {
+    margin-top: 3.5px;
+    font-size: 12px;
+    color: black;
+    font-weight: normal; }
   #home-content .item-divider .button.button-positive {
     border: 0;
     color: black;
     background-color: transparent; }
 #home-content .list .item {
   padding: 20px;
-  height: 75px; }
+  height: 75px;
+  background-color: #f3f3f3; }
 
 #tools-modal .add-icon {
-  width: 30px;
-  height: 30px;
-  margin-top: 19px;
+  width: 24px;
+  height: 24px;
+  margin-top: 22px;
   z-index: 12; }
 
 #people-modal .add-icon {
-  width: 30px;
-  height: 30px;
-  margin-top: 17px;
+  width: 24px;
+  height: 24px;
+  margin-top: 20px;
   z-index: 12; }
 #people-modal .header-text {
   margin-top: 12px; }
@@ -8481,13 +8492,13 @@ a:active {
   margin-top: 8px; }
 
 .list-item-button {
-  margin-top: 6px;
-  height: 30px;
+  margin-top: 9px;
+  height: 24px;
   z-index: 14; }
 
 .tool-list .list-item-button {
-  margin-top: 12px;
-  height: 30px;
+  margin-top: 15px;
+  height: 24px;
   z-index: 14; }
 
 .detail {
@@ -8676,7 +8687,8 @@ textarea {
     background-color: grey !important; }
     #activity-feed .list .item .alert-extras .alert-type {
       float: left;
-      width: 250px; }
+      width: 250px;
+      margin-left: -10px; }
       #activity-feed .list .item .alert-extras .alert-type .medium-icon {
         margin-top: 3px;
         height: 16px;
@@ -8707,6 +8719,9 @@ textarea {
 .note-list-item {
   padding-top: 7px;
   padding-bottom: 0px; }
+
+list-item-button {
+  border: 1px solid red; }
 
 .expanded-note {
   height: auto;
@@ -8950,9 +8965,14 @@ textarea {
   display: none;
   z-index: 12; }
   .modal .bar-footer {
+<<<<<<< HEAD
     height: 62px;
     line-height: 62px;
     border-top: 3px solid #abb2b6; }
+=======
+    height: 55px;
+    line-height: 55px; }
+>>>>>>> ad5348496a905dc5ff9ceb6cfad42fb7a88dc31b
 
 #tools-modal .list, #people-modal .list {
   margin-bottom: 62px; }
@@ -8992,7 +9012,7 @@ textarea {
   color: black;
   background-color: transparent; }
 #search-page .section .list li {
-  height: 75px;
+  min-height: 75px;
   padding: 20px; }
   #search-page .section .list li .big-title {
     margin-bottom: 4px;

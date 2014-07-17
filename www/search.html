@@ -61,8 +61,7 @@
 						</div>
 					</div>
 					<ul class="list first"  ng-if="tools.length !== 0" >
-						<!-- ng-click="expandTool()" -->
-						<li class="item regular-text item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in tools track by $index">
+						<li class="item regular-text item-button-right expandable" ng-click="expand( $event )" ng-repeat="tool in tools track by $index">
 							<div class="big-title">{{ tool.name }}</div>
 							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
 							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="action-text">{{ tool.replacement_for }}</span>

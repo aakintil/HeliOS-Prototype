@@ -131,9 +131,10 @@ $(document).ready(function () {
 	}); 
 
 	//	Expandable Code 
-	$(".expandable").click( function() {
-		$(this).find(".tool-submenu").slideToggle(); 
-	});  
+//	$(".expandable").click( function() {
+//		console.log(" clicked me")
+//		$(this).find(".tool-submenu").slideToggle(); 
+//	});  
 
 	var selectedPeople = [];
 
@@ -322,9 +323,9 @@ $(document).ready(function () {
 		$('#people-modal .clear-button img').fadeIn( 50 );
 	});
 
-	$( ".expand" ).click( function() {
-		alert(" have been clicked ")
-	});
+//	$( ".expand" ).click( function() {
+//		alert(" have been clicked ")
+//	});
 
 	// Modal Logic
 	// Hide a modal when it is closed

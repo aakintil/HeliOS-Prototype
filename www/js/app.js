@@ -497,12 +497,12 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $('<li ng-if=\'note.status === "" || note.status === undefined\' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-click="expandNote( $event )">' +
-							'<p class="regular-text note-text">' + note.message + '</p>' +
-							'<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">' +
-								'<img ng-if=\'note.status == "checked"\' src="img/icons/check-checked.svg" class="list-item-button">' +
-								'<img ng-if=\'note.status == "" || note.status === undefined\' src="img/icons/check-unchecked.svg" class="list-item-button">' +
-							'</button>' +
-							'<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by You on July 17, 2014</p>' +
+						'<p class="regular-text note-text">' + note.message + '</p>' +
+						'<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">' +
+						'<img ng-if=\'note.status == "checked"\' src="img/icons/check-checked.svg" class="list-item-button">' +
+						'<img ng-if=\'note.status == "" || note.status === undefined\' src="img/icons/check-unchecked.svg" class="list-item-button">' +
+						'</button>' +
+						'<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by You on July 17, 2014</p>' +
 						"</li>");
 
 
@@ -900,8 +900,8 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.toggleInlineInput = function() {
 
 		var text = {
-			"Add Job" : "Cancel", 
-			"Cancel" : "Add Job"
+			"+ Add Job" : "Cancel", 
+			"Cancel" : "+ Add Job"
 		}
 		var currText = $( ".create.job" ).html(); 
 		var newText = text[ currText ]; 
@@ -968,7 +968,14 @@ function SearchCtrl( $scope, $rootScope, $http, toolService, noteService, jobSer
 		$('#nav-buttons').fadeOut( 50 );
 		$('#search').addClass('expanded');
 	}, 10 );
-	
+
+
+	$scope.expand = function( event ) {
+		console.log( "look at me ", event.target )
+		if(!$(event.target).hasClass("list-item-button")) {
+			$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
+		}
+	}
 
 	toolService.getToolWithName( query )
 	.success( function( data ) {
@@ -1307,3 +1314,15 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 //		},
 //	];
 //})
+
+var t = {
+
+}
+
+var t = {
+	name : "Tooth Tool",
+	current_location : "neverland", 
+	home_location : "london", 
+	replacement_for : "Ball Driver F11", 
+	status : ""
+}
