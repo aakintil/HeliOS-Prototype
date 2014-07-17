@@ -9189,3 +9189,6 @@ list-item-button {
     color: white;
     font-family: "Gotham Narrow Medium";
     line-height: 75px; }
+
+.deletionFeedback {
+  height: 75px; }

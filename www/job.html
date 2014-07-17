@@ -60,7 +60,7 @@
 		<ion-view hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
 			<ion-content id="job-page" class="job" overflow-scroll="true" class="has-header" class="{{job.status}}">
 				<div class="top section">
-					
+
 					<div id="job-title" >
 						<div class="header-text title-row item-button-right">{{job.title}}</div>
 						<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
@@ -93,8 +93,19 @@
 						<li class="item" id="addNoteFromJob">
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						
-						<li ng-if='note.status === "" || note.status === undefined' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )" id="{{note._id}}">
+
+						<!-- note deletion -->
+<!--
+						<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion()">
+							<p class="regular-text note-text"> DELETE? </p>
+							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
+								<img src="img/icons/check-checked.svg" class="list-item-button">
+							</button>
+						</li>
+-->
+
+
+						<li ng-if='note.status === "" || note.status === undefined' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )" id="{{note._id}}">
 							<p class="regular-text note-text">{{ note.message }}</p>
 							<input class="addListItemInput regular-text hidden note-text-input" type="text" value={{note.message}} ng-model="note.message" ng-enter="saveNoteEdit(note._id, note)">
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
@@ -104,8 +115,8 @@
 							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
 							<div class="medium-regular-text-bold edit-note hidden" ng-click="editNote($event)"><img class="small-icon" src="img/icons/edit.svg">Edit Note</div>
 						</li>
-						
-						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
+
+						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
 							<p class="regular-text note-text">{{ note.message }}</p>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
 								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
