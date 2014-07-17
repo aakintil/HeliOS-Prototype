@@ -1121,7 +1121,7 @@ $bar-height: 55px;
 		.list {
 
 			li {
-				height: 75px; 
+				min-height: 75px; 
 				padding: 20px;
 
 				.big-title {

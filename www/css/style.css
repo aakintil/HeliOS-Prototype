@@ -8993,7 +8993,7 @@ list-item-button {
   color: black;
   background-color: transparent; }
 #search-page .section .list li {
-  height: 75px;
+  min-height: 75px;
   padding: 20px; }
   #search-page .section .list li .big-title {
     margin-bottom: 4px;
