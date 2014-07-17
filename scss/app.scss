@@ -651,6 +651,9 @@ textarea {
 
 	.list {
 
+		.item:nth-child(1) {
+			margin-top: 5px; 
+		}
 		.item {
 			padding: 20px;
 
@@ -1138,6 +1141,10 @@ $bar-height: 62px;
 		border: 0; 
 		color: black; 
 		background-color: transparent; 
+	}
+	
+	.marginMore7 {
+		margin-top: 7px !important; 
 	}
 
 	.section {

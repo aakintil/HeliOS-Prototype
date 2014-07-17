@@ -8686,6 +8686,8 @@ textarea {
       text-transform: uppercase;
       /*line-height: (15)+px;*/ }
 
+#activity-feed .list .item:nth-child(1) {
+  margin-top: 5px; }
 #activity-feed .list .item {
   padding: 20px; }
   #activity-feed .list .item p {
@@ -9018,6 +9020,8 @@ list-item-button {
   border: 0;
   color: black;
   background-color: transparent; }
+#search-page .marginMore7 {
+  margin-top: 7px !important; }
 #search-page .section .list li {
   min-height: 75px;
   padding: 20px; }

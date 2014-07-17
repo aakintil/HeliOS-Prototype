@@ -200,7 +200,8 @@
 								<span class="small-light-caps">Created:</span> 
 								<span class="action-text">{{job.created}}</span> 
 								<span class="small-light-caps">by</span> 
-								<span class="action-text">{{job.creator}}</span>
+								<span class="action-text" ng-if="job.creator === undefined || job.creator.length < 1"> You </span>
+								<span class="action-text" ng-if="job.creator !== undefined">{{job.creator}}</span>
 							</div>
 
 							<div class="detail">
