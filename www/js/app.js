@@ -407,7 +407,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	$scope.reportEvent = function(event)  {
 		console.log('Reporting : ' + event);
 
-		if ( event.type === "swipe" ) {
+		if ( event.type === "swiperight" ) {
 			$scope.deleteNote( event ); 
 		}
 
@@ -418,12 +418,28 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 	$scope.deleteNote = function( event ) {
 		console.log( "has been called"); 
-		console.log( event ); 
+		//		console.log( event );  
 		var el = $( event.currentTarget ); 
+		var cont = el.parent(); 
+		var x = el.offset().left; 
+		var y = el.offset().top; 
+		var index = $( "li" ).index( el ); 
+
 		el.addClass('animated fadeOutRight');
+		//		var feedback = $( '.deletionFeedback' );
+		var feedback = $( '<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion()"><p class="regular-text note-text"> DELETE? </p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)"><img src="img/icons/check-checked.svg" class="list-item-button"></button></li>' ); 
+
+		//		var deletion = $( '' ); 
 		// on animation end display none
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-			$( el ).slideToggle( "slow" ); 
+			console.log( "should show feedback for x amount of seconds"); 
+			console.log( cont.eq( index ) );
+//			el.slideToggle(); 
+//			feedback.insertAfter( el );  
+			//			feedback.css( "left", x ); 
+			//			feedback.css( "top", y ); 
+			//			feedback.show(); 
+			//			$( el ).slideToggle( "slow" ); 
 		});
 
 		// need a way to get the id on swipe
@@ -552,7 +568,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 		// so we don't have to refresh
 		// create a dom element but when the user returns to the page, the actual note element will be there
-		var domNote = $('<li ng-if=\'note.status === "" || note.status === undefined\' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-click="expandNote( $event )">' +
+		var domNote = $('<li ng-if=\'note.status === "" || note.status === undefined\' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item" ng-click="expandNote( $event )">' +
 						'<p class="regular-text note-text">' + note.message + '</p>' +
 						'<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">' +
 						'<img ng-if=\'note.status == "checked"\' src="img/icons/check-checked.svg" class="list-item-button">' +

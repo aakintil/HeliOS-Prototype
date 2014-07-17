@@ -2,7 +2,9 @@ $(document).ready(function () {
 
 	$( '#warning, #warning-overlay' ).hide(); 
 
-
+	$( '.deletionFeedback' ).hide(); 
+	
+	
 	function switchToStack(stack) {
 		localStorage.setItem('currentBackStackName', stack);
 	}
