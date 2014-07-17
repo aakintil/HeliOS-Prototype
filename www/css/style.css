@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8299,9 +8299,8 @@ p {
   line-height: 24px; }
 
 .big-title {
-  font-family: "Gotham Narrow Book";
+  font-family: "Gotham Narrow Bold";
   font-size: 18px;
-  font-weight: bold;
   color: black; }
 
 .small-title {
@@ -8316,6 +8315,12 @@ p {
   font-weight: bold;
   text-transform: uppercase;
   color: white; }
+
+.weird-text {
+  font-size: 16px !important;
+  font-weight: normal !important;
+  color: black !important;
+  font-family: "Gotham Narrow Book" !important; }
 
 .large-regular-text {
   font-size: 18px;
@@ -8337,12 +8342,22 @@ p {
   font-size: 14.5px !important;
   font-weight: normal !important;
   color: black !important;
-  font-family: "Gotham Narrow Book"; }
+  font-family: "Gotham Narrow Book";
+  text-transform: none !important; }
+
+.medium-regular-text-bold {
+  font-size: 14.5px !important;
+  font-weight: normal !important;
+  color: black !important;
+  font-family: "Gotham Narrow Bold";
+  text-transform: none !important; }
 
 .medium-title-text {
   font-size: 14.5px !important;
   color: black !important;
-  font-family: "Gotham Narrow Medium"; }
+  font-family: "Gotham Narrow Medium";
+  text-transform: none !important;
+  font-weight: normal !important; }
 
 .detail-text {
   font-size: 14.5px;
@@ -8369,6 +8384,10 @@ p {
 .header-text {
   font-size: 18px;
   font-family: "Gotham Narrow Bold"; }
+
+.header-text-secondary {
+  font-size: 18px;
+  font-family: "Gotham Narrow Book"; }
 
 .small-icon {
   height: 13px;
@@ -8441,6 +8460,10 @@ a:active {
   margin-top: 20px; }
   .offset .item-divider {
     background-color: #989898; }
+
+.edit-note {
+  margin-top: -4px !important;
+  /*padding: 10px;*/ }
 
 .home-nav-button {
   margin-top: -7px;

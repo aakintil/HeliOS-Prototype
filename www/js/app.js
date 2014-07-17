@@ -464,8 +464,11 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 	$scope.editNote = function(event) {
 		// console.log("the obj is ", $(event.target.parentElement));
-		var note = $(event.target.parentElement).find('.note-text');
-		var noteEdit = $(event.target.parentElement).find('.note-text-input');
+
+		console.log("EDITING NOTE");
+
+		var note = $(event.target.parentElement.parentElement).find('.note-text');
+		var noteEdit = $(event.target.parentElement.parentElement).find('.note-text-input');
 		noteEdit.first().show();
 		noteEdit.first().removeClass('hidden');
 		note.first().hide();
