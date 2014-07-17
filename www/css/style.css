@@ -9182,4 +9182,24 @@ list-item-button {
     line-height: 75px; }
 
 .deletionFeedback {
-  height: 75px !important; }
+  height: 62.5px !important;
+  padding: 10px 20px;
+  background-color: #fbe6e2;
+  position: relative;
+  text-align: center;
+  outline: 1px solid #fccce8; }
+  .deletionFeedback p {
+    margin: 0 auto; }
+  .deletionFeedback .regular-text {
+    text-transform: none; }
+  .deletionFeedback .small-text {
+    color: black;
+    font-family: "Gotham Narrow Medium"; }
+  .deletionFeedback .button {
+    position: absolute;
+    right: 9px;
+    top: 0;
+    background-color: transparent;
+    border: none; }
+    .deletionFeedback .button img {
+      height: 20px; }

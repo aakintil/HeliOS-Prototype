@@ -696,7 +696,7 @@ textarea {
 				font-family: $gotham-medium; 
 				color: black; 
 			}
-			
+
 			.no-overflow {
 				overflow: visible !important; 
 			}
@@ -1388,5 +1388,32 @@ $bar-height: 62px;
 
 
 .deletionFeedback {
-	height: 75px !important; 
+	height: 62.5px !important; 
+	padding: 10px 20px; 
+	background-color: #fbe6e2; 
+	position: relative; 
+	text-align: center; 
+	outline: 1px solid #fccce8;
+
+	p {
+		margin: 0 auto; 
+	}
+	.regular-text {
+		text-transform: none; 
+	}
+	.small-text {
+		color: black; 
+		font-family: $gotham-medium; 
+	}
+	.button {
+		position: absolute; 
+		right: 9px; 
+		top: 0; 
+		background-color: transparent; 
+		border: none; 
+
+		img {
+			height: 20px; 
+		}
+	}
 }

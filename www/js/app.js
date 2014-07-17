@@ -415,38 +415,51 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			$scope.data[event.type]++;
 		})
 	}
-	
-	$scope.completeDeletion = function( id ) {
-		console.log( "called it and got it ", id )	
+
+	$scope.completeDeletion = function( event ) {
+		// hide feedback maybe opacity out
+		// and a slide toggle. 
+		console.log( "called it and got it ", $( event.currentTarget ).attr("id") ); 
+		// need a way to get the id on swipe
+		//		noteService.deleteNote( note._id )
+		//		.success( function( data ) {
+		//		var info = {}; 
+		// 		info.msg = ; 
+		//		info.title = ; 
+		//		})
+		//		.error( function( data ) {
+		//
+		//		})
 	}
 
-	$scope.deleteNote = function( event ) {
+	var old = []; 
+	$scope.undoDeletion = function( event ) {
+		console.log( "called it and got it ", $( event.currentTarget ).attr("id") ); 
+		console.log( "got the old element ", old )
+	}
+
+	$scope.deleteNote = function( event  ) {
 		console.log( "has been called"); 
 		//		console.log( event );  
-		var el = $( event.currentTarget ); 
+		var el = $( event.currentTarget );
+		old.push( el ); 
 		var cont = el.parent(); 
 		var x = el.offset().left; 
 		var y = el.offset().top; 
+		var note_id = el.attr( "id" ); 
 		var index = $( "li" ).index( el ); 
 		console.log( "x: ", x, "  y: ", y ); 
 		el.addClass('animated fadeOutRight');
 
-		var feedback = $( '<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion( note._id )"><p class="regular-text note-text"> DELETE? </p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)"><img src="img/icons/check-checked.svg" class="list-item-button"></button></li>' ); 
+		var feedback = $( '<li id="' + note_id + '"class="empty-item deletionFeedback small-title"><p class="regular-text note-text"> Note deleted </p> <p class="small-text note-text" ng-click="undoDeletion( $event )"> Undo </p> <button class="button" ng-click="completeDeletion(note, $event, job._id)"><img src="img/icons/clear-btn.svg" alt="x"></button></li>' ); 
 
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			console.log( "should show feedback for x amount of seconds"); 
 			el.replaceWith( feedback ).removeClass("fadeOutRight"); 
 			$compile( feedback )($scope);
+			
+			// do a timeout to hide the deletion call completeDeletion
 		});
-
-		// need a way to get the id on swipe
-		//		noteService.deleteNote( note._id )
-		//		.success( function( data ) {
-		//
-		//		})
-		//		.error( function( data ) {
-		//
-		//		})
 	}
 
 
