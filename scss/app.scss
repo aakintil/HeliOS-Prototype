@@ -132,6 +132,13 @@ p {
 	color: white;
 }
 
+.weird-text {
+	font-size: 16px !important;
+	font-weight: normal !important;
+	color: black !important;
+	font-family: $font-family-sans-serif !important;
+}
+
 .large-regular-text {
 	font-size: (36/2)+px;
 	font-weight: normal;
@@ -204,6 +211,11 @@ p {
 .header-text {
 	font-size: 18px;
 	font-family: $font-family-sans-serif-bold;
+}
+
+.header-text-secondary {
+	font-size: 18px;
+	font-family: $font-family-sans-serif;
 }
 
 .small-icon {

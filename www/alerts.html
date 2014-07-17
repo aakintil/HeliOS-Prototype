@@ -53,24 +53,24 @@
 						<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 							<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
 							<a href="job.html?id={{ el.job_id._id || el._id }}">
-								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id !== '111111111111111111111111'"> 
+								<div class="header-text-secondary" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id !== '111111111111111111111111'"> 
 									You: "{{ el.message }}"							
 								</div>
 
-								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id === '111111111111111111111111'"> 
+								<div class="header-text-secondary" ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id === '111111111111111111111111'"> 
 									"{{ el.message }}"							
 								</div>
 
-								<div class="regular-text alert-text" ng-if="el.status !== 'completed' && el.message === undefined"> 
+								<div class="header-text-secondary" ng-if="el.status !== 'completed' && el.message === undefined"> 
 									You created a job							
 								</div>
-								<div class="regular-text alert-text" ng-if="el.status === 'completed'"> 
+								<div class="header-text-secondary" ng-if="el.status === 'completed'"> 
 									You completed a job.								
 								</div>
 
 								<div class="alert-extras">
 
-									<div class="small-light-caps alert-type">
+									<div class="medium-title-text alert-type">
 										<!-- show notes icon -->
 										<span ng-if="el.status !== 'completed' && el.message !== undefined && el.job_id._id !== '111111111111111111111111'">
 											<img class="medium-icon" src="img/icons/notes-dark.svg"> 

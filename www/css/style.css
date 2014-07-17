@@ -8316,6 +8316,12 @@ p {
   text-transform: uppercase;
   color: white; }
 
+.weird-text {
+  font-size: 16px !important;
+  font-weight: normal !important;
+  color: black !important;
+  font-family: "Gotham Narrow Book" !important; }
+
 .large-regular-text {
   font-size: 18px;
   font-weight: normal;
@@ -8378,6 +8384,10 @@ p {
 .header-text {
   font-size: 18px;
   font-family: "Gotham Narrow Bold"; }
+
+.header-text-secondary {
+  font-size: 18px;
+  font-family: "Gotham Narrow Book"; }
 
 .small-icon {
   height: 13px;
