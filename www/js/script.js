@@ -132,6 +132,7 @@ $(document).ready(function () {
 
 	//	Expandable Code 
 	$(".expandable").click( function() {
+		console.log(" clicked me")
 		$(this).find(".tool-submenu").slideToggle(); 
 	});  
 
