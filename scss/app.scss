@@ -640,6 +640,9 @@ textarea {
 
 	.list {
 
+		.item:nth-child(1) {
+			margin-top: 5px; 
+		}
 		.item {
 			padding: 20px;
 

@@ -47,16 +47,11 @@
 			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
 		</ion-nav-bar>
 
-
 		<div id="notification"> </div>
 
 		<ion-view title="Alerts" class="nav-frame" ng-controller="ActivityFeedCtrl">
 			<ion-content overflow-scroll="true" class="has-header">
 				<div id="activity-feed" class="section">
-					
-					</div>
-
-
 					<div class="list">
 						<div class="item item-button-right" ng-repeat="el in feed | orderBy:predicate">
 							<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
@@ -120,65 +115,6 @@
 
 			</ion-content>
 		</ion-view>   
-
-		<!-- Transparent Screen that will allow us to dismiss the dialog -->
-		<!--		<div id="hover" ng-controller="AddNoteController" ng-click="hideNewNoteModal()"></div>-->
-		<!-- 			<div id="hover" ng-controller="ModalCtrl" ng-click="hideModal()"></div>
-
-<div id="selectionModal" ng-controller="ModalCtrl" class="card popup-modal">
-<form ng-submit="createTask(task)">
-<div class="list">
-<p class="input-header"> Select </p>
-<button class="button button-full button-dark" ng-click="showModal('note')">Add A Note</button>
-<button class="button button-full button-dark" ng-click="showModal('job')">Add A Job</button>
-</div>
-</form>
-</div> -->
-
-		<!-- dunno if we have to change the controllers for add note and job: DISCUSS LATER -->
-		<!-- 			<div id="addNoteModal" ng-controller="ModalCtrl" class="card popup-modal">
-<form ng-submit="createTask(task)">
-<div class="list">
-<p class="input-header"> Add New Note </p>
-<label class="item item-input">
-<input type="text" placeholder="Title" ng-model="task.title">
-</label>
-
-<label class="item item-input">
-<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
-</label>
-
-<label class="item item-input">
-<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
-</label>
-
-<button class="button button-full button-dark" >Create Note</button>
-
-</div>
-</form>
-</div>
--->
-		<!-- 			<div id="addJobModal" ng-controller="ModalCtrl" class="card popup-modal">
-<form ng-submit="createTask(task)">
-<div class="list">
-<p class="input-header"> Add New Job </p>
-<label class="item item-input">
-<input type="text" placeholder="Title" ng-model="task.title">
-</label>
-
-<label class="item item-input">
-<input type="text" placeholder="Add Participants (Optional)" ng-model="task.title">
-</label>
-
-<label class="item item-input">
-<textarea placeholder="Create Note (Optional)" ng-model="task.title"> </textarea>
-</label>
-
-<button class="button button-full button-dark" >Create Job</button>
-
-</div>
-</form>
-</div>  --> 
 
 	</body>
 </html>
