@@ -146,9 +146,6 @@
 						</div>
 						<div class="create job float-right small-lowercase-title" ng-click="toggleInlineInput()">+ Add Job</div>
 					</div>
-					<div class="job-badge"> 
-						<p class="num">1</p> 
-					</div>
 					<div class="list">
 						<ul class="list">
 							<li class="item item-button-right" id="addJob">
@@ -156,6 +153,9 @@
 							</li>
 
 							<li class="item item-button-right" ng-repeat="job in jobs | orderBy:predicate" ng-if="job._id !== '111111111111111111111111' && job.members.indexOf('You') !== -1">
+								<div ng-if="job.badge === 'show'" class="job-badge {{ job._id }}"> 
+									<p class="num">1</p> 
+								</div>
 								<a href="job.html?id={{job._id}}" ng-click="broadcastJob(job._id)">
 									<div class="header-text">{{job.title}}</div>
 									<div class="">{{job.members}}</div>

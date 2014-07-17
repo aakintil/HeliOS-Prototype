@@ -79,7 +79,8 @@ var Job = mongoose.model( 'Job', {
 	tools : [{ type: Schema.ObjectId, ref: 'Tool' }], 
 	tools_checked : [{ type: Schema.ObjectId, ref: 'Tool' }], 
 	notes : [{ type: Schema.ObjectId, ref: 'Note' }], //[ { type: Schema.Types.ObjectId, ref: 'Note' } ], 
-	status : String
+	status : String, 
+	badge: { type: String, default: "hidden" },
 })
 
 
@@ -452,6 +453,23 @@ app.post( '/api/jobs/:id', function( req, res ) {
 	//	});
 });
 
+// UPDATE A JOBS BADGE
+app.post( '/api/jobs/a/b/:id', function( req, res ) {
+	console.log(" ===== IN THE JOB UPDATE CALL ====")
+
+	debug.log( " the params ", req.params )
+
+	console.log("UPDATING A JOB BADGE");
+	var query = { _id : req.params.id }
+	var b = "hidden"; 
+	Job.findOne( query, function ( err, job ) {
+		job.badge = "hidden";
+		job.save();
+		res.json( job );
+	});
+
+});
+
 
 // delete a note from a job
 app.delete( '/api/notes/:note_id', function( req, res ) {
@@ -484,14 +502,14 @@ app.post( '/api/notes/update/:note_id/:new_message', function( req, res ) {
 
 
 	// Note.remove( query, function( err, note ) {
-		//if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
-		//console.log( note ); 
-		//
-		//		Note.find( function( err, notes ) {
-		//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
-		//
-		//			res.json( notes ) // return all notes in the JSON format after we create another
-		//		})
+	//if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
+	//console.log( note ); 
+	//
+	//		Note.find( function( err, notes ) {
+	//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
+	//
+	//			res.json( notes ) // return all notes in the JSON format after we create another
+	//		})
 	//})
 });
 
@@ -618,13 +636,13 @@ app.put( '/api/jobs/:id/:status/:jobid', function( req, res ) {
 			// remove from array
 			var index = job.tools_checked.indexOf(toolId);
 			if (index > -1) {
-			    job.tools_checked.splice(index, 1);
+				job.tools_checked.splice(index, 1);
 			}
 		}
 
 		console.log("The updated job is ", job);
 
-		
+
 		// tool.status = status; 
 		// tool.save(); 
 		// res.json( tool ); 

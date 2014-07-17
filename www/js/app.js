@@ -202,6 +202,10 @@ app.service('jobService', ['$http', function ($http) {
 		return $http.post( urlBase + '/' + id )
 	}
 
+	this.hideBadge = function( id ) {
+		return $http.post( urlBase + '/a/b/' + id ); 
+	}
+
 	this.updateJobWithTools = function( type, param, id ) {
 		return $http.get( urlBase + '/' + type + '/' + param + '/' + id );
 	}
@@ -391,6 +395,14 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		tap : 0,
 		doubletap : 0
 	};
+	var temp_id = "53b73ec877e8dc1ec86a3d85"; 
+	var badge = $( '.job-badge' ); 
+
+	//	if ( temp_id === "53b73ec877e8dc1ec86a3d85" ) {
+	//		console.log( "the badge should be gone" ); 
+	//		badge.addClass( 'hidden' ); 
+	//	}
+
 
 	$scope.reportEvent = function(event)  {
 		console.log('Reporting : ' + event);
@@ -498,6 +510,19 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		$scope.notes = $scope.job.notes; 
 		console.log("THE NOTES ARE ", $scope.notes);
 		$scope.complete = $scope.job.status; 
+
+		debug.log( "the badge hopefully will exist", $scope.job.badge !== undefined ); 
+
+		if ( $scope.job.badge === 'show'  ) {
+			jobService.hideBadge( jobId )
+			.success( function( data ) {
+				console.log( "sucessfully hid badge")
+			})
+			.error( function( data ) {
+
+			})
+		}
+
 	})
 	.error( function( data ) {
 		console.log( "Error with getting all jobs 44: ", data._id ); 
@@ -905,16 +930,15 @@ function JobsCtrl( $scope, $rootScope, $http, jobService, notifications ) {
 	$scope.jobs = ""; 
 
 	$scope.predicate = '-created';
-	
-	
+
 	$scope.toggleWarning = function() {
 		console.log( "toggle toggle toggle" ); 
-		
+
 		var warning = $( '#warning, #warning-overlay' ); 
 		warning.toggle(); 
 	}
-	
-	
+
+
 	// onload, show all jobs
 	jobService.getJobs()
 	.success( function( data ) {
@@ -1364,8 +1388,9 @@ function ActivityFeedCtrl( $scope, jobService, noteService, toolService, $locati
 //	];
 //})
 
-var t = {
-
+var t2 = {
+	title: "JOB 2014", 
+	badge: "show", 
 }
 
 var t = {

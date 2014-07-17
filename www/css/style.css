@@ -9142,7 +9142,7 @@ list-item-button {
   background-color: #f05a24;
   z-index: 10;
   position: absolute;
-  margin-top: 2px;
+  top: 0;
   text-align: center; }
   .job-badge .num {
     font-size: 18px;
