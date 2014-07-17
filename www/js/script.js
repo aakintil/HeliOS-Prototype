@@ -221,6 +221,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$(".note-text-input").focusout(function() {
+		console.log("Focus out");
+	});
+
 	// Code for handling search bar results
 	$('#search').bind("focus", function() {
 		$( '#people-modal .clear-button' )
@@ -255,6 +259,28 @@ $(document).ready(function () {
 	//	$( '#people-modal .clear-button, #tools-modal .clear-button' ).bind( "click", function() {
 	//		//		$( '#search' ).val( "" ); 
 	//	})
+
+
+
+
+
+	setTimeout(function() {
+		var opaque = $('#complete img')[0].src;
+		console.log("OQAQUU IS ", opaque);
+			// $(".short.home").css("opacity", 1); 
+		var status = ""; 
+
+		// also have to send a notification when job is clicked
+		// everything greys out except for the title and the checkbox
+
+		//		debug.log( "shoudl have class", ); 
+		//		opaque.addClass("completed"); 
+		console.log("THE INDEX IS " + (opaque.indexOf("check-checked")));
+		if ( opaque.indexOf("check-checked") != -1 ) {
+			$('#job-page *').addClass("completed");
+		}
+	}, 1000);
+
 
 	$('#add-note').click(function(){
 		console.log('clicked');

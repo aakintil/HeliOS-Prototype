@@ -450,7 +450,7 @@ app.post( '/api/jobs/:id', function( req, res ) {
 	//			res.redirect( '/' );
 	//		});
 	//	});
-})
+});
 
 
 // delete a note from a job
@@ -467,8 +467,33 @@ app.delete( '/api/notes/:note_id', function( req, res ) {
 		//			res.json( notes ) // return all notes in the JSON format after we create another
 		//		})
 	})
-})
+});
 
+// update a note from a job
+app.post( '/api/notes/update/:note_id/:new_message', function( req, res ) {
+	//	console.log( req.params ); 
+	console.log("UPDATING A NOTE");
+	var query = { _id : req.params.note_id }
+	var message = req.params.new_message;
+	console.log("UPdating: " + req.params.note_id + " " + message);
+	Note.findOne( query, function (err, note) {
+		note.message = message;
+		note.save();
+		res.json(note);
+	});
+
+
+	// Note.remove( query, function( err, note ) {
+		//if ( err ) { res.send( err ); console.log("Error deleting appropriate note |  line 77 : server.js") }
+		//console.log( note ); 
+		//
+		//		Note.find( function( err, notes ) {
+		//			if ( err ) { res.send( err ); console.log("Error finding / getting appropriate note |  line 80 : server.js") }
+		//
+		//			res.json( notes ) // return all notes in the JSON format after we create another
+		//		})
+	//})
+});
 
 
 app.post( '/api/jobs', function( req, res ) {
@@ -599,8 +624,7 @@ app.put( '/api/jobs/:id/:status/:jobid', function( req, res ) {
 
 		console.log("The updated job is ", job);
 
-		job.save();
-		res.json(job);
+		
 		// tool.status = status; 
 		// tool.save(); 
 		// res.json( tool ); 
