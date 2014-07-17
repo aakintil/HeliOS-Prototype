@@ -685,10 +685,17 @@ textarea {
 		.item {
 			padding: 20px;
 			height: 75px !important; 
+			
+			.header-text-secondary {
+				overflow: hidden; 
+				text-overflow: ellipsis; 
+				with: 70%; 
+			}
 
 			p {
 				font-family: $gotham-medium; 
 				color: black; 
+				overflow: none !important; 
 			}
 
 			p, .alert-time {
@@ -705,20 +712,22 @@ textarea {
 
 				.alert-type {
 					float: left; 
-					width: 250px; 
+					width: auto; 
 					margin-left: -10px; 
 
 					.medium-icon {
 						//						height: (40/2)+px; // might be 30px
 						margin-top: 3px;
 						height: (32/2) + px; 
-						margin-right: 10px;
+						margin-right: -5px;
 						float: left; 
 					}
 				}
 
 				.alert-time {
 					float: right; 
+					font-size: 13px; 
+					margin-top: 3px; 
 					opacity: 0.65;
 				}
 
