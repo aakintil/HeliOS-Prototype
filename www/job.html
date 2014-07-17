@@ -112,8 +112,8 @@
 								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
 								<img ng-if='note.status == "" || note.status === undefined' src="img/icons/check-unchecked.svg" class="list-item-button">
 							</button>
-							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014 &nbsp;|&nbsp; <span class="medium-regular-text-bold detail-info  edit-note" ng-click="editNote($event)">Edit Note</span></p>
-							<!-- <p class="medium-regular-text-bold detail-info hidden edit-note" ng-click="editNote($event)">Edit Note</p> -->
+							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
+							<div class="medium-regular-text-bold edit-note hidden" ng-click="editNote($event)"><img class="small-icon" src="img/icons/edit.svg">Edit Note</div>
 						</li>
 
 						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
@@ -130,7 +130,7 @@
 				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
 					<div class="item item-button-right item-divider job-header">
 						<div class="section-header marginLess30 float-left small-title"><img class="small-icon" src="img/icons/tools-dark.svg">
-							Tools
+							Tools ({{job.tools.length}})
 							<button class="collapsable button button-clear button-positive">
 								<i class="icon ion-ios7-arrow-down"></i>
 							</button>
@@ -143,7 +143,7 @@
 						<li class="empty-item small-title" ng-if="job.tools.length === 0">No Tools</li>
 						<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools" ng-class="{checked: job.tools_checked.indexOf(tool._id) != -1}">
 							<div class="header-text">{{ tool.name }}</div>
-							<div class=""> Current Location: {{ tool.current_location }}</div>
+							<div class="">Location: {{ tool.current_location }}</div>
 							<div class="" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="">{{ tool.replacement_for }}</span>
 							</div>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(tool, $event, job._id)">
@@ -188,10 +188,10 @@
 								</div>
 								<div class="tool-submenu-replacement" ng-if="tool.replacement_for !== undefined">
 									<div class="medium-regular-text">
-										{{ tool.name }} is a replacement as
+										{{ tool.name }} is a replacement for
 									</div>
 									<div class="medium-regular-text">
-										{{ tool.replacement_for }} is uncalibrated.
+										uncalibrated {{ tool.replacement_for }}.
 									</div>
 								</div>
 							</div>
@@ -268,7 +268,7 @@
 						<ul class="list">
 							<li ng-click="updateTool($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{tool.name}}</div>
-								<div class="detail-row">Current Location: {{tool.current_location}}</div>
+								<div class="detail-row">Location: {{tool.current_location}}</div>
 								<button class="button button-clear checklist-item" id="{{tool._id}}">
 									<!-- <i class="icon ion-ios7-plus-outline medium-icon"></i> -->
 									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">

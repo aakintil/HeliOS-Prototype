@@ -1,106 +1,143 @@
 $(document).ready(function () {
 
-	$('a').click(function() {
-		console.log("hi");
+	$( '#warning, #warning-overlay' ).hide(); 
+	
+	
+	function switchToStack(stack) {
+		localStorage.setItem('currentBackStackName', stack);
+	}
+
+	function getCurrentStackName() {
+		return localStorage.getItem('currentBackStackName');
+	}
+
+	function getCurrentBackStack() {
+		var currentBackStackName = getCurrentStackName();
+		if (currentBackStackName == null) {
+			currentBackStackName = 'jobs';
+			localStorage.setItem('currentBackStackName', currentBackStackName);
+		}
+
+		var currentBackStack = JSON.parse(localStorage.getItem(currentBackStackName));
+		if (currentBackStack == null || currentBackStack == "") {
+			currentBackStack = [];
+		}
+		return currentBackStack;
+	}
+
+	function setCurrentBackStack(stack) {
+		localStorage.setItem(getCurrentStackName(), JSON.stringify(stack));
+	}
+
+	function popFromStack() {
+		var stack = getCurrentBackStack();
+		var mrsi = stack.pop();
+		setCurrentBackStack(stack);
+		return mrsi;
+	}
+
+	function saveCurrentPagetoCurrentStack() {
+
+		var currentStack = getCurrentBackStack();
+		console.log("Saving Current Page to Current Stack: " + document.location.href + " to " + currentStack);
+		currentStack.push(document.location.href);
+		setCurrentBackStack(currentStack);
+	}
+
+	var local = false;
+
+	$(".home-nav-button").click(function (e) {
+		// console.log("home pressed");
+		// saveCurrentPagetoCurrentStack();
+
+		// switchToStack('home');
+		// var popStack = popFromStack();
+		// console.log("Should be navigating to: " + popStack);
+		// if (popStack != undefined) {
+		// 	document.location.href = popStack;
+		// } else {
+		// 	document.location.href = "http://localhost:3000/index.html";
+		// }
+
+		if (local) {
+			document.location.href = "http://localhost:3000/index.html";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/index.html";
+		}
+
+
 	});
 
-	// function switchToStack(stack) {
-	// 	localStorage.setItem('currentBackStackName', stack);
-	// }
+	$(".alerts-nav-button").click(function (e) {
+		// console.log("alerts pressed");
+		// saveCurrentPagetoCurrentStack();
 
-	// function getCurrentStackName() {
-	// 	return localStorage.getItem('currentBackStackName');
-	// }
+		// switchToStack('alerts');
+		// var popStack = popFromStack();
+		// if (popStack != undefined) {
+		// 	document.location.href = popStack;
+		// } else {
+		// 	document.location.href = "http://localhost:3000/alerts.html?type=alert";
+		// }
 
-	// function getCurrentBackStack() {
-	// 	var currentBackStackName = getCurrentStackName();
-	// 	if (currentBackStackName == null) {
-	// 		currentBackStackName = 'jobs';
-	// 		localStorage.setItem('currentBackStackName', currentBackStackName);
-	// 	}
 
-	// 	var currentBackStack = JSON.parse(localStorage.getItem(currentBackStackName));
-	// 	if (currentBackStack == null || currentBackStack == "") {
-	// 		console.log("GETCUR: " + currentBackStack);
-	// 		currentBackStack = [];
-	// 	}
-	// 	return currentBackStack;
-	// }
+		if (local) {
+			document.location.href = "http://localhost:3000/alerts.html?type=alert";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/alerts.html?type=alert";
+		}
+	});
 
-	// function setCurrentBackStack(stack) {
-	// 	localStorage.setItem(getCurrentStackName(), JSON.stringify(stack));
-	// }
+	$(".add-nav-button").click(function (e) {
+		// console.log("add pressed");
+		// saveCurrentPagetoCurrentStack();
 
-	// function popFromStack() {
-	// 	var stack = getCurrentBackStack();
-	// 	var mrsi = stack.pop();
-	// 	setCurrentBackStack(stack);
-	// 	return mrsi;
-	// }
+		// switchToStack('add');
+		// var popStack = popFromStack();
+		// if (popStack != undefined) {
+		// 	document.location.href = popStack;
+		// } else {
+		// 	document.location.href = "http://localhost:3000/add.html";
+		// }
 
-	// function saveCurrentPagetoCurrentStack() {
-	// 	console.log("Should be adding current page");
-	// 	var currentStack = getCurrentBackStack();
-	// 	console.log(currentStack);
-	// 	currentStack.push(document.location.href);
-	// 	console.log(currentStack);
-	// 	setCurrentBackStack(currentStack);
-	// }
+		if (local) {
+			document.location.href = "http://localhost:3000/add.html";
+		} else {
+			document.location.href = "http://still-inlet-9779.herokuapp.com/add.html";
+		}
+	});
 
-	// $(".jobs").click(function (e) {
-	// 	saveCurrentPagetoCurrentStack();
+	// $("#search").keypress(function(event) {
+	//     if (event.which == 13) {
+	//         console.log("search pressed");
 
-	// 	switchToStack('jobs');
-	// 	var popStack = popFromStack();
-	// 	if (popStack != undefined) {
-	// 		document.location.href = popStack;
-	// 	} else {
-	// 		document.location.href = "http://localhost:8100/index.html";
-	// 	}
+	//         saveCurrentPagetoCurrentStack();
 
+	// 		switchToStack('search');
+	// 		console.log("search finished");
+	//     }
 	// });
 
-	// $(".notes").click(function (e) {
-	// 	saveCurrentPagetoCurrentStack();
-
-	// 	switchToStack('notes');
-	// 	var popStack = popFromStack();
-	// 	if (popStack != undefined) {
-	// 		document.location.href = popStack;
-	// 	} else {
-	// 		document.location.href = "http://localhost:8100/notes.html";
-	// 	}
-	// });
-
-	// $(".alerts").click(function (e) {
-	// 	saveCurrentPagetoCurrentStack();
-
-	// 	switchToStack('notes');
-	// 	var popStack = popFromStack();
-	// 	if (popStack != undefined) {
-	// 		document.location.href = popStack;
-	// 	} else {
-	// 		document.location.href = "http://localhost:8100/alerts.html";
-	// 	}
-	// });
-
-	// $("a:not(.nav-bar-buttons > a)").click(function () {
-	// 	saveCurrentPagetoCurrentStack();
-	// });
+	$("body").on('click', 'a', function () {
+		console.log("clicked a link")
+		saveCurrentPagetoCurrentStack();
+	});
 
 
 
 	//	Collapsable Code
 
-	$(".collapsable").click( function() {
-		var list =  $(this).parent().siblings(".list"); 
+	$( '.collapsable' ).click( function() {
+		var list = $( this ).closest( '.item-divider' ).siblings( '.list' ); 
+		$( this ).toggleClass( 'rotate90' ); 
 		list.slideToggle(); 
 	}); 
 
 	//	Expandable Code 
-	$(".expandable").click( function() {
-		$(this).find(".tool-submenu").slideToggle(); 
-	});  
+//	$(".expandable").click( function() {
+//		console.log(" clicked me")
+//		$(this).find(".tool-submenu").slideToggle(); 
+//	});  
 
 	var selectedPeople = [];
 
@@ -149,37 +186,114 @@ $(document).ready(function () {
 
 	});
 
+	$(".modal button").click(function(e) {
+		console.log("it was pressed");
+	});
+
 	// Code for handling adding element inline
 	$('input').keyup(function(e){
 		if(e.keyCode == 13)
 		{
 			$(this).trigger("enterKey");
+			//			cordova.plugins.Keyboard.close();
 		}
 	});
 
-	$('.addListItemInput').hide();
+	// Hide job and note creation inputs
+	$('#addNoteFromJob').hide();
+	$('#addJob').hide();
 
-	$('.addListItemText').click(function() {
-		$(this).nextAll('.addListItemInput');
-		$(this).hide();
-		$(this).nextAll('.addListItemInput').show();
-		$(this).nextAll('.addListItemInput').focus();
-	});
-
-	$('.addListItemInput').bind("enterKey", function() {
-		$(this).hide();
-		$(this).val("");
-		$(this).prevAll('.addListItemText').show();
-	});
+	$('.cancel-button').hide();
+	$('.clear-button img').hide();
 
 	// Code for handling search bar results
 	$('#search').bind("enterKey", function() {
 		var query = $( this ).val(); 
-		console.log( query, " should not be null");  
 		$(this).val("");
 		window.location = "search.html?"+query; 		
 	});
 
+	$('#search').keyup(function() {
+		if ($('#search').val().length > 0) {
+			$( '.clear-button img' ).fadeIn(50);
+		} else {
+			$('.clear-button img').fadeOut(50);
+		}
+	});
+
+	$(".note-text-input").focusout(function() {
+		console.log("Focus out");
+	});
+
+	// Code for handling search bar results
+	$('#search').bind("focus", function() {
+		$( '#people-modal .clear-button' )
+		.add( $( '#tools-modal .clear-button' ) )
+		.add( $('.cancel-button') ).fadeIn(50);
+		
+		$('#nav-buttons').fadeOut(50);
+		console.log("expanded");
+		$('#search').addClass('expanded');
+	});
+
+
+	$('.cancel-button').click(function() {
+		$("#search").val("");
+		$('#search').removeClass('expanded');
+		$('.cancel-button').fadeOut(50);
+		$('.clear-button').fadeOut(50);
+		$('#nav-buttons').fadeIn(50);
+	});
+
+	// redirect cancel button on search page
+	$('#search-page .cancel-button').click(function() {
+		window.location = "/"; 
+	});
+
+	$('.clear-button').bind("click", function() {
+		$( '.clear-button img' ).fadeOut(50);
+		$("#tools-modal #search").add( $("#people-modal #search") ).add( $("#search") ).val(""); 
+		$("#search").focus();
+	});
+
+	//	$( '#people-modal .clear-button, #tools-modal .clear-button' ).bind( "click", function() {
+	//		//		$( '#search' ).val( "" ); 
+	//	})
+
+
+
+
+
+	setTimeout(function() {
+		var opaque = $('#complete img')[0].src;
+		console.log("OQAQUU IS ", opaque);
+			// $(".short.home").css("opacity", 1); 
+		var status = ""; 
+
+		// also have to send a notification when job is clicked
+		// everything greys out except for the title and the checkbox
+
+		//		debug.log( "shoudl have class", ); 
+		//		opaque.addClass("completed"); 
+		console.log("THE INDEX IS " + (opaque.indexOf("check-checked")));
+		if ( opaque.indexOf("check-checked") != -1 ) {
+			$('#job-page *').addClass("completed");
+		}
+	}, 1000);
+
+
+	$('#add-note').click(function(){
+		console.log('clicked');
+		var element = $('<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>');
+		$("#notes-list").prepend(element);
+		$("#notes-list .empty-item").hide();
+		$compile( element )($scope);
+
+		setTimeout(function(){
+			$("#notes-list .addListItemInput").focus();
+		}, 0);
+
+	});
 
 	// Code for adding note/jobs from the page
 	$('.add-type .button').click(function() {
@@ -218,28 +332,42 @@ $(document).ready(function () {
 		$('#input-job-hidden').trigger('input');
 	});
 
-	$("#people-modal .done").click(function(){
-		var participants = "";
-		$("#people-search-bar").val("");
-		$("#people-modal li").each(function() {
-			if( $(this).find('button i.ion-ios7-checkmark').length !=0 ) {
-				participants += $(this).find('.big-title').first()[0].innerText;
-				participants += ", ";
-			}
-		});
-		participants = participants.substring(0, participants.length-2);
-		$('#input-participants').val(participants);
-		$('#input-participants').trigger('input');
-		$('#people-modal').hide();
-	 	$('#add-page').show();
+	$(".back-job").click(function(){
+		$('#job-modal').hide();
+		$('#add-page').show();
 	});
 
-	//Adding tools to an existing job
-	// $("#add-tool-to-job #done").click(function(){
-	// 	var toolList = [];
-	// 	$(".ion-ios7-checkmark").each(function(){
-	// 		toolList.push($(this).parent().attr('id'));
-	// 	});
-	// });
-	
+	$(".back-people").click(function(){
+		$('#people-modal').hide();
+		$('#add-page').show();
+	});
+
+	$("#add-tools").click(function() {
+		$("#tools-modal").show();
+		$('#tools-modal .clear-button img').fadeIn( 50 );	
+	});
+
+	$("#add-people").click(function() {
+		$("#people-modal").show();
+		$('#people-modal .clear-button img').fadeIn( 50 );
+	});
+
+//	$( ".expand" ).click( function() {
+//		alert(" have been clicked ")
+//	});
+
+	// Modal Logic
+	// Hide a modal when it is closed
+	$(".modal #nav-bar").on('click', '.done-button', function() {
+
+		// Hide the modal
+		$($(this)[0].parentNode.parentNode.parentNode).hide();
+		$('.modal-background').hide();
+	});
+
+	// Modify a check/plus button on click
+	$(".modal .list li").on('click', '.icon', function() {
+		console.log($(this));
+	});
+
 });

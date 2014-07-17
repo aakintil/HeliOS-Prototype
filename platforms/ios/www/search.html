@@ -23,110 +23,144 @@
 		<script src="js/script.js"></script>
 	</head>
 
-	<body ng-app="starter" class="home">
+	<body ng-app="starter" class="search" id="search-page">
 
 
-		<!------------------- NAVIGATION ------------------->
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
-			<div class="button-bar nav-bar-buttons">
+			<div class="short search-bg"></div>
+			<input id="search" type="text" placeholder="Tools, Jobs, Notes"  autocomplete="off" ng-model="searchText" ng-change=""/> 
+			<div class="clear-button" type="reset"><img src="img/icons/clear-btn.svg" alt=""></div>
+			<button class="button button-stable cancel-button">Cancel</button>
+
+			<div class="button-bar nav-bar-buttons" id="nav-buttons">
 				<!-- place in a.button -->
 
-				<div class="button jobs active" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-colored.svg"></div>
-				<div class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-dark.svg"></div>
-				<a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-dark.svg"></a>
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-colored.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
+				<!-- <a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a> -->
 			</div>
-			<input id="search" type="text" placeholder="Search"  autocomplete="off" ng-model="searchText"> 
+
 			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
 		</ion-nav-bar>
-
-
-		<!------------------- NOTIFICATIONS BAR ------------------->
 		<div id="notification"> </div>
 
 
-		<!------------------- SEARCH VIEW ------------------->
 		<ion-view id="search-page" title="Search" hide-back-button="true" ng-controller="SearchCtrl" class="nav-frame">
-			<ion-content>
+			<ion-content overflow-scroll="true" class="has-header">
 				<!------------ Tools ------------>
 				<div class="section" id="uli" >
-					<div class="item item-divider home">
-						<div class="section-header center-text">Tools</div>
-					</div>
-					<ul class="list first"  ng-if="tools.length !== 0" ng-repeat="tool in tools track by $index">
-						<!-- ng-click="expandTool()" -->
-						<li class="item regular-text item-button-right expandable" ng-click="expand($event)">
-							<div class="big-title">{{ tool.name }}</div>
-							<div class="small-regular-text"> Current Location: {{ tool.current_location }}</div>
-							<div class="small-regular-text" ng-if="tool.replacement_for !== undefined">{{ tool.replacement_for }}</div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+					<!-- Navigation Indicator Bar -->
+					<div class="short search-pg"> </div>
+
+					<div class="item item-divider search marginMore5">
+						<div class="section-header float-left small-title">
+							Tools
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
 							</button>
+						</div>
+					</div>
+					<ul class="list first"  ng-if="tools.length !== 0" >
+						<li class="item regular-text item-button-right expandable" ng-click="expand( $event )" ng-repeat="tool in tools track by $index">
+							<div class="header-text">{{ tool.name }}</div>
+							<div class="weird-text"> Current Location: {{ tool.current_location }}</div>
+							<div class="weird-text" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="">{{ tool.replacement_for }}</span>
+							</div>
 
 							<div class="tool-submenu">
-								<p>HOME LOCATION: {{ tool.home_location }}</p>
-<!--								<p>LAST USED: {{ tool.last_used }} </p>-->
+								<div class="main-submenu">
+									<p>
+										<span class="small-light-caps">
+											Home Location: Venus 2
+										</span>
+									</p>
+									<p>
+										<span class="small-light-caps">
+											Last Used: 5/3/14 by
+										</span>
+										<span class="small-regular-text">
+											Olga L
+										</span>
+									</p>
+									<p>
+										<span class="small-light-caps">
+											Last Calibrated: 6/16/13 by
+										</span>
+										<span class="small-regular-text">
+											Nick R
+										</span>
+									</p>
+								</div>
+								<div class="tool-submenu-replacement" ng-if="tool.replacement_for">
+									<span class="action-text">
+										{{ tool.replacement_for }}
+									</span>
+									<p>
+										<span class="small-light-caps">
+											Reason:
+										</span> 
+										<span class="small-regular-text">
+											Tool Uncalibrated {{tool.replacement_for}} 
+										</span>
+									</p>
+								</div>
 							</div>
 						</li>
 					</ul>
 					<!-- if there are no tools -->
 					<ul class="list" ng-if="tools.length === 0">
 						<li class="item regular-text item-button-right">
-							<div class="big-title"> No Tools For This Result </div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-							</button>
+							<div class="big-title marginMore7"> No Tools For This Result </div>
 						</li>
 					</ul>
 				</div>
 
 				<!------------ Notes ------------>
 				<div class="section" >
-					<div class="item item-divider home">
-						<div class="section-header center-text">Notes</div>
+					<div class="item item-divider search">
+						<div class="section-header float-left small-title">
+							Notes
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
 					</div>
 					<!-- if there are notes -->
-					<ul class="list"  ng-if="notes.length !== 0" ng-repeat="note in notes track by $index">
-						<li class="item regular-text item-button-right" ng-click="goToJobPage( note )">
+					<ul class="list"  ng-if="notes.length !== 0">
+						<li class="item regular-text item-button-right" ng-click="goToJobPage( note )"  ng-repeat="note in notes track by $index">
 							<div class="big-title">{{ note.message }}</div>
 							<div class="small-regular-text">{{ note.creator }}</div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-							</button>
 						</li>
 					</ul>
 
 					<!-- if there are no notes -->
 					<ul class="list" ng-if="notes.length === 0">
 						<li class="item regular-text item-button-right">
-							<div class="big-title"> No Notes For This Result </div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-							</button>
+							<div class="header-text marginMore7"> No Notes For This Result </div>
 						</li>
 					</ul>
 				</div>
 
 				<!------------ Jobs ------------>
 				<div class="section" >
-					<div class="item item-divider home">
-						<div class="section-header center-text">Jobs</div>
+					<div class="item item-divider search">
+						<div class="section-header float-left small-title">
+							Jobs
+							<button class="collapsable button button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
 					</div>
-					<ul class="list" ng-if="jobs.length !== 0" ng-repeat="job in jobs track by $index">
-						<li class="item regular-text item-button-right" ng-click="goToJobPage( job )">
+					<ul class="list" ng-if="jobs.length !== 0">
+						<li class="item regular-text item-button-right" ng-click="goToJobPage( job )" ng-repeat="job in jobs track by $index">
 							<div class="big-title">{{ job.title }}</div>
 							<div class="small-regular-text">{{ job.members }}</div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-							</button>
 						</li>
 					</ul>
 					<!-- if there are no jobs -->
 					<ul class="list" ng-if="jobs.length === 0">
 						<li class="item regular-text item-button-right">
-							<div class="big-title"> No Jobs For This Result </div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
-							</button>
+							<div class="header-text marginMore7"> No Jobs For This Result </div>
 						</li>
 					</ul>
 				</div>

@@ -570,11 +570,13 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		// create a dom element but when the user returns to the page, the actual note element will be there
 		var domNote = $('<li ng-if=\'note.status === "" || note.status === undefined\' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item" ng-click="expandNote( $event )">' +
 						'<p class="regular-text note-text">' + note.message + '</p>' +
+						'<input class="addListItemInput regular-text hidden note-text-input" type="text" value={{note.message}} ng-model="note.message" ng-enter="saveNoteEdit({{note._id}}, {{note}})">' + 
 						'<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">' +
 						'<img ng-if=\'note.status == "checked"\' src="img/icons/check-checked.svg" class="list-item-button">' +
 						'<img ng-if=\'note.status == "" || note.status === undefined\' src="img/icons/check-unchecked.svg" class="list-item-button">' +
 						'</button>' +
 						'<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by You on July 17, 2014</p>' +
+						'<span class="medium-regular-text-bold detail-info  edit-note hidden" ng-click="editNote($event)">Edit Note</span>' +
 						"</li>");
 
 		if ( $(".insert li:nth-child(2)").attr("id") === "addNoteFromJob" )
@@ -616,6 +618,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		if(!$(event.target).hasClass("list-item-button") && !$(event.target).hasClass("edit-note")) {
 			$(event.currentTarget).find("p.regular-text").toggleClass("expanded-note");
 			$(event.currentTarget).find("p.detail-info").toggleClass("hidden");
+			$(event.currentTarget).find("div.edit-note").toggleClass("hidden");
 		}
 	}
 
@@ -1154,8 +1157,20 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	// }
 
 	$scope.updateTool = function( event ) {
+
+		console.log("THE TARGET IS", event.target);
+
 		var img = $(event.target).find('.add-icon');
 		console.log("THE IMAGE IS", img);
+		if ($(event.target).hasClass('title-row')) {
+			img = $(event.target.parentElement).find('img');
+		}
+		if ($(event.target).hasClass('detail-row')) {
+			img = $(event.target.parentElement).find('img');
+		}
+		if ($(event.target).hasClass('add-icon')) {
+			img = $(event.target);
+		}
 		if (img.hasClass("unplused")) {
 			console.log("top");
 			img.removeClass("unplused");
@@ -1275,18 +1290,34 @@ function ParticipantsCtrl( $scope, $rootScope, $http, $location, jobService) {
 	$scope.predicate = 'name';
 
 	$scope.updatePerson = function( event ) {
+
+		console.log("THE TARGET IS ", event.target);
+
 		var img = $(event.target).find('img');
-		console.log("THE IMAGE IS", img);
-		if (img.hasClass("unplused")) {
-			console.log("top");
-			img.removeClass("unplused");
-			img.addClass("plused");
-			img.attr('src', "img/icons/plus-plused.svg"); 
+		if ($(event.target).hasClass('title-row')) {
+			img = $(event.target.parentElement).find('img');
+		}
+		if ($(event.target).hasClass('add-icon')) {
+			img = $(event.target);
+			if (event.target.toString().indexOf('unplused') === -1) {
+				img.removeClass("unplused");
+				img.addClass("plused");
+				img.attr('src', "img/icons/plus-plused.svg"); 
+			} else {
+				img.removeClass("plused");
+				img.addClass("unplused");
+				img.attr('src', "img/icons/plus-unplused.svg");
+			}
 		} else {
-			console.log("bottom");
-			img.removeClass("plused");
-			img.addClass("unplused");
-			img.attr('src', "img/icons/plus-unplused.svg"); 
+			if (img.hasClass("unplused")) {
+				img.removeClass("unplused");
+				img.addClass("plused");
+				img.attr('src', "img/icons/plus-plused.svg"); 
+			} else {
+				img.removeClass("plused");
+				img.addClass("unplused");
+				img.attr('src', "img/icons/plus-unplused.svg"); 
+			}
 		}
 	}
 

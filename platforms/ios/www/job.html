@@ -7,14 +7,16 @@
 
 		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
 		<link href="css/jquery-ui.css" rel="stylesheet">
 
 		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="js/jquery-ui.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+		<!--		<script src="js/jquery-ui.js"></script>-->
 		<!-- ionic/angularjs js -->
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -30,36 +32,43 @@
 	<body ng-app="starter">
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
-			<div class="button-bar nav-bar-buttons">
+			<div class="short home"> </div>
+			<back>
+				<i class="icon ion-chevron-left back-icon"></i>
+			</back>
+			<input id="search" type="text" placeholder="Tools, Jobs, Notes"  autocomplete="off" ng-model="searchText" ng-change=""/> 
+			<div class="clear-button" type="reset"><img src="img/icons/clear-btn.svg" alt="x"></div>
+			<button class="button button-stable cancel-button">Cancel</button>
+
+			<div class="button-bar nav-bar-buttons" id="nav-buttons">
 				<!-- place in a.button -->
 
-				<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-colored.svg"></a>
-				<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></a>
-				<a class="button" href="add.html"><img class="icon" src="img/icons/add-gray.svg"></a>
-
+				<div class="button home-nav-button"><img class="icon" src="img/icons/home-colored.svg"></div>
+				<div class="button alerts-nav-button"><img class="icon" src="img/icons/test-grey.svg"></div>
+				<!-- <a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a> -->
 			</div>
-			<input id="search" type="text" placeholder="Search">
+
+			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
+
 		</ion-nav-bar>
 
 
-		<!------------------- NOTIFICATIONS BAR ------------------->
+
 		<div id="notification"> </div>
 
 
-		<ion-view title="Jobs" hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
-			<ion-content class="job">
-				<div class="section">
-					<div class="item item-divider home">
-						<div class="left-title-button"><back>Back</back></div>
-						<div class="center-text">{{job.title}}</div>
-						<!-- <div class="right-title-button">Right Side</div> -->
-					</div>
-					<div id="job-title" class="{{note.status}}">
-						<div class="big-title offset item-button-right">{{job.title}}</div>
-
-						<button ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item">
-							<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+		<ion-view hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
+			<ion-content id="job-page" class="job" overflow-scroll="true" class="has-header" class="{{job.status}}">
+				<div class="top section">
+					
+					<div id="job-title" >
+						<div class="header-text title-row item-button-right">{{job.title}}</div>
+						<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
+						<button id="complete" ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
+							<img class="job-check-icon" ng-if='$parent.job.status == "completed"' src="img/icons/check-checked.svg">
+							<img class="job-check-icon" ng-if='$parent.job.status == "" || $parent.job.status == undefined' src="img/icons/check-unchecked.svg">
 						</button>
+						<div ng-if='$parent.job.status == "completed"' class="job-completed-text">Completed</div>
 					</div>
 
 				</div>
@@ -67,98 +76,237 @@
 				<!-- <button class="button offset list-item-adder">Add Participant +</button> -->
 
 				<div class="section offset {{ complete }}">
-					<div class="item item-button-right item-divider">
-						<div class="section-header small-title"><img class="small-icon" src="img/icons/notes-dark.svg">Notes</div>
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
+					<div class="item item-divider job-header">
+						<div class="section-header marginLess30 small-title float-left">
+							<img class="small-icon" src="img/icons/notes-dark.svg">
+							Notes
+							<button class="collapsable button button-clear button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
+						<div class="float-right create note addListItemText small-regular-text" ng-click="toggleInlineInput( $event )">
+							+ Add Note
+						</div>
 					</div>
-					<ul class="list insert">
+					<ul class="list notes insert">
+						<li class="empty-item small-title" ng-if="job.notes.length === 0">No Notes</li>
 						<li class="item" id="addNoteFromJob">
-							<div class="addListItemText action-text list-action-item">
-								+ Add Note
-							</div>
 							<input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )">
 						</li>
-						<li class="item regular-text item-button-right {{note.status}}" ng-repeat="note in notes track by $index">
-							{{ note.message }}
-							<button ng-click="changeStatus( {{note}}, $event )" class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+						
+						<li ng-if='note.status === "" || note.status === undefined' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )" id="{{note._id}}">
+							<p class="regular-text note-text">{{ note.message }}</p>
+							<input class="addListItemInput regular-text hidden note-text-input" type="text" value={{note.message}} ng-model="note.message" ng-enter="saveNoteEdit(note._id, note)">
+							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
+								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
+								<img ng-if='note.status == "" || note.status === undefined' src="img/icons/check-unchecked.svg" class="list-item-button">
 							</button>
+							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014 &nbsp;|&nbsp; <span class="medium-regular-text-bold detail-info  edit-note" ng-click="editNote($event)">Edit Note</span></p>
+							<!-- <p class="medium-regular-text-bold detail-info hidden edit-note" ng-click="editNote($event)">Edit Note</p> -->
+						</li>
+						
+						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">
+							<p class="regular-text note-text">{{ note.message }}</p>
+							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
+								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
+								<img ng-if='note.status == ""' src="img/icons/check-unchecked.svg" class="list-item-button">
+							</button>
+							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
 						</li>
 					</ul>
 				</div>
 
-				<div class="section offset {{ complete }}">
-					<div class="item item-button-right item-divider">
-						<div class="section-header small-title"><img class="small-icon" src="img/icons/tools-dark.svg">Tools</div>
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
+				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
+					<div class="item item-button-right item-divider job-header">
+						<div class="section-header marginLess30 float-left small-title"><img class="small-icon" src="img/icons/tools-dark.svg">
+							Tools
+							<button class="collapsable button button-clear button-positive">
+								<i class="icon ion-ios7-arrow-down"></i>
+							</button>
+						</div>
+						<div class="float-right create note addListItemText small-regular-text" id="add-tools">
+							+ Add Tools
+						</div>
 					</div>
-					<ul class="list">
-						<li class="item" id="addToolFromJob">
-							<a href="addTool.html?{{job._id}}">
-								<div class="addListItemText action-text list-action-item">+ Add Tool</div>
-							</a>
-						</li>
-						<li class="item item-button-right" ng-repeat="tool in job.tools">
-							<div class="big-title">{{tool.name}}</div>
-							<div class="detail-text ">Current Location: {{tool.current_location}}</div>
-							<button class="button button-clear checklist-item">
-								<i class="icon ion-ios7-checkmark-outline medium-icon"></i>
+					<ul class="list tool-list">
+						<li class="empty-item small-title" ng-if="job.tools.length === 0">No Tools</li>
+						<li class="item item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in job.tools" ng-class="{checked: job.tools_checked.indexOf(tool._id) != -1}">
+							<div class="header-text">{{ tool.name }}</div>
+							<div class=""> Current Location: {{ tool.current_location }}</div>
+							<div class="" ng-if="tool.replacement_for !== undefined">		Replacement For: <span class="">{{ tool.replacement_for }}</span>
+							</div>
+							<button class="button button-clear checklist-item" ng-click="changeStatus(tool, $event, job._id)">
+								<img ng-if="job.tools_checked.indexOf(tool._id) != -1" src="img/icons/check-checked.svg" class="list-item-button">
+								<img ng-if="job.tools_checked.indexOf(tool._id) == -1" src="img/icons/check-unchecked.svg" class="list-item-button">
 							</button>
+
+							<div class="tool-submenu">
+								<div class="main-submenu">
+									<p>
+										<span class="medium-title-text">
+											Home:
+										</span>
+										<span class="medium-regular-text">
+											Venus 2
+										</span>
+									</p>
+									<p>
+										<span class="medium-title-text">
+											Calibration Status:
+										</span>
+										<span class="medium-regular-text">
+											Calibrated
+										</span>
+									</p>
+									<p>
+										<span class="medium-title-text">
+											Last calibration:
+										</span>
+										<span class="medium-regular-text">
+											Nick L. on Jun 2, 2014
+										</span>
+									</p>
+									<p>
+										<span class="medium-title-text">
+											Last used:
+										</span>
+										<span class="medium-regular-text">
+											Olga K, on March 4, 2013
+										</span>
+									</p>
+								</div>
+								<div class="tool-submenu-replacement" ng-if="tool.replacement_for !== undefined">
+									<div class="medium-regular-text">
+										{{ tool.name }} is a replacement as
+									</div>
+									<div class="medium-regular-text">
+										{{ tool.replacement_for }} is uncalibrated.
+									</div>
+								</div>
+							</div>
 						</li>
 					</ul>
 				</div>
 
-				<div class="section offset {{ complete }}">
-					<div class="item item-button-right item-divider">
+				<div class="section offset {{ complete }}" ng-if="job._id !== '111111111111111111111111'">
+					<div class="item item-button-right item-divider job-header-details">
 						<div class="section-header small-title">
 
-							<div class="detail-header">
-								<img class="small-icon" src="img/icons/jobs-dark.svg">Job Details
+							<div class="detail-header marginLess15">
+								<img class="small-icon" src="img/icons/jobs-dark.svg">
+								Job Details
+								<button class="collapsable button button-clear button-positive">
+									<i class="icon ion-ios7-arrow-down"></i>
+								</button>
 							</div>
 
 							<div class="detail">
-								<span class="small-light-caps">Created:</span> 
-								<span class="action-text">{{job.created}}</span> 
-								<span class="small-light-caps">by</span> 
-								<span class="action-text">{{job.creator}}</span>
+								<span class="medium-title-text">
+									Created:
+								</span>
+								<span class="medium-regular-text">
+									{{job.created}} by 
+								</span>
+								<span class="medium-regular-text" ng-if="job.creator === undefined || job.creator.length < 1"> You </span>
+								<span class="medium-regular-text" ng-if="job.creator !== undefined">{{job.creator}}</span>
 							</div>
 
 							<div class="detail">
-								<span class="small-light-caps">Collaborators:</span> 
-								<span class="action-text">{{job.members}}</span> 
-
+								<span class="medium-title-text">Collaborators:</span> 
+								<span class="medium-regular-text">{{job.members}}</span> 
 							</div>
 
 						</div>
-						<button class="collapsable button button-clear button-positive">
-							<i class="icon ion-ios7-arrow-down"></i>
-						</button>
 					</div>
 					<ul class="list">
-						<li class="item action-text">
+						<li class="item small-item" id="add-people">
 							<div class="list-action-item">
-								Add or Remove a Collaborators
+								Edit Collaborators
 							</div>
 						</li>
-						<li class="item action-text">
+						<li class="item small-item">
 							<div class="list-action-item">
 								Update Job Template
 							</div>
 						</li>
-						<li class="item action-text">
+						<li class="item small-item">
 							<div class="list-action-item">
 								Save as New Job Template
 							</div>
 						</li>
 					</ul>
 				</div>
-
 			</ion-content>
 		</ion-view>
 
+
+		<!-- The add tools page overlay -->
+		<div id="tools-modal" class="modal" ng-controller="ToolsCtrl as ToolsCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input id="search" class="expanded" type="text" placeholder="Search for Tools"  autocomplete="off" ng-model="ToolsCtrl.searchText"> 
+				<div class="clear-button" type="reset"><img src="img/icons/clear-btn.svg" alt="x"></div>
+
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done-button">Cancel</div>
+				</div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content overflow-scroll="true" class="has-header">
+					<div class="section">
+						<ul class="list">
+							<li ng-click="updateTool($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
+								<div class="title-row header-text">{{tool.name}}</div>
+								<div class="detail-row">Current Location: {{tool.current_location}}</div>
+								<button class="button button-clear checklist-item" id="{{tool._id}}">
+									<!-- <i class="icon ion-ios7-plus-outline medium-icon"></i> -->
+									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
+								</button>
+							</li>
+						</ul>
+					</div>
+				</ion-content>
+				<div class="bar bar-footer">
+					<button class="bar bar-footer bar-balanced" ng-click="getToolList()">
+						<div class="title">Add Tools</div>
+					</button>
+				</div>
+			</ion-view>
+		</div>
+
+
+		<!-- The add collabs page overlay -->
+		<div id="people-modal" class="modal" ng-controller="ParticipantsCtrl as PartCtrl">
+			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
+				<input ng-model="PartCtrl.searchText" id="search" class="expanded" type="text" placeholder="Search for People"  autocomplete="off"> 
+				<div class="clear-button" type="reset">X</div>
+
+				<div class="button-bar nav-bar-buttons">
+					<div class="button done-button">Cancel</div>
+				</div>
+			</ion-nav-bar>
+
+			<ion-view class="nav-frame">
+				<ion-content overflow-scroll="true" class="has-header">
+					<div class="section">
+						<ul class="list">
+							<li ng-click="updatePerson($event)" class="item item-button-right two-row-list-item" ng-repeat="person in people | filter:PartCtrl.searchText | orderBy:predicate">
+								<div class="title-row header-text">{{person.name}}</div>
+								<button class="button button-clear checklist-item" ng-click="updatePerson($event)">
+									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
+								</button>
+							</li>
+						</ul>
+					</div>
+				</ion-content>
+				<div class="bar bar-footer">
+					<button id="addpeoplebutton" class="bar bar-footer bar-balanced" ng-click="saveParticipants()">
+						<div class="title">Add People</div>
+					</button>
+				</div>
+			</ion-view>
+		</div>
+
 	</body>
+
 </html>

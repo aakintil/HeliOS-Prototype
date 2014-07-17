@@ -316,7 +316,7 @@ a:active {
 .edit-note {
 
 	margin-top: -4px !important;
-	/*padding: 10px;*/
+	padding-bottom: 16px;
 }
 
 .home-nav-button {
@@ -512,8 +512,7 @@ textarea {
 	}
 
 	.button.activated {
-		box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
-		color: $white-text;
+		background-color: rgba(200, 200, 200, .5)
 	}
 
 	#search {
@@ -768,7 +767,6 @@ textarea {
 
 .detail-info {
 	margin-top: 5px;
-	padding-bottom: 16px;
 }
 
 .note-list-item {

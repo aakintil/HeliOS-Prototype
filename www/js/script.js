@@ -46,7 +46,7 @@ $(document).ready(function () {
 		setCurrentBackStack(currentStack);
 	}
 
-	var local = false;
+	var local = true;
 
 	$(".home-nav-button").click(function (e) {
 		// console.log("home pressed");
