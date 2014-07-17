@@ -34,17 +34,17 @@ $base-background-color: $gray-background;
 //Base
 @font-face {
 	font-family: "Gotham Narrow Book";
-	src: url("../fonts/GothamNarrow-Book.otf");
+	src: url("../fonts/GothamNarrow-Book.otf") format("opentype");
 }
 
 @font-face {
 	font-family: "Gotham Narrow Bold";
-	src: url("../fonts/GothamNarrow-Bold.otf");
+	src: url("../fonts/GothamNarrow-Bold.otf") format("opentype");
 }
 
 @font-face {
 	font-family: "Gotham Narrow Medium";
-	src: url("../fonts/GothamNarrow-Medium.otf");
+	src: url("../fonts/GothamNarrow-Medium.otf") format("opentype");
 }
 
 // Fonts
