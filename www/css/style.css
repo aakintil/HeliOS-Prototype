@@ -9145,18 +9145,29 @@ list-item-button {
     color: white;
     opacity: 0.5; }
   #warning .title,
-  #warning .sub {
+  #warning .sub,
+  #warning .subsub {
     color: white; }
   #warning .title {
     font-family: "Gotham Narrow Bold";
     margin-top: 25px;
-    margin-bottom: 50px;
-    font-size: 36px; }
+    margin-bottom: 20px;
+    font-size: 27.5px;
+    text-transform: uppercase; }
   #warning .sub {
     font-family: "Gotham Narrow Book";
-    line-height: 50px;
-    font-size: 30px;
-    letter-spacing: 4px; }
+    line-height: 36px;
+    font-size: 24px;
+    margin-bottom: 25px;
+    letter-spacing: 4px;
+    text-transform: uppercase; }
+  #warning .subsub {
+    font-family: "Gotham Narrow Book";
+    font-size: 18px;
+    text-transform: none;
+    margin-bottom: 0px; }
+  #warning .bold {
+    font-family: "Gotham Narrow Bold"; }
 
 #warning-overlay {
   position: absolute;
