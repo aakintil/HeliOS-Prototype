@@ -874,16 +874,18 @@ list-item-button {
 	position: relative; 
 	z-index: 10;
 	top: -80px;
+	padding: 0 5px; 
 
 	div {
 		position: relative;
 		margin: 0 auto; 
-		padding-top: 10px;
+		padding-top: 5px;
 		color: white; 
-		font-size: $item-title; 
-		line-height: $nav-bar-height/3; 
-		width: 75%; 
+		font-size: 17px; 
+		line-height: 23px; 
+		width: 100%; 
 		text-align: center; 
+		letter-spacing: 1px; 
 	}
 }
 
