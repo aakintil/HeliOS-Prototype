@@ -119,35 +119,32 @@ p {
 }
 
 .small-title {
-	font-family: $font-family-sans-serif-bold; 
 	font-size: (23/2)+px;
+	font-weight: bold;
 	text-transform: uppercase;
 	color: black;
 }
 
 .small-title-white {
-	font-family: $font-family-sans-serif-bold; 
 	font-size: (23/2)+px;
+	font-weight: bold;
 	text-transform: uppercase;
 	color: white;
 }
 
 .large-regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px;
 	font-weight: normal;
 	color: black;
 }
 
 .regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
 }
 
 .small-regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (23/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
@@ -155,7 +152,6 @@ p {
 }
 
 .medium-regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (29/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
@@ -163,21 +159,18 @@ p {
 }
 
 .medium-title-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (29/2)+px !important;
 	color: black !important;
 	font-family: $font-family-sans-serif-medium;
 }
 
 .detail-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (29/2)+px;
 	font-weight: lighter;
 	color: black;
 }
 
 .action-text {
-	font-family: $font-family-sans-serif-bold; 
 	font-size: (29/2)+px;
 	font-weight: bold;
 	color: black;
@@ -297,11 +290,6 @@ a:active {
 	}
 }
 
-.edit-note {
-	padding-bottom: 16px;
-	margin-top: -2px !important;
-	/*padding: 10px;*/
-}
 
 .home-nav-button {
 	margin-top: -7px;
@@ -668,6 +656,7 @@ textarea {
 		}
 		.item {
 			padding: 20px;
+			height: 75px !important; 
 
 			p {
 				font-family: $gotham-medium; 
@@ -679,7 +668,7 @@ textarea {
 			}
 
 			.regular-text {
-				margin-bottom: 11px; 
+
 			}
 
 			.alert-extras {
@@ -739,6 +728,7 @@ textarea {
 
 .detail-info {
 	margin-top: 5px;
+	padding-bottom: 16px;
 }
 
 .note-list-item {
@@ -1203,7 +1193,7 @@ $bar-height: 62px;
 }
 
 .completed {
-	opacity: 0.85; 
+	opacity: 0.5; 
 
 	-webkit-transition: all 0.5s linear; 
 	-moz-transition:  all 0.5s linear; 
@@ -1241,7 +1231,7 @@ $bar-height: 62px;
 }
 
 .hidden {
-	display: none !important;
+	display: none;
 }
 
 // Bottom Margin for list elements
