@@ -8299,9 +8299,8 @@ p {
   line-height: 24px; }
 
 .big-title {
-  font-family: "Gotham Narrow Book";
+  font-family: "Gotham Narrow Bold";
   font-size: 18px;
-  font-weight: bold;
   color: black; }
 
 .small-title {
@@ -8336,17 +8335,25 @@ p {
   text-transform: none !important; }
 
 .medium-regular-text {
-  font-family: "Gotham Narrow Book";
   font-size: 14.5px !important;
   font-weight: normal !important;
   color: black !important;
-  font-family: "Gotham Narrow Book"; }
+  font-family: "Gotham Narrow Book";
+  text-transform: none !important; }
+
+.medium-regular-text-bold {
+  font-size: 14.5px !important;
+  font-weight: normal !important;
+  color: black !important;
+  font-family: "Gotham Narrow Bold";
+  text-transform: none !important; }
 
 .medium-title-text {
-  font-family: "Gotham Narrow Book";
   font-size: 14.5px !important;
   color: black !important;
-  font-family: "Gotham Narrow Medium"; }
+  font-family: "Gotham Narrow Medium";
+  text-transform: none !important;
+  font-weight: normal !important; }
 
 .detail-text {
   font-family: "Gotham Narrow Book";
@@ -8449,8 +8456,7 @@ a:active {
     background-color: #989898; }
 
 .edit-note {
-  padding-bottom: 16px;
-  margin-top: -2px !important;
+  margin-top: -4px !important;
   /*padding: 10px;*/ }
 
 .home-nav-button {
@@ -8740,7 +8746,8 @@ textarea {
   margin-bottom: 0px; }
 
 .detail-info {
-  margin-top: 5px; }
+  margin-top: 5px;
+  padding-bottom: 16px; }
 
 .note-list-item {
   padding-top: 7px;
