@@ -60,6 +60,17 @@
 							</button>
 						</div>
 					</div>
+					<!--
+<div class="tool-submenu-replacement" ng-if="tool.replacement_for !== undefined">
+<div class="medium-regular-text">
+{{ tool.name }} is a replacement as
+</div>
+<div class="medium-regular-text">
+{{ tool.replacement_for }} is uncalibrated.
+</div>
+</div>
+-->
+
 					<ul class="list first"  ng-if="tools.length !== 0" >
 						<!-- ng-click="expandTool()" -->
 						<li class="item regular-text item-button-right expandable" ng-click="expand($event)" ng-repeat="tool in tools track by $index">

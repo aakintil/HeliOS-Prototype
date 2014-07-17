@@ -296,7 +296,7 @@ a:active {
 
 // Home page
 #home-content {
-	
+
 	.item.personal {
 		background-color: white !important; 
 	}
@@ -650,7 +650,8 @@ textarea {
 				.alert-type {
 					float: left; 
 					width: 250px; 
-
+					margin-left: -10px; 
+					
 					.medium-icon {
 						//						height: (40/2)+px; // might be 30px
 						margin-top: 3px;

@@ -8674,7 +8674,8 @@ textarea {
     background-color: grey !important; }
     #activity-feed .list .item .alert-extras .alert-type {
       float: left;
-      width: 250px; }
+      width: 250px;
+      margin-left: -10px; }
       #activity-feed .list .item .alert-extras .alert-type .medium-icon {
         margin-top: 3px;
         height: 16px;
