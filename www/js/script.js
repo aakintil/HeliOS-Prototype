@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
 	$( '#warning, #warning-overlay' ).hide(); 
-	
-	
+
+
 	function switchToStack(stack) {
 		localStorage.setItem('currentBackStackName', stack);
 	}
@@ -134,10 +134,10 @@ $(document).ready(function () {
 	}); 
 
 	//	Expandable Code 
-//	$(".expandable").click( function() {
-//		console.log(" clicked me")
-//		$(this).find(".tool-submenu").slideToggle(); 
-//	});  
+	//	$(".expandable").click( function() {
+	//		console.log(" clicked me")
+	//		$(this).find(".tool-submenu").slideToggle(); 
+	//	});  
 
 	var selectedPeople = [];
 
@@ -230,7 +230,7 @@ $(document).ready(function () {
 		$( '#people-modal .clear-button' )
 		.add( $( '#tools-modal .clear-button' ) )
 		.add( $('.cancel-button') ).fadeIn(50);
-		
+
 		$('#nav-buttons').fadeOut(50);
 		console.log("expanded");
 		$('#search').addClass('expanded');
@@ -266,8 +266,8 @@ $(document).ready(function () {
 
 	setTimeout(function() {
 		var opaque = $('#complete img')[0].src;
-		console.log("OQAQUU IS ", opaque);
-			// $(".short.home").css("opacity", 1); 
+		//		console.log("OQAQUU IS ", opaque);
+		// $(".short.home").css("opacity", 1); 
 		var status = ""; 
 
 		// also have to send a notification when job is clicked
@@ -275,7 +275,7 @@ $(document).ready(function () {
 
 		//		debug.log( "shoudl have class", ); 
 		//		opaque.addClass("completed"); 
-		console.log("THE INDEX IS " + (opaque.indexOf("check-checked")));
+		//		console.log("THE INDEX IS " + (opaque.indexOf("check-checked")));
 		if ( opaque.indexOf("check-checked") != -1 ) {
 			$('#job-page *').addClass("completed");
 		}
@@ -352,9 +352,9 @@ $(document).ready(function () {
 		$('#people-modal .clear-button img').fadeIn( 50 );
 	});
 
-//	$( ".expand" ).click( function() {
-//		alert(" have been clicked ")
-//	});
+	//	$( ".expand" ).click( function() {
+	//		alert(" have been clicked ")
+	//	});
 
 	// Modal Logic
 	// Hide a modal when it is closed

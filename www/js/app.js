@@ -508,10 +508,10 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		$scope.job.created = dateString;
 		$scope.job_tool_ids = $scope.job.tools;
 		jobPageService.toolList = $scope.job.tools;
-		console.log("Set it to ", jobPageService.toolList);
+		//		console.log("Set it to ", jobPageService.toolList);
 		$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
-		console.log("THE NOTES ARE ", $scope.notes);
+		//		console.log("THE NOTES ARE ", $scope.notes);
 		$scope.complete = $scope.job.status; 
 
 		debug.log( "the badge hopefully will exist", $scope.job.badge !== undefined ); 
@@ -563,18 +563,19 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 						'<span class="medium-regular-text-bold detail-info  edit-note hidden" ng-click="editNote($event)">Edit Note</span>' +
 						"</li>");
 
- 
-		if ( $(".insert li:nth-child(2)").length !== 0 )
+		if ( $(".insert li:nth-child(2)").attr("id") === "addNoteFromJob" )
+			$( domNote ).insertAfter( "#addNoteFromJob" );
+		else 
 			$( domNote ).insertBefore( $(".insert li:nth-child(2)") ); 
-		else
-			$( ".insert" ).append( $( domNote ) ); 
+
+		//			$( ".insert" ).appendAfter( $( domNote ) ); 
 
 		$compile( domNote )($scope);
 
 		// send data to db
 		noteService.createNote( form )
 		.success( function( data ) {
-			console.log( "all notes from this job successfully created | ", data ); 
+			//			console.log( "all notes from this job successfully created | ", data ); 
 			var info = {}; 
 			info.title = "Note"; 
 			if ( data.members.length > 0 ) {
@@ -725,9 +726,9 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		}
 
 		var currText = $( event.currentTarget ).html().trim(); 
-		console.log(currText);
+		//		console.log(currText);
 		var newText = text[ currText ]; 
-		console.log(newText);
+		//		console.log(newText);
 		$( event.currentTarget ).html( newText ); 
 
 		if ( currText === "Cancel" ) {
