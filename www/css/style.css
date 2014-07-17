@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -9071,7 +9071,7 @@ list-item-button {
     padding-bottom: 6px; }
 
 .completed {
-  opacity: 0.5;
+  opacity: 0.85;
   -webkit-transition: all 0.5s linear;
   -moz-transition: all 0.5s linear;
   -ms-transition: all 0.5s linear;
