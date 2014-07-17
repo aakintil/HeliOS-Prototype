@@ -594,7 +594,9 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 	$scope.changeJobStatus = function( job, event ) {
 		var el = $(event.currentTarget).parent(); 
-		var opaque = el.parent().siblings(); 
+		var opaque = $('.section');
+		// $(".short.home").css("opacity", 1); 
+		console.log("THEY ARE: ", opaque);
 		var check = $(event.currentTarget).find("img"); 
 		var status = ""; 
 

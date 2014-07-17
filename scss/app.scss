@@ -1,6 +1,6 @@
 // your variable changes can go here
 
-$nav-bar-height: 55px;
+$nav-bar-height: 62px;
 
 // Colors
 $gray-dark: rgba(0, 0, 0, .42);
@@ -454,9 +454,8 @@ textarea {
 		width: 25%; 
 		background-color: $positive; 
 		color: $text-normal;
-		opacity: 0.6; 
 		font-size: (25/2)+px;
-		//		font-weight: bold;
+		/*font-weight: bold;*/
 	}
 
 	.button.active {
@@ -477,7 +476,7 @@ textarea {
 		margin: 10px;
 		margin-left: 20px;
 		margin-right: 0px;
-		border: 2px solid #c4c4c4;
+		border: 1px solid rgb(50, 50, 50);
 		width: $search-bar;
 		height: (66/2)+px;
 		background: url('../img/icons/search.svg') no-repeat;
@@ -533,8 +532,8 @@ textarea {
 }*/
 
 	.icon {
-		max-height: 25px;
-		max-width: 25px;
+		max-height: 33px;
+		max-width: 33px;
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -577,6 +576,20 @@ textarea {
 	top: 10px;
 }
 
+
+.short {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 7px !important; 
+	width: 100%; 
+	z-index: 100;
+}
+
+.search-bg {
+	background-color: black;
+}
+
 .section {
 	.list {
 
@@ -590,10 +603,10 @@ textarea {
 
 	}
 
-	.short {
+/*	.short {
 		height: 7px !important; 
 		width: 100%; 
-	}
+	}*/
 
 	.item-divider {
 		min-height: (24/2)+px;
@@ -1016,7 +1029,7 @@ textarea {
 	padding: 0 20px 0 20px;
 }
 
-$bar-height: 55px;
+$bar-height: 62px;
 .modal {
 
 	position: absolute;
