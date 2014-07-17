@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*!
+/*
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8463,7 +8463,7 @@ a:active {
 
 .edit-note {
   margin-top: -4px !important;
-  padding-bottom: 16px; }
+  /*padding: 10px;*/ }
 
 .home-nav-button {
   margin-top: -7px;
@@ -8600,7 +8600,8 @@ textarea {
     color: white;
     background-color: #f0f0f0; }
   #nav-bar .button.activated {
-    background-color: rgba(200, 200, 200, 0.5); }
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+    color: white; }
   #nav-bar #search {
     /*-webkit-transition: width .5s;
     transition: width .5s;*/
@@ -8758,7 +8759,8 @@ textarea {
   margin-bottom: 0px; }
 
 .detail-info {
-  margin-top: 5px; }
+  margin-top: 5px;
+  padding-bottom: 16px; }
 
 .note-list-item {
   padding-top: 7px;
@@ -9180,4 +9182,4 @@ list-item-button {
     line-height: 75px; }
 
 .deletionFeedback {
-  height: 75px; }
+  height: 75px !important; }

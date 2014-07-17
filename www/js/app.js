@@ -415,6 +415,10 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			$scope.data[event.type]++;
 		})
 	}
+	
+	$scope.completeDeletion = function( id ) {
+		console.log( "called it and got it ", id )	
+	}
 
 	$scope.deleteNote = function( event ) {
 		console.log( "has been called"); 
@@ -424,22 +428,15 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		var x = el.offset().left; 
 		var y = el.offset().top; 
 		var index = $( "li" ).index( el ); 
-
+		console.log( "x: ", x, "  y: ", y ); 
 		el.addClass('animated fadeOutRight');
-		//		var feedback = $( '.deletionFeedback' );
-		var feedback = $( '<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion()"><p class="regular-text note-text"> DELETE? </p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)"><img src="img/icons/check-checked.svg" class="list-item-button"></button></li>' ); 
 
-		//		var deletion = $( '' ); 
-		// on animation end display none
+		var feedback = $( '<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion( note._id )"><p class="regular-text note-text"> DELETE? </p><button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)"><img src="img/icons/check-checked.svg" class="list-item-button"></button></li>' ); 
+
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			console.log( "should show feedback for x amount of seconds"); 
-			console.log( cont.eq( index ) );
-//			el.slideToggle(); 
-//			feedback.insertAfter( el );  
-			//			feedback.css( "left", x ); 
-			//			feedback.css( "top", y ); 
-			//			feedback.show(); 
-			//			$( el ).slideToggle( "slow" ); 
+			el.replaceWith( feedback ).removeClass("fadeOutRight"); 
+			$compile( feedback )($scope);
 		});
 
 		// need a way to get the id on swipe

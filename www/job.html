@@ -95,14 +95,12 @@
 						</li>
 
 						<!-- note deletion -->
-<!--
 						<li class="empty-item deletionFeedback small-title" ng-click="completeDeletion()">
 							<p class="regular-text note-text"> DELETE? </p>
 							<button class="button button-clear checklist-item" ng-click="changeStatus(note, $event, job._id)">
 								<img src="img/icons/check-checked.svg" class="list-item-button">
 							</button>
 						</li>
--->
 
 
 						<li ng-if='note.status === "" || note.status === undefined' detect-gestures gesture-type="swiperight" class="item regular-text item-button-right note-list-item" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )" id="{{note._id}}">

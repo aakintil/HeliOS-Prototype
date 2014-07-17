@@ -316,7 +316,7 @@ a:active {
 .edit-note {
 
 	margin-top: -4px !important;
-	padding-bottom: 16px;
+	/*padding: 10px;*/
 }
 
 .home-nav-button {
@@ -512,7 +512,8 @@ textarea {
 	}
 
 	.button.activated {
-		background-color: rgba(200, 200, 200, .5)
+		box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
+		color: $white-text;
 	}
 
 	#search {
@@ -767,6 +768,7 @@ textarea {
 
 .detail-info {
 	margin-top: 5px;
+	padding-bottom: 16px;
 }
 
 .note-list-item {
@@ -1386,5 +1388,5 @@ $bar-height: 62px;
 
 
 .deletionFeedback {
-	height: 75px; 
+	height: 75px !important; 
 }
