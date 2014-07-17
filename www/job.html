@@ -177,10 +177,10 @@
 								</div>
 								<div class="tool-submenu-replacement" ng-if="tool.replacement_for !== undefined">
 									<div class="medium-regular-text">
-										{{ tool.name }} is a replacement as
+										{{ tool.name }} is a replacement for
 									</div>
 									<div class="medium-regular-text">
-										{{ tool.replacement_for }} is uncalibrated.
+										uncalibrated {{ tool.replacement_for }}.
 									</div>
 								</div>
 							</div>
@@ -257,7 +257,7 @@
 						<ul class="list">
 							<li ng-click="updateTool($event)" class="item item-button-right two-row-list-item" ng-repeat="tool in tools | filter:ToolsCtrl.searchText | orderBy:predicate">
 								<div class="title-row header-text">{{tool.name}}</div>
-								<div class="detail-row">Current Location: {{tool.current_location}}</div>
+								<div class="detail-row">Location: {{tool.current_location}}</div>
 								<button class="button button-clear checklist-item" id="{{tool._id}}">
 									<!-- <i class="icon ion-ios7-plus-outline medium-icon"></i> -->
 									<img class="unplused add-icon" src="img/icons/plus-unplused.svg" class="list-item-button">
