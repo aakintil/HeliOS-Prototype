@@ -515,7 +515,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		///////////////////////////////////////////////////////////
 
 		$( ".addListItemText" ).text("+ Add Note");
-
+		$("#addNoteFromJob").hide();
 		// hide DOM Elements 
 		// $( ".addListItemInput" ).parent().hide();
 		$( ".addListItemInput" ).val("");

@@ -120,33 +120,31 @@ p {
 .small-title {
 	font-family: $font-family-sans-serif; 
 	font-size: (23/2)+px;
+	font-weight: bold;
 	text-transform: uppercase;
 	color: black;
 }
 
 .small-title-white {
-	font-family: $font-family-sans-serif-bold; 
 	font-size: (23/2)+px;
+	font-weight: bold;
 	text-transform: uppercase;
 	color: white;
 }
 
 .large-regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px;
 	font-weight: normal;
 	color: black;
 }
 
 .regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (36/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
 }
 
 .small-regular-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (23/2)+px !important;
 	font-weight: normal !important;
 	color: black !important;
@@ -178,14 +176,12 @@ p {
 }
 
 .detail-text {
-	font-family: $font-family-sans-serif; 
 	font-size: (29/2)+px;
 	font-weight: lighter;
 	color: black;
 }
 
 .action-text {
-	font-family: $font-family-sans-serif-bold; 
 	font-size: (29/2)+px;
 	font-weight: bold;
 	color: black;
@@ -323,7 +319,7 @@ a:active {
 
 // Home page
 #home-content {
-	
+
 	.medium-icon.home {
 		height: 20px;
 		width: 20px;
@@ -676,6 +672,7 @@ textarea {
 		}
 		.item {
 			padding: 20px;
+			height: 75px !important; 
 
 			p {
 				font-family: $gotham-medium; 
@@ -687,7 +684,7 @@ textarea {
 			}
 
 			.regular-text {
-				margin-bottom: 11px; 
+
 			}
 
 			.alert-extras {
@@ -1169,6 +1166,10 @@ $bar-height: 62px;
 		margin-top: 7px !important; 
 	}
 
+	.marginMore5 {
+		margin-top: 5px !important; 
+	}
+
 	.section {
 
 		.list {
@@ -1212,7 +1213,7 @@ $bar-height: 62px;
 }
 
 .completed {
-	opacity: 0.85; 
+	opacity: 0.5; 
 
 	-webkit-transition: all 0.5s linear; 
 	-moz-transition:  all 0.5s linear; 
@@ -1310,7 +1311,7 @@ $bar-height: 62px;
 		color: white; 
 		opacity: 0.5; 
 	}
-	
+
 	.title, 
 	.sub {
 		color: white; 
@@ -1350,7 +1351,7 @@ $bar-height: 62px;
 	position: absolute; 
 	margin-top: 2px; 
 	text-align: center; 
-	
+
 	.num {
 		font-size: 18px;
 		color: white; 

@@ -8306,29 +8306,27 @@ p {
 .small-title {
   font-family: "Gotham Narrow Book";
   font-size: 11.5px;
+  font-weight: bold;
   text-transform: uppercase;
   color: black; }
 
 .small-title-white {
-  font-family: "Gotham Narrow Bold";
   font-size: 11.5px;
+  font-weight: bold;
   text-transform: uppercase;
   color: white; }
 
 .large-regular-text {
-  font-family: "Gotham Narrow Book";
   font-size: 18px;
   font-weight: normal;
   color: black; }
 
 .regular-text {
-  font-family: "Gotham Narrow Book";
   font-size: 18px !important;
   font-weight: normal !important;
   color: black !important; }
 
 .small-regular-text {
-  font-family: "Gotham Narrow Book";
   font-size: 11.5px !important;
   font-weight: normal !important;
   color: black !important;
@@ -8356,13 +8354,11 @@ p {
   font-weight: normal !important; }
 
 .detail-text {
-  font-family: "Gotham Narrow Book";
   font-size: 14.5px;
   font-weight: lighter;
   color: black; }
 
 .action-text {
-  font-family: "Gotham Narrow Bold";
   font-size: 14.5px;
   font-weight: bold;
   color: black;
@@ -8707,14 +8703,13 @@ textarea {
 #activity-feed .list .item:nth-child(1) {
   margin-top: 5px; }
 #activity-feed .list .item {
-  padding: 20px; }
+  padding: 20px;
+  height: 75px !important; }
   #activity-feed .list .item p {
     font-family: "Gotham Narrow Medium";
     color: black; }
   #activity-feed .list .item p, #activity-feed .list .item .alert-time {
     font-size: 14.5px; }
-  #activity-feed .list .item .regular-text {
-    margin-bottom: 11px; }
   #activity-feed .list .item .alert-extras {
     position: relative;
     background-color: grey !important; }
@@ -9042,6 +9037,8 @@ list-item-button {
   background-color: transparent; }
 #search-page .marginMore7 {
   margin-top: 7px !important; }
+#search-page .marginMore5 {
+  margin-top: 5px !important; }
 #search-page .section .list li {
   min-height: 75px;
   padding: 20px; }
@@ -9064,7 +9061,7 @@ list-item-button {
     padding-bottom: 6px; }
 
 .completed {
-  opacity: 0.85;
+  opacity: 0.5;
   -webkit-transition: all 0.5s linear;
   -moz-transition: all 0.5s linear;
   -ms-transition: all 0.5s linear;
