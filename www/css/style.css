@@ -8992,6 +8992,8 @@ list-item-button {
   border: 0;
   color: black;
   background-color: transparent; }
+#search-page .marginMore7 {
+  margin-top: 7px !important; }
 #search-page .section .list li {
   min-height: 75px;
   padding: 20px; }
