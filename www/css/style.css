@@ -8441,6 +8441,14 @@ a:active {
   .offset .item-divider {
     background-color: #989898; }
 
+.home-nav-button {
+  margin-top: -7px;
+  margin-right: -10px !important; }
+
+.alerts-nav-button {
+  margin-top: -6px;
+  margin-left: -10px !important; }
+
 #home-content .item.personal {
   background-color: white !important; }
 #home-content .medium-icon.home {
@@ -8580,7 +8588,7 @@ textarea {
     margin-left: 20px;
     margin-right: 0px;
     border: 1px solid #323232;
-    width: 60%;
+    width: 50%;
     height: 33px;
     background: url("../img/icons/search.svg") no-repeat;
     background-size: 30px 30px;
