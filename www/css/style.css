@@ -1,5 +1,5 @@
 /*
-Syntax error: Undefined variable: "$font-family-sans-bold".
+Syntax error: Undefined variable: "$font-family-sans-serifbold".
         on line 180 of scss/app.scss
 
 175: 	font-weight: lighter;
@@ -7,7 +7,7 @@ Syntax error: Undefined variable: "$font-family-sans-bold".
 177: }
 178: 
 179: .action-text {
-180: 	font-family: $font-family-sans-bold; 
+180: 	font-family: $font-family-sans-serifbold; 
 181: 	font-size: (29/2)+px;
 182: 	font-weight: bold;
 183: 	color: black;
@@ -61,4 +61,4 @@ scss/app.scss:180
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$font-family-sans-bold\".\A         on line 180 of scss/app.scss\A \A 175: 	font-weight: lighter;\A 176: 	color: black;\A 177: }\A 178: \A 179: .action-text {\A 180: 	font-family: $font-family-sans-bold; \A 181: 	font-size: (29/2)+px;\A 182: 	font-weight: bold;\A 183: 	color: black;\A 184: 	text-transform: none;\A 185: }"; }
+  content: "Syntax error: Undefined variable: \"$font-family-sans-serifbold\".\A         on line 180 of scss/app.scss\A \A 175: 	font-weight: lighter;\A 176: 	color: black;\A 177: }\A 178: \A 179: .action-text {\A 180: 	font-family: $font-family-sans-serifbold; \A 181: 	font-size: (29/2)+px;\A 182: 	font-weight: bold;\A 183: 	color: black;\A 184: 	text-transform: none;\A 185: }"; }
