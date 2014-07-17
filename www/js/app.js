@@ -352,7 +352,7 @@ app.service('notifications', ['$http', function ($http) {
 				if ( url !== undefined ) { window.location = url; }
 			}, 300); 
 
-		}, 2300);
+		}, 2700);
 
 
 	}

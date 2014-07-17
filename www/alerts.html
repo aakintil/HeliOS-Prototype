@@ -105,7 +105,7 @@
 
 								</div>
 							</a>
-
+						</<div>
 					</div>
 
 				</div>
@@ -115,3 +115,36 @@
 
 	</body>
 </html>
+
+
+
+
+
+<div class="item item-button-right">
+	<!--<a href="job.html?id=53be081604b37af3d04528db&type=alert">-->
+	<a href="job.html?id=">
+		<div class="header-text-secondary"> 
+			Olga K.: "Check areas 1, 5, 8, 12, 17, 21, and 22 on the ArcJet for faulty bolts"							
+		</div>
+
+		<div class="alert-extras">
+
+			<div class="medium-title-text alert-type">
+				<!-- show notes icon -->
+				<span>
+					<img class="medium-icon" src="img/icons/notes-dark.svg"> 
+				</span>
+
+				<p ng-if="el.title !== undefined"> {{ el.title }} </p>
+				<p class="no-overflow" ng-if="el.title === undefined"> {{ el.job_id.title }} </p>
+			</div>
+
+			<div class="alert-time"> 
+				{{ el.created | fromNow }} 
+			</div>
+
+		</div>
+
+		</div>
+	</a>
+</<div>
