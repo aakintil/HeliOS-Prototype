@@ -419,13 +419,30 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	$scope.completeDeletion = function( event ) {
 		// hide feedback maybe opacity out
 		// and a slide toggle. 
-		console.log( "called it and got it ", $( event.currentTarget ).attr("id") ); 
-		// need a way to get the id on swipe
-		//		noteService.deleteNote( note._id )
+		//		console.log( "event type ", typeof event ); 
+		var note_id = typeof event === 'string' ? event : $( event.currentTarget ).parent().attr("id"); 
+		var n = ''+ "#"+note_id + ''; 
+		var el = $( n ); 
+		console.log( "the element ", el );
+
+		el.removeClass( 'animated fadeInLeft', function() {
+			el.addClass( 'animated zoomOut' ); 
+			el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+				el.slideToggle( function() {
+					el.remove(); 
+				})
+			}); 
+		} )
+
+
+
+		// actually delete the element
+		//		noteService.deleteNote( note_id )
 		//		.success( function( data ) {
-		//		var info = {}; 
-		// 		info.msg = ; 
-		//		info.title = ; 
+		//			var info = {}; 
+		//			info.msg = "Note successfully deleted. Collaborators notified.; 
+		//			info.title = ""; 
+		//			notifications.show( info ); 
 		//		})
 		//		.error( function( data ) {
 		//
@@ -442,9 +459,6 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		feedback.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			feedback.replaceWith( el ).removeClass('fadeOutLeft').addClass( 'fadeInLeft' ); 
 		}); 
-		//		console.log( "got the old element ", old[0] ); 
-		//		var el = $( old[0] ); 
-		//		var feedback = $( '' ); 
 	}
 
 	$scope.deleteNote = function( event  ) {
@@ -460,7 +474,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		console.log( "x: ", x, "  y: ", y ); 
 		el.addClass('animated fadeOutRight');
 
-		var feedback = $( '<li id="' + note_id + '"class="empty-item deletionFeedback small-title"><p class="regular-text note-text"> Note deleted </p> <p class="small-text note-text" ng-click="undoDeletion( $event )"> Undo </p> <button class="button" ng-click="completeDeletion(note, $event, job._id)"><img src="img/icons/clear-btn.svg" alt="x"></button></li>' ); 
+		var feedback = $( '<li id="' + note_id + '"class="empty-item deletionFeedback small-title"><p class="regular-text note-text"> Note deleted </p> <p class="small-text note-text" ng-click="undoDeletion( $event )"> Undo </p> <button class="button" ng-click="completeDeletion( $event )"><img src="img/icons/clear-btn.svg" alt="x"></button></li>' ); 
 
 		el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 			console.log( "should show feedback for x amount of seconds"); 
@@ -468,6 +482,10 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			$compile( feedback )($scope);
 
 			// do a timeout to hide the deletion call completeDeletion
+			setTimeout(function() {
+				console.log( "call delete "); 
+				$scope.completeDeletion( note_id ); 
+			}, 4000 );	
 		});
 	}
 
