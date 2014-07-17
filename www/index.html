@@ -25,6 +25,14 @@
 
 	<body ng-app="starter" class="home">
 
+		<div id="warning-overlay"></div>
+
+		<div id="warning"> 
+			<img class="close" ng-click="toggleWarning()" src="img/icons/clear-btn-white.svg" alt="x">
+			<p class="title"> Warning</p> 
+			<p class="sub">Screwdriver Left In Arcjet</p> 
+		</div>
+	
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
 
@@ -112,9 +120,10 @@
 		</div>
 
 
-
 		<ion-view hide-back-button="true" ng-controller="JobsCtrl" class="nav-frame">
 			<ion-content id="home-content" overflow-scroll="true" class="has-header">
+				<!-- The Warning Text and button -->
+				<div id="toggleWarning" ng-click="toggleWarning()"> </div>
 				<div class="section" >
 					<ul class="list">
 						<li class="item personal">
