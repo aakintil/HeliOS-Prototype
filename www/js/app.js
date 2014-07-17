@@ -483,6 +483,8 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		// CAUSES DISREPANCY //////////////////////////////////////
 		///////////////////////////////////////////////////////////
 
+		$( ".addListItemText" ).text("+ Add Note");
+
 		// hide DOM Elements 
 		$( ".addListItemInput" ).parent().hide();
 		$( ".addListItemInput" ).val("");
