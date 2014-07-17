@@ -591,6 +591,13 @@ textarea {
 	top: 10px;
 }
 
+.job-completed-text {
+	z-index: 100;
+	margin-top: -10px;
+	float: right;
+	font-size: (23/2) + px;
+	font-family: $font-family-sans-serif;
+}
 
 .short {
 	position: absolute;

@@ -593,6 +593,8 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	}
 
 	$scope.changeJobStatus = function( job, event ) {
+
+
 		var el = $(event.currentTarget).parent(); 
 		var opaque = $('.section');
 		// $(".short.home").css("opacity", 1); 
@@ -609,10 +611,8 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			opaque.removeClass("completed");
 			check.attr("src", "img/icons/check-unchecked.svg")
 			status = "na"; 
-			console.log("TOP");
 		}
 		else {
-			console.log("BOTTOM");
 			opaque.addClass("completed"); 
 			check.attr("src", "img/icons/check-checked.svg")
 			status = "completed"; 
@@ -622,6 +622,13 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			id: job._id, 
 			status: status
 		}
+
+		if (data.status === "completed") {
+			$('.job-completed-text').show();
+		} else {
+			$('.job-completed-text').hide();
+		}
+
 		//		console.log( " should not throw bloody errors ", data )
 		jobService.changeJobStatus( data )
 		.success( function( data ) {
