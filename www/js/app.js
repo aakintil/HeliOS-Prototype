@@ -1,8 +1,8 @@
 // Ionic Starter App
 
 //Globals
-var fadeSpeed = .5;
-var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]
+var fadeSpeed = 0.5;
+var members = [ "Olga K.", "Aderinsola A.", "Adam M.", "Maggie B.", "Lisa D.", "Kirsten Y.", "Christine O.", "Matt S.", "Alex E." ]; 
 var personalNoteId = "111111111111111111111111"; 
 // Formats console output nicer
 var debug = {
@@ -344,7 +344,7 @@ app.service('notifications', ['$http', function ($http) {
 				if ( url !== undefined ) { window.location = url; }
 			}, 300); 
 
-		}, 1500);
+		}, 2300);
 
 
 	}
@@ -519,7 +519,12 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			console.log( "all notes from this job successfully created | ", data ); 
 			var info = {}; 
 			info.title = "Note"; 
-			info.msg = "has been successfully created! \n And shared with Olga K."; 
+			if ( data.members.length > 0 ) {
+				info.msg = "has been successfully created! And shared with " + data.members;
+			}
+			else {
+				info.msg = "has been successfully created!"
+			}
 			notifications.show( info )
 			//			$scope.notes = $scope.job.notes; 
 		})
@@ -635,7 +640,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			//			debug.log( " a changed status ", data.status ); 
 			var info = {}; 
 			info.title = data.title; 
-			info.msg = data.status === "completed" ? "is marked as complete" : "is still in progress"; 
+			info.msg = data.status === "completed" ? "is marked as complete. Collaborators notified." : "is still in progress. Collaborators notified."; 
 			notifications.show( info ); 
 		})
 		.error( function( data ) {
@@ -734,7 +739,7 @@ function ModalCtrl( $scope, jobService, noteService, notifications ) {
 			console.log(" note created " );
 			var info = {}; 
 			info.title = ""; 
-			info.msg = "Note Successfully Created"; 
+			info.msg = "Note Successfully Created. Collaborators notified."; 
 			notifications.show( info, url); 
 		})
 		.error( function( data ) {

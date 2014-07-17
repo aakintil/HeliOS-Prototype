@@ -8823,16 +8823,18 @@ list-item-button {
   width: 100%;
   position: relative;
   z-index: 10;
-  top: -80px; }
+  top: -80px;
+  padding: 0 5px; }
   #notification div {
     position: relative;
     margin: 0 auto;
-    padding-top: 10px;
+    padding-top: 5px;
     color: white;
-    font-size: 18px;
-    line-height: 20.66667px;
-    width: 75%;
-    text-align: center; }
+    font-size: 17px;
+    line-height: 23px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1px; }
 
 .success {
   background-color: #292929; }
