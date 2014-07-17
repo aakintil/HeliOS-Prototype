@@ -1,15 +1,15 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Gotham Narrow Book";
-  src: url("../fonts/GothamNarrow-Book.otf"); }
+  src: url("../fonts/GothamNarrow-Book.otf") format("opentype"); }
 
 @font-face {
   font-family: "Gotham Narrow Bold";
-  src: url("../fonts/GothamNarrow-Bold.otf"); }
+  src: url("../fonts/GothamNarrow-Bold.otf") format("opentype"); }
 
 @font-face {
   font-family: "Gotham Narrow Medium";
-  src: url("../fonts/GothamNarrow-Medium.otf"); }
+  src: url("../fonts/GothamNarrow-Medium.otf") format("opentype"); }
 
 input {
   background-color: whitesmoke; }
@@ -8305,6 +8305,7 @@ p {
   color: black; }
 
 .small-title {
+  font-family: "Gotham Narrow Book";
   font-size: 11.5px;
   font-weight: bold;
   text-transform: uppercase;
@@ -9023,6 +9024,8 @@ list-item-button {
   background-color: transparent; }
 #search-page .marginMore7 {
   margin-top: 7px !important; }
+#search-page .marginMore5 {
+  margin-top: 5px !important; }
 #search-page .section .list li {
   min-height: 75px;
   padding: 20px; }
