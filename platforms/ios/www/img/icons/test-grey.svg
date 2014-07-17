@@ -4,12 +4,23 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="66px" height="66px" viewBox="0 0 66 66" enable-background="new 0 0 66 66" xml:space="preserve">
 <g>
-	<polygon points="10.597,33.333 8.081,30.224 32.97,10.077 57.121,30.243 54.557,33.313 32.931,15.255 	"/>
-</g>
-<g>
-	<polygon points="50,57 15,57 15,26 19,26 19,53 46,53 46,26 50,26 	"/>
-</g>
-<g>
-	<polygon points="39,55 35,55 35,43 30,43 30,55 26,55 26,39 39,39 	"/>
+	<g>
+		<rect x="11" y="17" width="5" height="5"/>
+	</g>
+	<g>
+		<rect x="21" y="17" width="34" height="5"/>
+	</g>
+	<g>
+		<rect x="11" y="31" width="5" height="5"/>
+	</g>
+	<g>
+		<rect x="21" y="31" width="34" height="5"/>
+	</g>
+	<g>
+		<rect x="11" y="45" width="5" height="5"/>
+	</g>
+	<g>
+		<rect x="21" y="45" width="34" height="5"/>
+	</g>
 </g>
 </svg>

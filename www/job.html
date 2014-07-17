@@ -101,8 +101,8 @@
 								<img ng-if='note.status == "checked"' src="img/icons/check-checked.svg" class="list-item-button">
 								<img ng-if='note.status == "" || note.status === undefined' src="img/icons/check-unchecked.svg" class="list-item-button">
 							</button>
-							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014 &nbsp;|&nbsp; <span class="medium-regular-text-bold detail-info  edit-note" ng-click="editNote($event)">Edit Note</span></p>
-							<!-- <p class="medium-regular-text-bold detail-info hidden edit-note" ng-click="editNote($event)">Edit Note</p> -->
+							<p class="medium-regular-text detail-info hidden"><img class="small-icon" src="img/icons/person.svg">Created by {{note.creator}} on July 4, 2014</p>
+							 <div class="medium-regular-text-bold edit-note hidden" ng-click="editNote($event)">Edit Note</div>
 						</li>
 						
 						<li ng-if='note.status === "checked"' detect-gestures gesture-type="swipe" class="item regular-text item-button-right note-list-item checked" ng-repeat="note in notes | orderBy:predicate" ng-click="expandNote( $event )">

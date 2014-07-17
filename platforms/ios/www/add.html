@@ -35,7 +35,7 @@
 			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 				<input ng-model="inputQuery" class="search-search" type="text"/>
 				<div class="button-bar nav-bar-buttons">
-					<div class="button">Done</div>
+					<div class="button done-button">Done</div>
 				</div>
 			</ion-nav-bar>
 
@@ -44,10 +44,16 @@
 				<ion-content>
 					<div class="section">
 						<div class="item item-divider add">
-							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
+							<div class="left-title-button">
+								<div class="back-job">
+									<i class="icon ion-chevron-left back-icon"></i>
+									Back
+								</div>
+							</div>
+							<div class="right-text">Select Job</div>
 						</div>
 						<ul class="list">
-							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}">
+							<li class="jobselection item item-button-right" ng-repeat="job in jobs | filter:inputQuery" id="{{job._id}}" ng-if="job._id !== '111111111111111111111111'">
 								<div class="big-title">{{job.title}}</div>
 								<div class="small-regular-text">{{job.members}}</div>
 							</li>
@@ -64,15 +70,21 @@
 			<ion-nav-bar id="nav-bar" class="bar-positive my-nav-bar" align-title="center">
 				<input ng-model="PartCtrl.searchText" id="people-search-bar" class="search-search" type="text"/>
 				<div class="button-bar nav-bar-buttons">
-					<div class="button done">Done</div>
+					<div class="button done-button done">Done</div>
 				</div>
 			</ion-nav-bar>
 
 			<ion-view class="nav-frame">
-				<ion-content>
+				<ion-content overflow-scroll="true" class="has-header">
 					<div class="section">
 						<div class="item item-divider add">
-							<back><div class="section-header"><i class="icon ion-chevron-left"></i> Back</div></back>
+							<div class="left-title-button">
+								<div class="back-people">
+									<i class="icon ion-chevron-left back-icon"></i>
+									Back
+								</div>
+							</div>
+							<div class="right-text">Select Collaborators</div>
 						</div>
 						<ul class="list">
 							<li class="personselection item item-button-right" ng-repeat="person in people | filter:PartCtrl.searchText "> <!-- | orderBy:predicate"> -->
@@ -94,9 +106,9 @@
 				<div class="button-bar nav-bar-buttons">
 					<!-- place in a.button -->
 
-					<a class="button jobs" ng-click="hideModal()" href="index.html"><img class="icon" src="img/icons/home-gray.svg"></a>
-					<a class="button alerts" ng-click="hideModal()" href="alerts.html"><img class="icon" src="img/icons/alert-gray.svg"></a>
-					<a class="button" href="add.html"><img class="icon" src="img/icons/add-green.svg"></a>
+					<div class="button home-nav-button"><img class="icon" src="img/icons/home-gray.svg"></div>
+					<div class="button alerts-nav-button"><img class="icon" src="img/icons/alert-gray.svg"></div>
+					<div class="button add-nav-button"><img class="icon" src="img/icons/add-green.svg"></div>
 					<!-- <a class="button" ng-click="showSelectionModal()"><img class="icon" src="img/icons/add-gray.svg"></a> -->
 				</div>
 				<input id="search" type="text" placeholder="Search"  autocomplete="off" ng-model="searchText" ng-change=""> 
@@ -110,9 +122,9 @@
 				<ion-content id="add">
 					<div class="section">
 						<div class="item item-divider add">
-							<div class="left-title-button"><back></back></div>
+							<!-- <div class="left-title-button">&nbsp;</div> -->
 							<div class="center-text">Add New</div>
-							<div class="right-title-button"></div>
+							<!-- <div class="right-title-button"></div> -->
 						</div>
 					</div>
 
