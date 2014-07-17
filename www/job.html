@@ -32,6 +32,7 @@
 	<body ng-app="starter">
 
 		<ion-nav-bar id="nav-bar" ng-controller="NavCtrl" class="bar-positive my-nav-bar" align-title="center">
+			<div class="short home"> </div>
 			<back>
 				<i class="icon ion-chevron-left back-icon"></i>
 			</back>
@@ -48,6 +49,7 @@
 			</div>
 
 			<!-- if you're on the job page, then the elements have plus signs otherwise it looks like normal -->	
+
 		</ion-nav-bar>
 
 
@@ -56,9 +58,9 @@
 
 
 		<ion-view hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
-			<ion-content class="job" overflow-scroll="true" class="has-header">
+			<ion-content id="job-page" class="job" overflow-scroll="true" class="has-header">
 				<div class="top section">
-					<div class="short home"> </div>
+					
 					<div id="job-title" class="{{job.status}}">
 						<div class="big-title title-row item-button-right">{{job.title}}</div>
 						<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
