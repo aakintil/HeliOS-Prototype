@@ -1311,8 +1311,30 @@ $bar-height: 62px;
 #warning-overlay {
 	position: absolute; 
 	width: 100%; 
-	height: 100%; 
+	height: 100%;  
 	background-color: #000000; 
 	opacity: 0.6;
 	z-index: 11;
 }
+
+
+// job badge
+.job-badge {
+	height: 73px; 
+	width: 30px;
+	right: 0; 
+	background-color: #f05a24; 
+	z-index: 10; 
+	position: absolute; 
+	margin-top: 2px; 
+	text-align: center; 
+	
+	.num {
+		font-size: 18px;
+		color: white; 
+		font-family: $gotham-medium; 
+		line-height: 75px; 
+	}
+}
+
+// home icon badge
