@@ -270,6 +270,10 @@ app.service('noteService', ['$http', function ($http) {
 		return $http.get( urlBase + '/m/d/y/' + field)
 	}
 
+	this.updateNote = function( note ) {
+		console.log("THE NOTE IS " + note._id + " " + note.message);
+		return $http.post( urlBase + '/update/' + note._id + "/" + note.message ); 
+	}
 
 	// change this to a simple getNote function 
 	this.getNoteWithMsg = function( type, param ) {
@@ -446,6 +450,30 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		}
 	}
 
+	$scope.editNote = function(event) {
+		// console.log("the obj is ", $(event.target.parentElement));
+		var note = $(event.target.parentElement).find('.note-text');
+		var noteEdit = $(event.target.parentElement).find('.note-text-input');
+		noteEdit.first().show();
+		noteEdit.first().removeClass('hidden');
+		note.first().hide();
+
+		setTimeout(function() {
+			noteEdit.focus();
+		}, 0);	
+	}
+
+	$scope.saveNoteEdit = function (id, note) {
+
+		noteService.updateNote(note);
+
+		var inputItem = $("#" + id).find('input').first();
+		inputItem.hide();
+
+		var textItem = $("#" + id).find('p').first();
+		textItem.show();
+	}
+
 	$scope.expand = function( event ) {
 		if(!$(event.target).hasClass("list-item-button")) {
 			$( event.currentTarget ).find( ".tool-submenu" ).slideToggle( "1000" ); 
@@ -535,7 +563,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	$scope.expandNote = function( event ) {
 		console.log(" clicked : ", event);
 		console.log($(event.target).hasClass("list-item-button"));
-		if(!$(event.target).hasClass("list-item-button")) {
+		if(!$(event.target).hasClass("list-item-button") && !$(event.target).hasClass("edit-note")) {
 			$(event.currentTarget).find("p.regular-text").toggleClass("expanded-note");
 			$(event.currentTarget).find("p.detail-info").toggleClass("hidden");
 		}
@@ -596,7 +624,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 
 		var el = $(event.currentTarget).parent(); 
-		var opaque = $('.section');
+		var opaque = $('.job-page *');
 		// $(".short.home").css("opacity", 1); 
 		console.log("THEY ARE: ", opaque);
 		var check = $(event.currentTarget).find("img"); 

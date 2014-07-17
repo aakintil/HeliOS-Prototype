@@ -218,6 +218,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$(".note-text-input").focusout(function() {
+		console.log("Focus out");
+	});
+
 	// Code for handling search bar results
 	$('#search').bind("focus", function() {
 		$( '#people-modal .clear-button' )

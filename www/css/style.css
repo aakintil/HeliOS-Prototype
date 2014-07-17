@@ -8441,6 +8441,11 @@ a:active {
   .offset .item-divider {
     background-color: #989898; }
 
+.edit-note {
+  padding-bottom: 16px;
+  margin-top: -2px !important;
+  /*padding: 10px;*/ }
+
 .home-nav-button {
   margin-top: -7px;
   margin-right: -10px !important; }
@@ -8728,8 +8733,7 @@ textarea {
   margin-bottom: 0px; }
 
 .detail-info {
-  margin-top: 5px;
-  padding-bottom: 16px; }
+  margin-top: 5px; }
 
 .note-list-item {
   padding-top: 7px;
@@ -9073,7 +9077,7 @@ list-item-button {
   font-size: 55px !important; }
 
 .hidden {
-  display: none; }
+  display: none !important; }
 
 .list:last-child {
   /*margin-bottom: 15px; */ }
