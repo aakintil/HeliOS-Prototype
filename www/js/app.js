@@ -514,7 +514,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		$( ".addListItemText" ).text("+ Add Note");
 
 		// hide DOM Elements 
-		$( ".addListItemInput" ).parent().hide();
+		// $( ".addListItemInput" ).parent().hide();
 		$( ".addListItemInput" ).val("");
 
 		// run the rest of the method
@@ -624,7 +624,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 
 
 		var el = $(event.currentTarget).parent(); 
-		var opaque = $('.job-page *');
+		var opaque = $('#job-page *');
 		// $(".short.home").css("opacity", 1); 
 		console.log("THEY ARE: ", opaque);
 		var check = $(event.currentTarget).find("img"); 
@@ -1074,7 +1074,6 @@ function ToolsCtrl( $scope, $rootScope, $http, toolService, jobService, $locatio
 	$scope.predicate = 'name';
 	setTimeout( function(){
 		$scope.prevToolList = jobPageService.toolList;
-		console.log("tools ctrol got it", $scope.prevToolList[0].name);
 	}, 250);
 
 	$scope.setSearchQuery = function(inputQuery) {

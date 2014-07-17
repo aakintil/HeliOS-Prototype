@@ -260,6 +260,28 @@ $(document).ready(function () {
 	//		//		$( '#search' ).val( "" ); 
 	//	})
 
+
+
+
+
+	setTimeout(function() {
+		var opaque = $('#complete img')[0].src;
+		console.log("OQAQUU IS ", opaque);
+			// $(".short.home").css("opacity", 1); 
+		var status = ""; 
+
+		// also have to send a notification when job is clicked
+		// everything greys out except for the title and the checkbox
+
+		//		debug.log( "shoudl have class", ); 
+		//		opaque.addClass("completed"); 
+		console.log("THE INDEX IS " + (opaque.indexOf("check-checked")));
+		if ( opaque.indexOf("check-checked") != -1 ) {
+			$('#job-page *').addClass("completed");
+		}
+	}, 1000);
+
+
 	$('#add-note').click(function(){
 		console.log('clicked');
 		var element = $('<li class="item" id="addNoteFromJob"><input class="addListItemInput" type="text" placeholder="Write Note" ng-model="note.message" ng-enter="addNote( note )"></li>');

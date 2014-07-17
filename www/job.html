@@ -58,10 +58,10 @@
 
 
 		<ion-view hide-back-button="true" ng-controller="JobCtrl" class="nav-frame">
-			<ion-content id="job-page" class="job" overflow-scroll="true" class="has-header">
+			<ion-content id="job-page" class="job" overflow-scroll="true" class="has-header" class="{{job.status}}">
 				<div class="top section">
 					
-					<div id="job-title" class="{{job.status}}">
+					<div id="job-title" >
 						<div class="big-title title-row item-button-right">{{job.title}}</div>
 						<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
 						<button id="complete" ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
