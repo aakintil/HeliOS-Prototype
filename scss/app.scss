@@ -512,8 +512,7 @@ textarea {
 	}
 
 	.button.activated {
-		box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
-		color: $white-text;
+		background-color: rgba(200, 200, 200, .5)
 	}
 
 	#search {

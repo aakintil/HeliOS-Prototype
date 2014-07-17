@@ -8600,8 +8600,7 @@ textarea {
     color: white;
     background-color: #f0f0f0; }
   #nav-bar .button.activated {
-    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
-    color: white; }
+    background-color: rgba(200, 200, 200, 0.5); }
   #nav-bar #search {
     /*-webkit-transition: width .5s;
     transition: width .5s;*/
