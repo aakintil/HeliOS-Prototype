@@ -66,8 +66,9 @@
 						<div class="detail-row"><img class="small-icon" src="img/icons/people.svg">{{job.members}}</div> 
 						<button id="complete" ng-click="changeJobStatus( job, $event )" class="button button-clear checklist-item" ng-if="job._id !== '111111111111111111111111'">
 							<img class="job-check-icon" ng-if='$parent.job.status == "completed"' src="img/icons/check-checked.svg">
-							<img class="job-check-icon" ng-if='$parent.job.status == ""' src="img/icons/check-unchecked.svg">
+							<img class="job-check-icon" ng-if='$parent.job.status == "" || $parent.job.status == undefined' src="img/icons/check-unchecked.svg">
 						</button>
+						<div ng-if='$parent.job.status == "completed"' class="job-completed-text">Completed</div>
 					</div>
 
 				</div>

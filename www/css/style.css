@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8645,6 +8645,13 @@ textarea {
 .nav-frame {
   top: 10px; }
 
+.job-completed-text {
+  z-index: 100;
+  margin-top: -10px;
+  float: right;
+  font-size: 11.5px;
+  font-family: "Gotham Narrow Book"; }
+
 .short {
   position: absolute;
   bottom: 0px;
@@ -8965,14 +8972,8 @@ list-item-button {
   display: none;
   z-index: 12; }
   .modal .bar-footer {
-<<<<<<< HEAD
     height: 62px;
-    line-height: 62px;
-    border-top: 3px solid #abb2b6; }
-=======
-    height: 55px;
-    line-height: 55px; }
->>>>>>> ad5348496a905dc5ff9ceb6cfad42fb7a88dc31b
+    line-height: 62px; }
 
 #tools-modal .list, #people-modal .list {
   margin-bottom: 62px; }
