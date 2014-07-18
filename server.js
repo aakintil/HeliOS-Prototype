@@ -152,9 +152,52 @@ app.put( '/api/tools/:id/:status/:id', function( req, res ) {
 		tool.save(); 
 		res.json( tool ); 
 	})
-})
+});
 
 
+////// RFID ///////
+var tagA = '5900108A37F4'; // T93 53be05d504b37af3d04528d1
+var A_id = '53be05d504b37af3d04528d1';
+var tagB = '6A008FC66F4C'; // Z8 53be05d504b37af3d04528ce
+var B_id = '53be05d504b37af3d04528ce';
+var tagC = '6A008F7BB42A'; // Z9 53be05d504b37af3d04528cf
+var C_id = '53be05d504b37af3d04528cf';
+var tagD = '59001D3C552D'; // T67 53be05d504b37af3d04528d0'
+var D_id = '53be05d504b37af3d04528d0';
+
+app.post( '/api/tools/updateToolLocation', function ( req, res ) {
+	// use mongoose to get all notes in the database
+	console.log("This worked!");
+
+	console.log(req.body.rfid);
+
+	var queryID = "";
+	switch (req.body.rfid) {
+		case tagA:
+			queryID = A_id;
+			break;
+		case tagB:
+			queryID = B_id;
+			break;
+		case tagC:
+			queryID = C_id;
+			break;
+		case tagD:
+			queryID = D_id;
+			break;
+		default:
+			console.log("It failed");
+	}
+
+	var query = { _id : queryID }
+	Tool.findOne( query, function ( err, tool ) {
+		tool.current_location = "Saturn 1";
+		tool.save();
+		console.log(tool);
+		res.json( tool );
+	});
+
+}); 
 
 ////// NOTES //////
 
