@@ -440,7 +440,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 							console.log("In here: " + curToolId);
 							if (newTools[j]['current_location'] != oldTools[i]['current_location']) {
 								console.log("Tool: " + $scope.job.tools[i] + "updating location " + newTools[j]['current_location']);
-								$scope.job.tools[i].current_location = newTools[j]['current_location'];
+								$scope.job.tools[i]['current_location'] = newTools[j]['current_location'];
 							}
 						}
 					}
