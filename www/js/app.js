@@ -318,6 +318,14 @@ app.service('toolService', ['$http', function ($http) {
 		return $http.get( urlBase + '/'  + name);
 	}
 
+	// this.getToolLocation = function(jobId) {
+	// 	return $http.get( '/api/pizza' + '/getToolLocation/'  + jobId);
+	// }
+
+	this.amen = function( jobid ) {
+		return $http.get( '/api/tools/a/b/c/' + jobid ); 
+	}
+
 }]);
 
 
@@ -403,6 +411,64 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 	//		badge.addClass( 'hidden' ); 
 	//	}
 
+	var u = function() {
+
+			var absUrl = $location.$$absUrl;
+			var jobId = absUrl.substr( absUrl.indexOf('=') + 1);
+
+			// toolService.getToolLocation(jobId)
+			// .success(function(data) {
+			// 	console.log("Succces " + data);
+			// })
+			// .error(function(data) {
+			// 	console.log("Failure " + data); 
+			// });
+			
+			var oldTools = $scope.job.tools;
+
+			toolService.amen( jobId ) 
+			.success( function( data ) {
+				console.log( "the updated job ", data );
+				var job = data;
+				var newTools = job.tools;
+
+				for (var i = 0; i < oldTools.length; i++){
+					var curToolId = oldTools[i]['_id'];
+					console.log("Up here: " + curToolId);
+					for (var j = 0; j < newTools.length; j++) {
+						if (newTools[j]['_id'] === curToolId) {
+							console.log("In here: " + curToolId);
+							if (newTools[j]['current_location'] != oldTools[i]['current_location']) {
+								console.log("Tool: " + $scope.job.tools[i] + "updating location " + newTools[j][current_location]);
+								$scope.job.tools[i].current_location = newTools[j][current_location];
+							}
+						}
+					}
+				}
+
+			})
+			.error( function( data ) {
+				console.log( "double faack" ); 
+			})
+
+			// var toolId = "53c6a84ab618b3454e742555";
+
+			// for (var i = 0; i < $scope.job.tools.length; i++) {
+			// 	var tool = $scope.job.tools[i];
+			// 	if (tool["_id"] == toolId) {
+			// 		tool["current_location"] = "Saturn 1";
+			// 	}
+			// }
+			//  = [
+			// 	{ "_id" : "53c6a84ab618b3454e742555", "name" : "Screwdriver F44", "current_location" : "Mercury 1", "home_location" : "Venus 3" },
+			// 	{ "_id" : "53c6a7f7b618b3454e74254e", "name" : "Screwdriver T67", "current_location" : "Mercury 1", "home_location" : "Venus 3" },
+			// 	{ "_id" : "53c6a81eb618b3454e742552", "name" : "Screwdriver T92", "current_location" : "Saturn 1", "home_location" : "Venus 2" }
+			// ];
+			console.log("THIS RAN");
+  		$timeout(u, 1000);
+	}
+
+	$timeout(u, 1000);
 
 	$scope.reportEvent = function(event)  {
 		console.log('Reporting : ' + event);
@@ -561,7 +627,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 		$scope.job_tool_ids = $scope.job.tools;
 		jobPageService.toolList = $scope.job.tools;
 		//		console.log("Set it to ", jobPageService.toolList);
-		$scope.tools = $scope.job.tools;
+		//$scope.tools = $scope.job.tools;
 		$scope.notes = $scope.job.notes; 
 		//		console.log("THE NOTES ARE ", $scope.notes);
 		$scope.complete = $scope.job.status; 

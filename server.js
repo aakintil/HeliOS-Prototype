@@ -165,6 +165,21 @@ var C_id = '53be05d504b37af3d04528cf';
 var tagD = '59001D3C552D'; // T67 53be05d504b37af3d04528d0'
 var D_id = '53be05d504b37af3d04528d0';
 
+
+app.get('/api/tools/a/b/c/:jobid', function( req, res ) {
+	console.log( "should be in here ......" ); 
+	var query = { _id : req.params.jobid };
+	Job.findOne( query, function ( err, job ) {
+		// res.json( job );
+	}).populate("tools").exec( function( err, job ) {
+		if( err ) console.log( "HUGE MISTAKE IN GETTING NOTES CREATED WITHIN A DATE RANGE"); 
+		//		debug.log("the notes",  notes )
+		console.log(job);
+		res.json( job ); 
+	});	
+}); 
+
+
 app.post( '/api/tools/updateToolLocation', function ( req, res ) {
 	// use mongoose to get all notes in the database
 	console.log("This worked!");
