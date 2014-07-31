@@ -425,6 +425,7 @@ function JobCtrl( $scope, jobService, noteService, toolService, $location, notif
 			// });
 			
 			var oldTools = $scope.job.tools;
+		
 
 			toolService.amen( jobId ) 
 			.success( function( data ) {

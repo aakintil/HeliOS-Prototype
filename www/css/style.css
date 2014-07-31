@@ -14,7 +14,7 @@
 input {
   background-color: whitesmoke; }
 
-/*
+/*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
@@ -8455,6 +8455,9 @@ a:active {
   float: right;
   width: 15%; }
 
+.job-width {
+  width: 15px !important; }
+
 .offset {
   margin: 0 18px;
   margin-top: 20px; }
@@ -8462,7 +8465,8 @@ a:active {
     background-color: #989898; }
 
 .edit-note {
-  margin-top: -4px !important;
+  margin-top: -20px !important;
+  margin-bottom: 10px !important;
   /*padding: 10px;*/ }
 
 .home-nav-button {
@@ -8859,7 +8863,7 @@ list-item-button {
   #notification div {
     position: relative;
     margin: 0 auto;
-    padding-top: 5px;
+    padding-top: 8px;
     color: white;
     font-size: 14px;
     line-height: 23px;

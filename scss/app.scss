@@ -304,6 +304,10 @@ a:active {
 	width: 15%;
 }
 
+.job-width {
+	width: 15px !important;
+}
+
 .offset {
 	margin: 0 18px;
 	margin-top: 20px;
@@ -315,7 +319,8 @@ a:active {
 
 .edit-note {
 
-	margin-top: -4px !important;
+	margin-top: -20px !important;
+	margin-bottom: 10px !important;
 	/*padding: 10px;*/
 }
 
