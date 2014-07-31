@@ -1,7 +1,7 @@
-
-
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
+var request = require('request');
+
 
 var sp = new SerialPort("/dev/tty.usbserial-AH02MBY6", {baudrate: 9600, buffersize: 1024, parser: serialport.parsers.readline("\n")});
 
@@ -14,6 +14,8 @@ var tagD = '59001D3C552D'; // T67 53be05d504b37af3d04528d0'
 sp.on('open', function(){
   console.log('Serial Port Opend');
   sp.on('data', function(data){
-
+	console.log("Data: ", data);
+	request.post('http://localhost:3000/api/tools/updateToolLocation', {form:{rfid:data}});
+	
   });
 });

@@ -155,16 +155,19 @@ app.put( '/api/tools/:id/:status/:id', function( req, res ) {
 });
 
 
-////// RFID ///////
-var tagA = '5900108A37F4'; // T93 53be05d504b37af3d04528d1
-var A_id = '53be05d504b37af3d04528d1';
-var tagB = '6A008FC66F4C'; // Z8 53be05d504b37af3d04528ce
-var B_id = '53be05d504b37af3d04528ce';
-var tagC = '6A008F7BB42A'; // Z9 53be05d504b37af3d04528cf
-var C_id = '53be05d504b37af3d04528cf';
-var tagD = '59001D3C552D'; // T67 53be05d504b37af3d04528d0'
-var D_id = '53be05d504b37af3d04528d0';
+// ////// RFID ///////
+// var tagA = '5900108A37F4'; // T93 53be05d504b37af3d04528d1
+// var A_id = '53be05d504b37af3d04528d1';
+// var tagB = '6A008FC66F4C'; // Z8 53be05d504b37af3d04528ce
+// var B_id = '53be05d504b37af3d04528ce';
+// var tagC = '6A008F7BB42A'; // Z9 53be05d504b37af3d04528cf
+// var C_id = '53be05d504b37af3d04528cf';
+// var tagD = '59001D3C552D'; // T67 53be05d504b37af3d04528d0'
+// var D_id = '53be05d504b37af3d04528d0';
 
+var tagB = '6A008F7BB42A';
+var tagC = '6A008FC66F4C';
+var tagA = '5900108A37F4';
 
 app.get('/api/tools/a/b/c/:jobid', function( req, res ) {
 	console.log( "should be in here ......" ); 
@@ -182,7 +185,7 @@ app.get('/api/tools/a/b/c/:jobid', function( req, res ) {
 
 app.post( '/api/tools/updateToolLocation', function ( req, res ) {
 	// use mongoose to get all notes in the database
-	console.log("This worked!");
+	console.log("This worked, got request!");
 
 	console.log(req.body.rfid);
 
